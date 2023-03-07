@@ -21,21 +21,3 @@ env_reset: ## Resets environment variables
 	@${_ECHO};
 	@${_ECHO_OK};
 
-release: _release_message _do_release changelog ## Prepare for release
-	@${_ECHO} "";
-
-_release_message:
-	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Preparing for release...${_C_STOP}\n";
-
-_do_release:
-	@${_BIN_DIR}/gitattributes.sh
-
-changelog: _changelog_message _do_changelog ## Generate changelog
-	@${_ECHO} "";
-
-_changelog_message:
-	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Generating changelog...${_C_STOP}\n";
-
-_do_changelog:
-	@-git-chglog --output CHANGELOG.md
-
