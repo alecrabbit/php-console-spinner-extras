@@ -2,3 +2,4 @@
 /.tools/.dam/
 .env
 docker-stack.yml
+.start_time
