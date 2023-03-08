@@ -11,7 +11,7 @@ PROJECT_SHORT_TITLE=✨
 
 # Git related variables
 WORKING_BRANCH=dev
-DEFAULT_COMMIT_MESSAGE=~wp
+COMMIT_MESSAGE=~wp
 
 # Docker compose files
 

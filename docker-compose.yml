@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  &service-app app:
+    image: php:8.2-cli-alpine
+    hostname: *service-app
+    volumes:
+      - ./:/app
+    tty: true
+    env_file:
+      - ./.env
+    working_dir: /app
+
+#  &service-composer composer:
+#    image: composer
+#    hostname: *service-composer
+#    volumes:
+#      - ./:/app
+#    command: tail -F /dev/null
+#    env_file:
+#      - ./.env
+#    working_dir: /app
