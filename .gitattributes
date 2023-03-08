@@ -16,3 +16,4 @@ README.md export-ignore
 .scrutinizer.yml export-ignore
 TERMINAL_TITLE export-ignore
 tests/ export-ignore
+.tools/ export-ignore
