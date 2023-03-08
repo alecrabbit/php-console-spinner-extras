@@ -1,7 +1,7 @@
 {
     "name": "alecrabbit/php-console-spinner-extras",
     "type": "library",
-    "description": "Add-ons for alecrabbit/php-console-spinner",
+    "description": "Add-ons for php-console-spinner",
     "keywords": [
         "php",
         "spinner",
@@ -18,7 +18,7 @@
         "symfony/var-dumper": "*",
         "fakerphp/faker": "*",
         "nunomaduro/collision": "^7.0",
-        "alecrabbit/php-console-spinner": "dev-develop"
+        "alecrabbit/php-console-spinner": "dev-master"
     },
     "autoload": {
         "psr-4": {
