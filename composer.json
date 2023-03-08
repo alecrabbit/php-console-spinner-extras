@@ -1,24 +1,11 @@
 {
     "name": "alecrabbit/php-console-spinner-extras",
     "type": "library",
-    "description": "Colorful extremely flexible spinner for [async] php cli applications",
+    "description": "Add-ons for alecrabbit/php-console-spinner",
     "keywords": [
         "php",
-        "terminal",
         "spinner",
-        "console",
-        "cli",
-        "pretty",
-        "shell",
-        "bash",
-        "256color",
-        "8bit",
-        "colorful",
-        "ansi",
-        "async",
-        "snake",
-        "reactphp",
-        "revolt"
+        "extras"
     ],
     "license": "MIT",
     "require": {
@@ -35,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "AlecRabbit\\Spinner\\Extras\\": "src\\Spinner\\Extras\\"
+            "AlecRabbit\\Spinner\\": "src\\Spinner\\"
         }
     },
     "autoload-dev": {
@@ -44,10 +31,7 @@
         }
     },
     "suggest": {
-        "ext-pcntl": "For signal handling support.",
-        "ext-mbstring": "For multibyte Unicode string functionality.",
-        "react/event-loop": "For ReactPHP event-loop support.",
-        "revolt/event-loop": "For Revolt event-loop support."
+        "ext-mbstring": "For multibyte Unicode string functionality."
     },
     "minimum-stability": "stable"
 }
