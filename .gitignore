@@ -1,0 +1,7 @@
+/.idea/
+/.tools/.dam/
+/vendor/
+.env
+docker-stack.yml
+.start_time
+.last_init_time
