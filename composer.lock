@@ -4,20 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "168676a3d4bc6884dc5321ca637eefe9",
-    "packages": [
+    "content-hash": "5bf93e5ecec88b5a495ecaaf55d63a14",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "alecrabbit/php-console-spinner",
             "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
-                "reference": "f9b4c18cc9a76fc509922733c8b454f82586f784"
+                "reference": "c0ca3276797ae4f981273e7e4196ae4f48a8d1dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/f9b4c18cc9a76fc509922733c8b454f82586f784",
-                "reference": "f9b4c18cc9a76fc509922733c8b454f82586f784",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/c0ca3276797ae4f981273e7e4196ae4f48a8d1dd",
+                "reference": "c0ca3276797ae4f981273e7e4196ae4f48a8d1dd",
                 "shasum": ""
             },
             "require": {
@@ -77,10 +78,8 @@
                 "issues": "https://github.com/alecrabbit/php-console-spinner/issues",
                 "source": "https://github.com/alecrabbit/php-console-spinner/tree/develop"
             },
-            "time": "2023-03-08T09:06:47+00:00"
-        }
-    ],
-    "packages-dev": [
+            "time": "2023-03-08T12:49:21+00:00"
+        },
         {
             "name": "fakerphp/faker",
             "version": "v1.21.0",
@@ -222,16 +221,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.11.0",
+            "version": "1.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "14daed4296fae74d9e3201d2c4925d1acb7aa614"
+                "reference": "7284c22080590fb39f2ffa3e9057f10a4ddd0e0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/14daed4296fae74d9e3201d2c4925d1acb7aa614",
-                "reference": "14daed4296fae74d9e3201d2c4925d1acb7aa614",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/7284c22080590fb39f2ffa3e9057f10a4ddd0e0c",
+                "reference": "7284c22080590fb39f2ffa3e9057f10a4ddd0e0c",
                 "shasum": ""
             },
             "require": {
@@ -269,7 +268,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.11.0"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.11.1"
             },
             "funding": [
                 {
@@ -277,7 +276,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-03-03T13:19:32+00:00"
+            "time": "2023-03-08T13:26:56+00:00"
         },
         {
             "name": "nikic/php-parser",
