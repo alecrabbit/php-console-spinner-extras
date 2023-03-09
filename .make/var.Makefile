@@ -22,7 +22,7 @@ _FILES = \
 
 # ------------------------------------------------------------------------------
 PROJECT_NAME=pcs-extras
-PROJECT_SHORT_TITLE=🏵️
+PROJECT_SHORT_TITLE=🧳
 
 TEST_REPETITION=10
 APP_CONTAINER=app
