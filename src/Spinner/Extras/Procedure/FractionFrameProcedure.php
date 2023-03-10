@@ -6,6 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Core\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Frame;
+use AlecRabbit\Spinner\Core\WidthDeterminer;
 use AlecRabbit\Spinner\Extras\Contract\IFractionValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFractionProcedure;
 
@@ -43,7 +44,7 @@ final class FractionFrameProcedure extends AFractionProcedure
         }
         $v = $this->createColumn($this->fractionValue->getValue());
         return
-            new Frame($v);
+            new Frame($v, WidthDeterminer::determine($v));
     }
 
     private function createColumn(float $progress): string
