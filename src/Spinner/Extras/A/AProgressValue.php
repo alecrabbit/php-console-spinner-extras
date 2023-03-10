@@ -24,8 +24,8 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
         protected readonly bool $autoFinish = true,
     ) {
         parent::__construct($startValue, $min, $max);
-        $this->stepValue = ($this->max - $this->min) / $this->steps;
         self::assert($this);
+        $this->stepValue = ($this->max - $this->min) / $this->steps;
     }
 
     /**

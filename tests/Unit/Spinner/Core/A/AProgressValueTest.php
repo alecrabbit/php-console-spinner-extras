@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Spinner\Core\A;
 
-use AlecRabbit\Spinner\Core\A\AFloatValue;
-use AlecRabbit\Spinner\Core\Contract\IFloatValue;
 use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Extras\A\AProgressValue;
+use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Tests\Spinner\TestCase\TestCase;
 
 final class AProgressValueTest extends TestCase
@@ -247,7 +247,7 @@ final class AProgressValueTest extends TestCase
         self::assertSame($expected[self::STEPS], $fractionValue->getSteps());
     }
 
-    public static function getInstance(array $args = []): IFloatValue
+    public static function getInstance(array $args = []): IProgressValue
     {
         return new class(
             startValue: $args[self::START] ?? 0.0,
@@ -255,7 +255,7 @@ final class AProgressValueTest extends TestCase
             min: $args[self::MIN] ?? 0.0,
             max: $args[self::MAX] ?? 1.0,
             autoFinish: $args[self::AUTO_FINISH] ?? false,
-        ) extends AFloatValue {
+        ) extends AProgressValue {
         };
     }
 
