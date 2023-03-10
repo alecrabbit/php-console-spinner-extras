@@ -19,7 +19,7 @@
         "fakerphp/faker": "*",
         "nunomaduro/collision": "^7.0",
         "revolt/event-loop": "^1.0",
-        "alecrabbit/php-console-spinner": "dev-master"
+        "alecrabbit/php-console-spinner": "dev-prepare-next"
     },
     "autoload": {
         "psr-4": {
