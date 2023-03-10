@@ -58,15 +58,10 @@ abstract class AFloatValue extends AValue implements IFloatValue
         };
     }
 
-    public function getValue(): float
-    {
-        return $this->value;
-    }
-
     /** @inheritdoc */
     public function setValue($value): void
     {
-        $this->value = $value;
+        parent::setValue($value);
         $this->checkBounds();
     }
 
