@@ -10,6 +10,7 @@ use AlecRabbit\Spinner\Core\WidthDeterminer;
 use AlecRabbit\Spinner\Extras\Contract\IProgressBarSprite;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
+use AlecRabbit\Spinner\Factory\FrameFactory;
 
 final class ProgresBarProcedure extends AProgressValueProcedure
 {
@@ -56,13 +57,13 @@ final class ProgresBarProcedure extends AProgressValueProcedure
     {
         if ($this->floatValue->isFinished()) {
             if ($this->finishedDelay < 0) {
-                return Frame::createEmpty();
+                return FrameFactory::createEmpty();
             }
             $this->finishedDelay -= $dt;
         }
         $v = $this->createBar($this->floatValue->getValue());
         return
-            new Frame($v, WidthDeterminer::determine($v));
+            FrameFactory::create($v);
     }
 
     private function createBar(float $progress): string

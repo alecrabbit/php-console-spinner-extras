@@ -9,6 +9,7 @@ use AlecRabbit\Spinner\Core\Frame;
 use AlecRabbit\Spinner\Core\WidthDeterminer;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
+use AlecRabbit\Spinner\Factory\FrameFactory;
 
 final class StepsProcedure extends AProgressValueProcedure
 {
@@ -24,13 +25,13 @@ final class StepsProcedure extends AProgressValueProcedure
     {
         if ($this->progressValue->isFinished()) {
             if ($this->finishedDelay < 0) {
-                return Frame::createEmpty();
+                return FrameFactory::createEmpty();
             }
             $this->finishedDelay -= $dt;
         }
         $v = $this->createSteps($this->progressValue);
         return
-            new Frame($v, WidthDeterminer::determine($v));
+            FrameFactory::create($v);
     }
 
     private function createSteps(IProgressValue $fractionValue): string

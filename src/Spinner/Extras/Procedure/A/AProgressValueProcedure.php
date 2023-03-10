@@ -9,6 +9,7 @@ use AlecRabbit\Spinner\Core\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Frame;
 use AlecRabbit\Spinner\Core\WidthDeterminer;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
+use AlecRabbit\Spinner\Factory\FrameFactory;
 
 abstract class AProgressValueProcedure extends AFloatValueProcedure
 {
@@ -28,7 +29,7 @@ abstract class AProgressValueProcedure extends AFloatValueProcedure
     {
         if ($this->progressValue->isFinished()) {
             if ($this->finishedDelay < 0) {
-                return Frame::createEmpty();
+                return FrameFactory::createEmpty();
             }
             $this->finishedDelay -= $dt;
         }
@@ -37,6 +38,6 @@ abstract class AProgressValueProcedure extends AFloatValueProcedure
             $this->progressValue->getValue() * 100
         );
         return
-            new Frame($v, WidthDeterminer::determine($v));
+            FrameFactory::create($v);
     }
 }
