@@ -8,27 +8,27 @@ use AlecRabbit\Spinner\Core\Contract\IFloatValue;
 use AlecRabbit\Spinner\Core\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Frame;
 use AlecRabbit\Spinner\Core\WidthDeterminer;
-use AlecRabbit\Spinner\Extras\Procedure\A\AFractionProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
 
-final class StepsProcedure extends AFractionProcedure
+final class StepsProcedure extends AFloatValueProcedure
 {
     private float $stepValue;
 
-    public function __construct(IFloatValue $fractionValue)
+    public function __construct(IFloatValue $progressValue)
     {
-        parent::__construct($fractionValue);
-        $this->stepValue = ($fractionValue->getMax() - $fractionValue->getMin()) / $fractionValue->getSteps();
+        parent::__construct($progressValue);
+        $this->stepValue = ($progressValue->getMax() - $progressValue->getMin()) / $progressValue->getSteps();
     }
 
     public function update(float $dt = null): IFrame
     {
-        if ($this->fractionValue->isFinished()) {
+        if ($this->floatValue->isFinished()) {
             if ($this->finishedDelay < 0) {
                 return Frame::createEmpty();
             }
             $this->finishedDelay -= $dt;
         }
-        $v = $this->createSteps($this->fractionValue);
+        $v = $this->createSteps($this->floatValue);
         return
             new Frame($v, WidthDeterminer::determine($v));
     }

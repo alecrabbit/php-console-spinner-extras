@@ -9,9 +9,9 @@ use AlecRabbit\Spinner\Core\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Frame;
 use AlecRabbit\Spinner\Core\WidthDeterminer;
 use AlecRabbit\Spinner\Extras\Contract\IFractionBarSprite;
-use AlecRabbit\Spinner\Extras\Procedure\A\AFractionProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
 
-final class FractionBarProcedure extends AFractionProcedure
+final class FractionBarProcedure extends AFloatValueProcedure
 {
     protected const UNITS = 5;
     protected string $open;
@@ -23,19 +23,19 @@ final class FractionBarProcedure extends AFractionProcedure
 
 
     public function __construct(
-        IFloatValue $fractionValue,
+        IFloatValue $progressValue,
         protected ?IFractionBarSprite $sprite = null,
         protected int $units = self::UNITS,
         protected bool $withCursor = true,
     ) {
-        parent::__construct($fractionValue);
+        parent::__construct($progressValue);
 
         $this->init();
     }
 
     protected function init(): void
     {
-        $this->cursorThreshold = $this->fractionValue->getMax();
+        $this->cursorThreshold = $this->floatValue->getMax();
         $this->units = $this->withCursor ? $this->units - 1 : $this->units;
         $this->open = $this->sprite ? $this->sprite->getOpen() : '[';
         $this->close = $this->sprite ? $this->sprite->getClose() : ']';
@@ -54,13 +54,13 @@ final class FractionBarProcedure extends AFractionProcedure
 
     public function update(float $dt = null): IFrame
     {
-        if ($this->fractionValue->isFinished()) {
+        if ($this->floatValue->isFinished()) {
             if ($this->finishedDelay < 0) {
                 return Frame::createEmpty();
             }
             $this->finishedDelay -= $dt;
         }
-        $v = $this->createBar($this->fractionValue->getValue());
+        $v = $this->createBar($this->floatValue->getValue());
         return
             new Frame($v, WidthDeterminer::determine($v));
     }

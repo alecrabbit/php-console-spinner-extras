@@ -2,30 +2,32 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Extras\Procedure;
+namespace AlecRabbit\Spinner\Extras\Procedure\A;
 
 use AlecRabbit\Spinner\Core\Contract\IFloatValue;
 use AlecRabbit\Spinner\Core\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Frame;
+use AlecRabbit\Spinner\Core\Procedure\A\AProcedure;
 use AlecRabbit\Spinner\Core\WidthDeterminer;
-use AlecRabbit\Spinner\Extras\Procedure\A\AFractionProcedure;
+use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 
-final class FractionValueProcedure extends AFractionProcedure
+abstract class AProgressValueProcedure extends AFloatValueProcedure
 {
-    private const FORMAT = "%' 3.0f%%"; // "%' 5.1f%%";
-    private string $format;
+    protected const FORMAT = "%' 3.0f%%"; // "%' 5.1f%%";
+    protected const FINISHED_DELAY = 500;
 
     public function __construct(
-        IFloatValue $fractionValue,
+        protected readonly IProgressValue $progressValue,
         string $format = null,
+        protected float $finishedDelay = self::FINISHED_DELAY,
     ) {
-        $this->format = $format ?? self::FORMAT;
-        parent::__construct($fractionValue);
+
+        parent::__construct($progressValue, $format);
     }
 
     public function update(float $dt = null): IFrame
     {
-        if ($this->fractionValue->isFinished()) {
+        if ($this->progressValue->isFinished()) {
             if ($this->finishedDelay < 0) {
                 return Frame::createEmpty();
             }
@@ -33,7 +35,7 @@ final class FractionValueProcedure extends AFractionProcedure
         }
         $v = sprintf(
             $this->format,
-            $this->fractionValue->getValue() * 100
+            $this->progressValue->getValue() * 100
         );
         return
             new Frame($v, WidthDeterminer::determine($v));
