@@ -15,7 +15,7 @@ use AlecRabbit\Spinner\Extras\Contract\IProgressWidgetFactory;
 use AlecRabbit\Spinner\Extras\ProgressBarSprite;
 use AlecRabbit\Spinner\Extras\Procedure\ProgresBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressValueProcedure;
-use AlecRabbit\Spinner\Extras\Procedure\StepsProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
 use AlecRabbit\Spinner\Factory\A\AWidgetFactory;
 
 abstract class AProgressWidgetFactory extends AWidgetFactory implements IProgressWidgetFactory
@@ -32,7 +32,7 @@ abstract class AProgressWidgetFactory extends AWidgetFactory implements IProgres
             static::getWidgetRevolverBuilder()
                 ->withCharRevolver(
                     new ProceduralRevolver(
-                        new StepsProcedure(
+                        new ProgressStepsProcedure(
                             $progressValue,
                         ),
                         $updateInterval

@@ -11,7 +11,7 @@ use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 use AlecRabbit\Spinner\Factory\FrameFactory;
 
-final class StepsProcedure extends AProgressValueProcedure
+final class ProgressStepsProcedure extends AProgressValueProcedure
 {
     private float $stepValue;
 
