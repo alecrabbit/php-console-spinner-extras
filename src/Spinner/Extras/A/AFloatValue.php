@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\A;
 
+use AlecRabbit\Spinner\Core\A\AValue;
 use AlecRabbit\Spinner\Exception\InvalidArgumentException;
-use AlecRabbit\Spinner\Extras\Contract\IFractionValue;
+use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 
-abstract class AFractionValue implements IFractionValue
+abstract class AFloatValue extends AValue implements IFloatValue
 {
     protected float $value;
     protected bool $finished = false;
@@ -31,7 +32,7 @@ abstract class AFractionValue implements IFractionValue
     /**
      * @throws InvalidArgumentException
      */
-    protected static function assert(AFractionValue $value): void
+    protected static function assert(AFloatValue $value): void
     {
         match (true) {
             $value->min > $value->max =>
@@ -62,7 +63,8 @@ abstract class AFractionValue implements IFractionValue
         return $this->value;
     }
 
-    public function setValue(float $value): void
+    /** @inheritdoc */
+    public function setValue($value): void
     {
         $this->value = $value;
         $this->checkBounds();

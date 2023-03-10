@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Spinner\Core\A;
 
 use AlecRabbit\Spinner\Exception\InvalidArgumentException;
-use AlecRabbit\Spinner\Extras\A\AFractionValue;
-use AlecRabbit\Spinner\Extras\Contract\IFractionValue;
+use AlecRabbit\Spinner\Extras\A\AFloatValue;
+use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Tests\Spinner\TestCase\TestCase;
 
 final class AFractionValueTest extends TestCase
@@ -247,7 +247,7 @@ final class AFractionValueTest extends TestCase
         self::assertSame($expected[self::STEPS], $fractionValue->getSteps());
     }
 
-    public static function getInstance(array $args = []): IFractionValue
+    public static function getInstance(array $args = []): IFloatValue
     {
         return new class(
             startValue: $args[self::START] ?? 0.0,
@@ -255,7 +255,7 @@ final class AFractionValueTest extends TestCase
             min: $args[self::MIN] ?? 0.0,
             max: $args[self::MAX] ?? 1.0,
             autoFinish: $args[self::AUTO_FINISH] ?? false,
-        ) extends AFractionValue {
+        ) extends AFloatValue {
         };
     }
 

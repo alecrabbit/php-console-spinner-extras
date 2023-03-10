@@ -7,7 +7,7 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 use AlecRabbit\Spinner\Core\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Frame;
 use AlecRabbit\Spinner\Core\WidthDeterminer;
-use AlecRabbit\Spinner\Extras\Contract\IFractionValue;
+use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFractionProcedure;
 
 final class FractionFrameProcedure extends AFractionProcedure
@@ -26,7 +26,7 @@ final class FractionFrameProcedure extends AFractionProcedure
     private int $steps;
 
     public function __construct(
-        IFractionValue $fractionValue,
+        IFloatValue $fractionValue,
         protected array $frames = self::FRAMES, // TODO (2023-01-26 14:45) [Alec Rabbit]: remove array type -> use smth like "IFramesCollection"
     )
     {

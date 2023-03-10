@@ -8,7 +8,7 @@ use AlecRabbit\Spinner\Core\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Frame;
 use AlecRabbit\Spinner\Core\WidthDeterminer;
 use AlecRabbit\Spinner\Extras\Contract\IFractionBarSprite;
-use AlecRabbit\Spinner\Extras\Contract\IFractionValue;
+use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFractionProcedure;
 
 final class FractionBarProcedure extends AFractionProcedure
@@ -23,7 +23,7 @@ final class FractionBarProcedure extends AFractionProcedure
 
 
     public function __construct(
-        IFractionValue $fractionValue,
+        IFloatValue $fractionValue,
         protected ?IFractionBarSprite $sprite = null,
         protected int $units = self::UNITS,
         protected bool $withCursor = true,

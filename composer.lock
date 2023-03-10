@@ -13,19 +13,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
-                "reference": "532f70012bb87b6881e2e6366faf8fb04a1c1abe"
+                "reference": "8b8a31c3f83168834aa32957df95e9e65555726a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/532f70012bb87b6881e2e6366faf8fb04a1c1abe",
-                "reference": "532f70012bb87b6881e2e6366faf8fb04a1c1abe",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/8b8a31c3f83168834aa32957df95e9e65555726a",
+                "reference": "8b8a31c3f83168834aa32957df95e9e65555726a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2"
             },
             "require-dev": {
-                "alecrabbit/php-console-spinner-extras": "dev-main",
+                "alecrabbit/php-console-spinner-extras": "dev-dev",
                 "alecrabbit/php-wcwidth": "^1.0.0-ALPHA.0",
                 "fakerphp/faker": "*",
                 "nunomaduro/collision": "^7.0",
@@ -79,7 +79,7 @@
                 "issues": "https://github.com/alecrabbit/php-console-spinner/issues",
                 "source": "https://github.com/alecrabbit/php-console-spinner/tree/prepare-next"
             },
-            "time": "2023-03-10T10:23:12+00:00"
+            "time": "2023-03-10T13:09:35+00:00"
         },
         {
             "name": "fakerphp/faker",
