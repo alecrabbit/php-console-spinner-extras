@@ -10,49 +10,31 @@ use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 
 abstract class AFloatValue extends AValue implements IFloatValue
 {
-    protected float $value;
-    protected bool $finished = false;
-    protected float $stepValue;
-
-    /**
-     * @throws InvalidArgumentException
-     */
     public function __construct(
         float $startValue = 0.0,
-        protected readonly int $steps = 100,
         protected readonly float $min = 0.0,
         protected readonly float $max = 1.0,
-        protected readonly bool $autoFinish = false,
     ) {
-        self::assert($this);
-        $this->stepValue = ($this->max - $this->min) / $this->steps;
         $this->setValue($startValue);
     }
 
     /**
      * @throws InvalidArgumentException
      */
-    protected static function assert(AFloatValue $value): void
+    protected function assert(): void
     {
         match (true) {
-            $value->min > $value->max =>
+            $this->value->min > $this->value->max =>
             throw new InvalidArgumentException(
                 sprintf(
                     'Max value should be greater than min value. Min: "%s", Max: "%s".',
-                    $value->min,
-                    $value->max,
+                    $this->value->min,
+                    $this->value->max,
                 )
             ),
-            $value->min === $value->max =>
+            $this->value->min === $this->value->max =>
             throw new InvalidArgumentException(
                 'Min and Max values cannot be equal.'
-            ),
-            0 > $value->steps || 0 === $value->steps =>
-            throw new InvalidArgumentException(
-                sprintf(
-                    'Steps should be greater than 0. Steps: "%s".',
-                    $value->steps,
-                )
             ),
             default => null,
         };
@@ -75,18 +57,6 @@ abstract class AFloatValue extends AValue implements IFloatValue
         return $this->max;
     }
 
-    /** @inheritdoc */
-    public function advance(int $steps = 1): void
-    {
-        if ($this->finished) {
-            return;
-        }
-
-        $this->value += $steps * $this->stepValue;
-        $this->checkBounds();
-        $this->autoFinish();
-    }
-
     protected function checkBounds(): void
     {
         if ($this->value > $this->max) {
@@ -97,26 +67,20 @@ abstract class AFloatValue extends AValue implements IFloatValue
         }
     }
 
-    protected function autoFinish(): void
+    protected static function assertValue(mixed $value): void
     {
-        if ($this->autoFinish && $this->value === $this->max) {
-            $this->finish();
+        if(!\is_float($value)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    'Value should be float. Value: "%s".',
+                    $value,
+                )
+            );
         }
     }
 
-    public function finish(): void
+    public function getValue(): float
     {
-        $this->finished = true;
-        $this->value = $this->max;
-    }
-
-    public function getSteps(): int
-    {
-        return $this->steps;
-    }
-
-    public function isFinished(): bool
-    {
-        return $this->finished;
+        return $this->value;
     }
 }

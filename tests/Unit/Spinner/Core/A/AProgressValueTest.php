@@ -9,7 +9,7 @@ use AlecRabbit\Spinner\Extras\A\AFloatValue;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Tests\Spinner\TestCase\TestCase;
 
-final class AFractionValueTest extends TestCase
+final class AProgressValueTest extends TestCase
 {
     public static function createDataProvider(): iterable
     {

@@ -20,14 +20,4 @@ interface IFloatValue extends IValue
 
     public function getMax(): float;
 
-    public function getSteps(): int;
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    public function advance(int $steps): void;
-
-    public function finish(): void;
-
-    public function isFinished(): bool;
 }
