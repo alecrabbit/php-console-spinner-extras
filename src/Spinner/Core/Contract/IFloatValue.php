@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Extras\Contract;
-
-use AlecRabbit\Spinner\Core\Contract\IValue;
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+namespace AlecRabbit\Spinner\Core\Contract;
 
 interface IFloatValue extends IValue
 {

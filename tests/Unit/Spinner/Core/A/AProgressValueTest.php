@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Spinner\Core\A;
 
+use AlecRabbit\Spinner\Core\A\AFloatValue;
+use AlecRabbit\Spinner\Core\Contract\IFloatValue;
 use AlecRabbit\Spinner\Exception\InvalidArgumentException;
-use AlecRabbit\Spinner\Extras\A\AFloatValue;
-use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Tests\Spinner\TestCase\TestCase;
 
 final class AProgressValueTest extends TestCase

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\A;
 
-use AlecRabbit\Spinner\Core\A\AValue;
+use AlecRabbit\Spinner\Core\A\AFloatValue;
 use AlecRabbit\Spinner\Exception\InvalidArgumentException;
-use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 
 abstract class AProgressValue extends AFloatValue implements IProgressValue
@@ -26,38 +25,25 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
     ) {
         parent::__construct($startValue, $min, $max);
         $this->stepValue = ($this->max - $this->min) / $this->steps;
+        self::assert($this);
     }
 
-    protected function assert(): void
+    /**
+     * @throws InvalidArgumentException
+     */
+    private static function assert(AProgressValue $value): void
     {
-        parent::assert();
+
         match (true) {
-            0 > $this->steps || 0 === $this->steps =>
+            0 > $value->steps || 0 === $value->steps =>
             throw new InvalidArgumentException(
                 sprintf(
                     'Steps should be greater than 0. Steps: "%s".',
-                    $this->steps,
+                    $value->steps,
                 )
             ),
             default => null,
         };
-    }
-
-    /** @inheritdoc */
-    public function setValue($value): void
-    {
-        parent::setValue($value);
-        $this->checkBounds();
-    }
-
-    public function getMin(): float
-    {
-        return $this->min;
-    }
-
-    public function getMax(): float
-    {
-        return $this->max;
     }
 
     /** @inheritdoc */
@@ -70,16 +56,6 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
         $this->value += $steps * $this->stepValue;
         $this->checkBounds();
         $this->autoFinish();
-    }
-
-    protected function checkBounds(): void
-    {
-        if ($this->value > $this->max) {
-            $this->value = $this->max;
-        }
-        if ($this->value < $this->min) {
-            $this->value = $this->min;
-        }
     }
 
     protected function autoFinish(): void
@@ -103,22 +79,5 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
     public function isFinished(): bool
     {
         return $this->finished;
-    }
-
-    protected static function assertValue(mixed $value): void
-    {
-        if(!\is_float($value)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    'Value should be float. Value: "%s".',
-                    $value,
-                )
-            );
-        }
-    }
-
-    public function getValue(): float
-    {
-        return $this->value;
     }
 }
