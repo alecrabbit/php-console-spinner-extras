@@ -9,9 +9,11 @@ use AlecRabbit\Spinner\Core\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Frame;
 use AlecRabbit\Spinner\Core\WidthDeterminer;
 use AlecRabbit\Spinner\Extras\Contract\IFractionBarSprite;
+use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 
-final class FractionBarProcedure extends AFloatValueProcedure
+final class ProgresBarProcedure extends AProgressValueProcedure
 {
     protected const UNITS = 5;
     protected string $open;
@@ -23,7 +25,7 @@ final class FractionBarProcedure extends AFloatValueProcedure
 
 
     public function __construct(
-        IFloatValue $progressValue,
+        IProgressValue $progressValue,
         protected ?IFractionBarSprite $sprite = null,
         protected int $units = self::UNITS,
         protected bool $withCursor = true,

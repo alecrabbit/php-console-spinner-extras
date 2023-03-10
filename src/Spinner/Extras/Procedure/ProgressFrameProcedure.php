@@ -8,9 +8,11 @@ use AlecRabbit\Spinner\Core\Contract\IFloatValue;
 use AlecRabbit\Spinner\Core\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Frame;
 use AlecRabbit\Spinner\Core\WidthDeterminer;
+use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 
-final class FractionFrameProcedure extends AFloatValueProcedure
+final class ProgressFrameProcedure extends AProgressValueProcedure
 {
     private const FRAMES = [
         ' ',
@@ -26,7 +28,7 @@ final class FractionFrameProcedure extends AFloatValueProcedure
     private int $steps;
 
     public function __construct(
-        IFloatValue $progressValue,
+        IProgressValue $progressValue,
         protected array $frames = self::FRAMES, // TODO (2023-01-26 14:45) [Alec Rabbit]: remove array type -> use smth like "IFramesCollection"
     )
     {
@@ -36,7 +38,7 @@ final class FractionFrameProcedure extends AFloatValueProcedure
 
     public function update(float $dt = null): IFrame
     {
-        if ($this->floatValue->isFinished()) {
+        if ($this->progressValue->isFinished()) {
             if ($this->finishedDelay < 0) {
                 return Frame::createEmpty();
             }

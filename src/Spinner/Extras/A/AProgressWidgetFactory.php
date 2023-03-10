@@ -12,7 +12,7 @@ use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Contract\IFractionBarSprite;
 use AlecRabbit\Spinner\Extras\Contract\IProgressWidgetFactory;
 use AlecRabbit\Spinner\Extras\FractionBarSprite;
-use AlecRabbit\Spinner\Extras\Procedure\FractionBarProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\ProgresBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressValueProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\StepsProcedure;
 use AlecRabbit\Spinner\Factory\A\AWidgetFactory;
@@ -57,7 +57,7 @@ abstract class AProgressWidgetFactory extends AWidgetFactory implements IProgres
         $sprite ??= new FractionBarSprite();
 
         $procedure =
-            new FractionBarProcedure(
+            new ProgresBarProcedure(
                 $progressValue,
                 $sprite,
             );
