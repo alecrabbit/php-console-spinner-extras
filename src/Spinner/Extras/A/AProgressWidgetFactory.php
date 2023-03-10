@@ -10,6 +10,7 @@ use AlecRabbit\Spinner\Core\Contract\IInterval;
 use AlecRabbit\Spinner\Core\Revolver\ProceduralRevolver;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Contract\IFractionBarSprite;
+use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Contract\IProgressWidgetFactory;
 use AlecRabbit\Spinner\Extras\FractionBarSprite;
 use AlecRabbit\Spinner\Extras\Procedure\ProgresBarProcedure;
@@ -20,7 +21,7 @@ use AlecRabbit\Spinner\Factory\A\AWidgetFactory;
 abstract class AProgressWidgetFactory extends AWidgetFactory implements IProgressWidgetFactory
 {
     public static function createSteps(
-        IFloatValue $progressValue,
+        IProgressValue $progressValue,
         ?IInterval $updateInterval = null,
         ?IFrame $leadingSpacer = null,
         ?IFrame $trailingSpacer = null,
@@ -48,7 +49,7 @@ abstract class AProgressWidgetFactory extends AWidgetFactory implements IProgres
     }
 
     public static function createProgressBar(
-        IFloatValue $progressValue,
+        IProgressValue $progressValue,
         ?IFractionBarSprite $sprite = null,
         ?IInterval $updateInterval = null,
         ?IFrame $leadingSpacer = null,
@@ -72,7 +73,7 @@ abstract class AProgressWidgetFactory extends AWidgetFactory implements IProgres
     }
 
     public static function createProgressValue(
-        IFloatValue $progressValue,
+        IProgressValue $progressValue,
         ?string $format = null,
         ?IInterval $updateInterval = null,
         ?IFrame $leadingSpacer = null,

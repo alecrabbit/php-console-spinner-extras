@@ -12,7 +12,7 @@ use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 interface IProgressWidgetFactory
 {
     public static function createSteps(
-        IFloatValue $progressValue,
+        IProgressValue $progressValue,
         ?IInterval $updateInterval = null,
         ?IFrame $leadingSpacer = null,
         ?IFrame $trailingSpacer = null,
