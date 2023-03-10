@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Spinner\Core\Procedure\A;
 
 use AlecRabbit\Tests\Spinner\TestCase\TestCase;
-use AlecRabbit\Tests\Spinner\Unit\Spinner\Core\Procedure\A\Override\FractionBarSprite;
+use AlecRabbit\Tests\Spinner\Unit\Spinner\Core\Procedure\A\Override\ProgressBarSprite;
 
 final class AFractionBarSpriteTest extends TestCase
 {
     /** @test */
     public function canCreateDefault(): void
     {
-        $instance = new FractionBarSprite();
+        $instance = new ProgressBarSprite();
         self::assertSame('', $instance->getOpen());
         self::assertSame('', $instance->getClose());
         self::assertSame('█', $instance->getDone());
@@ -23,7 +23,7 @@ final class AFractionBarSpriteTest extends TestCase
     /** @test */
     public function canCreate(): void
     {
-        $instance = new FractionBarSprite(
+        $instance = new ProgressBarSprite(
             empty: 'e',
             done: 'd',
             cursor: 'c',

@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
-                "reference": "019e0c4f61fa943f2bb5c673c56981b64281e7a4"
+                "reference": "b569488abc74d914a3295b723ac96f6a032f18fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/019e0c4f61fa943f2bb5c673c56981b64281e7a4",
-                "reference": "019e0c4f61fa943f2bb5c673c56981b64281e7a4",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/b569488abc74d914a3295b723ac96f6a032f18fd",
+                "reference": "b569488abc74d914a3295b723ac96f6a032f18fd",
                 "shasum": ""
             },
             "require": {
@@ -79,7 +79,7 @@
                 "issues": "https://github.com/alecrabbit/php-console-spinner/issues",
                 "source": "https://github.com/alecrabbit/php-console-spinner/tree/prepare-next"
             },
-            "time": "2023-03-10T13:46:13+00:00"
+            "time": "2023-03-10T14:13:22+00:00"
         },
         {
             "name": "fakerphp/faker",

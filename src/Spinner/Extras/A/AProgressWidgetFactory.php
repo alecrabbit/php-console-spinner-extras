@@ -9,10 +9,10 @@ use AlecRabbit\Spinner\Core\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Contract\IInterval;
 use AlecRabbit\Spinner\Core\Revolver\ProceduralRevolver;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
-use AlecRabbit\Spinner\Extras\Contract\IFractionBarSprite;
+use AlecRabbit\Spinner\Extras\Contract\IProgressBarSprite;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Contract\IProgressWidgetFactory;
-use AlecRabbit\Spinner\Extras\FractionBarSprite;
+use AlecRabbit\Spinner\Extras\ProgressBarSprite;
 use AlecRabbit\Spinner\Extras\Procedure\ProgresBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressValueProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\StepsProcedure;
@@ -50,12 +50,12 @@ abstract class AProgressWidgetFactory extends AWidgetFactory implements IProgres
 
     public static function createProgressBar(
         IProgressValue $progressValue,
-        ?IFractionBarSprite $sprite = null,
+        ?IProgressBarSprite $sprite = null,
         ?IInterval $updateInterval = null,
         ?IFrame $leadingSpacer = null,
         ?IFrame $trailingSpacer = null,
     ): IWidgetComposite {
-        $sprite ??= new FractionBarSprite();
+        $sprite ??= new ProgressBarSprite();
 
         $procedure =
             new ProgresBarProcedure(

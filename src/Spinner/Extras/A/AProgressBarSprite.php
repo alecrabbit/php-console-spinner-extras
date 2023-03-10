@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\A;
 
-use AlecRabbit\Spinner\Extras\Contract\IFractionBarSprite;
+use AlecRabbit\Spinner\Extras\Contract\IProgressBarSprite;
 
-abstract readonly class AFractionBarSprite implements IFractionBarSprite
+abstract readonly class AProgressBarSprite implements IProgressBarSprite
 {
     public function __construct(
         protected string $empty = '░',

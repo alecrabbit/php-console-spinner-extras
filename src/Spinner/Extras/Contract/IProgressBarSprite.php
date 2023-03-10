@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Contract;
 
-interface IFractionBarSprite
+interface IProgressBarSprite
 {
     public function getOpen(): string;
 
