@@ -7,7 +7,7 @@ namespace AlecRabbit\Tests\Spinner\Unit\Spinner\Core\Procedure\A;
 use AlecRabbit\Tests\Spinner\TestCase\TestCase;
 use AlecRabbit\Tests\Spinner\Unit\Spinner\Core\Procedure\A\Override\ProgressBarSprite;
 
-final class AFractionBarSpriteTest extends TestCase
+final class AProgressBarSpriteTest extends TestCase
 {
     /** @test */
     public function canCreateDefault(): void
