@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce8ecd1699ccae5a51fc932386dd284d",
+    "content-hash": "63e321c21716e6d98ece180b3d5f507a",
     "packages": [
         {
             "name": "alecrabbit/php-console-spinner",
