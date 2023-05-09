@@ -1,6 +1,11 @@
-/.idea/
 /vendor/
-.env
-docker-stack.yml
-.start_time
+/.eval/
+/.idea/
+.deptrac.cache
+.ready
 .last_init_time
+.start_time
+docker-stack.yml
+.env
+.php-cs-fixer.php
+*.php-cs-fixer.cache

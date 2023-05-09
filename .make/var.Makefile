@@ -6,27 +6,23 @@ endif
 
 GLOBAL_DEBUG=0
 
-PROJECT_NAME=project.name
-PROJECT_SHORT_TITLE=✨
-
 # Git related variables
 WORKING_BRANCH=dev
 COMMIT_MESSAGE=~wp
 
-# Docker compose files
-
-# _FILES = -f ${_DOCKER_COMPOSE_FILE} -f docker-compose.override.${_DC_EXTENSION}
+# Docker compose files (uncomment to use dev file)
 _FILES = \
 	-f ${_DOCKER_COMPOSE_FILE} \
 	-f docker-compose.dev.${_DC_EXTENSION} \
 
-# ------------------------------------------------------------------------------
 PROJECT_NAME=pcs-extras
-PROJECT_SHORT_TITLE=🏵️
+PROJECT_SHORT_TITLE=🧳
 
+# ------------------------------------------------------------------------------
+# Your variables here
 TEST_REPETITION=10
 APP_CONTAINER=app
-COMPOSER_CONTAINER=app
+COMPOSER_CONTAINER=${APP_CONTAINER}
 # COMPOSER_CONTAINER=composer
 DUMPER_CONTAINER=${APP_CONTAINER}
 APP_DIR=.
