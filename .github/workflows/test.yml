@@ -1,10 +1,10 @@
-name: build
+name: test
 
 on:
   push:
     branches:
       - 'main'
-      - 'develop'
+      - 'dev'
 
 jobs:
   test:
