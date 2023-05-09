@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Tests\Spinner\Unit\Spinner\Core\Procedure\A;
+namespace AlecRabbit\Tests\Unit\Spinner\Extras;
 
-use AlecRabbit\Tests\Spinner\TestCase\TestCase;
-use AlecRabbit\Tests\Spinner\Unit\Spinner\Core\Procedure\A\Override\ProgressBarSprite;
+use AlecRabbit\Spinner\Extras\ProgressBarSprite;
+use AlecRabbit\Tests\TestCase\TestCase;
 
-final class AProgressBarSpriteTest extends TestCase
+final class ProgressBarSpriteTest extends TestCase
 {
     /** @test */
     public function canCreateDefault(): void

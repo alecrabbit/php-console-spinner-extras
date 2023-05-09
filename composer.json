@@ -32,7 +32,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "AlecRabbit\\Tests\\Spinner\\": "tests"
+            "AlecRabbit\\Tests\\": "tests"
         }
     },
     "suggest": {
