@@ -1,5 +1,6 @@
 include ${_PROJECT_DIR}/project.init.Makefile
 include ${_PROJECT_DIR}/project.install.Makefile
+include ${_APP_DIR}/app.Makefile
 
 PROJECT_SEL=${_C_SELECT} ${PROJECT_NAME} ${_C_STOP}
 
@@ -16,4 +17,3 @@ _env_reset:
 	@cp -v ${_ENV_DIST_FILE} ${_ENV_FILE};
 	@${_ECHO};
 	@${_ECHO_OK};
-

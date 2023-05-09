@@ -1,38 +1,48 @@
 {
     "name": "alecrabbit/php-console-spinner-extras",
-    "type": "library",
     "description": "Add-ons for php-console-spinner",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "php",
         "spinner",
         "extras"
     ],
-    "license": "MIT",
     "require": {
-        "php": ">=8.2"
+        "php": ">=8.2",
+        "alecrabbit/php-console-spinner": "dev-prepare-next",
+        "alecrabbit/php-wcwidth": "^1.0.0-ALPHA.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.0",
-        "phpunit/php-code-coverage": "*",
-        "symfony/console": "^6.2",
-        "symfony/var-dumper": "*",
         "fakerphp/faker": "*",
         "nunomaduro/collision": "^7.0",
+        "nunomaduro/phpinsights": "^2.8",
+        "phpunit/php-code-coverage": "*",
+        "phpunit/phpunit": "^10.0",
         "revolt/event-loop": "^1.0",
-        "alecrabbit/php-console-spinner": "dev-prepare-next"
-    },
-    "autoload": {
-        "psr-4": {
-            "AlecRabbit\\Spinner\\": "src\\Spinner\\"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "AlecRabbit\\Tests\\Spinner\\": "tests"
-        }
+        "symfony/console": "^6.2",
+        "symfony/var-dumper": "*"
     },
     "suggest": {
         "ext-mbstring": "For multibyte Unicode string functionality."
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "AlecRabbit\\Spinner\\": "src\\Spinner\\"
+        },
+        "files": [
+            "src/Spinner/Extras/bootstrap.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AlecRabbit\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
 }
