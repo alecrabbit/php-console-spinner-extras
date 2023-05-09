@@ -1,0 +1,35 @@
+parameters:
+  namespace: 'AlecRabbit\\Spinner'
+
+# Add module files here
+imports:
+  - .common/paths.yaml
+  - module/extras.yaml
+
+deptrac:
+  ruleset:
+    Extras:
+      - +Contract
+      - +Core
+      - +Exception
+      - +Helper
+      - +Mixin
+      - +VendorSymfony
+    Helper:
+      - +Contract
+      - +Exception
+      - +Mixin
+    Mixin: ~
+    Root:
+      - +Contract
+      - +Core
+      - +Exception
+      - +Helper
+    VendorSymfony:
+      - +VendorContainer
+    VendorRevolt: ~
+    VendorReact: ~
+    VendorContainer: ~
+#  skip_violations:
+#    NS\Class:
+#      - AnotherNS\Class
