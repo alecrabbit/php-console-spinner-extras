@@ -5,31 +5,26 @@ parameters:
 imports:
   - .common/paths.yaml
   - module/extras.yaml
+  - vendor/container.yaml
+  - vendor/react.yaml
+  - vendor/revolt.yaml
+  - vendor/spinner.core.yaml
+  - vendor/symfony.yaml
 
 deptrac:
   ruleset:
     Extras:
-      - +Contract
-      - +Core
-      - +Exception
-      - +Helper
-      - +Mixin
+      - VendorSpinnerCore
+      - VendorSymfony
+    Container:
+      - +VendorContainer
+    VendorSpinnerCore:
+      - +VendorContainer
+      - +VendorRevolt
+      - +VendorReact
       - +VendorSymfony
-    Helper:
-      - +Contract
-      - +Exception
-      - +Mixin
-    Mixin: ~
-    Root:
-      - +Contract
-      - +Core
-      - +Exception
-      - +Helper
     VendorSymfony:
       - +VendorContainer
     VendorRevolt: ~
     VendorReact: ~
     VendorContainer: ~
-#  skip_violations:
-#    NS\Class:
-#      - AnotherNS\Class
