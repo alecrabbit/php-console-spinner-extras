@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
-                "reference": "e9f7fdb955694ae664039f5303cbc25c8507a813"
+                "reference": "92f2ebd4cf41dbf675fd1e8fc3322b7c27072b4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/e9f7fdb955694ae664039f5303cbc25c8507a813",
-                "reference": "e9f7fdb955694ae664039f5303cbc25c8507a813",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/92f2ebd4cf41dbf675fd1e8fc3322b7c27072b4d",
+                "reference": "92f2ebd4cf41dbf675fd1e8fc3322b7c27072b4d",
                 "shasum": ""
             },
             "require": {
@@ -47,8 +47,7 @@
             "autoload": {
                 "files": [
                     "src/Spinner/bootstrap.php",
-                    "src/Spinner/Asynchronous/bootstrap.php",
-                    "src/Spinner/Extras/bootstrap.php"
+                    "src/Spinner/Asynchronous/bootstrap.php"
                 ],
                 "psr-4": {
                     "AlecRabbit\\Spinner\\": "src\\Spinner\\"
@@ -81,7 +80,7 @@
                 "issues": "https://github.com/alecrabbit/php-console-spinner/issues",
                 "source": "https://github.com/alecrabbit/php-console-spinner/tree/prepare-next"
             },
-            "time": "2023-05-09T09:19:50+00:00"
+            "time": "2023-05-10T11:03:15+00:00"
         },
         {
             "name": "alecrabbit/php-wcwidth",

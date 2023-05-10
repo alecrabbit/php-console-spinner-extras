@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Unit\Spinner\Extras\Render;
 
 use AlecRabbit\Spinner\Contract\Option\OptionStyleMode;
-use AlecRabbit\Spinner\Core\Factory\Contract\IStyleFrameFactory;
+use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleFrameFactory;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleFrameRenderer;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Render\StyleFrameRenderer;
