@@ -69,11 +69,6 @@ final class Driver extends ADriver
         $this->output->erase($state);
     }
 
-    public function initialize(): void
-    {
-        $this->output->initialize();
-    }
-
     public function add(ISpinner $spinner): void
     {
         if (!$this->spinners->offsetExists($spinner)) {
@@ -87,7 +82,7 @@ final class Driver extends ADriver
     public function remove(ISpinner $spinner): void
     {
         if ($this->spinners->offsetExists($spinner)) {
-            $this->erase($this->spinners[$spinner]);
+            $this->eraseOne($this->spinners[$spinner]);
             $this->spinners->offsetUnset($spinner);
             $spinner->detach($this);
             $this->interval = $this->recalculateInterval();

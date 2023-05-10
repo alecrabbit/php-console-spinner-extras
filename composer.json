@@ -16,7 +16,6 @@
     "require-dev": {
         "fakerphp/faker": "*",
         "nunomaduro/collision": "^7.0",
-        "nunomaduro/phpinsights": "^2.8",
         "phpunit/php-code-coverage": "*",
         "phpunit/phpunit": "^10.0",
         "revolt/event-loop": "^1.0",
