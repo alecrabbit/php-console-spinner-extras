@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Core\A;
+namespace AlecRabbit\Spinner\Extras\Contract;
 
 interface IFrameRenderer
 {
