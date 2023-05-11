@@ -6,7 +6,6 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\TestCase;
 
 use AlecRabbit\Spinner\Container\Contract\IContainer;
-use AlecRabbit\Spinner\Container\IDefinitionRegistry;
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Contract\IObserver;
@@ -37,11 +36,11 @@ use AlecRabbit\Spinner\Core\Contract\ISettingsProvider;
 use AlecRabbit\Spinner\Core\Contract\ISignalProcessingProbe;
 use AlecRabbit\Spinner\Core\Contract\ISpinner;
 use AlecRabbit\Spinner\Core\Contract\ISpinnerState;
-use AlecRabbit\Spinner\Core\Contract\IWidthMeasurer;
+use AlecRabbit\Spinner\Extras\Contract\IWidthMeasurer;
 use AlecRabbit\Spinner\Core\Contract\Loop\Contract\ILoop;
 use AlecRabbit\Spinner\Core\Contract\Loop\Contract\ILoopProbe;
 use AlecRabbit\Spinner\Core\Factory\Contract\IBufferedOutputSingletonFactory;
-use AlecRabbit\Spinner\Core\Factory\Contract\ICharFrameFactory;
+use AlecRabbit\Spinner\Extras\Factory\Contract\ICharFrameFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\ICharFrameRevolverFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\IConsoleCursorFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\IDriverOutputFactory;
@@ -51,7 +50,7 @@ use AlecRabbit\Spinner\Core\Factory\Contract\ILoopProbeFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\ILoopSettingsFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\ILoopSetupFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\ILoopFactory;
-use AlecRabbit\Spinner\Core\Factory\Contract\IStyleFrameFactory;
+use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleFrameFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\IStyleFrameRevolverFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\ITerminalSettingsFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\ITimerFactory;
@@ -101,11 +100,6 @@ abstract class TestCaseWithPrebuiltMocksAndStubs extends TestCase
     protected function getWidgetConfigStub(): Stub&IWidgetConfig
     {
         return $this->createStub(IWidgetConfig::class);
-    }
-
-    protected function createDefinitionRegistryMock(): MockObject&IDefinitionRegistry
-    {
-        return $this->createMock(IDefinitionRegistry::class);
     }
 
     protected function getWidgetIntervalContainerMock(): MockObject&IWidgetIntervalContainer

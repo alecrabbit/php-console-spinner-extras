@@ -9,28 +9,34 @@ use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Contract\ITimer;
-use AlecRabbit\Spinner\Core\A\ASubject;
-use AlecRabbit\Spinner\Core\Contract\IDriver;
+use AlecRabbit\Spinner\Core\A\ADriver;
 use AlecRabbit\Spinner\Core\Contract\ISpinner;
 use AlecRabbit\Spinner\Core\Contract\ISpinnerState;
 use AlecRabbit\Spinner\Core\Output\Contract\IDriverOutput;
+use AlecRabbit\Spinner\Core\Settings\Contract\IDriverSettings;
 use AlecRabbit\Spinner\Core\SpinnerState;
-use Closure;
 use WeakMap;
 
-final class Driver extends ASubject implements IDriver
+final class Driver extends ADriver
 {
     /** @var WeakMap<ISpinner, ISpinnerState> */
     private readonly WeakMap $spinners;
-    private IInterval $interval;
+
 
     public function __construct(
-        protected readonly IDriverOutput $driverOutput,
-        protected readonly ITimer $timer,
-        protected readonly IInterval $initialInterval,
+        IDriverOutput $output,
+        ITimer $timer,
+        IInterval $initialInterval,
+        IDriverSettings $driverSettings,
         ?IObserver $observer = null,
     ) {
-        parent::__construct($observer);
+        parent::__construct(
+            $output,
+            $timer,
+            $initialInterval,
+            $driverSettings,
+            $observer
+        );
         $this->spinners = new WeakMap();
         $this->interval = $initialInterval;
     }
@@ -51,37 +57,8 @@ final class Driver extends ASubject implements IDriver
 
             $this->spinners->offsetSet($spinner, $state);
 
-            $this->driverOutput->write($state);
+            $this->output->write($state);
         }
-    }
-
-    public function interrupt(?string $interruptMessage = null): void
-    {
-        $this->finalize($interruptMessage);
-    }
-
-    public function finalize(?string $finalMessage = null): void
-    {
-        $this->eraseAll();
-        $this->driverOutput->finalize($finalMessage);
-    }
-
-    private function eraseAll(): void
-    {
-        /** @var ISpinnerState $state */
-        foreach ($this->spinners as $state) {
-            $this->erase($state);
-        }
-    }
-
-    private function erase(ISpinnerState $state): void
-    {
-        $this->driverOutput->erase($state);
-    }
-
-    public function initialize(): void
-    {
-        $this->driverOutput->initialize();
     }
 
     public function add(ISpinner $spinner): void
@@ -94,15 +71,10 @@ final class Driver extends ASubject implements IDriver
         }
     }
 
-    public function getInterval(): IInterval
-    {
-        return $this->interval;
-    }
-
     public function remove(ISpinner $spinner): void
     {
         if ($this->spinners->offsetExists($spinner)) {
-            $this->erase($this->spinners[$spinner]);
+            $this->eraseOne($this->spinners[$spinner]);
             $this->spinners->offsetUnset($spinner);
             $spinner->detach($this);
             $this->interval = $this->recalculateInterval();
@@ -127,13 +99,16 @@ final class Driver extends ASubject implements IDriver
         }
     }
 
-    public function wrap(Closure $callback): Closure
+    protected function erase(): void
     {
-        return
-            function (mixed ...$args) use ($callback): void {
-                $this->eraseAll();
-                $callback(...$args);
-                $this->render();
-            };
+        /** @var ISpinnerState $state */
+        foreach ($this->spinners as $state) {
+            $this->eraseOne($state);
+        }
+    }
+
+    private function eraseOne(ISpinnerState $state): void
+    {
+        $this->output->erase($state);
     }
 }

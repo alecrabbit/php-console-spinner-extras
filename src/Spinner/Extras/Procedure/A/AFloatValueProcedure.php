@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Procedure\A;
 
-use AlecRabbit\Spinner\Contract\IFloatValue;
 use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 
 abstract class AFloatValueProcedure extends AProcedure
 {
