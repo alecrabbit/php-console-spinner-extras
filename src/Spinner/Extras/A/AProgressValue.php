@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\A;
 
-use AlecRabbit\Spinner\Core\A\AFloatValue;
 use AlecRabbit\Spinner\Exception\InvalidArgumentException;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 
