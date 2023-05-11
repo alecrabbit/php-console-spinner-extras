@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Contract;
 
-use AlecRabbit\Spinner\Contract\IFloatValue;
 use AlecRabbit\Spinner\Exception\InvalidArgumentException;
 
 interface IProgressValue extends IFloatValue

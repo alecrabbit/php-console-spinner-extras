@@ -10,13 +10,11 @@ use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Contract\ITimer;
 use AlecRabbit\Spinner\Core\A\ADriver;
-use AlecRabbit\Spinner\Core\A\ASubject;
-use AlecRabbit\Spinner\Core\Contract\IDriver;
 use AlecRabbit\Spinner\Core\Contract\ISpinner;
 use AlecRabbit\Spinner\Core\Contract\ISpinnerState;
 use AlecRabbit\Spinner\Core\Output\Contract\IDriverOutput;
+use AlecRabbit\Spinner\Core\Settings\Contract\IDriverSettings;
 use AlecRabbit\Spinner\Core\SpinnerState;
-use Closure;
 use WeakMap;
 
 final class Driver extends ADriver
@@ -29,9 +27,16 @@ final class Driver extends ADriver
         IDriverOutput $output,
         ITimer $timer,
         IInterval $initialInterval,
+        IDriverSettings $driverSettings,
         ?IObserver $observer = null,
     ) {
-        parent::__construct($output, $timer, $initialInterval, $observer);
+        parent::__construct(
+            $output,
+            $timer,
+            $initialInterval,
+            $driverSettings,
+            $observer
+        );
         $this->spinners = new WeakMap();
         $this->interval = $initialInterval;
     }
@@ -54,19 +59,6 @@ final class Driver extends ADriver
 
             $this->output->write($state);
         }
-    }
-
-    protected function erase(): void
-    {
-        /** @var ISpinnerState $state */
-        foreach ($this->spinners as $state) {
-            $this->eraseOne($state);
-        }
-    }
-
-    private function eraseOne(ISpinnerState $state): void
-    {
-        $this->output->erase($state);
     }
 
     public function add(ISpinner $spinner): void
@@ -105,5 +97,18 @@ final class Driver extends ADriver
             $this->interval = $this->recalculateInterval();
             $this->notify();
         }
+    }
+
+    protected function erase(): void
+    {
+        /** @var ISpinnerState $state */
+        foreach ($this->spinners as $state) {
+            $this->eraseOne($state);
+        }
+    }
+
+    private function eraseOne(ISpinnerState $state): void
+    {
+        $this->output->erase($state);
     }
 }
