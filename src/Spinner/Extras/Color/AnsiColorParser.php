@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color;
 
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColor;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiColorParser;
 use AlecRabbit\Spinner\Extras\Contract\IHexColorToAnsiCodeConverter;
@@ -34,7 +34,7 @@ final class AnsiColorParser implements IAnsiColorParser
     {
         match (true) {
             self::correctFormat($color) => null,
-            default => throw new InvalidArgumentException(
+            default => throw new InvalidArgument(
                 sprintf('Invalid color format: "%s".,', $color)
             ),
         };

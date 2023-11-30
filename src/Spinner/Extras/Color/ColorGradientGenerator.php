@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color;
 
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColor;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorGradientGenerator;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorProcessor;
@@ -71,10 +71,10 @@ final class ColorGradientGenerator implements IColorGradientGenerator
     private function assertCount(int $count): void
     {
         match (true) {
-            $count < self::MIN => throw new InvalidArgumentException(
+            $count < self::MIN => throw new InvalidArgument(
                 sprintf('Number of colors must be greater than %s.', self::MIN)
             ),
-            $count > $this->maxColors => throw new InvalidArgumentException(
+            $count > $this->maxColors => throw new InvalidArgument(
                 sprintf('Number of colors must be less than %s.', $this->maxColors)
             ),
             default => null,

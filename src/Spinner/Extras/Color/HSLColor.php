@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color;
 
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\A\AColor;
 
 final readonly class HSLColor extends AColor
@@ -39,7 +39,7 @@ final readonly class HSLColor extends AColor
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public static function fromString(string $color): self
     {
@@ -51,7 +51,7 @@ final readonly class HSLColor extends AColor
             return
                 new self($h, $s, $l, $a);
         }
-        throw new InvalidArgumentException(
+        throw new InvalidArgument(
             sprintf('Invalid color string: "%s".', $color)
         );
     }

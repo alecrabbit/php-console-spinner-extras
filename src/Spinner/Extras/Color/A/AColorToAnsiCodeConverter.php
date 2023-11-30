@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color\A;
 
-use AlecRabbit\Spinner\Contract\Option\OptionStyleMode;
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\Ansi4Color;
 use AlecRabbit\Spinner\Extras\Color\Ansi8Color;
 use AlecRabbit\Spinner\Extras\Color\Mixin\Ansi8ColorTableTrait;
@@ -16,15 +16,15 @@ abstract class AColorToAnsiCodeConverter
     use Ansi8ColorTableTrait;
 
     public function __construct(
-        protected OptionStyleMode $styleMode,
+        protected StylingMethodOption $styleMode,
     ) {
         self::assert($this);
     }
 
     protected static function assert(self $obj): void
     {
-        if ($obj->styleMode === OptionStyleMode::NONE) {
-            throw new InvalidArgumentException(
+        if ($obj->styleMode === StylingMethodOption::NONE) {
+            throw new InvalidArgument(
                 sprintf(
                     'Unsupported style mode "%s".',
                     $obj->styleMode->name,
@@ -34,7 +34,7 @@ abstract class AColorToAnsiCodeConverter
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     protected function normalize(string $color): string
     {
@@ -52,21 +52,21 @@ abstract class AColorToAnsiCodeConverter
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     private function assertColor(array|string $color): void
     {
         if ($color === '') {
-            throw new InvalidArgumentException('Empty color string.');
+            throw new InvalidArgument('Empty color string.');
         }
 
         if (strlen($color) !== 6) {
-            throw new InvalidArgumentException(sprintf('Invalid color: "#%s".', $color));
+            throw new InvalidArgument(sprintf('Invalid color: "#%s".', $color));
         }
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     protected function convert8(string $color): string
     {
@@ -82,7 +82,7 @@ abstract class AColorToAnsiCodeConverter
     abstract protected function convertHexColorToAnsiColorCode(string $hexColor): string;
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     protected function convert4(string $color): string
     {

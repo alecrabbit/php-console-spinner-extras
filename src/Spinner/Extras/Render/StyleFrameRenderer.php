@@ -6,9 +6,9 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Render;
 
 use AlecRabbit\Spinner\Contract\IFrame;
-use AlecRabbit\Spinner\Contract\Option\OptionStyleMode;
+use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleFrameFactory;
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleFrameRenderer;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
@@ -18,23 +18,23 @@ final class StyleFrameRenderer implements IStyleFrameRenderer
     public function __construct(
         protected IStyleFrameFactory $frameFactory,
         protected IStyleRenderer $styleRenderer,
-        protected OptionStyleMode $styleMode,
+        protected StylingMethodOption $styleMode,
     ) {
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public function render(IStyle $style): IFrame
     {
-        if ($this->styleMode === OptionStyleMode::NONE) {
+        if ($this->styleMode === StylingMethodOption::NONE) {
             return $this->frameFactory->create('%s', 0);
         }
         return $this->createFrameFromStyle($style);
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     private function createFrameFromStyle(IStyle $style): IFrame
     {

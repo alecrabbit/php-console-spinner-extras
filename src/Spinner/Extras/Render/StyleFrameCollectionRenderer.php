@@ -6,11 +6,11 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Render;
 
 use AlecRabbit\Spinner\Contract\IFrame;
-use AlecRabbit\Spinner\Contract\Option\OptionStyleMode;
+use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
 use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Core\FrameCollection;
 use AlecRabbit\Spinner\Core\Pattern\Contract\IStylePattern;
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleFrameRendererFactory;
@@ -31,7 +31,7 @@ final class StyleFrameCollectionRenderer implements IStyleFrameCollectionRendere
 
     public function render(IStylePattern $pattern): IFrameCollection
     {
-        if (OptionStyleMode::NONE === $pattern->getStyleMode()) {
+        if (StylingMethodOption::NONE === $pattern->getStyleMode()) {
             return new FrameCollection($this->generateFrames($pattern));
         }
         $this->styleFrameRenderer = // TODO (2023-04-20 13:50) [Alec Rabbit]: can be retrieved from the container?
@@ -43,7 +43,7 @@ final class StyleFrameCollectionRenderer implements IStyleFrameCollectionRendere
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     private function generateFrames(IStylePattern $pattern): Traversable
     {
@@ -63,7 +63,7 @@ final class StyleFrameCollectionRenderer implements IStyleFrameCollectionRendere
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     private function createFrame(string|IStyle $style): IFrame
     {

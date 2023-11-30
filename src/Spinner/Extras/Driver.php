@@ -111,4 +111,10 @@ final class Driver extends ADriver
     {
         $this->output->erase($state);
     }
+
+    public function has(ISpinner $spinner): bool
+    {
+        // TODO: Implement has() method.
+        throw new \RuntimeException(__METHOD__ . ' Not implemented.');
+    }
 }

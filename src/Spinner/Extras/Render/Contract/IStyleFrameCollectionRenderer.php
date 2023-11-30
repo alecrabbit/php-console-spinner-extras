@@ -6,12 +6,12 @@ namespace AlecRabbit\Spinner\Extras\Render\Contract;
 
 use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Core\Pattern\Contract\IStylePattern;
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 
 interface IStyleFrameCollectionRenderer
 {
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public function render(IStylePattern $pattern): IFrameCollection;
 }

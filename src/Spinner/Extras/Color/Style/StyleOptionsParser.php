@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color\Style;
 
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptions;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptionsParser;
 use AlecRabbit\Spinner\Extras\Contract\Style\StyleOption;
@@ -38,7 +38,7 @@ final class StyleOptionsParser implements IStyleOptionsParser
             StyleOption::HIDDEN => [self::SET => 8, self::UNSET => 28],
             StyleOption::STRIKETHROUGH => [self::SET => 9, self::UNSET => 29],
             StyleOption::DOUBLE_UNDERLINE => [self::SET => 21, self::UNSET => 24],
-            default => throw new InvalidArgumentException('Unknown option: ' . $option->name),
+            default => throw new InvalidArgument('Unknown option: ' . $option->name),
         };
     }
 }

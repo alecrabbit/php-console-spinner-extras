@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\A;
 
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 
 abstract class AProgressValue extends AFloatValue implements IProgressValue
@@ -13,7 +13,7 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
     protected float $stepValue;
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public function __construct(
         float $startValue = 0.0,
@@ -28,12 +28,12 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     private static function assert(AProgressValue $value): void
     {
         match (true) {
-            0 > $value->steps || $value->steps === 0 => throw new InvalidArgumentException(
+            0 > $value->steps || $value->steps === 0 => throw new InvalidArgument(
                 sprintf(
                     'Steps should be greater than 0. Steps: "%s".',
                     $value->steps,

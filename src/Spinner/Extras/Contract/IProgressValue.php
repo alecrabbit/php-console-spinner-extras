@@ -5,14 +5,14 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Contract;
 
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 
 interface IProgressValue extends IFloatValue
 {
     public function getSteps(): int;
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public function advance(int $steps): void;
 

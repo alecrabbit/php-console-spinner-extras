@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color;
 
-use AlecRabbit\Spinner\Contract\Option\OptionStyleMode;
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\A\AColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Contract\IHexColorToAnsiCodeConverter;
 
@@ -17,14 +17,14 @@ final class HexColorToAnsiCodeConverter extends AColorToAnsiCodeConverter implem
         $color = $this->normalize($color);
 
         return match ($this->styleMode) {
-            OptionStyleMode::ANSI4 => $this->convert4($color),
-            OptionStyleMode::ANSI8 => $this->convert8($color),
+            StylingMethodOption::ANSI4 => $this->convert4($color),
+            StylingMethodOption::ANSI8 => $this->convert8($color),
             default => $this->convertHexColorToAnsiColorCode($color),
         };
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     protected function convertHexColorToAnsiColorCode(string $hexColor): string
     {
@@ -35,22 +35,22 @@ final class HexColorToAnsiCodeConverter extends AColorToAnsiCodeConverter implem
         $b = $color & 255;
 
         return match ($this->styleMode) {
-            OptionStyleMode::ANSI4 => (string)$this->convertFromRGB($r, $g, $b),
-            OptionStyleMode::ANSI8 => '8;5;' . (string)$this->convertFromRGB($r, $g, $b),
-            OptionStyleMode::ANSI24 => sprintf('8;2;%d;%d;%d', $r, $g, $b),
-            default => throw new InvalidArgumentException('Should not be thrown: Unsupported style mode.'),
+            StylingMethodOption::ANSI4 => (string)$this->convertFromRGB($r, $g, $b),
+            StylingMethodOption::ANSI8 => '8;5;' . (string)$this->convertFromRGB($r, $g, $b),
+            StylingMethodOption::ANSI24 => sprintf('8;2;%d;%d;%d', $r, $g, $b),
+            default => throw new InvalidArgument('Should not be thrown: Unsupported style mode.'),
         };
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     protected function convertFromRGB(int $r, int $g, int $b): int
     {
         return match ($this->styleMode) {
-            OptionStyleMode::ANSI4 => $this->degradeHexColorToAnsi4($r, $g, $b),
-            OptionStyleMode::ANSI8 => $this->degradeHexColorToAnsi8($r, $g, $b),
-            default => throw new InvalidArgumentException(
+            StylingMethodOption::ANSI4 => $this->degradeHexColorToAnsi4($r, $g, $b),
+            StylingMethodOption::ANSI8 => $this->degradeHexColorToAnsi8($r, $g, $b),
+            default => throw new InvalidArgument(
                 sprintf(
                     'RGB cannot be converted to "%s".',
                     $this->styleMode->name
