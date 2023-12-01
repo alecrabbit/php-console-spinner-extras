@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color\Contract;
 
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\RGBColor;
 use Generator;
 use Traversable;
@@ -20,7 +20,7 @@ interface IColorGradientGenerator
      *
      * @return Generator<RGBColor> A generator that yields RGBColor objects.
      *
-     * @throws InvalidArgumentException if the parameters are invalid.
+     * @throws InvalidArgument if the parameters are invalid.
      */
     public function gradient(IColor|string $from, IColor|string $to, int $count = 2): Generator;
 
@@ -33,7 +33,7 @@ interface IColorGradientGenerator
      *
      * @return Generator<RGBColor> A generator that yields RGBColor objects.
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public function gradients(Traversable $colors, int $num = 2, IColor|string|null $fromColor = null): Generator;
 }

@@ -5,9 +5,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Pattern;
 
-use AlecRabbit\Spinner\Contract\Option\OptionStyleMode;
+use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
 use AlecRabbit\Spinner\Core\Pattern\A\AStylePattern;
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use Traversable;
 
 /** @psalm-suppress UnusedClass */
@@ -26,36 +26,36 @@ final class CustomStylePattern extends AStylePattern
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     private static function assertPattern(array $pattern): void
     {
         if (empty($pattern)) {
-            throw new InvalidArgumentException('Pattern is empty.');
+            throw new InvalidArgument('Pattern is empty.');
         }
-        if (!array_key_exists(OptionStyleMode::ANSI4->value, $pattern)) {
-            throw new InvalidArgumentException('Pattern does not contain ANSI4 key.');
+        if (!array_key_exists(StylingMethodOption::ANSI4->value, $pattern)) {
+            throw new InvalidArgument('Pattern does not contain ANSI4 key.');
         }
-        if (!array_key_exists(OptionStyleMode::ANSI8->value, $pattern)) {
-            throw new InvalidArgumentException('Pattern does not contain ANSI8 key.');
+        if (!array_key_exists(StylingMethodOption::ANSI8->value, $pattern)) {
+            throw new InvalidArgument('Pattern does not contain ANSI8 key.');
         }
-        if (!array_key_exists(OptionStyleMode::ANSI24->value, $pattern)) {
-            throw new InvalidArgumentException('Pattern does not contain ANSI24 key.');
+        if (!array_key_exists(StylingMethodOption::ANSI24->value, $pattern)) {
+            throw new InvalidArgument('Pattern does not contain ANSI24 key.');
         }
-        self::assertPatternSection($pattern[OptionStyleMode::ANSI4->value]);
-        self::assertPatternSection($pattern[OptionStyleMode::ANSI8->value]);
-        self::assertPatternSection($pattern[OptionStyleMode::ANSI24->value]);
+        self::assertPatternSection($pattern[StylingMethodOption::ANSI4->value]);
+        self::assertPatternSection($pattern[StylingMethodOption::ANSI8->value]);
+        self::assertPatternSection($pattern[StylingMethodOption::ANSI24->value]);
 //        match (true) {
-//            empty($pattern) => throw new InvalidArgumentException('Pattern is empty.'),
-//            !array_key_exists(OptionStyleMode::ANSI4->value, $pattern)
+//            empty($pattern) => throw new InvalidArgument('Pattern is empty.'),
+//            !array_key_exists(StylingMethodOption::ANSI4->value, $pattern)
 //            =>
-//            throw new InvalidArgumentException('Pattern does not contain ANSI4 key.'),
-//            !array_key_exists(OptionStyleMode::ANSI8->value, $pattern)
+//            throw new InvalidArgument('Pattern does not contain ANSI4 key.'),
+//            !array_key_exists(StylingMethodOption::ANSI8->value, $pattern)
 //            =>
-//            throw new InvalidArgumentException('Pattern does not contain ANSI8 key.'),
-//            !array_key_exists(OptionStyleMode::ANSI24->value, $pattern)
+//            throw new InvalidArgument('Pattern does not contain ANSI8 key.'),
+//            !array_key_exists(StylingMethodOption::ANSI24->value, $pattern)
 //            =>
-//            throw new InvalidArgumentException('Pattern does not contain ANSI24 key.'),
+//            throw new InvalidArgument('Pattern does not contain ANSI24 key.'),
 //        };
     }
 
@@ -63,7 +63,7 @@ final class CustomStylePattern extends AStylePattern
     {
     }
 
-    public function getEntries(OptionStyleMode $styleMode = OptionStyleMode::ANSI8): Traversable
+    public function getEntries(StylingMethodOption $styleMode = StylingMethodOption::ANSI8): Traversable
     {
         yield from $this->pattern[$styleMode->value];
     }

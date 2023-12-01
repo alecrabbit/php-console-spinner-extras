@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color;
 
-use AlecRabbit\Spinner\Contract\Option\OptionStyleMode;
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\A\AColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Contract\IHexColorToAnsiCodeConverter;
 
@@ -17,14 +17,14 @@ final class SimpleHexColorToAnsiCodeConverter extends AColorToAnsiCodeConverter 
         $color = $this->normalize($color);
 
         return match ($this->styleMode) {
-            OptionStyleMode::ANSI4 => $this->convert4($color),
-            OptionStyleMode::ANSI8 => $this->convert8($color),
+            StylingMethodOption::ANSI4 => $this->convert4($color),
+            StylingMethodOption::ANSI8 => $this->convert8($color),
             default => $this->convertHexColorToAnsiColorCode($color),
         };
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     protected function convertHexColorToAnsiColorCode(string $hexColor): string
     {
@@ -35,8 +35,8 @@ final class SimpleHexColorToAnsiCodeConverter extends AColorToAnsiCodeConverter 
         $b = $color & 255;
 
         return match ($this->styleMode) {
-            OptionStyleMode::ANSI24 => sprintf('8;2;%d;%d;%d', $r, $g, $b),
-            default => throw new InvalidArgumentException(
+            StylingMethodOption::ANSI24 => sprintf('8;2;%d;%d;%d', $r, $g, $b),
+            default => throw new InvalidArgument(
                 sprintf(
                     'Failed to convert color "%s" in mode "%s".',
                     $hexColor,

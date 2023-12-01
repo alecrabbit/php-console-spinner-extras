@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color;
 
-use AlecRabbit\Spinner\Contract\Option\OptionStyleMode;
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\A\AAnsiColor;
 use AlecRabbit\Spinner\Helper\Asserter;
 
@@ -25,10 +25,10 @@ final class Ansi8Color extends AAnsiColor
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     protected static function assertIndex(int $index): void
     {
-        Asserter::assertIntColor($index, OptionStyleMode::ANSI8);
+        Asserter::assertIntColor($index, StylingMethodOption::ANSI8);
     }
 }

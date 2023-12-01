@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Factory;
 
-use AlecRabbit\Spinner\Contract\Option\OptionStyleMode;
+use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
 use AlecRabbit\Spinner\Extras\Color\AnsiColorParser;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiColorParser;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IAnsiColorParserFactory;
@@ -18,7 +18,7 @@ final class AnsiColorParserFactory implements IAnsiColorParserFactory
     ) {
     }
 
-    public function create(OptionStyleMode $styleMode): IAnsiColorParser
+    public function create(StylingMethodOption $styleMode): IAnsiColorParser
     {
         return new AnsiColorParser(
             converter: $this->converterFactory->create($styleMode),

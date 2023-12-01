@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color\Contract;
 
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\HSLColor;
 use AlecRabbit\Spinner\Extras\Color\RGBColor;
 
@@ -16,7 +16,7 @@ interface IColorProcessor
      *
      * @param string|IColor $color The color to convert.
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public function toRGB(string|IColor $color): RGBColor;
 
@@ -25,7 +25,7 @@ interface IColorProcessor
      *
      * @param string|IColor $color The color to convert.
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public function toHSL(string|IColor $color): HSLColor;
 

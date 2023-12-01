@@ -7,7 +7,7 @@ namespace AlecRabbit\Tests\TestCase;
 
 use AlecRabbit\Spinner\Core\Config\Contract\IConfig;
 use AlecRabbit\Spinner\Core\Contract\IConfigBuilder;
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Exception\LogicException;
 use AlecRabbit\Spinner\StaticFacade;
 
@@ -18,7 +18,7 @@ abstract class ConfigTestCase extends TestCase
     /**
      * @param bool $fresh Set to true to create a fresh config during one test.
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      * @throws LogicException
      */
     protected static function getDefaultConfig(bool $fresh = false): IConfig
@@ -36,7 +36,7 @@ abstract class ConfigTestCase extends TestCase
 
     /**
      * @throws LogicException
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     private static function doBuildConfig(): IConfig
     {

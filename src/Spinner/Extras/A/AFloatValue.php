@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\A;
 
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 
 abstract class AFloatValue implements IFloatValue
@@ -12,7 +12,7 @@ abstract class AFloatValue implements IFloatValue
     protected float $value;
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public function __construct(
         float $startValue = 0.0,
@@ -24,19 +24,19 @@ abstract class AFloatValue implements IFloatValue
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     private static function assert(AFloatValue $value): void
     {
         match (true) {
-            $value->min > $value->max => throw new InvalidArgumentException(
+            $value->min > $value->max => throw new InvalidArgument(
                 sprintf(
                     'Max value should be greater than min value. Min: "%s", Max: "%s".',
                     $value->min,
                     $value->max,
                 )
             ),
-            $value->min === $value->max => throw new InvalidArgumentException(
+            $value->min === $value->max => throw new InvalidArgument(
                 'Min and Max values cannot be equal.'
             ),
             default => null,

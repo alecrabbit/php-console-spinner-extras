@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color;
 
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\A\AColor;
 use Stringable;
 
@@ -40,7 +40,7 @@ final readonly class RGBColor extends AColor implements Stringable
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public static function fromString(string $color): self
     {
@@ -57,7 +57,7 @@ final readonly class RGBColor extends AColor implements Stringable
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     private static function fromHex(string $hex): self
     {
@@ -72,7 +72,7 @@ final readonly class RGBColor extends AColor implements Stringable
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     private static function normalizeHex(string $hex): string
     {
@@ -88,12 +88,12 @@ final readonly class RGBColor extends AColor implements Stringable
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     private static function assertHex(string $hex): void
     {
         if (!preg_match(self::REGEXP_HEX, $hex)) {
-            throw new InvalidArgumentException(
+            throw new InvalidArgument(
                 sprintf('Invalid color string: "%s".', $hex)
             );
         }

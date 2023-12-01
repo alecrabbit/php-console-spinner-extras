@@ -5,10 +5,11 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\TestCase;
 
-use AlecRabbit\Spinner\Helper\Stringify;
-use AlecRabbit\Tests\Helper\PickLock;
-use AlecRabbit\Tests\Mixin\AppRelatedConstTrait;
+use AlecRabbit\Tests\TestCase\Helper\PickLock;
+use AlecRabbit\Tests\TestCase\Mixin\AppRelatedConstTrait;
 use ArrayAccess;
+use Faker\Factory as FakerFactory;
+use Faker\Generator as FakerGenerator;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 use Throwable;
 
@@ -22,6 +23,7 @@ abstract class TestCase extends PHPUnitTestCase
 
     final protected const REPEATS = 10;
     final protected const FLOAT_EQUALITY_DELTA = 0.0000001;
+    private const FORMAT_THROWABLE = "%s('%s')";
 
     protected static function getPropertyValue(string $property, mixed $from): mixed
     {
@@ -59,15 +61,33 @@ abstract class TestCase extends PHPUnitTestCase
         ) {
             $messageOrException = new $messageOrException($exceptionMessage ?? '');
         }
-        return 'Exception not thrown: ' . Stringify::throwable($messageOrException);
+        return 'Exception not thrown: ' . self::throwable($messageOrException);
     }
 
-    protected function setUp(): void
+    protected static function throwable(Throwable $t, bool $unwrap = true): string
     {
+        $class = $t::class;
+        $message = $t->getMessage();
+        $aux = $unwrap ? ' [' . $class . ']' : '';
+        return sprintf(
+                self::FORMAT_THROWABLE,
+                self::classShortName($class),
+                $message
+            ) . $aux;
     }
 
-    protected function tearDown(): void
+    protected static function classShortName(string|object $fqcn): string
     {
+        if (is_object($fqcn)) {
+            $fqcn = $fqcn::class;
+        }
+        $parts = explode('\\', $fqcn);
+        return end($parts);
+    }
+
+    protected static function getFaker(): FakerGenerator
+    {
+        return FakerFactory::create();
     }
 
     protected function expectsException(mixed $expected): ?Throwable

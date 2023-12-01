@@ -3,35 +3,95 @@
 /app/src/Spinner/Extras/Color/A/AAnsiColor.php:22:16:error - MixedReturnStatement: Possibly-mixed return value
 /app/src/Spinner/Extras/Color/A/AAnsiColor.php:22:16:error - MixedReturnStatement: Could not infer a return type
 /app/src/Spinner/Extras/Color/A/AColorToAnsiCodeConverter.php:63:20:error - PossiblyInvalidArgument: Argument 1 of strlen expects string, but possibly different type array<array-key, mixed>|non-empty-string provided
-/app/src/Spinner/Extras/Color/A/AColorToAnsiCodeConverter.php:64:81:error - PossiblyInvalidArgument: Argument 2 of sprintf expects float|int|string, but possibly different type array<array-key, mixed>|non-empty-string provided
+/app/src/Spinner/Extras/Color/A/AColorToAnsiCodeConverter.php:64:72:error - PossiblyInvalidArgument: Argument 2 of sprintf expects float|int|object{__tostring()}|string, but possibly different type array<array-key, mixed>|non-empty-string provided
 /app/src/Spinner/Extras/Color/AnsiColorParser.php:30:42:error - PossiblyInvalidArgument: Argument 1 of AlecRabbit\Spinner\Extras\Contract\IHexColorToAnsiCodeConverter::convert expects string, but possibly different type AlecRabbit\Spinner\Extras\Color\Contract\IColor|non-empty-string provided
-/app/src/Spinner/Extras/Color/AnsiColorParser.php:38:57:error - PossiblyInvalidArgument: Argument 2 of sprintf expects float|int|string, but possibly different type AlecRabbit\Spinner\Extras\Color\Contract\IColor|string provided
+/app/src/Spinner/Extras/Color/AnsiColorParser.php:38:57:error - PossiblyInvalidArgument: Argument 2 of sprintf expects float|int|object{__tostring()}|string, but possibly different type AlecRabbit\Spinner\Extras\Color\Contract\IColor|string provided
 /app/src/Spinner/Extras/Color/ColorGradientGenerator.php:32:29:error - MixedAssignment: Unable to determine the type that $color is being assigned to
 /app/src/Spinner/Extras/Color/ColorGradientGenerator.php:34:17:error - MixedAssignment: Unable to determine the type that $fromColor is being assigned to
 /app/src/Spinner/Extras/Color/ColorGradientGenerator.php:37:40:error - MixedArgument: Argument 1 of AlecRabbit\Spinner\Extras\Color\ColorGradientGenerator::gradient cannot be AlecRabbit\Spinner\Extras\Color\Contract\IColor|mixed|string, expecting AlecRabbit\Spinner\Extras\Color\Contract\IColor|string
 /app/src/Spinner/Extras/Color/ColorGradientGenerator.php:37:52:error - MixedArgument: Argument 2 of AlecRabbit\Spinner\Extras\Color\ColorGradientGenerator::gradient cannot be mixed, expecting AlecRabbit\Spinner\Extras\Color\Contract\IColor|string
 /app/src/Spinner/Extras/Color/Style/StyleOptionsParser.php:22:34:error - MixedAssignment: Unable to determine the type that $option is being assigned to
 /app/src/Spinner/Extras/Color/Style/StyleOptionsParser.php:23:55:error - MixedArgument: Argument 1 of AlecRabbit\Spinner\Extras\Color\Style\StyleOptionsParser::getOptionCodes cannot be mixed, expecting AlecRabbit\Spinner\Extras\Contract\Style\StyleOption
+/app/src/Spinner/Extras/Color/Style/StyleOptionsParser.php:41:71:error - MixedPropertyFetch: Cannot fetch property on empty var $option
 /app/src/Spinner/Extras/Contract/IProgressWidgetFactory.php:21:8:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Widget\Contract\ILegacyWidgetComposite does not exist
 /app/src/Spinner/Extras/Contract/IProgressWidgetFactory.php:29:8:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Widget\Contract\ILegacyWidgetComposite does not exist
 /app/src/Spinner/Extras/Contract/Style/IStyleOptions.php:10:33:error - MissingTemplateParam: AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptions has missing template params when extending IteratorAggregate, expecting 2
+/app/src/Spinner/Extras/Driver.php:23:22:error - UndefinedDocblockClass: Docblock-defined class, interface or enum named AlecRabbit\Spinner\Core\Contract\ISpinnerState does not exist
+/app/src/Spinner/Extras/Driver.php:27:9:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Output\Contract\IDriverOutput does not exist
+/app/src/Spinner/Extras/Driver.php:28:9:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Contract\ITimer does not exist
+/app/src/Spinner/Extras/Driver.php:34:13:error - InvalidArgument: Argument 1 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Contract\IInterval, but AlecRabbit\Spinner\Core\Output\Contract\IDriverOutput provided
+/app/src/Spinner/Extras/Driver.php:35:13:error - InvalidArgument: Argument 2 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Core\Contract\IDriverMessages, but AlecRabbit\Spinner\Contract\ITimer provided
+/app/src/Spinner/Extras/Driver.php:36:13:error - InvalidArgument: Argument 3 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Core\Contract\IRenderer, but AlecRabbit\Spinner\Contract\IInterval provided
+/app/src/Spinner/Extras/Driver.php:37:13:error - InvalidArgument: Argument 4 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Contract\IDeltaTimer, but AlecRabbit\Spinner\Core\Settings\Contract\IDriverSettings provided
 /app/src/Spinner/Extras/Driver.php:40:27:error - PropertyTypeCoercion: $this->spinners expects 'WeakMap<AlecRabbit\Spinner\Core\Contract\ISpinner, AlecRabbit\Spinner\Core\Contract\ISpinnerState>',  parent type 'WeakMap<object, mixed>' provided
+/app/src/Spinner/Extras/Driver.php:46:9:error - MixedAssignment: Unable to determine the type that $dt is being assigned to
+/app/src/Spinner/Extras/Driver.php:46:17:error - UndefinedThisPropertyFetch: Instance property AlecRabbit\Spinner\Extras\Driver::$timer is not defined
+/app/src/Spinner/Extras/Driver.php:46:31:error - MixedMethodCall: Cannot determine the type of $this->timer when calling method getDelta
 /app/src/Spinner/Extras/Driver.php:48:37:error - MixedAssignment: Unable to determine the type that $spinner is being assigned to
 /app/src/Spinner/Extras/Driver.php:48:49:error - MixedAssignment: Unable to determine the type that $previousState is being assigned to
 /app/src/Spinner/Extras/Driver.php:49:13:error - MixedAssignment: Unable to determine the type that $frame is being assigned to
 /app/src/Spinner/Extras/Driver.php:49:32:error - MixedMethodCall: Cannot determine the type of $spinner when calling method getFrame
-/app/src/Spinner/Extras/Driver.php:53:31:error - MixedArgument: Argument 1 of AlecRabbit\Spinner\Core\SpinnerState::__construct cannot be mixed, expecting string
+/app/src/Spinner/Extras/Driver.php:52:21:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\SpinnerState does not exist
 /app/src/Spinner/Extras/Driver.php:53:39:error - MixedMethodCall: Cannot determine the type of $frame when calling method sequence
-/app/src/Spinner/Extras/Driver.php:54:28:error - MixedArgument: Argument 2 of AlecRabbit\Spinner\Core\SpinnerState::__construct cannot be mixed, expecting int
 /app/src/Spinner/Extras/Driver.php:54:36:error - MixedMethodCall: Cannot determine the type of $frame when calling method width
-/app/src/Spinner/Extras/Driver.php:55:36:error - MixedArgument: Argument 3 of AlecRabbit\Spinner\Core\SpinnerState::__construct cannot be mixed, expecting int
 /app/src/Spinner/Extras/Driver.php:55:52:error - MixedMethodCall: Cannot determine the type of $previousState when calling method getWidth
 /app/src/Spinner/Extras/Driver.php:58:40:error - MixedArgument: Argument 1 of WeakMap::offsetSet cannot be mixed, expecting AlecRabbit\Spinner\Core\Contract\ISpinner
+/app/src/Spinner/Extras/Driver.php:58:50:error - InvalidArgument: Argument 2 of WeakMap::offsetSet expects AlecRabbit\Spinner\Core\Contract\ISpinnerState, but AlecRabbit\Spinner\Core\SpinnerState provided
+/app/src/Spinner/Extras/Driver.php:60:13:error - UndefinedThisPropertyFetch: Instance property AlecRabbit\Spinner\Extras\Driver::$output is not defined
+/app/src/Spinner/Extras/Driver.php:60:28:error - MixedMethodCall: Cannot determine the type of $this->output when calling method write
+/app/src/Spinner/Extras/Driver.php:67:50:error - MixedArgument: Argument 2 of WeakMap::offsetSet cannot be mixed, expecting TVal
+/app/src/Spinner/Extras/Driver.php:67:54:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\SpinnerState does not exist
+/app/src/Spinner/Extras/Driver.php:68:13:error - MixedAssignment: Unable to determine the type that $this->interval is being assigned to
+/app/src/Spinner/Extras/Driver.php:68:48:error - UndefinedInterfaceMethod: Method AlecRabbit\Spinner\Contract\IInterval::smallest does not exist
+/app/src/Spinner/Extras/Driver.php:85:45:error - MixedInferredReturnType: Could not verify return type 'AlecRabbit\Spinner\Contract\IInterval' for AlecRabbit\Spinner\Extras\Driver::recalculateInterval
 /app/src/Spinner/Extras/Driver.php:88:37:error - MixedAssignment: Unable to determine the type that $spinner is being assigned to
+/app/src/Spinner/Extras/Driver.php:89:13:error - MixedAssignment: Unable to determine the type that $interval is being assigned to
+/app/src/Spinner/Extras/Driver.php:89:36:error - MixedMethodCall: Cannot determine the type of $interval when calling method smallest
+/app/src/Spinner/Extras/Driver.php:89:36:error - PossiblyUndefinedMethod: Method AlecRabbit\Spinner\Contract\IInterval::smallest does not exist
 /app/src/Spinner/Extras/Driver.php:89:55:error - MixedMethodCall: Cannot determine the type of $spinner when calling method getInterval
+/app/src/Spinner/Extras/Driver.php:91:16:error - MixedReturnStatement: Could not infer a return type
 /app/src/Spinner/Extras/Driver.php:96:43:error - ArgumentTypeCoercion: Argument 1 of WeakMap::offsetExists expects AlecRabbit\Spinner\Core\Contract\ISpinner, but parent type AlecRabbit\Spinner\Contract\ISubject provided
+/app/src/Spinner/Extras/Driver.php:105:37:error - UndefinedDocblockClass: Docblock-defined class, interface or enum named AlecRabbit\Spinner\Core\Contract\ISpinnerState does not exist
+/app/src/Spinner/Extras/Driver.php:110:31:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Contract\ISpinnerState does not exist
 /app/src/Spinner/Extras/Factory/StyleFrameFactory.php:32:17:error - PossiblyInvalidArgument: Argument 1 of AlecRabbit\Spinner\Extras\Contract\IWidthMeasurer::measureWidth expects string, but possibly different type array<array-key, mixed>|string provided
+/app/src/Spinner/Extras/Factory/StyleFrameRendererFactory.php:26:9:error - MixedAssignment: Unable to determine the type that $styleMode is being assigned to
+/app/src/Spinner/Extras/Factory/StyleFrameRendererFactory.php:26:40:error - UndefinedMethod: Method AlecRabbit\Spinner\Contract\Option\StylingMethodOption::lowest does not exist
+/app/src/Spinner/Extras/Factory/StyleFrameRendererFactory.php:30:68:error - MixedArgument: Argument 1 of AlecRabbit\Spinner\Extras\Factory\Contract\IStyleRendererFactory::create cannot be mixed, expecting AlecRabbit\Spinner\Contract\Option\StylingMethodOption
+/app/src/Spinner/Extras/Pattern/CharPattern/Aesthetic.php:15:31:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Ascii.php:15:27:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/ChristmasTree.php:15:35:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Clock.php:15:27:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/ClockHourly.php:15:33:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Diamond.php:15:29:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Dice.php:15:26:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Dot.php:15:25:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/DotBinaryCount.php:15:36:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Earth.php:15:27:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/FeatheredArrow.php:15:36:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/FingerDance.php:15:33:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/FistBump.php:15:30:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/HalfCircle.php:15:32:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Mindblown.php:15:31:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Monkey.php:15:28:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Moon.php:15:26:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/PulseBlue.php:15:31:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/PulseOrange.php:15:33:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/PulseOrangeBlue.php:15:37:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/RainyWeather.php:15:34:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Runner.php:15:28:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Sector.php:15:28:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/ShortSnake.php:15:32:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Speaker.php:15:29:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Square.php:15:28:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/SquareToggle.php:15:34:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/StormyWeather.php:15:35:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/SwirlingDots.php:15:34:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CharPattern/Toggle.php:15:28:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CustomCharPattern.php:12:39:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\ACharPattern does not exist
+/app/src/Spinner/Extras/Pattern/CustomStylePattern.php:14:40:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\AStylePattern does not exist
 /app/src/Spinner/Extras/Procedure/A/AFloatValueProcedure.php:22:50:error - InvalidReturnType: Not all code paths of AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure::getFrame end in a return statement, return type AlecRabbit\Spinner\Contract\IFrame expected
+/app/src/Spinner/Extras/Procedure/A/AProceduralPattern.php:12:43:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\APattern does not exist
+/app/src/Spinner/Extras/Procedure/A/AProceduralStylePattern.php:12:48:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\AStylePattern does not exist
 /app/src/Spinner/Extras/Procedure/A/AProgressValueProcedure.php:14:21:error - InvalidClassConstantType: The type "'%' 3.0f%%'" for AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure::FORMAT does not satisfy the type "'%s'" inherited from AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure::FORMAT
 /app/src/Spinner/Extras/Procedure/A/AProgressValueProcedure.php:25:50:error - MixedInferredReturnType: Could not verify return type 'AlecRabbit\Spinner\Contract\IFrame' for AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure::getFrame
 /app/src/Spinner/Extras/Procedure/A/AProgressValueProcedure.php:37:16:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Factory\CharFrameFactory does not exist
@@ -42,10 +102,16 @@
 /app/src/Spinner/Extras/Procedure/ProgressStepsProcedure.php:23:50:error - MixedInferredReturnType: Could not verify return type 'AlecRabbit\Spinner\Contract\IFrame' for AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure::getFrame
 /app/src/Spinner/Extras/Procedure/ProgressStepsProcedure.php:27:24:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Extras\Procedure\Frame does not exist
 /app/src/Spinner/Extras/Procedure/ProgressStepsProcedure.php:32:16:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Factory\CharFrameFactory does not exist
-/app/src/Spinner/Extras/Procedure/TmpProceduralCharPattern.php:24:58:error - MixedInferredReturnType: Could not verify return type 'AlecRabbit\Spinner\Contract\IFrame' for _app_src_Spinner_Extras_Procedure_TmpProceduralCharPattern_php_23_566::getFrame
-/app/src/Spinner/Extras/Procedure/TmpProceduralCharPattern.php:28:24:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Factory\CharFrameFactory does not exist
+/app/src/Spinner/Extras/Procedure/TmpProceduralCharPattern.php:17:13:error - UnimplementedInterfaceMethod: Method getinterval is not defined on class AlecRabbit\Spinner\Extras\Procedure\TmpProceduralCharPattern
+/app/src/Spinner/Extras/Procedure/TmpProceduralCharPattern.php:17:46:error - MissingDependency: AlecRabbit\Spinner\Extras\Procedure\A\AProceduralPattern depends on class or interface alecrabbit\spinner\core\pattern\a\apattern that does not exist
+/app/src/Spinner/Extras/Procedure/TmpProceduralStylePattern.php:17:13:error - UnimplementedInterfaceMethod: Method getinterval is not defined on class AlecRabbit\Spinner\Extras\Procedure\TmpProceduralStylePattern
+/app/src/Spinner/Extras/Procedure/TmpProceduralStylePattern.php:17:47:error - MissingDependency: AlecRabbit\Spinner\Extras\Procedure\A\AProceduralStylePattern depends on class or interface alecrabbit\spinner\core\pattern\a\astylepattern that does not exist
 /app/src/Spinner/Extras/Render/CharFrameCollectionRenderer.php:32:28:error - UndefinedInterfaceMethod: Method AlecRabbit\Spinner\Contract\Pattern\IPattern::getEntries does not exist
+/app/src/Spinner/Extras/Render/Contract/IStyleFrameCollectionRenderer.php:16:28:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\Contract\IStylePattern does not exist
 /app/src/Spinner/Extras/Render/StyleFrameCollectionRenderer.php:24:33:error - PropertyNotSetInConstructor: Property AlecRabbit\Spinner\Extras\Render\StyleFrameCollectionRenderer::$styleFrameRenderer is not defined in constructor of AlecRabbit\Spinner\Extras\Render\StyleFrameCollectionRenderer or in any private or final methods called in the constructor
+/app/src/Spinner/Extras/Render/StyleFrameCollectionRenderer.php:32:28:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\Contract\IStylePattern does not exist
+/app/src/Spinner/Extras/Render/StyleFrameCollectionRenderer.php:32:53:error - MixedInferredReturnType: Could not verify return type 'AlecRabbit\Spinner\Core\Contract\IFrameCollection' for AlecRabbit\Spinner\Extras\Render\StyleFrameCollectionRenderer::render
+/app/src/Spinner/Extras/Render/StyleFrameCollectionRenderer.php:48:37:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\Contract\IStylePattern does not exist
 /app/src/Spinner/Extras/StyleToAnsiStringConverter.php:70:30:error - MixedAssignment: Unable to determine the type that $option is being assigned to
 /app/src/Spinner/Extras/StyleToAnsiStringConverter.php:71:13:error - MixedAssignment: Unable to determine the type of this assignment
 /app/src/Spinner/Extras/StyleToAnsiStringConverter.php:71:24:error - MixedArrayAccess: Cannot access array value on mixed variable $option
@@ -53,6 +119,12 @@
 /app/src/Spinner/Extras/StyleToAnsiStringConverter.php:94:30:error - MixedAssignment: Unable to determine the type that $option is being assigned to
 /app/src/Spinner/Extras/StyleToAnsiStringConverter.php:95:13:error - MixedAssignment: Unable to determine the type of this assignment
 /app/src/Spinner/Extras/StyleToAnsiStringConverter.php:95:24:error - MixedArrayAccess: Cannot access array value on mixed variable $option
+/app/src/Spinner/Extras/Terminal/SymfonyTerminalProbe.php:18:42:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Terminal\A\ATerminalProbe does not exist
+/app/src/Spinner/Extras/Widget/Contract/IWidgetContextToIntervalMap.php:31:22:error - ImplementedReturnTypeMismatch: The inherited return type '(TValue:AlecRabbit\Spinner\Extras\Widget\Contract\IWidgetContextToIntervalMap as AlecRabbit\Spinner\Contract\IInterval|null)|null' for ArrayAccess::offsetGet is different to the implemented return type for AlecRabbit\Spinner\Extras\Widget\Contract\IWidgetContextToIntervalMap::offsetget 'AlecRabbit\Spinner\Contract\IInterval|null'
+/app/src/Spinner/Extras/Widget/WidgetContextToIntervalMap.php:30:36:error - InvalidReturnType: The declared return type 'Traversable<TKey:AlecRabbit\Spinner\Extras\Widget\WidgetContextToIntervalMap as AlecRabbit\Spinner\Core\Widget\Contract\IWidgetContext, TValue:AlecRabbit\Spinner\Extras\Widget\WidgetContextToIntervalMap as AlecRabbit\Spinner\Contract\IInterval|null>' for AlecRabbit\Spinner\Extras\Widget\WidgetContextToIntervalMap::getIterator is incorrect, got 'Generator<AlecRabbit\Spinner\Core\Widget\Contract\IWidgetContext, AlecRabbit\Spinner\Contract\IInterval|null, mixed, void>'
+/app/src/Spinner/Extras/Widget/WidgetContextToIntervalMap.php:55:22:error - ImplementedReturnTypeMismatch: The inherited return type '(TValue:AlecRabbit\Spinner\Extras\Widget\WidgetContextToIntervalMap as AlecRabbit\Spinner\Contract\IInterval|null)|null' for ArrayAccess::offsetGet is different to the implemented return type for AlecRabbit\Spinner\Extras\Widget\WidgetContextToIntervalMap::offsetget 'AlecRabbit\Spinner\Contract\IInterval|null'
+/app/src/Spinner/Extras/Widget/WidgetContextToIntervalMap.php:85:13:error - RedundantConditionGivenDocblockType: Docblock-defined type AlecRabbit\Spinner\Contract\IInterval for $value is never null
+/app/src/Spinner/Extras/Widget/WidgetContextToIntervalMap.php:85:23:error - DocblockTypeContradiction: Cannot resolve types for $value - docblock-defined type AlecRabbit\Spinner\Contract\IInterval does not contain null
 /app/src/Spinner/Extras/WidthMeasurer.php:24:9:error - MixedAssignment: Unable to determine the type that $returnType is being assigned to
 /app/src/Spinner/Extras/WidthMeasurer.php:24:54:error - UndefinedMethod: Method ReflectionType::getName does not exist
 /app/src/Spinner/Extras/WidthMeasurer.php:25:9:error - MixedAssignment: Unable to determine the type that $parameterType is being assigned to

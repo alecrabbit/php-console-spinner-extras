@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color\A;
 
-use AlecRabbit\Spinner\Exception\InvalidArgumentException;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\Mixin\Ansi8ColorTableTrait;
 use AlecRabbit\Spinner\Helper\Asserter;
 
@@ -14,7 +14,7 @@ abstract class AAnsiColor
     use Ansi8ColorTableTrait;
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public static function getIndex(string $hex): ?int
     {
@@ -23,7 +23,7 @@ abstract class AAnsiColor
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     protected static function assertHexStringColor(string $hex): void
     {
@@ -33,7 +33,7 @@ abstract class AAnsiColor
     abstract protected static function getColors(): array;
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     public static function getHexColor(int $index): string
     {
@@ -42,7 +42,7 @@ abstract class AAnsiColor
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws InvalidArgument
      */
     abstract protected static function assertIndex(int $index): void;
 }
