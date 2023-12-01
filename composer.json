@@ -21,7 +21,8 @@
         "react/event-loop": "*",
         "revolt/event-loop": "*",
         "symfony/console": "^6.2",
-        "symfony/var-dumper": "*"    },
+        "symfony/var-dumper": "*"
+    },
     "suggest": {
         "ext-mbstring": "For multibyte Unicode string functionality."
     },

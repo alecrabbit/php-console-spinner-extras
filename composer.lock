@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
-                "reference": "346d99588c9a52c4e389e90020aad30cb7d24cd3"
+                "reference": "b4e2eceea2519232020c4b7d9c6a7a9987d0c189"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/346d99588c9a52c4e389e90020aad30cb7d24cd3",
-                "reference": "346d99588c9a52c4e389e90020aad30cb7d24cd3",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/b4e2eceea2519232020c4b7d9c6a7a9987d0c189",
+                "reference": "b4e2eceea2519232020c4b7d9c6a7a9987d0c189",
                 "shasum": ""
             },
             "require": {
@@ -80,7 +80,7 @@
                 "issues": "https://github.com/alecrabbit/php-console-spinner/issues",
                 "source": "https://github.com/alecrabbit/php-console-spinner/tree/prepare-next"
             },
-            "time": "2023-11-30T12:00:33+00:00"
+            "time": "2023-11-30T14:46:46+00:00"
         },
         {
             "name": "alecrabbit/php-wcwidth",

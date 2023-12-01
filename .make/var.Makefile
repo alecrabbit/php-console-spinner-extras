@@ -20,7 +20,6 @@ PROJECT_SHORT_TITLE=🧳
 
 # ------------------------------------------------------------------------------
 # Your variables here
-TEST_REPETITION=10
 APP_CONTAINER=app
 COMPOSER_CONTAINER=${APP_CONTAINER}
 # COMPOSER_CONTAINER=composer
