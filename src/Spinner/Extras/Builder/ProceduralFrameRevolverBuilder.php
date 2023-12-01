@@ -7,7 +7,6 @@ namespace AlecRabbit\Spinner\Extras\Builder;
 
 use AlecRabbit\Spinner\Contract\Pattern\IProceduralPattern;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
-use AlecRabbit\Spinner\Extras\AFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Revolver\ProceduralRevolver;
 
 final class ProceduralFrameRevolverBuilder extends AFrameRevolverBuilder
