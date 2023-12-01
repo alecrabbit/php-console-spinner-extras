@@ -15,8 +15,8 @@ $widget =
     Facade::getWidgetFactory()
         ->create(
             new WidgetSettings(
-                charPalette: new \AlecRabbit\Spinner\Extras\Palette\Char\Sector(
-                    new PaletteOptions(reversed: true)
+                charPalette: new \AlecRabbit\Spinner\Extras\Palette\Char\FistBump(
+                    new PaletteOptions(reversed: false)
                 )
             )
         )

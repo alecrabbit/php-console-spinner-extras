@@ -13,19 +13,22 @@ use Traversable;
  * @codeCoverageIgnore
  * @psalm-suppress UnusedClass
  */
-final class ClockHourly extends ACharPalette
+final class Runner extends ACharPalette
 {
-    protected function sequence(): Traversable
+    protected
+    function sequence(): Traversable
     {
-        yield from  ['🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚', '🕛'];
+        yield from ['🚶 ', '🏃 '];
     }
 
-    protected function createFrame(string $element): ICharFrame
+    protected
+    function createFrame(string $element): ICharFrame
     {
-        return new CharFrame($element, 2);
+        return new CharFrame($element, 3);
     }
 
-    protected function getInterval(): ?int
+    protected
+    function getInterval(): ?int
     {
         return 300;
     }

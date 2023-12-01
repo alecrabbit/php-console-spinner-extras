@@ -13,15 +13,32 @@ use Traversable;
  * @codeCoverageIgnore
  * @psalm-suppress UnusedClass
  */
-final class Speaker extends ACharPalette
+final class MindBlown extends ACharPalette
 {
+    private const SPACE = "\u{3000} ";
+
     protected function sequence(): Traversable
     {
         yield from [
-            '🔈 ',
-            '🔉 ',
-            '🔊 ',
-            '🔉 ',
+            '😊 ',
+            '🙂 ',
+            '😐 ',
+            '😐 ',
+            '😮 ',
+            '😮 ',
+            '😦 ',
+            '😦 ',
+            '😧 ',
+            '😧 ',
+            '🤯 ',
+            '🤯 ',
+            '💥 ',
+            '✨ ',
+            self::SPACE,
+            self::SPACE,
+            self::SPACE,
+            self::SPACE,
+            self::SPACE,
         ];
     }
 
@@ -32,6 +49,6 @@ final class Speaker extends ACharPalette
 
     protected function getInterval(): ?int
     {
-        return 300;
+        return 200;
     }
 }

@@ -9,6 +9,10 @@ use AlecRabbit\Spinner\Core\Contract\ICharFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use Traversable;
 
+/**
+ * @codeCoverageIgnore
+ * @psalm-suppress UnusedClass
+ */
 final class Dot extends ACharPalette
 {
     protected function sequence(): Traversable
