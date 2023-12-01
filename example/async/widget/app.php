@@ -15,7 +15,7 @@ $widget =
     Facade::getWidgetFactory()
         ->create(
             new WidgetSettings(
-                charPalette: new Snake(
+                charPalette: new \AlecRabbit\Spinner\Extras\Palette\Char\Speaker(
                     new PaletteOptions(reversed: true)
                 )
             )
