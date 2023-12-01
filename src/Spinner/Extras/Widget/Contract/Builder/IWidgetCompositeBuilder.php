@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Extras\Widget\Builder\Contract;
+namespace AlecRabbit\Spinner\Extras\Widget\Contract\Builder;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Contract\IIntervalComparator;

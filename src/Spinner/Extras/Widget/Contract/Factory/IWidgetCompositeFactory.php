@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Extras\Widget\Factory\Contract;
+namespace AlecRabbit\Spinner\Extras\Widget\Contract\Factory;
 
 use AlecRabbit\Spinner\Core\Config\Contract\IWidgetConfig;
 use AlecRabbit\Spinner\Core\Settings\Contract\IWidgetSettings;

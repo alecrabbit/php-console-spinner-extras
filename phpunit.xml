@@ -13,6 +13,9 @@
          stopOnFailure="false"
 >
     <testsuites>
+        <testsuite name="Spinner/Functional">
+            <directory>tests/Spinner/Functional</directory>
+        </testsuite>
         <testsuite name="Spinner/Extras/Functional">
             <directory>tests/Spinner/Extras/Functional</directory>
         </testsuite>
@@ -20,4 +23,9 @@
             <directory>tests/Spinner/Extras/Unit</directory>
         </testsuite>
     </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </source>
 </phpunit>
