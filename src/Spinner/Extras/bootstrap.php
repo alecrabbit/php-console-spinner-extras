@@ -10,6 +10,8 @@ use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IHexColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\HexColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Terminal\SymfonyTerminalProbe;
+use AlecRabbit\Spinner\Extras\Widget\Builder\WidgetCompositeBuilder;
+use AlecRabbit\Spinner\Extras\Widget\Contract\Builder\IWidgetCompositeBuilder;
 use AlecRabbit\Spinner\Extras\Widget\Factory\WidgetCompositeFactory;
 
 // @codeCoverageIgnoreStart
@@ -26,6 +28,12 @@ $registry->bind(
     new ServiceDefinition(
         IWidgetFactory::class,
         WidgetCompositeFactory::class,
+    )
+);
+$registry->bind(
+    new ServiceDefinition(
+        IWidgetCompositeBuilder::class,
+        WidgetCompositeBuilder::class,
     )
 );
 

@@ -91,6 +91,7 @@ final class WidgetCompositeTest extends TestCase
         ?IIntervalComparator $intervalComparator = null,
         ?IWidgetCompositeChildrenContainer $children = null,
         ?IObserver $observer = null,
+        ?IWidgetContext $context = null,
     ): IWidgetComposite {
         return
             new WidgetComposite(
@@ -100,6 +101,7 @@ final class WidgetCompositeTest extends TestCase
                 intervalComparator: $intervalComparator ?? $this->getIntervalComparatorMock(),
                 children: $children ?? $this->getWidgetCompositeChildrenContainerMock(),
                 observer: $observer,
+                context: $context,
             );
     }
 
@@ -214,5 +216,28 @@ final class WidgetCompositeTest extends TestCase
     protected function getWidgetContextMock(): MockObject&IWidgetContext
     {
         return $this->createMock(IWidgetContext::class);
+    }
+
+    #[Test]
+    public function canGetContextPassedAsParam(): void
+    {
+        $context = $this->getWidgetContextMock();
+        $context
+            ->expects(self::once())
+            ->method('setWidget')
+            ->with(self::isInstanceOf(IWidgetComposite::class))
+        ;
+
+        $widgetComposite = $this->getTesteeInstance(context: $context);
+
+        self::assertSame($context, $widgetComposite->getContext());
+    }
+
+    #[Test]
+    public function canGetContext(): void
+    {
+        $widgetComposite = $this->getTesteeInstance();
+
+        self::assertSame($widgetComposite, $widgetComposite->getContext()->getWidget());
     }
 }

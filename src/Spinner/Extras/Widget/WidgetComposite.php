@@ -20,6 +20,7 @@ use AlecRabbit\Spinner\Extras\Widget\Contract\IWidgetCompositeChildrenContainer;
 final class WidgetComposite extends AWidget implements IWidgetComposite
 {
     protected IInterval $interval;
+    private IWidgetContext $context;
 
     public function __construct(
         IWidgetRevolver $revolver,
@@ -28,6 +29,7 @@ final class WidgetComposite extends AWidget implements IWidgetComposite
         private readonly IIntervalComparator $intervalComparator,
         private readonly IWidgetCompositeChildrenContainer $children = new WidgetCompositeChildrenContainer(),
         ?IObserver $observer = null,
+        ?IWidgetContext $context = null,
     ) {
         parent::__construct(
             $revolver,
@@ -36,9 +38,20 @@ final class WidgetComposite extends AWidget implements IWidgetComposite
             $observer
         );
 
+        $this->context = $this->initializeContext($context);
+
         $this->interval = $this->widgetRevolver->getInterval();
         $this->children->attach($this);
         $this->update($this->children);
+    }
+
+    protected function initializeContext(?IWidgetContext $context): IWidgetContext
+    {
+        if ($context instanceof IWidgetContext) {
+            $context->setWidget($this);
+            return $context;
+        }
+        return new WidgetContext($this);
     }
 
     public function getInterval(): IInterval
@@ -80,6 +93,11 @@ final class WidgetComposite extends AWidget implements IWidgetComposite
         }
 
         return $frame;
+    }
+
+    public function getContext(): IWidgetContext
+    {
+        return $this->context;
     }
 
     public function add(IWidgetContext $context): IWidgetContext

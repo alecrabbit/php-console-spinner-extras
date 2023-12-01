@@ -4,20 +4,70 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e48773604dbe8a327d1f3e2e89878792",
+    "content-hash": "329d9cd0d2523e49821ca861796c6494",
     "packages": [
+        {
+            "name": "alecrabbit/php-color",
+            "version": "dev-prepare-next",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alecrabbit/php-color.git",
+                "reference": "266472c473d74c9df3ad8c6e41e59d2ec10dfdb7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alecrabbit/php-color/zipball/266472c473d74c9df3ad8c6e41e59d2ec10dfdb7",
+                "reference": "266472c473d74c9df3ad8c6e41e59d2ec10dfdb7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^7.0",
+                "phpunit/php-code-coverage": "*",
+                "phpunit/phpunit": "^10.0",
+                "symfony/console": "^6.2",
+                "symfony/var-dumper": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/bootstrap.php"
+                ],
+                "psr-4": {
+                    "AlecRabbit\\Color\\": "src\\Color\\"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Utilities for working with colors",
+            "keywords": [
+                "color",
+                "convert",
+                "converter",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/alecrabbit/php-color/issues",
+                "source": "https://github.com/alecrabbit/php-color/tree/prepare-next"
+            },
+            "time": "2023-12-01T12:10:56+00:00"
+        },
         {
             "name": "alecrabbit/php-console-spinner",
             "version": "dev-prepare-next",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
-                "reference": "31353bbd82dd69dea5b22db4bf01721b35a602c9"
+                "reference": "57f8868e0c2169f133297fe7063b7a1cf8cfcd0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/31353bbd82dd69dea5b22db4bf01721b35a602c9",
-                "reference": "31353bbd82dd69dea5b22db4bf01721b35a602c9",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/57f8868e0c2169f133297fe7063b7a1cf8cfcd0b",
+                "reference": "57f8868e0c2169f133297fe7063b7a1cf8cfcd0b",
                 "shasum": ""
             },
             "require": {
@@ -80,7 +130,7 @@
                 "issues": "https://github.com/alecrabbit/php-console-spinner/issues",
                 "source": "https://github.com/alecrabbit/php-console-spinner/tree/prepare-next"
             },
-            "time": "2023-12-01T11:20:11+00:00"
+            "time": "2023-12-01T12:06:48+00:00"
         },
         {
             "name": "alecrabbit/php-wcwidth",
@@ -3074,7 +3124,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "alecrabbit/php-console-spinner": 20
+        "alecrabbit/php-console-spinner": 20,
+        "alecrabbit/php-color": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

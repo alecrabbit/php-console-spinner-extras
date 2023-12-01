@@ -11,6 +11,7 @@
     "require": {
         "php": ">=8.2",
         "alecrabbit/php-console-spinner": "dev-prepare-next",
+        "alecrabbit/php-color": "dev-prepare-next",
         "alecrabbit/php-wcwidth": "^1.0.0"
     },
     "require-dev": {
