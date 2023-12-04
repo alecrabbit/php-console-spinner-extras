@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "329d9cd0d2523e49821ca861796c6494",
+    "content-hash": "65e438d144fc534993d19312325b4921",
     "packages": [
         {
             "name": "alecrabbit/php-color",
@@ -3124,8 +3124,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "alecrabbit/php-console-spinner": 20,
-        "alecrabbit/php-color": 20
+        "alecrabbit/php-color": 20,
+        "alecrabbit/php-console-spinner": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

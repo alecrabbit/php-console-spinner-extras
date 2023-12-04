@@ -6,47 +6,55 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Extras\Unit;
 
 use AlecRabbit\Spinner\Exception\InvalidArgument;
+use AlecRabbit\Spinner\Extras\Contract\IWidthGetter;
 use AlecRabbit\Spinner\Extras\Contract\IWidthMeasurer;
 use AlecRabbit\Spinner\Extras\WidthMeasurer;
 use AlecRabbit\Tests\TestCase\TestCaseWithPrebuiltMocksAndStubs;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 
 final class WidthMeasurerTest extends TestCaseWithPrebuiltMocksAndStubs
 {
     #[Test]
-    public function canMeasureWidth(): void
+    public function canBeInstantiated(): void
     {
         $measurer = $this->getTesteeInstance();
 
         self::assertInstanceOf(WidthMeasurer::class, $measurer);
-        self::assertSame(3, $measurer->measureWidth('abc'));
     }
 
     public function getTesteeInstance(
-        ?callable $measureFunction = null
+        ?IWidthGetter $widthGetter = null,
     ): IWidthMeasurer {
         return new WidthMeasurer(
-            measureFunction: $measureFunction ?? static fn(string $string): int => strlen($string)
+            widthGetter: $widthGetter ?? $this->getWidthGetterMock(),
         );
     }
 
-    #[Test]
-    public function throwsIfMeasureFunctionHasInvalidSignature(): void
+    private function getWidthGetterMock(): MockObject&IWidthGetter
     {
-        $exceptionClass = InvalidArgument::class;
-        $exceptionMessage =
-            'Invalid measure function signature.'
-            . ' Signature expected to be: "function(string $string): int { //... }".';
+        return $this->createMock(IWidthGetter::class);
+    }
 
-        $this->expectException($exceptionClass);
-        $this->expectExceptionMessage($exceptionMessage);
+    #[Test]
+    public function canMeasureWidth(): void
+    {
+        $value = 'test';
+
+        $widthGetter = $this->getWidthGetterMock();
+        $widthGetter
+            ->expects(self::once())
+            ->method('getWidth')
+            ->with(self::identicalTo($value))
+            ->willReturn(4)
+        ;
 
         $measurer = $this->getTesteeInstance(
-            static fn(int $int): string => 'whoops!'
+            widthGetter: $widthGetter,
         );
 
-        self::assertInstanceOf(WidthMeasurer::class, $measurer);
+        $width = $measurer->measureWidth($value);
 
-        self::fail(self::exceptionNotThrownString($exceptionClass, $exceptionMessage));
+        self::assertSame(4, $width);
     }
 }
