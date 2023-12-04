@@ -14,8 +14,10 @@ use AlecRabbit\Spinner\Core\Loop\Contract\ILoopProvider;
 use AlecRabbit\Spinner\Core\Settings\Contract\ISettings;
 use AlecRabbit\Spinner\Core\Settings\Contract\ISettingsProvider;
 use AlecRabbit\Spinner\Core\Settings\Contract\ISpinnerSettings;
+use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
 use AlecRabbit\Spinner\Exception\DomainException;
 use AlecRabbit\Spinner\Extras\Facade;
+use AlecRabbit\Spinner\Extras\Widget\Contract\Factory\IWidgetCompositeFactory;
 use AlecRabbit\Tests\TestCase\FacadeAwareTestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -68,6 +70,28 @@ final class FacadeTest extends FacadeAwareTestCase
     private function getSettingsProviderMock(): MockObject&ISettingsProvider
     {
         return $this->createMock(ISettingsProvider::class);
+    }
+
+    #[Test]
+    public function canGetWidgetFactory(): void
+    {
+        $container = $this->getContainerMock();
+        self::setContainer($container);
+
+        $factory = $this->getWidgetCompositeFactoryMock();
+        $container
+            ->expects(self::once())
+            ->method('get')
+            ->with(self::identicalTo(IWidgetFactory::class))
+            ->willReturn($factory)
+        ;
+
+        self::assertSame($factory, Facade::getWidgetFactory());
+    }
+
+    private function getWidgetCompositeFactoryMock(): MockObject&IWidgetCompositeFactory
+    {
+        return $this->createMock(IWidgetCompositeFactory::class);
     }
 
     #[Test]
