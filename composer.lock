@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-color.git",
-                "reference": "f9e80c22777adbe8deb2748ec0d1e8f9f3534311"
+                "reference": "e2e6aeae4211fb73c13b1ab16582f61a5c6f0409"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-color/zipball/f9e80c22777adbe8deb2748ec0d1e8f9f3534311",
-                "reference": "f9e80c22777adbe8deb2748ec0d1e8f9f3534311",
+                "url": "https://api.github.com/repos/alecrabbit/php-color/zipball/e2e6aeae4211fb73c13b1ab16582f61a5c6f0409",
+                "reference": "e2e6aeae4211fb73c13b1ab16582f61a5c6f0409",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +54,7 @@
                 "issues": "https://github.com/alecrabbit/php-color/issues",
                 "source": "https://github.com/alecrabbit/php-color/tree/prepare-next"
             },
-            "time": "2023-12-01T14:20:15+00:00"
+            "time": "2023-12-04T10:52:50+00:00"
         },
         {
             "name": "alecrabbit/php-console-spinner",
