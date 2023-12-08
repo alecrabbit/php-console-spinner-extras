@@ -62,12 +62,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
-                "reference": "307cda30735caf8f47aaca967ecf8410c05a16c6"
+                "reference": "6455b779acd1b5725133db764547e8dd796f2c9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/307cda30735caf8f47aaca967ecf8410c05a16c6",
-                "reference": "307cda30735caf8f47aaca967ecf8410c05a16c6",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/6455b779acd1b5725133db764547e8dd796f2c9f",
+                "reference": "6455b779acd1b5725133db764547e8dd796f2c9f",
                 "shasum": ""
             },
             "require": {
@@ -76,13 +76,13 @@
             },
             "require-dev": {
                 "fakerphp/faker": "*",
-                "nunomaduro/collision": "^7.0",
+                "nunomaduro/collision": "*",
                 "phpunit/php-code-coverage": "*",
                 "phpunit/phpunit": "^10.0",
                 "react/event-loop": "*",
                 "react/http": "*",
                 "revolt/event-loop": "*",
-                "symfony/console": "^6.2",
+                "symfony/console": "*",
                 "symfony/var-dumper": "*"
             },
             "suggest": {
@@ -130,7 +130,7 @@
                 "issues": "https://github.com/alecrabbit/php-console-spinner/issues",
                 "source": "https://github.com/alecrabbit/php-console-spinner/tree/prepare-next"
             },
-            "time": "2023-12-04T12:34:44+00:00"
+            "time": "2023-12-07T15:41:06+00:00"
         },
         {
             "name": "alecrabbit/php-wcwidth",
@@ -1120,16 +1120,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.5.1",
+            "version": "10.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "d5d9dca6a902d05b34c4bcbc7c1636ce1dc25408"
+                "reference": "5aedff46afba98dddecaa12349ec044d9103d4fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d5d9dca6a902d05b34c4bcbc7c1636ce1dc25408",
-                "reference": "d5d9dca6a902d05b34c4bcbc7c1636ce1dc25408",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5aedff46afba98dddecaa12349ec044d9103d4fe",
+                "reference": "5aedff46afba98dddecaa12349ec044d9103d4fe",
                 "shasum": ""
             },
             "require": {
@@ -1201,7 +1201,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.1"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.2"
             },
             "funding": [
                 {
@@ -1217,7 +1217,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-01T16:57:05+00:00"
+            "time": "2023-12-05T14:54:33+00:00"
         },
         {
             "name": "psr/log",

@@ -6,9 +6,11 @@ namespace AlecRabbit\Tests\Spinner\Extras\Unit\Palette\Style;
 
 
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
+use AlecRabbit\Spinner\Core\Palette\Builder\PaletteTemplateBuilder;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
 use AlecRabbit\Spinner\Core\Palette\PaletteTemplate;
 use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Palette\Style\Red;
@@ -53,7 +55,7 @@ final class RedTest extends TestCase
             ->willReturn(StylingMethodMode::NONE)
         ;
 
-        $template = $palette->getTemplate($mode);
+        $template = $this->createTemplate($mode);
 
         self::assertInstanceOf(PaletteTemplate::class, $template);
         self::assertInstanceOf(Generator::class, $template->getEntries());
@@ -68,9 +70,15 @@ final class RedTest extends TestCase
     #[Test]
     public function returnsOneFrameIteratorWithoutMode(): void
     {
+        $mode = $this->getPaletteModeMock();
+        $mode
+            ->expects(self::exactly(2))
+            ->method('getStylingMode')
+            ->willReturn(StylingMethodMode::NONE)
+        ;
         $palette = $this->getTesteeInstance();
 
-        $template = $palette->getTemplate();
+        $template = $this->createTemplate($mode);
 
         $traversable = $template->getEntries();
 
@@ -96,7 +104,7 @@ final class RedTest extends TestCase
             ->willReturn(StylingMethodMode::NONE)
         ;
 
-        $template = $palette->getTemplate($mode);
+        $template = $this->createTemplate($mode);
 
         $traversable = $template->getEntries();
 
@@ -126,7 +134,7 @@ final class RedTest extends TestCase
             ->willReturn(StylingMethodMode::ANSI4)
         ;
 
-        $template = $palette->getTemplate($mode);
+        $template = $this->createTemplate($mode);
 
         $traversable = $template->getEntries();
 
@@ -156,7 +164,7 @@ final class RedTest extends TestCase
             ->willReturn(StylingMethodMode::ANSI8)
         ;
 
-        $template = $palette->getTemplate($mode);
+        $template = $this->createTemplate($mode);
 
         $traversable = $template->getEntries();
 
@@ -186,7 +194,7 @@ final class RedTest extends TestCase
             ->willReturn(StylingMethodMode::ANSI24)
         ;
 
-        $template = $palette->getTemplate($mode);
+        $template = $this->createTemplate($mode);
 
         $traversable = $template->getEntries();
 
@@ -198,5 +206,18 @@ final class RedTest extends TestCase
         self::assertEquals(new StyleFrame("\e[31m%s\e[39m", 0), $entries[0]);
 
         self::assertNull($template->getOptions()->getInterval());
+    }
+
+    private function createTemplate(IPaletteMode $mode, ?IPalette $palette = null): IPaletteTemplate
+    {
+        $palette ??= $this->getTesteeInstance();
+
+        $templateBuilder = new PaletteTemplateBuilder();
+
+        return $templateBuilder
+            ->withEntries($palette->getEntries($mode))
+            ->withOptions($palette->getOptions($mode))
+            ->build()
+        ;
     }
 }
