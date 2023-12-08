@@ -17,6 +17,7 @@ $stylePalette =
         {
             while (true) {
                 yield $this->createFrame("\e[92m%s\e[39m");
+                yield $this->createFrame("\e[31m%s\e[39m");
             }
         }
 
