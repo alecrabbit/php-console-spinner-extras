@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 use AlecRabbit\Spinner\Container\DefinitionRegistry;
 use AlecRabbit\Spinner\Container\ServiceDefinition;
+use AlecRabbit\Spinner\Core\Factory\Contract\ICharFrameRevolverFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\IStyleFrameRevolverFactory;
 use AlecRabbit\Spinner\Core\Palette\Factory\Contract\IPaletteTemplateFactory;
 use AlecRabbit\Spinner\Core\Pattern\Factory\Contract\IPatternFactory;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
+use AlecRabbit\Spinner\Extras\Factory\CharFrameRevolverFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IHexColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\HexColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\StyleFrameRevolverFactory;
@@ -50,6 +52,10 @@ DefinitionRegistry::getInstance()
         new ServiceDefinition(
             IStyleFrameRevolverFactory::class,
             StyleFrameRevolverFactory::class,
+        ),
+        new ServiceDefinition(
+            ICharFrameRevolverFactory::class,
+            CharFrameRevolverFactory::class,
         ),
         new ServiceDefinition(
             IFrameRevolverBuilder::class,

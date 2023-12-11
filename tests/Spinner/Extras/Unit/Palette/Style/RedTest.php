@@ -50,12 +50,11 @@ final class RedTest extends TestCase
 
         $mode = $this->getPaletteModeMock();
         $mode
-            ->expects(self::once())
+            ->expects(self::never())
             ->method('getStylingMode')
-            ->willReturn(StylingMethodMode::NONE)
         ;
 
-        $template = $this->createTemplate($mode);
+        $template = $this->createTemplate($mode, $palette);
 
         self::assertInstanceOf(PaletteTemplate::class, $template);
         self::assertInstanceOf(Generator::class, $template->getEntries());
@@ -72,11 +71,10 @@ final class RedTest extends TestCase
     {
         $mode = $this->getPaletteModeMock();
         $mode
-            ->expects(self::exactly(2))
+            ->expects(self::once())
             ->method('getStylingMode')
             ->willReturn(StylingMethodMode::NONE)
         ;
-        $palette = $this->getTesteeInstance();
 
         $template = $this->createTemplate($mode);
 
@@ -95,11 +93,9 @@ final class RedTest extends TestCase
     #[Test]
     public function returnsOneFrameIteratorOnStylingModeNone(): void
     {
-        $palette = $this->getTesteeInstance();
-
         $mode = $this->getPaletteModeMock();
         $mode
-            ->expects(self::exactly(2))
+            ->expects(self::once())
             ->method('getStylingMode')
             ->willReturn(StylingMethodMode::NONE)
         ;
@@ -129,12 +125,12 @@ final class RedTest extends TestCase
 
         $mode = $this->getPaletteModeMock();
         $mode
-            ->expects(self::exactly(2))
+            ->expects(self::once())
             ->method('getStylingMode')
             ->willReturn(StylingMethodMode::ANSI4)
         ;
 
-        $template = $this->createTemplate($mode);
+        $template = $this->createTemplate($mode, $palette);
 
         $traversable = $template->getEntries();
 
@@ -159,12 +155,12 @@ final class RedTest extends TestCase
 
         $mode = $this->getPaletteModeMock();
         $mode
-            ->expects(self::exactly(2))
+            ->expects(self::once())
             ->method('getStylingMode')
             ->willReturn(StylingMethodMode::ANSI8)
         ;
 
-        $template = $this->createTemplate($mode);
+        $template = $this->createTemplate($mode, $palette);
 
         $traversable = $template->getEntries();
 
@@ -189,12 +185,12 @@ final class RedTest extends TestCase
 
         $mode = $this->getPaletteModeMock();
         $mode
-            ->expects(self::exactly(2))
+            ->expects(self::once())
             ->method('getStylingMode')
             ->willReturn(StylingMethodMode::ANSI24)
         ;
 
-        $template = $this->createTemplate($mode);
+        $template = $this->createTemplate($mode, $palette);
 
         $traversable = $template->getEntries();
 

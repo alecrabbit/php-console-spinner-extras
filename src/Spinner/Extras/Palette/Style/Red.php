@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Palette\Style;
 
-use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
+use AlecRabbit\Spinner\Core\Contract\IStyleFrame;
 use AlecRabbit\Spinner\Core\Palette\A\AStylePalette;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
+use AlecRabbit\Spinner\Core\StyleFrame;
 use Traversable;
 
-final class Red extends AStylePalette {
+final class Red extends AStylePalette
+{
     protected function ansi4StyleFrames(): Traversable
     {
         yield from [
@@ -16,18 +19,13 @@ final class Red extends AStylePalette {
         ];
     }
 
-    protected function ansi8StyleFrames(): Traversable
+    protected function createFrame(string $element, ?int $width = null): IStyleFrame
     {
-        return $this->ansi4StyleFrames();
+        return new StyleFrame($element, $width ?? 0);
     }
 
-    protected function ansi24StyleFrames(): Traversable
+    protected function modeInterval(?IPaletteMode $mode = null): ?int
     {
-        return $this->ansi4StyleFrames();
-    }
-
-    protected function getInterval(StylingMethodMode $stylingMode): ?int
-    {
-        return null; // due to single style frame
+        return null;
     }
 }

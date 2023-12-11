@@ -32,7 +32,7 @@ final readonly class StyleFrameRevolverFactory implements IStyleFrameRevolverFac
                     $pattern->getFrames()
                 )
                 ->withInterval($pattern->getInterval())
-                ->withTolerance($this->getTolerance())
+                ->withTolerance($this->revolverConfig->getTolerance())
                 ->build()
             ;
         }
@@ -44,13 +44,8 @@ final readonly class StyleFrameRevolverFactory implements IStyleFrameRevolverFac
                 )
             )
             ->withInterval($pattern->getInterval())
-            ->withTolerance($this->getTolerance())
+            ->withTolerance($this->revolverConfig->getTolerance())
             ->build()
         ;
-    }
-
-    private function getTolerance(): ITolerance
-    {
-        return $this->revolverConfig->getTolerance();
     }
 }

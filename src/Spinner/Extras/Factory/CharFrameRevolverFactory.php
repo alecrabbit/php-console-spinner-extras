@@ -11,11 +11,13 @@ use AlecRabbit\Spinner\Core\Factory\Contract\IFrameCollectionFactory;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolverBuilder;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
+use AlecRabbit\Spinner\Extras\Pattern\IInfinitePattern;
 
 final readonly class CharFrameRevolverFactory implements ICharFrameRevolverFactory
 {
     public function __construct(
         private IFrameRevolverBuilder $frameRevolverBuilder,
+        private IFrameCollectionRevolverBuilder $frameCollectionRevolverBuilder,
         private IFrameCollectionFactory $frameCollectionFactory,
         private IRevolverConfig $revolverConfig,
     ) {
@@ -23,19 +25,25 @@ final readonly class CharFrameRevolverFactory implements ICharFrameRevolverFacto
 
     public function create(IPattern $pattern): IFrameRevolver
     {
-        return $this->frameRevolverBuilder
+        if ($pattern instanceof IInfinitePattern) {
+            return $this->frameRevolverBuilder
+                ->withFrames(
+                    $pattern->getFrames()
+                )
+                ->withInterval($pattern->getInterval())
+                ->withTolerance($this->revolverConfig->getTolerance())
+                ->build()
+            ;
+        }
+
+        return $this->frameCollectionRevolverBuilder
             ->withFrames(
-                $this->frameCollectionFactory
-                    ->create(
-                        $pattern->getFrames()
-                    )
+                $this->frameCollectionFactory->create(
+                    $pattern->getFrames()
+                )
             )
-            ->withInterval(
-                $pattern->getInterval()
-            )
-            ->withTolerance(
-                $this->revolverConfig->getTolerance()
-            )
+            ->withInterval($pattern->getInterval())
+            ->withTolerance($this->revolverConfig->getTolerance())
             ->build()
         ;
     }
