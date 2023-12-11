@@ -6,20 +6,15 @@ namespace AlecRabbit\Tests\Spinner\Extras\Unit\Revolver\Builder;
 
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\CharFrame;
-use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
-use AlecRabbit\Spinner\Core\Revolver\Builder\FrameCollectionRevolverBuilder;
-use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolverBuilder;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
-use AlecRabbit\Spinner\Core\Revolver\FrameCollectionRevolver;
-use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Exception\LogicException;
 use AlecRabbit\Spinner\Extras\Revolver\Builder\FrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Revolver\FrameRevolver;
 use AlecRabbit\Tests\TestCase\TestCase;
+use Generator;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
-use Traversable;
 
 final class FrameRevolverBuilderTest extends TestCase
 {
@@ -52,6 +47,11 @@ final class FrameRevolverBuilderTest extends TestCase
 
         self::assertInstanceOf(FrameRevolverBuilder::class, $frameRevolverBuilder);
         self::assertInstanceOf(FrameRevolver::class, $revolver);
+    }
+
+    private function getGenerator(): Generator
+    {
+        yield new CharFrame('0', 0);
     }
 
     protected function getIntervalMock(): MockObject&IInterval
@@ -112,10 +112,5 @@ final class FrameRevolverBuilderTest extends TestCase
             exception: $exceptionClass,
             message: $exceptionMessage,
         );
-    }
-
-    private function getGenerator(): \Generator
-    {
-        yield new CharFrame('0', 0);
     }
 }

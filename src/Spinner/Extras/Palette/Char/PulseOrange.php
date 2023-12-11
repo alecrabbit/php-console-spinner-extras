@@ -6,7 +6,6 @@ namespace AlecRabbit\Spinner\Extras\Palette\Char;
 
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\ICharFrame;
-use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use Traversable;
 

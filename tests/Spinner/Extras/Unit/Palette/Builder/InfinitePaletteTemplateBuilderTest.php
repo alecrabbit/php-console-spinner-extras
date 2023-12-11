@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Extras\Unit\Palette\Builder;
 
 use AlecRabbit\Spinner\Core\Palette\Builder\Contract\IPaletteTemplateBuilder;
-use AlecRabbit\Spinner\Core\Palette\Builder\PaletteTemplateBuilder;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
-use AlecRabbit\Spinner\Core\Palette\PaletteTemplate;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Palette\Builder\InfinitePaletteTemplateBuilder;
 use AlecRabbit\Spinner\Extras\Palette\InfinitePaletteTemplate;

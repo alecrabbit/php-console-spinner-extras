@@ -7,9 +7,9 @@ namespace AlecRabbit\Spinner\Extras\Render;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
-use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleFrameFactory;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
+use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleFrameFactory;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleFrameRenderer;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 

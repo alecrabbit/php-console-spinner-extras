@@ -13,9 +13,9 @@ use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
 use AlecRabbit\Spinner\Core\Palette\Factory\Contract\IPaletteModeFactory;
 use AlecRabbit\Spinner\Core\Palette\Factory\Contract\IPaletteTemplateFactory;
 use AlecRabbit\Spinner\Core\Pattern\Factory\Contract\IPatternFactory;
+use AlecRabbit\Spinner\Core\Pattern\Pattern;
 use AlecRabbit\Spinner\Extras\Palette\IInfinitePaletteTemplate;
 use AlecRabbit\Spinner\Extras\Pattern\Factory\PatternFactory;
-use AlecRabbit\Spinner\Core\Pattern\Pattern;
 use AlecRabbit\Spinner\Extras\Pattern\InfinitePattern;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -111,6 +111,32 @@ final class PatternFactoryTest extends TestCase
         self::assertSame($entries, $pattern->getFrames());
         self::assertSame($factoryInterval, $pattern->getInterval());
     }
+
+    private function getIntervalMock(): MockObject&IInterval
+    {
+        return $this->createMock(IInterval::class);
+    }
+
+    private function getPaletteOptionsMock(): MockObject&IPaletteOptions
+    {
+        return $this->createMock(IPaletteOptions::class);
+    }
+
+    private function getTraversableMock(): MockObject&Traversable
+    {
+        return $this->createMock(Traversable::class);
+    }
+
+    private function getTemplateMock(): MockObject&IPaletteTemplate
+    {
+        return $this->createMock(IPaletteTemplate::class);
+    }
+
+    private function getPaletteMock(): MockObject&IPalette
+    {
+        return $this->createMock(IPalette::class);
+    }
+
     #[Test]
     public function canCreateFromInfinitePalette(): void
     {
@@ -170,37 +196,14 @@ final class PatternFactoryTest extends TestCase
         self::assertSame($factoryInterval, $pattern->getInterval());
     }
 
-    private function getIntervalMock(): MockObject&IInterval
+    private function getInfinitePaletteTemplateMock(): MockObject&IInfinitePaletteTemplate
     {
-        return $this->createMock(IInterval::class);
-    }
-
-    private function getPaletteOptionsMock(): MockObject&IPaletteOptions
-    {
-        return $this->createMock(IPaletteOptions::class);
+        return $this->createMock(IInfinitePaletteTemplate::class);
     }
 
     private function getPaletteModeMock(): MockObject&IPaletteMode
     {
         return $this->createMock(IPaletteMode::class);
-    }
-
-    private function getTraversableMock(): MockObject&Traversable
-    {
-        return $this->createMock(Traversable::class);
-    }
-
-    private function getTemplateMock(): MockObject&IPaletteTemplate
-    {
-        return $this->createMock(IPaletteTemplate::class);
-    }    private function getInfinitePaletteTemplateMock(): MockObject&IInfinitePaletteTemplate
-    {
-        return $this->createMock(IInfinitePaletteTemplate::class);
-    }
-
-    private function getPaletteMock(): MockObject&IPalette
-    {
-        return $this->createMock(IPalette::class);
     }
 
     private function getPaletteModeFactoryMock(): MockObject&IPaletteModeFactory

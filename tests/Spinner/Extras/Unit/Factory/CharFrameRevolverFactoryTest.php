@@ -11,7 +11,6 @@ use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Factory\Contract\ICharFrameRevolverFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\IFrameCollectionFactory;
-use AlecRabbit\Spinner\Core\Factory\Contract\IIntervalFactory;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolverBuilder;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;

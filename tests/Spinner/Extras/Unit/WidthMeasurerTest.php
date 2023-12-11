@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Extras\Unit;
 
-use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\IWidthGetter;
 use AlecRabbit\Spinner\Extras\Contract\IWidthMeasurer;
 use AlecRabbit\Spinner\Extras\WidthMeasurer;

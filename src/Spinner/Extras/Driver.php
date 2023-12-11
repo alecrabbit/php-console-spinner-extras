@@ -15,6 +15,7 @@ use AlecRabbit\Spinner\Core\Contract\ISpinnerState;
 use AlecRabbit\Spinner\Core\Output\Contract\IDriverOutput;
 use AlecRabbit\Spinner\Core\Settings\Contract\IDriverSettings;
 use AlecRabbit\Spinner\Core\SpinnerState;
+use RuntimeException;
 use WeakMap;
 
 final class Driver extends ADriver
@@ -82,6 +83,19 @@ final class Driver extends ADriver
         }
     }
 
+    private function eraseOne(ISpinnerState $state): void
+    {
+        $this->output->erase($state);
+    }
+
+    protected function erase(): void
+    {
+        /** @var ISpinnerState $state */
+        foreach ($this->spinners as $state) {
+            $this->eraseOne($state);
+        }
+    }
+
     private function recalculateInterval(): IInterval
     {
         $interval = $this->initialInterval;
@@ -99,22 +113,9 @@ final class Driver extends ADriver
         }
     }
 
-    protected function erase(): void
-    {
-        /** @var ISpinnerState $state */
-        foreach ($this->spinners as $state) {
-            $this->eraseOne($state);
-        }
-    }
-
-    private function eraseOne(ISpinnerState $state): void
-    {
-        $this->output->erase($state);
-    }
-
     public function has(ISpinner $spinner): bool
     {
         // TODO: Implement has() method.
-        throw new \RuntimeException(__METHOD__ . ' Not implemented.');
+        throw new RuntimeException(__METHOD__ . ' Not implemented.');
     }
 }

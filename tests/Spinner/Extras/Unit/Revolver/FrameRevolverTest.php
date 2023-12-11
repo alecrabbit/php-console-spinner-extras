@@ -13,8 +13,11 @@ use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Revolver\FrameRevolver;
 use AlecRabbit\Tests\TestCase\TestCase;
+use ArrayObject;
+use Generator;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
+use Traversable;
 
 final class FrameRevolverTest extends TestCase
 {
@@ -27,7 +30,7 @@ final class FrameRevolverTest extends TestCase
     }
 
     public function getTesteeInstance(
-        ?\Traversable $frames = null,
+        ?Traversable $frames = null,
         ?IInterval $interval = null,
         ?ITolerance $tolerance = null,
     ): IFrameRevolver {
@@ -39,7 +42,7 @@ final class FrameRevolverTest extends TestCase
             );
     }
 
-    private function getGenerator(): \Generator
+    private function getGenerator(): Generator
     {
         yield new CharFrame('0', 0);
         yield new CharFrame('1', 0);
@@ -99,7 +102,7 @@ final class FrameRevolverTest extends TestCase
         $this->expectExceptionMessage('Frames must be an instance of Generator. "ArrayObject" given.');
 
         $this->getTesteeInstance(
-            frames: new \ArrayObject(),
+            frames: new ArrayObject(),
         );
     }
 

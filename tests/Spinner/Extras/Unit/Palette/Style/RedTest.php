@@ -66,6 +66,19 @@ final class RedTest extends TestCase
         return $this->createMock(IPaletteMode::class);
     }
 
+    private function createTemplate(IPaletteMode $mode, ?IPalette $palette = null): IPaletteTemplate
+    {
+        $palette ??= $this->getTesteeInstance();
+
+        $templateBuilder = new PaletteTemplateBuilder();
+
+        return $templateBuilder
+            ->withEntries($palette->getEntries($mode))
+            ->withOptions($palette->getOptions($mode))
+            ->build()
+        ;
+    }
+
     #[Test]
     public function returnsOneFrameIteratorWithoutMode(): void
     {
@@ -202,18 +215,5 @@ final class RedTest extends TestCase
         self::assertEquals(new StyleFrame("\e[31m%s\e[39m", 0), $entries[0]);
 
         self::assertNull($template->getOptions()->getInterval());
-    }
-
-    private function createTemplate(IPaletteMode $mode, ?IPalette $palette = null): IPaletteTemplate
-    {
-        $palette ??= $this->getTesteeInstance();
-
-        $templateBuilder = new PaletteTemplateBuilder();
-
-        return $templateBuilder
-            ->withEntries($palette->getEntries($mode))
-            ->withOptions($palette->getOptions($mode))
-            ->build()
-        ;
     }
 }

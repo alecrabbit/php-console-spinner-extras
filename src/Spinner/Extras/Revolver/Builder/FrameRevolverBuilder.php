@@ -6,7 +6,6 @@ namespace AlecRabbit\Spinner\Extras\Revolver\Builder;
 
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
-use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolverBuilder;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
 use AlecRabbit\Spinner\Exception\LogicException;
@@ -15,7 +14,7 @@ use Traversable;
 
 final class FrameRevolverBuilder implements IFrameRevolverBuilder
 {
-    private ?\Traversable $frames = null;
+    private ?Traversable $frames = null;
     private ?IInterval $interval = null;
     private ?ITolerance $tolerance = null;
 

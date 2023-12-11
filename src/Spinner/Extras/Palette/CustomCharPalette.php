@@ -6,18 +6,16 @@ namespace AlecRabbit\Spinner\Extras\Palette;
 
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\ICharFrame;
-use AlecRabbit\Spinner\Core\Contract\IStyleFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
-use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Palette\A\AInfiniteCharPalette;
 use Traversable;
 
 final class CustomCharPalette extends AInfiniteCharPalette
 {
     public function __construct(
-        private readonly \Traversable $frames,
+        private readonly Traversable $frames,
         private readonly ?int $frameWidth = null,
         IPaletteOptions $options = new PaletteOptions()
     ) {

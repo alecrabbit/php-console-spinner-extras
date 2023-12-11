@@ -6,9 +6,9 @@ namespace AlecRabbit\Tests\Spinner\Extras\Unit\Palette;
 
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
-use AlecRabbit\Spinner\Core\Palette\PaletteTemplate;
 use AlecRabbit\Spinner\Extras\Palette\InfinitePaletteTemplate;
 use AlecRabbit\Tests\TestCase\TestCase;
+use ArrayObject;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use Traversable;
@@ -49,7 +49,7 @@ final class InfinitePaletteTemplateTest extends TestCase
     #[Test]
     public function canGetEntries(): void
     {
-        $entries = new \ArrayObject();
+        $entries = new ArrayObject();
 
         $template = $this->getTesteeInstance(
             entries: $entries,

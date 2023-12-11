@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\Test;
 final class CharFrameFactoryTest extends TestCaseWithPrebuiltMocksAndStubs
 {
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $frameFactory = $this->getTesteeInstance();
 

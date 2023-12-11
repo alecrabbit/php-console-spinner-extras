@@ -7,11 +7,6 @@ namespace AlecRabbit\Spinner\Helper;
 
 use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
-use AlecRabbit\Spinner\Exception\RuntimeException;
-use Traversable;
-
-use function class_exists;
-use function extension_loaded;
 
 /**
  * @deprecated
@@ -49,8 +44,11 @@ final class Asserter
     /**
      * @throws InvalidArgument
      */
-    public static function assertIntColor(int $color, StylingMethodOption $styleMode, ?string $callerMethod = null): void
-    {
+    public static function assertIntColor(
+        int $color,
+        StylingMethodOption $styleMode,
+        ?string $callerMethod = null
+    ): void {
         match (true) {
             0 > $color => throw new InvalidArgument(
                 sprintf(

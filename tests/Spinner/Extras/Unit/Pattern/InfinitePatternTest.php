@@ -3,8 +3,6 @@
 namespace AlecRabbit\Tests\Spinner\Extras\Unit\Pattern;
 
 use AlecRabbit\Spinner\Contract\IInterval;
-use AlecRabbit\Spinner\Contract\Pattern\IPattern;
-use AlecRabbit\Spinner\Core\Pattern\Pattern;
 use AlecRabbit\Spinner\Extras\Pattern\IInfinitePattern;
 use AlecRabbit\Spinner\Extras\Pattern\InfinitePattern;
 use AlecRabbit\Tests\TestCase\TestCase;

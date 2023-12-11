@@ -49,21 +49,6 @@ final class SpinnerFactoryTest extends TestCase
         return $this->createMock(IRootWidgetConfigFactory::class);
     }
 
-    protected function getRootWidgetConfigMock(): MockObject&IRootWidgetConfig
-    {
-        return $this->createMock(IRootWidgetConfig::class);
-    }
-
-    protected function getWidgetSettingsMock(): MockObject&IWidgetSettings
-    {
-        return $this->createMock(IWidgetSettings::class);
-    }
-
-    protected function getSpinnerSettingsMock(): MockObject&ISpinnerSettings
-    {
-        return $this->createMock(ISpinnerSettings::class);
-    }
-
     #[Test]
     public function canCreateUsingWidgetCompositeFactory(): void
     {
@@ -94,9 +79,24 @@ final class SpinnerFactoryTest extends TestCase
         self::assertInstanceOf(Spinner::class, $spinner);
     }
 
+    protected function getRootWidgetConfigMock(): MockObject&IRootWidgetConfig
+    {
+        return $this->createMock(IRootWidgetConfig::class);
+    }
+
     protected function getWidgetCompositeFactoryMock(): MockObject&IWidgetCompositeFactory
     {
         return $this->createMock(IWidgetCompositeFactory::class);
+    }
+
+    protected function getWidgetSettingsMock(): MockObject&IWidgetSettings
+    {
+        return $this->createMock(IWidgetSettings::class);
+    }
+
+    protected function getSpinnerSettingsMock(): MockObject&ISpinnerSettings
+    {
+        return $this->createMock(ISpinnerSettings::class);
     }
 
     protected function getSettingsMock(): MockObject&ISettings

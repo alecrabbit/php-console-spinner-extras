@@ -83,12 +83,11 @@ $loop = Facade::getLoop();
 $loop->delay(
     7, // delay before error
     static function () use ($errorState, $loop): void {
-        $message = FakerFactory::create()->sentence(); // random error message
         $errorState(
             sprintf(
                 '%s: %s',
                 (new DateTimeImmutable())->format(DATE_ATOM),
-                $message
+                FakerFactory::create()->sentence() // random error message
             )
         );
         $loop->delay(

@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Palette\Builder;
 
 use AlecRabbit\Spinner\Contract\IFrame;
-use AlecRabbit\Spinner\Core\Palette\Builder\Contract\IPaletteTemplateBuilder;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
-use AlecRabbit\Spinner\Core\Palette\PaletteTemplate;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Palette\Builder\Contract\IInfinitePaletteTemplateBuilder;
 use AlecRabbit\Spinner\Extras\Palette\InfinitePaletteTemplate;
