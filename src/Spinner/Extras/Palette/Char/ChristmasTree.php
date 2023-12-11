@@ -6,6 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Palette\Char;
 
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\ICharFrame;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use Traversable;
 
@@ -20,12 +21,12 @@ final class ChristmasTree extends ACharPalette
         yield from  ['🌲', '🎄'];
     }
 
-    protected function createFrame(string $element): ICharFrame
+    protected function createFrame(string $element, ?int $width = null): ICharFrame
     {
-        return new CharFrame($element, 2);
+        return new CharFrame($element, $width ?? 2);
     }
 
-    protected function getInterval(): ?int
+    protected function modeInterval(?IPaletteMode $mode = null): ?int
     {
         return 500;
     }
