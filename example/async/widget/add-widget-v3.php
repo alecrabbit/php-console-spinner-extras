@@ -14,7 +14,7 @@ use AlecRabbit\Spinner\Extras\Palette\Style\Red;
 
 require_once __DIR__ . '/../bootstrap.async.php';
 
-// !! ATTENTION !! Extreme hacks ahead - cursor movement is used in this example
+// !! ATTENTION !! Cursor movement is used in this example
 
 Facade::getSettings()
     ->set(
