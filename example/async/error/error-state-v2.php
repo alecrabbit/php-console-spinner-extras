@@ -36,13 +36,13 @@ $errorState =
                     new StyleFrame("\e[41;1m  %s  \e[0m", 4),
                     new StyleFrame("\e[1m  %s  \e[0m", 4),
                 ]),
-                options: new PaletteOptions(interval: 100),
+                options: new PaletteOptions(interval: 200),
             );
 
         $charPalette =
             new CustomCharPalette(
                 new \ArrayObject([
-                    new CharFrame('Error', 5),
+                    new CharFrame('>>> Error <<<', 13),
                 ]),
             );
 
