@@ -58,7 +58,7 @@ abstract class AFloatValue implements IFloatValue
         return $this->value;
     }
 
-    public function setValue(float $value): void
+    protected function setValue(float $value): void
     {
         $this->value = $value;
         $this->checkBounds();

@@ -12,6 +12,9 @@ use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleRendererFactory;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleFrameRenderer;
 use AlecRabbit\Spinner\Extras\Render\StyleFrameRenderer;
 
+/**
+ * @deprecated
+ */
 final class StyleFrameRendererFactory implements IStyleFrameRendererFactory
 {
     public function __construct(
