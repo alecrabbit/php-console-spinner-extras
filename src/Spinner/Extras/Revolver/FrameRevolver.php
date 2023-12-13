@@ -24,16 +24,9 @@ final class FrameRevolver extends ARevolver implements IFrameRevolver
     ) {
         parent::__construct($interval, $tolerance);
 
-        if (!$frames instanceof Generator) {
-            throw new InvalidArgument(
-                sprintf(
-                    'Frames must be an instance of %s. "%s" given.',
-                    Generator::class,
-                    get_debug_type($frames)
-                )
-            ); // TODO (2023-12-08 17:13) [Alec Rabbit]: clarify message about infinite generator
-        }
+        self::assertFrames($frames);
 
+        /** @var Generator $frames */
         $this->frames = $frames;
     }
 
@@ -45,5 +38,19 @@ final class FrameRevolver extends ARevolver implements IFrameRevolver
     protected function current(): IFrame
     {
         return $this->frames->current();
+    }
+
+    protected static function assertFrames(Traversable $frames): void
+    {
+        match (true) {
+            $frames instanceof Generator => null,
+            default => throw new InvalidArgument(
+                sprintf(
+                    'Frames must be an instance of infinite %s. "%s" given.',
+                    Generator::class,
+                    get_debug_type($frames)
+                )
+            ),
+        };
     }
 }

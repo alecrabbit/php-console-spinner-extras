@@ -12,22 +12,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-color.git",
-                "reference": "e2e6aeae4211fb73c13b1ab16582f61a5c6f0409"
+                "reference": "08bbff05777bb686ea0c2552bf6ff6e106a495dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-color/zipball/e2e6aeae4211fb73c13b1ab16582f61a5c6f0409",
-                "reference": "e2e6aeae4211fb73c13b1ab16582f61a5c6f0409",
+                "url": "https://api.github.com/repos/alecrabbit/php-color/zipball/08bbff05777bb686ea0c2552bf6ff6e106a495dc",
+                "reference": "08bbff05777bb686ea0c2552bf6ff6e106a495dc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2"
             },
             "require-dev": {
-                "nunomaduro/collision": "^7.0",
+                "nunomaduro/collision": "*",
                 "phpunit/php-code-coverage": "*",
                 "phpunit/phpunit": "^10.0",
-                "symfony/console": "^6.2",
+                "symfony/console": "*",
                 "symfony/var-dumper": "*"
             },
             "type": "library",
@@ -54,7 +54,7 @@
                 "issues": "https://github.com/alecrabbit/php-color/issues",
                 "source": "https://github.com/alecrabbit/php-color/tree/prepare-next"
             },
-            "time": "2023-12-04T10:52:50+00:00"
+            "time": "2023-12-12T11:26:46+00:00"
         },
         {
             "name": "alecrabbit/php-console-spinner",
@@ -62,12 +62,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
-                "reference": "e14de14f1b240f329d2fb9bb209465ede69dc6e4"
+                "reference": "3297359f9376f850c86d6dd5984645cb6172384c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/e14de14f1b240f329d2fb9bb209465ede69dc6e4",
-                "reference": "e14de14f1b240f329d2fb9bb209465ede69dc6e4",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/3297359f9376f850c86d6dd5984645cb6172384c",
+                "reference": "3297359f9376f850c86d6dd5984645cb6172384c",
                 "shasum": ""
             },
             "require": {
@@ -130,7 +130,7 @@
                 "issues": "https://github.com/alecrabbit/php-console-spinner/issues",
                 "source": "https://github.com/alecrabbit/php-console-spinner/tree/prepare-next"
             },
-            "time": "2023-12-11T13:38:26+00:00"
+            "time": "2023-12-13T14:07:01+00:00"
         },
         {
             "name": "alecrabbit/php-wcwidth",
@@ -1123,16 +1123,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.5.2",
+            "version": "10.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "5aedff46afba98dddecaa12349ec044d9103d4fe"
+                "reference": "6fce887c71076a73f32fd3e0774a6833fc5c7f19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5aedff46afba98dddecaa12349ec044d9103d4fe",
-                "reference": "5aedff46afba98dddecaa12349ec044d9103d4fe",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6fce887c71076a73f32fd3e0774a6833fc5c7f19",
+                "reference": "6fce887c71076a73f32fd3e0774a6833fc5c7f19",
                 "shasum": ""
             },
             "require": {
@@ -1204,7 +1204,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.2"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.3"
             },
             "funding": [
                 {
@@ -1220,7 +1220,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-05T14:54:33+00:00"
+            "time": "2023-12-13T07:25:23+00:00"
         },
         {
             "name": "psr/log",

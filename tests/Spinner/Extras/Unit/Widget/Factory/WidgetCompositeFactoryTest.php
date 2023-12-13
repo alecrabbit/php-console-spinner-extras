@@ -9,6 +9,7 @@ use AlecRabbit\Spinner\Core\Config\Contract\Factory\IWidgetConfigFactory;
 use AlecRabbit\Spinner\Core\Config\Contract\IWidgetConfig;
 use AlecRabbit\Spinner\Core\Config\Contract\IWidgetRevolverConfig;
 use AlecRabbit\Spinner\Core\Contract\IIntervalComparator;
+use AlecRabbit\Spinner\Core\Settings\Contract\IWidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetRevolver;
@@ -150,6 +151,91 @@ final class WidgetCompositeFactoryTest extends TestCase
         self::assertInstanceOf(WidgetCompositeFactory::class, $widgetFactory);
         self::assertSame($widget, $widgetFactory->create());
     }
+    #[Test]
+    public function canCreateWidgetWithWidgetSettings(): void
+    {
+        $leadingSpacer = $this->getFrameMock();
+        $trailingSpacer = $this->getFrameMock();
+        $revolverConfig = $this->getRevolverConfigMock();
+        $intervalComparator = $this->getIntervalComparatorMock();
+        $widgetConfig = $this->getWidgetConfigMock();
+        $widgetConfig
+            ->expects(self::once())
+            ->method('getLeadingSpacer')
+            ->willReturn($leadingSpacer)
+        ;
+        $widgetConfig
+            ->expects(self::once())
+            ->method('getTrailingSpacer')
+            ->willReturn($trailingSpacer)
+        ;
+        $widgetConfig
+            ->expects(self::once())
+            ->method('getWidgetRevolverConfig')
+            ->willReturn($revolverConfig)
+        ;
+        $widgetSettings = $this->getWidgetSettingsMock();
+        $widgetConfigFactory = $this->getWidgetConfigFactoryMock();
+        $widgetConfigFactory
+            ->expects(self::once())
+            ->method('create')
+            ->with(self::identicalTo($widgetSettings))
+            ->willReturn($widgetConfig)
+        ;
+
+        $widget = $this->getWidgetCompositeMock();
+
+        $widgetRevolver = $this->getWidgetRevolverMock();
+
+        $widgetRevolverFactory = $this->getWidgetRevolverFactoryMock();
+        $widgetRevolverFactory
+            ->expects(self::once())
+            ->method('create')
+            ->with(self::identicalTo($revolverConfig))
+            ->willReturn($widgetRevolver)
+        ;
+
+        $widgetBuilder = $this->getWidgetCompositeBuilderMock();
+        $widgetBuilder
+            ->expects(self::once())
+            ->method('withLeadingSpacer')
+            ->with(self::identicalTo($leadingSpacer))
+            ->willReturnSelf()
+        ;
+        $widgetBuilder
+            ->expects(self::once())
+            ->method('withTrailingSpacer')
+            ->with(self::identicalTo($trailingSpacer))
+            ->willReturnSelf()
+        ;
+        $widgetBuilder
+            ->expects(self::once())
+            ->method('withWidgetRevolver')
+            ->with(self::identicalTo($widgetRevolver))
+            ->willReturnSelf()
+        ;
+        $widgetBuilder
+            ->expects(self::once())
+            ->method('withIntervalComparator')
+            ->with(self::identicalTo($intervalComparator))
+            ->willReturnSelf()
+        ;
+        $widgetBuilder
+            ->expects(self::once())
+            ->method('build')
+            ->willReturn($widget)
+        ;
+
+        $widgetFactory = $this->getTesteeInstance(
+            widgetConfigFactory: $widgetConfigFactory,
+            widgetBuilder: $widgetBuilder,
+            widgetRevolverFactory: $widgetRevolverFactory,
+            intervalComparator: $intervalComparator,
+        );
+
+        self::assertInstanceOf(WidgetCompositeFactory::class, $widgetFactory);
+        self::assertSame($widget, $widgetFactory->using($widgetSettings)->create());
+    }
 
     protected function getFrameMock(): MockObject&IFrame
     {
@@ -179,5 +265,10 @@ final class WidgetCompositeFactoryTest extends TestCase
     protected function getWidgetMock(): MockObject&IWidget
     {
         return $this->createMock(IWidget::class);
+    }
+
+    private function getWidgetSettingsMock(): MockObject&IWidgetSettings
+    {
+        return $this->createMock(IWidgetSettings::class);
     }
 }

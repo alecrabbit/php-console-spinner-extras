@@ -57,8 +57,14 @@ final class SpinnerFactoryTest extends TestCase
         $widgetFactory = $this->getWidgetCompositeFactoryMock();
         $widgetFactory
             ->expects(self::once())
-            ->method('create')
+            ->method('using')
             ->with(self::identicalTo($widgetConfig))
+            ->willReturnSelf()
+        ;
+        $widgetFactory
+            ->expects(self::once())
+            ->method('create')
+            ->with()
         ;
 
         $widgetConfigFactory = $this->getWidgetConfigFactoryMock();

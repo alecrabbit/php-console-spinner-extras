@@ -11,5 +11,7 @@ use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
 
 interface IWidgetCompositeFactory extends IWidgetFactory
 {
-    public function create(IWidgetConfig|IWidgetSettings|null $widgetSettings = null): IWidgetComposite;
+    public function create(): IWidgetComposite;
+
+    public function using(IWidgetConfig|IWidgetSettings|null $widgetSettings = null): IWidgetCompositeFactory;
 }

@@ -99,7 +99,7 @@ final class FrameRevolverTest extends TestCase
     public function throwsIfFramesIsNotAGenerator(): void
     {
         $this->expectException(InvalidArgument::class);
-        $this->expectExceptionMessage('Frames must be an instance of Generator. "ArrayObject" given.');
+        $this->expectExceptionMessage('Frames must be an instance of infinite Generator. "ArrayObject" given.');
 
         $this->getTesteeInstance(
             frames: new ArrayObject(),
