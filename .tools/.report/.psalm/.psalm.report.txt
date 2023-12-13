@@ -19,47 +19,49 @@
 /app/src/Spinner/Extras/Contract/IProgressWidgetFactory.php:21:8:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Widget\Contract\ILegacyWidgetComposite does not exist
 /app/src/Spinner/Extras/Contract/IProgressWidgetFactory.php:29:8:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Widget\Contract\ILegacyWidgetComposite does not exist
 /app/src/Spinner/Extras/Contract/Style/IStyleOptions.php:10:33:error - MissingTemplateParam: AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptions has missing template params when extending IteratorAggregate, expecting 2
-/app/src/Spinner/Extras/Driver.php:23:22:error - UndefinedDocblockClass: Docblock-defined class, interface or enum named AlecRabbit\Spinner\Core\Contract\ISpinnerState does not exist
-/app/src/Spinner/Extras/Driver.php:27:9:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Output\Contract\IDriverOutput does not exist
-/app/src/Spinner/Extras/Driver.php:28:9:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Contract\ITimer does not exist
-/app/src/Spinner/Extras/Driver.php:34:13:error - InvalidArgument: Argument 1 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Contract\IInterval, but AlecRabbit\Spinner\Core\Output\Contract\IDriverOutput provided
-/app/src/Spinner/Extras/Driver.php:35:13:error - InvalidArgument: Argument 2 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Core\Contract\IDriverMessages, but AlecRabbit\Spinner\Contract\ITimer provided
-/app/src/Spinner/Extras/Driver.php:36:13:error - InvalidArgument: Argument 3 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Core\Contract\IRenderer, but AlecRabbit\Spinner\Contract\IInterval provided
-/app/src/Spinner/Extras/Driver.php:37:13:error - InvalidArgument: Argument 4 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Contract\IDeltaTimer, but AlecRabbit\Spinner\Core\Settings\Contract\IDriverSettings provided
-/app/src/Spinner/Extras/Driver.php:40:27:error - PropertyTypeCoercion: $this->spinners expects 'WeakMap<AlecRabbit\Spinner\Core\Contract\ISpinner, AlecRabbit\Spinner\Core\Contract\ISpinnerState>',  parent type 'WeakMap<object, mixed>' provided
-/app/src/Spinner/Extras/Driver.php:46:9:error - MixedAssignment: Unable to determine the type that $dt is being assigned to
-/app/src/Spinner/Extras/Driver.php:46:17:error - UndefinedThisPropertyFetch: Instance property AlecRabbit\Spinner\Extras\Driver::$timer is not defined
-/app/src/Spinner/Extras/Driver.php:46:31:error - MixedMethodCall: Cannot determine the type of $this->timer when calling method getDelta
-/app/src/Spinner/Extras/Driver.php:48:37:error - MixedAssignment: Unable to determine the type that $spinner is being assigned to
-/app/src/Spinner/Extras/Driver.php:48:49:error - MixedAssignment: Unable to determine the type that $previousState is being assigned to
-/app/src/Spinner/Extras/Driver.php:49:13:error - MixedAssignment: Unable to determine the type that $frame is being assigned to
-/app/src/Spinner/Extras/Driver.php:49:32:error - MixedMethodCall: Cannot determine the type of $spinner when calling method getFrame
-/app/src/Spinner/Extras/Driver.php:52:21:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\SpinnerState does not exist
-/app/src/Spinner/Extras/Driver.php:53:39:error - MixedMethodCall: Cannot determine the type of $frame when calling method sequence
-/app/src/Spinner/Extras/Driver.php:54:36:error - MixedMethodCall: Cannot determine the type of $frame when calling method width
-/app/src/Spinner/Extras/Driver.php:55:52:error - MixedMethodCall: Cannot determine the type of $previousState when calling method getWidth
-/app/src/Spinner/Extras/Driver.php:58:40:error - MixedArgument: Argument 1 of WeakMap::offsetSet cannot be mixed, expecting AlecRabbit\Spinner\Core\Contract\ISpinner
-/app/src/Spinner/Extras/Driver.php:58:50:error - InvalidArgument: Argument 2 of WeakMap::offsetSet expects AlecRabbit\Spinner\Core\Contract\ISpinnerState, but AlecRabbit\Spinner\Core\SpinnerState provided
-/app/src/Spinner/Extras/Driver.php:60:13:error - UndefinedThisPropertyFetch: Instance property AlecRabbit\Spinner\Extras\Driver::$output is not defined
-/app/src/Spinner/Extras/Driver.php:60:28:error - MixedMethodCall: Cannot determine the type of $this->output when calling method write
-/app/src/Spinner/Extras/Driver.php:67:50:error - MixedArgument: Argument 2 of WeakMap::offsetSet cannot be mixed, expecting TVal
-/app/src/Spinner/Extras/Driver.php:67:54:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\SpinnerState does not exist
-/app/src/Spinner/Extras/Driver.php:68:13:error - MixedAssignment: Unable to determine the type that $this->interval is being assigned to
-/app/src/Spinner/Extras/Driver.php:68:48:error - UndefinedInterfaceMethod: Method AlecRabbit\Spinner\Contract\IInterval::smallest does not exist
-/app/src/Spinner/Extras/Driver.php:85:45:error - MixedInferredReturnType: Could not verify return type 'AlecRabbit\Spinner\Contract\IInterval' for AlecRabbit\Spinner\Extras\Driver::recalculateInterval
-/app/src/Spinner/Extras/Driver.php:88:37:error - MixedAssignment: Unable to determine the type that $spinner is being assigned to
-/app/src/Spinner/Extras/Driver.php:89:13:error - MixedAssignment: Unable to determine the type that $interval is being assigned to
-/app/src/Spinner/Extras/Driver.php:89:36:error - MixedMethodCall: Cannot determine the type of $interval when calling method smallest
-/app/src/Spinner/Extras/Driver.php:89:36:error - PossiblyUndefinedMethod: Method AlecRabbit\Spinner\Contract\IInterval::smallest does not exist
-/app/src/Spinner/Extras/Driver.php:89:55:error - MixedMethodCall: Cannot determine the type of $spinner when calling method getInterval
-/app/src/Spinner/Extras/Driver.php:91:16:error - MixedReturnStatement: Could not infer a return type
-/app/src/Spinner/Extras/Driver.php:96:43:error - ArgumentTypeCoercion: Argument 1 of WeakMap::offsetExists expects AlecRabbit\Spinner\Core\Contract\ISpinner, but parent type AlecRabbit\Spinner\Contract\ISubject provided
-/app/src/Spinner/Extras/Driver.php:105:37:error - UndefinedDocblockClass: Docblock-defined class, interface or enum named AlecRabbit\Spinner\Core\Contract\ISpinnerState does not exist
-/app/src/Spinner/Extras/Driver.php:110:31:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Contract\ISpinnerState does not exist
+/app/src/Spinner/Extras/Driver.php:24:22:error - UndefinedDocblockClass: Docblock-defined class, interface or enum named AlecRabbit\Spinner\Core\Contract\ISpinnerState does not exist
+/app/src/Spinner/Extras/Driver.php:28:9:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Output\Contract\IDriverOutput does not exist
+/app/src/Spinner/Extras/Driver.php:29:9:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Contract\ITimer does not exist
+/app/src/Spinner/Extras/Driver.php:35:13:error - InvalidArgument: Argument 1 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Contract\IInterval, but AlecRabbit\Spinner\Core\Output\Contract\IDriverOutput provided
+/app/src/Spinner/Extras/Driver.php:36:13:error - InvalidArgument: Argument 2 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Core\Contract\IDriverMessages, but AlecRabbit\Spinner\Contract\ITimer provided
+/app/src/Spinner/Extras/Driver.php:37:13:error - InvalidArgument: Argument 3 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Core\Contract\IRenderer, but AlecRabbit\Spinner\Contract\IInterval provided
+/app/src/Spinner/Extras/Driver.php:38:13:error - InvalidArgument: Argument 4 of AlecRabbit\Spinner\Core\A\ADriver::__construct expects AlecRabbit\Spinner\Contract\IDeltaTimer, but AlecRabbit\Spinner\Core\Settings\Contract\IDriverSettings provided
+/app/src/Spinner/Extras/Driver.php:41:27:error - PropertyTypeCoercion: $this->spinners expects 'WeakMap<AlecRabbit\Spinner\Core\Contract\ISpinner, AlecRabbit\Spinner\Core\Contract\ISpinnerState>',  parent type 'WeakMap<object, mixed>' provided
+/app/src/Spinner/Extras/Driver.php:47:9:error - MixedAssignment: Unable to determine the type that $dt is being assigned to
+/app/src/Spinner/Extras/Driver.php:47:17:error - UndefinedThisPropertyFetch: Instance property AlecRabbit\Spinner\Extras\Driver::$timer is not defined
+/app/src/Spinner/Extras/Driver.php:47:31:error - MixedMethodCall: Cannot determine the type of $this->timer when calling method getDelta
+/app/src/Spinner/Extras/Driver.php:49:37:error - MixedAssignment: Unable to determine the type that $spinner is being assigned to
+/app/src/Spinner/Extras/Driver.php:49:49:error - MixedAssignment: Unable to determine the type that $previousState is being assigned to
+/app/src/Spinner/Extras/Driver.php:50:13:error - MixedAssignment: Unable to determine the type that $frame is being assigned to
+/app/src/Spinner/Extras/Driver.php:50:32:error - MixedMethodCall: Cannot determine the type of $spinner when calling method getFrame
+/app/src/Spinner/Extras/Driver.php:53:21:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\SpinnerState does not exist
+/app/src/Spinner/Extras/Driver.php:54:39:error - MixedMethodCall: Cannot determine the type of $frame when calling method sequence
+/app/src/Spinner/Extras/Driver.php:55:36:error - MixedMethodCall: Cannot determine the type of $frame when calling method width
+/app/src/Spinner/Extras/Driver.php:56:52:error - MixedMethodCall: Cannot determine the type of $previousState when calling method getWidth
+/app/src/Spinner/Extras/Driver.php:59:40:error - MixedArgument: Argument 1 of WeakMap::offsetSet cannot be mixed, expecting AlecRabbit\Spinner\Core\Contract\ISpinner
+/app/src/Spinner/Extras/Driver.php:59:50:error - InvalidArgument: Argument 2 of WeakMap::offsetSet expects AlecRabbit\Spinner\Core\Contract\ISpinnerState, but AlecRabbit\Spinner\Core\SpinnerState provided
+/app/src/Spinner/Extras/Driver.php:61:13:error - UndefinedThisPropertyFetch: Instance property AlecRabbit\Spinner\Extras\Driver::$output is not defined
+/app/src/Spinner/Extras/Driver.php:61:28:error - MixedMethodCall: Cannot determine the type of $this->output when calling method write
+/app/src/Spinner/Extras/Driver.php:68:50:error - MixedArgument: Argument 2 of WeakMap::offsetSet cannot be mixed, expecting TVal
+/app/src/Spinner/Extras/Driver.php:68:54:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\SpinnerState does not exist
+/app/src/Spinner/Extras/Driver.php:69:13:error - MixedAssignment: Unable to determine the type that $this->interval is being assigned to
+/app/src/Spinner/Extras/Driver.php:69:48:error - UndefinedInterfaceMethod: Method AlecRabbit\Spinner\Contract\IInterval::smallest does not exist
+/app/src/Spinner/Extras/Driver.php:86:31:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Contract\ISpinnerState does not exist
+/app/src/Spinner/Extras/Driver.php:94:37:error - UndefinedDocblockClass: Docblock-defined class, interface or enum named AlecRabbit\Spinner\Core\Contract\ISpinnerState does not exist
+/app/src/Spinner/Extras/Driver.php:99:45:error - MixedInferredReturnType: Could not verify return type 'AlecRabbit\Spinner\Contract\IInterval' for AlecRabbit\Spinner\Extras\Driver::recalculateInterval
+/app/src/Spinner/Extras/Driver.php:102:37:error - MixedAssignment: Unable to determine the type that $spinner is being assigned to
+/app/src/Spinner/Extras/Driver.php:103:13:error - MixedAssignment: Unable to determine the type that $interval is being assigned to
+/app/src/Spinner/Extras/Driver.php:103:36:error - MixedMethodCall: Cannot determine the type of $interval when calling method smallest
+/app/src/Spinner/Extras/Driver.php:103:36:error - PossiblyUndefinedMethod: Method AlecRabbit\Spinner\Contract\IInterval::smallest does not exist
+/app/src/Spinner/Extras/Driver.php:103:55:error - MixedMethodCall: Cannot determine the type of $spinner when calling method getInterval
+/app/src/Spinner/Extras/Driver.php:105:16:error - MixedReturnStatement: Could not infer a return type
+/app/src/Spinner/Extras/Driver.php:110:43:error - ArgumentTypeCoercion: Argument 1 of WeakMap::offsetExists expects AlecRabbit\Spinner\Core\Contract\ISpinner, but parent type AlecRabbit\Spinner\Contract\ISubject provided
 /app/src/Spinner/Extras/Factory/StyleFrameFactory.php:32:17:error - PossiblyInvalidArgument: Argument 1 of AlecRabbit\Spinner\Extras\Contract\IWidthMeasurer::measureWidth expects string, but possibly different type array<array-key, mixed>|string provided
-/app/src/Spinner/Extras/Factory/StyleFrameRendererFactory.php:26:9:error - MixedAssignment: Unable to determine the type that $styleMode is being assigned to
-/app/src/Spinner/Extras/Factory/StyleFrameRendererFactory.php:26:40:error - UndefinedMethod: Method AlecRabbit\Spinner\Contract\Option\StylingMethodOption::lowest does not exist
-/app/src/Spinner/Extras/Factory/StyleFrameRendererFactory.php:30:68:error - MixedArgument: Argument 1 of AlecRabbit\Spinner\Extras\Factory\Contract\IStyleRendererFactory::create cannot be mixed, expecting AlecRabbit\Spinner\Contract\Option\StylingMethodOption
+/app/src/Spinner/Extras/Factory/StyleFrameRendererFactory.php:29:9:error - MixedAssignment: Unable to determine the type that $styleMode is being assigned to
+/app/src/Spinner/Extras/Factory/StyleFrameRendererFactory.php:29:40:error - UndefinedMethod: Method AlecRabbit\Spinner\Contract\Option\StylingMethodOption::lowest does not exist
+/app/src/Spinner/Extras/Factory/StyleFrameRendererFactory.php:33:68:error - MixedArgument: Argument 1 of AlecRabbit\Spinner\Extras\Factory\Contract\IStyleRendererFactory::create cannot be mixed, expecting AlecRabbit\Spinner\Contract\Option\StylingMethodOption
+/app/src/Spinner/Extras/Palette/CustomCharPalette.php:35:36:error - MixedReturnTypeCoercion: The declared return type 'Traversable<mixed, AlecRabbit\Spinner\Core\Contract\ICharFrame|string>' for AlecRabbit\Spinner\Extras\Palette\CustomCharPalette::sequence is more specific than the inferred return type 'Generator<mixed, mixed, mixed, void>'
+/app/src/Spinner/Extras/Palette/CustomStylePalette.php:25:44:error - MixedReturnTypeCoercion: The declared return type 'Traversable<mixed, AlecRabbit\Spinner\Core\Contract\IStyleFrame|string>' for AlecRabbit\Spinner\Extras\Palette\CustomStylePalette::ansi4StyleFrames is more specific than the inferred return type 'Generator<mixed, mixed, mixed, void>'
 /app/src/Spinner/Extras/Procedure/A/AFloatValueProcedure.php:22:50:error - InvalidReturnType: Not all code paths of AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure::getFrame end in a return statement, return type AlecRabbit\Spinner\Contract\IFrame expected
 /app/src/Spinner/Extras/Procedure/A/AProceduralPattern.php:12:43:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\APattern does not exist
 /app/src/Spinner/Extras/Procedure/A/AProceduralStylePattern.php:12:48:error - UndefinedClass: Class, interface or enum named AlecRabbit\Spinner\Core\Pattern\A\AStylePattern does not exist

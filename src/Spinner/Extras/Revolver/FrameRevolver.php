@@ -15,8 +15,13 @@ use Traversable;
 
 final class FrameRevolver extends ARevolver implements IFrameRevolver
 {
+    /** @var Generator<IFrame> */
     private Generator $frames;
 
+    /**
+     * @param Traversable<IFrame> $frames
+     * @throws InvalidArgument
+     */
     public function __construct(
         Traversable $frames,
         IInterval $interval,
@@ -26,7 +31,7 @@ final class FrameRevolver extends ARevolver implements IFrameRevolver
 
         self::assertFrames($frames);
 
-        /** @var Generator $frames */
+        /** @var Generator<IFrame> $frames */
         $this->frames = $frames;
     }
 

@@ -234,7 +234,7 @@ final class WidgetCompositeFactoryTest extends TestCase
         );
 
         self::assertInstanceOf(WidgetCompositeFactory::class, $widgetFactory);
-        self::assertSame($widget, $widgetFactory->using($widgetSettings)->create());
+        self::assertSame($widget, $widgetFactory->usingSettings($widgetSettings)->create());
     }
 
     protected function getFrameMock(): MockObject&IFrame

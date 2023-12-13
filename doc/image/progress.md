@@ -11,9 +11,13 @@ $widgetSettings =
         charPalette: /* TBD */,
     );
 
-$progressValue = new ProgressValue(0);
+$progressValue = new ProgressValue();
 
-$widget = $factory->create($progressValue, $widgetSettings);
+$widget = 
+    $factory
+        ->usingSettings($widgetSettings)
+        ->usingValue($progressValue)
+        ->create();
 
 $spinner = Facade::createSpinner();
 

@@ -13,15 +13,14 @@ use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetRevolverFactory;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Builder\IWidgetCompositeBuilder;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Factory\IWidgetCompositeFactory;
 
-final  class WidgetCompositeFactory implements IWidgetCompositeFactory
+final readonly class WidgetCompositeFactory implements IWidgetCompositeFactory
 {
-    private IWidgetSettings|IWidgetConfig|null $widgetSettings = null;
-
     public function __construct(
-        private readonly IWidgetConfigFactory $widgetConfigFactory,
-        private readonly IWidgetCompositeBuilder $widgetBuilder,
-        private readonly IWidgetRevolverFactory $widgetRevolverFactory,
-        private readonly IIntervalComparator $intervalComparator,
+        private IWidgetConfigFactory $widgetConfigFactory,
+        private IWidgetCompositeBuilder $widgetBuilder,
+        private IWidgetRevolverFactory $widgetRevolverFactory,
+        private IIntervalComparator $intervalComparator,
+        private IWidgetConfig|IWidgetSettings|null $widgetSettings = null,
     ) {
     }
 
@@ -40,9 +39,14 @@ final  class WidgetCompositeFactory implements IWidgetCompositeFactory
         ;
     }
 
-    public function using(IWidgetConfig|IWidgetSettings|null $widgetSettings = null): IWidgetCompositeFactory
+    public function usingSettings(IWidgetConfig|IWidgetSettings|null $widgetSettings = null): IWidgetCompositeFactory
     {
-        $this->widgetSettings = $widgetSettings;
-        return $this;
+        return new self(
+            widgetConfigFactory: $this->widgetConfigFactory,
+            widgetBuilder: $this->widgetBuilder,
+            widgetRevolverFactory: $this->widgetRevolverFactory,
+            intervalComparator: $this->intervalComparator,
+            widgetSettings: $widgetSettings,
+        );
     }
 }

@@ -13,5 +13,5 @@ interface IWidgetCompositeFactory extends IWidgetFactory
 {
     public function create(): IWidgetComposite;
 
-    public function using(IWidgetConfig|IWidgetSettings|null $widgetSettings = null): IWidgetCompositeFactory;
+    public function usingSettings(IWidgetConfig|IWidgetSettings|null $widgetSettings = null): IWidgetCompositeFactory;
 }
