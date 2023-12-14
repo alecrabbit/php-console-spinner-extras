@@ -10,6 +10,7 @@ use AlecRabbit\Spinner\Core\Factory\CharFrameFactory;
 use AlecRabbit\Spinner\Extras\Contract\IProgressBarSprite;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
+use AlecRabbit\Spinner\Extras\ProgressBarSprite;
 
 use function AlecRabbit\WCWidth\wcswidth;
 
@@ -20,40 +21,25 @@ use function AlecRabbit\WCWidth\wcswidth;
 final class ProgressBarProcedure extends AProgressValueProcedure
 {
     private const UNITS = 5;
-    private string $open;
-    private string $close;
-    private string $empty;
-    private string $done;
-    private string $cursor;
     private float $cursorThreshold;
 
     public function __construct(
         IProgressValue $progressValue,
-        private readonly ?IProgressBarSprite $sprite = null,
+        private readonly IProgressBarSprite $sprite = new ProgressBarSprite(),
         private int $units = self::UNITS,
         private readonly bool $withCursor = true,
     ) {
         parent::__construct($progressValue);
 
-        $this->init();
-    }
-
-    protected function init(): void
-    {
         $this->cursorThreshold = $this->progressValue->getMax();
         $this->units = $this->withCursor ? $this->units - 1 : $this->units;
-        $this->open = $this->sprite ? $this->sprite->getOpen() : '[';
-        $this->close = $this->sprite ? $this->sprite->getClose() : ']';
-        $this->empty = $this->sprite ? $this->sprite->getEmpty() : '-';
-        $this->done = $this->sprite ? $this->sprite->getDone() : '=';
-        $this->cursor = $this->sprite ? $this->sprite->getCursor() : '>';
     }
 
     private function getCursor(float $fraction): string
     {
         return $fraction >= $this->cursorThreshold
-            ? $this->done
-            : $this->cursor;
+            ? $this->sprite->getDone()
+            : $this->sprite->getCursor();
     }
 
     public function getFrame(?float $dt = null): IFrame
@@ -77,10 +63,10 @@ final class ProgressBarProcedure extends AProgressValueProcedure
                 ? $this->getCursor($progress)
                 : '';
 
-        return $this->open .
-            str_repeat($this->done, $p) .
+        return $this->sprite->getOpen() .
+            str_repeat($this->sprite->getDone(), $p) .
             $cursor .
-            str_repeat($this->empty, $this->units - $p) .
-            $this->close;
+            str_repeat($this->sprite->getEmpty(), $this->units - $p) .
+            $this->sprite->getClose();
     }
 }
