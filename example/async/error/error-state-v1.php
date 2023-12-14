@@ -48,18 +48,19 @@ $errorState =
         /** @var IWidgetComposite $error */
         $error =
             $widgetFactory
-                ->create(
+                ->usingSettings(
                     new WidgetSettings(
                         stylePalette: $stylePalette,
                         charPalette: $charPalette,
                     ),
                 )
+                ->create()
         ;
 
         /** @var IWidgetComposite $errorMessage */
         $errorMessage =
             $widgetFactory
-                ->create(
+                ->usingSettings(
                     new WidgetSettings(
                         charPalette: new CustomCharPalette(
                             new \ArrayObject([
@@ -68,6 +69,7 @@ $errorState =
                         ),
                     ),
                 )
+                ->create()
         ;
 
         $error->add($errorMessage->getContext());
