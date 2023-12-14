@@ -3,7 +3,7 @@
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Pattern;
 
 use AlecRabbit\Spinner\Contract\IInterval;
-use AlecRabbit\Spinner\Extras\Pattern\IInfinitePattern;
+use AlecRabbit\Spinner\Extras\Pattern\Contract\IInfinitePattern;
 use AlecRabbit\Spinner\Extras\Pattern\InfinitePattern;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;

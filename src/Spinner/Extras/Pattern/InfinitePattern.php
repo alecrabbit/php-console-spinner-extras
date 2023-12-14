@@ -6,6 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Pattern;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
+use AlecRabbit\Spinner\Extras\Pattern\Contract\IInfinitePattern;
 use Traversable;
 
 final readonly class InfinitePattern implements IInfinitePattern

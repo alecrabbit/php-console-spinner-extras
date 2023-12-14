@@ -16,7 +16,7 @@ use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolverBuilder;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Factory\StyleFrameRevolverFactory;
-use AlecRabbit\Spinner\Extras\Pattern\IInfinitePattern;
+use AlecRabbit\Spinner\Extras\Pattern\Contract\IInfinitePattern;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;

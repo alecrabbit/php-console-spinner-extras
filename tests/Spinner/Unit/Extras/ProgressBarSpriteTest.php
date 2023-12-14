@@ -6,10 +6,11 @@ namespace AlecRabbit\Tests\Spinner\Unit\Extras;
 
 use AlecRabbit\Spinner\Extras\ProgressBarSprite;
 use AlecRabbit\Tests\TestCase\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 final class ProgressBarSpriteTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function canCreateDefault(): void
     {
         $instance = new ProgressBarSprite();
@@ -20,20 +21,27 @@ final class ProgressBarSpriteTest extends TestCase
         self::assertSame('░', $instance->getEmpty());
     }
 
-    /** @test */
+    #[Test]
     public function canCreate(): void
     {
+        $empty = 'e';
+        $done = 'd';
+        $cursor = 'c';
+        $open = 'o';
+        $close = 'f';
+
         $instance = new ProgressBarSprite(
-            empty: 'e',
-            done: 'd',
-            cursor: 'c',
-            open: 'o',
-            close: 'f',
+            empty: $empty,
+            done: $done,
+            cursor: $cursor,
+            open: $open,
+            close: $close,
         );
-        self::assertSame('e', $instance->getEmpty());
-        self::assertSame('d', $instance->getDone());
-        self::assertSame('c', $instance->getCursor());
-        self::assertSame('o', $instance->getOpen());
-        self::assertSame('f', $instance->getClose());
+
+        self::assertSame($empty, $instance->getEmpty());
+        self::assertSame($done, $instance->getDone());
+        self::assertSame($cursor, $instance->getCursor());
+        self::assertSame($open, $instance->getOpen());
+        self::assertSame($close, $instance->getClose());
     }
 }
