@@ -7,6 +7,9 @@ namespace AlecRabbit\Spinner\Extras\Procedure\A;
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\IProcedure;
 
+/**
+ * @deprecated
+ */
 abstract class AProcedure implements IProcedure
 {
     abstract public function getFrame(?float $dt = null): IFrame;

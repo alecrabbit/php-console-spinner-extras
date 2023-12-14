@@ -18,7 +18,7 @@ use Traversable;
  */
 final class FrameRevolverBuilder implements IFrameRevolverBuilder
 {
-    /** @var Traversable<IFrame>|null  */
+    /** @var Traversable<IFrame>|null */
     private ?Traversable $frames = null;
     private ?IInterval $interval = null;
     private ?ITolerance $tolerance = null;

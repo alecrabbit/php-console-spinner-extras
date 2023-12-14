@@ -32,7 +32,8 @@ abstract class AWidgetComposite extends AWidget implements IWidgetComposite
         protected readonly IWidgetCompositeChildrenContainer $children = new WidgetCompositeChildrenContainer(),
         ?IObserver $observer = null,
         ?IWidgetContext $context = null, // FIXME (2023-12-13 17:53) [Alec Rabbit]: context is observer?
-    ) {
+    )
+    {
         parent::__construct(
             $revolver,
             $leadingSpacer,

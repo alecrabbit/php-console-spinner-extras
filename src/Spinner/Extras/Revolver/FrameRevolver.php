@@ -35,16 +35,6 @@ final class FrameRevolver extends ARevolver implements IFrameRevolver
         $this->frames = $frames;
     }
 
-    protected function next(?float $dt = null): void
-    {
-        $this->frames->next();
-    }
-
-    protected function current(): IFrame
-    {
-        return $this->frames->current();
-    }
-
     protected static function assertFrames(Traversable $frames): void
     {
         match (true) {
@@ -57,5 +47,15 @@ final class FrameRevolver extends ARevolver implements IFrameRevolver
                 )
             ),
         };
+    }
+
+    protected function next(?float $dt = null): void
+    {
+        $this->frames->next();
+    }
+
+    protected function current(): IFrame
+    {
+        return $this->frames->current();
     }
 }

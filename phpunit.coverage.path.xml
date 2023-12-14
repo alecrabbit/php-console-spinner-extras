@@ -14,11 +14,8 @@
         <testsuite name="Spinner/Functional">
             <directory>tests/Spinner/Functional</directory>
         </testsuite>
-        <testsuite name="Spinner/Extras/Functional">
-            <directory>tests/Spinner/Extras/Functional</directory>
-        </testsuite>
-        <testsuite name="Spinner/Extras/Unit">
-            <directory>tests/Spinner/Extras/Unit</directory>
+        <testsuite name="Spinner/Unit">
+            <directory>tests/Spinner/Unit</directory>
         </testsuite>
     </testsuites>
     <coverage>

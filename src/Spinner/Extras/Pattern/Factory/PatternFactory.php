@@ -10,7 +10,7 @@ use AlecRabbit\Spinner\Core\Palette\Contract\IPalette;
 use AlecRabbit\Spinner\Core\Palette\Factory\Contract\IPaletteTemplateFactory;
 use AlecRabbit\Spinner\Core\Pattern\Factory\Contract\IPatternFactory;
 use AlecRabbit\Spinner\Core\Pattern\Pattern;
-use AlecRabbit\Spinner\Extras\Palette\IInfinitePaletteTemplate;
+use AlecRabbit\Spinner\Extras\Palette\Contract\IInfinitePaletteTemplate;
 use AlecRabbit\Spinner\Extras\Pattern\InfinitePattern;
 
 final readonly class PatternFactory implements IPatternFactory

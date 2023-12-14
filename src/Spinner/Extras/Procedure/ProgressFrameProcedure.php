@@ -9,7 +9,10 @@ use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 
-/** @psalm-suppress UnusedClass */
+/**
+ * @deprecated
+ * @psalm-suppress UnusedClass
+ */
 final class ProgressFrameProcedure extends AProgressValueProcedure
 {
     private int $steps;

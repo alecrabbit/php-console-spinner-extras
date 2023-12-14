@@ -5,27 +5,33 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Factory\CharFrameFactory;
 use AlecRabbit\Spinner\Extras\Contract\IProgressBarSprite;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 
-/** @psalm-suppress UnusedClass */
+use function AlecRabbit\WCWidth\wcswidth;
+
+/**
+ * @deprecated
+ * @psalm-suppress UnusedClass
+ */
 final class ProgressBarProcedure extends AProgressValueProcedure
 {
-    protected const UNITS = 5;
-    protected string $open;
-    protected string $close;
-    protected string $empty;
-    protected string $done;
-    protected string $cursor;
-    protected float $cursorThreshold;
+    private const UNITS = 5;
+    private string $open;
+    private string $close;
+    private string $empty;
+    private string $done;
+    private string $cursor;
+    private float $cursorThreshold;
 
     public function __construct(
         IProgressValue $progressValue,
-        protected ?IProgressBarSprite $sprite = null,
-        protected int $units = self::UNITS,
-        protected bool $withCursor = true,
+        private readonly ?IProgressBarSprite $sprite = null,
+        private int $units = self::UNITS,
+        private readonly bool $withCursor = true,
     ) {
         parent::__construct($progressValue);
 
@@ -54,12 +60,12 @@ final class ProgressBarProcedure extends AProgressValueProcedure
     {
         if ($this->progressValue->isFinished()) {
             if ($this->finishedDelay < 0) {
-                return Frame::createEmpty();
+                return new CharFrame('', 0);
             }
             $this->finishedDelay -= $dt ?? 0.0;
         }
         $v = $this->createBar($this->progressValue->getValue());
-        return CharFrameFactory::create($v);
+        return new CharFrame($v, wcswidth($v)); // FIXME (2023-12-14 14:21) [Alec Rabbit]: direct function call
     }
 
     private function createBar(float $progress): string

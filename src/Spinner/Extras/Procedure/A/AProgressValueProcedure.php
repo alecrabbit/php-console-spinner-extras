@@ -6,9 +6,13 @@ namespace AlecRabbit\Spinner\Extras\Procedure\A;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Core\CharFrame;
-use AlecRabbit\Spinner\Core\Factory\CharFrameFactory;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 
+use function AlecRabbit\WCWidth\wcswidth;
+
+/**
+ * @deprecated
+ */
 abstract class AProgressValueProcedure extends AFloatValueProcedure
 {
     protected const FORMAT = "%' 3.0f%%"; // "%' 5.1f%%";
@@ -26,7 +30,7 @@ abstract class AProgressValueProcedure extends AFloatValueProcedure
     {
         if ($this->progressValue->isFinished()) {
             if ($this->finishedDelay < 0) {
-                return CharFrame::createEmpty();
+                return new CharFrame('', 0);
             }
             $this->finishedDelay -= $dt ?? 0.0;
         }
@@ -34,6 +38,6 @@ abstract class AProgressValueProcedure extends AFloatValueProcedure
             $this->format,
             $this->progressValue->getValue() * 100
         );
-        return CharFrameFactory::create($v);
+        return new CharFrame($v, wcswidth($v)); // FIXME (2023-12-14 14:21) [Alec Rabbit]: direct function call
     }
 }

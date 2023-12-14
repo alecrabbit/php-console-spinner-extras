@@ -6,6 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Palette;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Extras\Palette\Contract\IInfinitePaletteTemplate;
 use Traversable;
 
 final readonly class InfinitePaletteTemplate implements IInfinitePaletteTemplate

@@ -7,6 +7,9 @@ namespace AlecRabbit\Spinner\Extras\Procedure\A;
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 
+/**
+ * @deprecated
+ */
 abstract class AFloatValueProcedure extends AProcedure
 {
     protected const FORMAT = '%s';

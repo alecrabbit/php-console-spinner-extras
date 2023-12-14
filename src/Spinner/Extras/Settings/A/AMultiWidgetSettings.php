@@ -20,8 +20,7 @@ abstract readonly class AMultiWidgetSettings implements IMultiWidgetSettings
     public function __construct(
         private IWidgetSettings $first,
         IWidgetSettings ...$other,
-    )
-    {
+    ) {
         /** @var array<int, IWidgetSettings> $other */
         $this->other = new ArrayObject($other);
     }
