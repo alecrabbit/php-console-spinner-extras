@@ -11,14 +11,12 @@ use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
 use AlecRabbit\Spinner\Extras\Palette\Contract\IInvokablePalette;
-use AlecRabbit\Spinner\Extras\Palette\Style\CustomStylePalette;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProgressStylePalette;
 use AlecRabbit\Tests\TestCase\TestCase;
 use ArrayObject;
 use Generator;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
-use Traversable;
 
 final class ProgressStylePaletteTest extends TestCase
 {
@@ -43,11 +41,6 @@ final class ProgressStylePaletteTest extends TestCase
     private function getInvokablePaletteMock(): MockObject&IInvokablePalette
     {
         return $this->createMock(IInvokablePalette::class);
-    }
-
-    private function getPaletteOptionsMock(): MockObject&IPaletteOptions
-    {
-        return $this->createMock(IPaletteOptions::class);
     }
 
     #[Test]
@@ -77,6 +70,11 @@ final class ProgressStylePaletteTest extends TestCase
         self::assertSame($interval, $palette->getOptions()->getInterval());
     }
 
+    private function getPaletteOptionsMock(): MockObject&IPaletteOptions
+    {
+        return $this->createMock(IPaletteOptions::class);
+    }
+
     #[Test]
     public function canGetEntriesOne(): void
     {
@@ -85,7 +83,8 @@ final class ProgressStylePaletteTest extends TestCase
         $invokablePalette
             ->expects(self::once())
             ->method('__invoke')
-            ->willReturn($frames);
+            ->willReturn($frames)
+        ;
 
         $palette = $this->getTesteeInstance(
             palette: $invokablePalette,
@@ -112,7 +111,8 @@ final class ProgressStylePaletteTest extends TestCase
         $invokablePalette
             ->expects(self::once())
             ->method('__invoke')
-            ->willReturn($frames);
+            ->willReturn($frames)
+        ;
 
         $palette = $this->getTesteeInstance(
             palette: $invokablePalette,

@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Functional\Extras\Palette\Char;
 
-use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
+use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
-use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
-use AlecRabbit\Spinner\Extras\Palette\Contract\IInvokablePalette;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProgressCharPalette;
+use AlecRabbit\Spinner\Extras\Palette\Contract\IInvokablePalette;
 use AlecRabbit\Tests\TestCase\TestCase;
 use ArrayObject;
 use Generator;
@@ -43,11 +42,6 @@ final class ProgressCharPaletteTest extends TestCase
         return $this->createMock(IInvokablePalette::class);
     }
 
-    private function getPaletteOptionsMock(): MockObject&IPaletteOptions
-    {
-        return $this->createMock(IPaletteOptions::class);
-    }
-
     #[Test]
     public function canGetOptionsIntervalOne(): void
     {
@@ -74,6 +68,12 @@ final class ProgressCharPaletteTest extends TestCase
 
         self::assertSame($interval, $palette->getOptions()->getInterval());
     }
+
+    private function getPaletteOptionsMock(): MockObject&IPaletteOptions
+    {
+        return $this->createMock(IPaletteOptions::class);
+    }
+
     #[Test]
     public function canGetEntries(): void
     {
@@ -82,7 +82,8 @@ final class ProgressCharPaletteTest extends TestCase
         $invokablePalette
             ->expects(self::once())
             ->method('__invoke')
-            ->willReturn($frames);
+            ->willReturn($frames)
+        ;
 
         $palette = $this->getTesteeInstance(
             palette: $invokablePalette,
@@ -109,6 +110,7 @@ final class ProgressCharPaletteTest extends TestCase
             $entries->next();
         }
     }
+
     private function getPaletteModeMock(): MockObject&IPaletteMode
     {
         return $this->createMock(IPaletteMode::class);

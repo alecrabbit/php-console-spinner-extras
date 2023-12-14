@@ -27,8 +27,7 @@ final class ProgressStylePaletteTest extends TestCase
     private function getTesteeInstance(
         ?IInvokablePalette $palette = null,
         IPaletteOptions $options = new PaletteOptions(),
-    ): IInfinitePalette
-    {
+    ): IInfinitePalette {
         return new ProgressStylePalette(
             palette: $palette ?? $this->getInvokablePaletteMock(),
             options: $options,
