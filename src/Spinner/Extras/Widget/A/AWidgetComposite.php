@@ -104,7 +104,7 @@ abstract class AWidgetComposite extends AWidget implements IWidgetComposite
         if ($this->observer instanceof IWidgetContext) {
             return $this->observer;
         }
-        throw new \RuntimeException(sprintf('Observer is not instance of %s', IWidgetContext::class));
+        throw new \RuntimeException(sprintf('Observer is not an instance of %s', IWidgetContext::class));
     }
 
     public function add(IWidgetContext $context): IWidgetContext
