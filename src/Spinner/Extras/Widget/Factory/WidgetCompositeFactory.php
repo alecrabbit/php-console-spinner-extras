@@ -37,11 +37,11 @@ final readonly class WidgetCompositeFactory implements IWidgetCompositeFactory
     {
         $firstWidget = $this->createWidget($widgetSettings->getFirst());
 
-        foreach ($widgetSettings->getOther() as $other) {
-            $widgetComposite = $this->createWidget($other);
+        foreach ($widgetSettings->getOther() as $otherSettings) {
+            $otherWidget = $this->createWidget($otherSettings);
 
             $firstWidget->add(
-                $widgetComposite->getContext()
+                $otherWidget->getContext()
             );
         }
 

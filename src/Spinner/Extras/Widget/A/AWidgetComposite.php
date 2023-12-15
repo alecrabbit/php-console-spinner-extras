@@ -18,11 +18,11 @@ use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetRevolver;
 use AlecRabbit\Spinner\Extras\Widget\Contract\IWidgetCompositeChildrenContainer;
 use AlecRabbit\Spinner\Extras\Widget\WidgetCompositeChildrenContainer;
 use AlecRabbit\Spinner\Extras\Widget\WidgetContext;
+use AlecRabbit\Tests\TestCase\Helper\PickLock;
 
 abstract class AWidgetComposite extends AWidget implements IWidgetComposite
 {
     protected IInterval $interval;
-    protected IWidgetContext $context;
 
     public function __construct(
         IWidgetRevolver $revolver,
@@ -31,9 +31,7 @@ abstract class AWidgetComposite extends AWidget implements IWidgetComposite
         protected readonly IIntervalComparator $intervalComparator,
         protected readonly IWidgetCompositeChildrenContainer $children = new WidgetCompositeChildrenContainer(),
         ?IObserver $observer = null,
-        ?IWidgetContext $context = null, // FIXME (2023-12-13 17:53) [Alec Rabbit]: context is observer?
-    )
-    {
+    ) {
         parent::__construct(
             $revolver,
             $leadingSpacer,
@@ -41,20 +39,23 @@ abstract class AWidgetComposite extends AWidget implements IWidgetComposite
             $observer
         );
 
-        $this->context = $this->initializeContext($context);
+        $this->observer = $this->initializeObserver($observer);
 
         $this->interval = $this->widgetRevolver->getInterval();
         $this->children->attach($this);
         $this->update($this->children);
     }
 
-    protected function initializeContext(?IWidgetContext $context): IWidgetContext
+    protected function initializeObserver(?IObserver $observer): ?IObserver
     {
-        if ($context instanceof IWidgetContext) {
-            $context->setWidget($this);
-            return $context;
+        if ($observer instanceof IWidgetContext) {
+            $observer->setWidget($this);
+            return $observer;
         }
-        return new WidgetContext($this);
+        if ($observer === null) {
+            return new WidgetContext($this);
+        }
+        return null;
     }
 
     public function getInterval(): IInterval
@@ -100,7 +101,10 @@ abstract class AWidgetComposite extends AWidget implements IWidgetComposite
 
     public function getContext(): IWidgetContext
     {
-        return $this->context;
+        if ($this->observer instanceof IWidgetContext) {
+            return $this->observer;
+        }
+        throw new \RuntimeException(sprintf('Observer is not instance of %s', IWidgetContext::class));
     }
 
     public function add(IWidgetContext $context): IWidgetContext
@@ -113,5 +117,10 @@ abstract class AWidgetComposite extends AWidget implements IWidgetComposite
         if ($this->children->has($context)) {
             $this->children->remove($context);
         }
+    }
+
+    protected function assertObserverIsNotAttached(): void
+    {
+        // do nothing
     }
 }

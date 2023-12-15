@@ -48,6 +48,8 @@ $widgetTwo =
         ->create()
 ;
 
+$widget->add($widgetTwo->getContext()); // note the nesting
+
 $spinner =
     Facade::createSpinner(
         new SpinnerSettings(
@@ -57,7 +59,5 @@ $spinner =
             )
         ),
     );
-
-$widget->add($widgetTwo->getContext()); // note the nesting
 
 $spinner->add($widget->getContext());

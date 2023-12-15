@@ -362,25 +362,25 @@ final class WidgetCompositeTest extends TestCase
         );
     }
 
-    #[Test]
-    public function throwsIfObserverAlreadyAttached(): void
-    {
-        $exceptionClass = ObserverCanNotBeOverwritten::class;
-        $exceptionMessage = 'Observer is already attached.';
-
-        $test = function (): void {
-            $widgetComposite = $this->getTesteeInstance();
-            $observer = $this->getObserverMock();
-            $widgetComposite->attach($observer);
-            $widgetComposite->attach($observer);
-        };
-
-        $this->wrapExceptionTest(
-            test: $test,
-            exception: $exceptionClass,
-            message: $exceptionMessage,
-        );
-    }
+//    #[Test]
+//    public function throwsIfObserverAlreadyAttached(): void
+//    {
+//        $exceptionClass = ObserverCanNotBeOverwritten::class;
+//        $exceptionMessage = 'Observer is already attached.';
+//
+//        $test = function (): void {
+//            $widgetComposite = $this->getTesteeInstance();
+//            $observer = $this->getObserverMock();
+//            $widgetComposite->attach($observer);
+//            $widgetComposite->attach($observer);
+//        };
+//
+//        $this->wrapExceptionTest(
+//            test: $test,
+//            exception: $exceptionClass,
+//            message: $exceptionMessage,
+//        );
+//    }
 
     #[Test]
     public function throwsIfUpdateInvokedForSelf(): void

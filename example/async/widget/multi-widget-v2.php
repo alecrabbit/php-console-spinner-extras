@@ -44,7 +44,7 @@ $spinner = Facade::createSpinner(
     new SpinnerSettings(autoAttach: false)
 );
 
-//Facade::getDriver()->add($spinner);
+Facade::getDriver()->add($spinner);
 
 /** @var IWidgetComposite $widget */
 $widget =
@@ -57,4 +57,4 @@ $widget =
 
 $spinner->add($widget->getContext());
 
-Facade::getDriver()->add($spinner);
+//Facade::getDriver()->add($spinner);
