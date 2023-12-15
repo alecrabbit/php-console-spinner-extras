@@ -14,7 +14,6 @@ use AlecRabbit\Spinner\Extras\Palette\Char\Runner;
 use AlecRabbit\Spinner\Extras\Palette\Char\ShortSnake;
 use AlecRabbit\Spinner\Extras\Palette\Style\Red;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
-use AlecRabbit\Tests\TestCase\Helper\PickLock;
 
 require_once __DIR__ . '/../bootstrap.async.php';
 
