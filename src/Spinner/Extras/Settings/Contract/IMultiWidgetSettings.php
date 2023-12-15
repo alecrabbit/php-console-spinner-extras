@@ -18,4 +18,6 @@ interface IMultiWidgetSettings extends IWidgetSettings
      * @return Traversable<IWidgetSettings>
      */
     public function getOther(): Traversable;
+
+    public function getFirst(): IWidgetSettings;
 }

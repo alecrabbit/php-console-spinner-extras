@@ -24,7 +24,7 @@ Facade::getSettings()
 /** @var IWidgetComposite $widget */
 $widget =
     Facade::getWidgetFactory()
-        ->create(
+        ->usingSettings(
             new WidgetSettings(
                 stylePalette: new Rainbow(),
                 charPalette: new FeatheredArrow(
@@ -36,6 +36,7 @@ $widget =
                 )
             )
         )
+        ->create()
 ;
 
 $spinner = Facade::createSpinner();

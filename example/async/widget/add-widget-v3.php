@@ -10,6 +10,7 @@ use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\PulseOrangeBlue;
+use AlecRabbit\Spinner\Extras\Palette\Char\ShortSnake;
 use AlecRabbit\Spinner\Extras\Palette\Style\Red;
 
 require_once __DIR__ . '/../bootstrap.async.php';
@@ -25,17 +26,26 @@ Facade::getSettings()
 ;
 /** @var IWidgetComposite $widget */
 $widget =
-    Facade::getWidgetFactory()->create();
+    Facade::getWidgetFactory()
+        ->usingSettings(
+            new WidgetSettings(
+                trailingSpacer: new CharFrame('  ', 2), // move cursor up
+                charPalette: new ShortSnake(),
+            )
+        )
+        ->create()
+;
 
 /** @var IWidgetComposite $widgetTwo */
 $widgetTwo =
     Facade::getWidgetFactory()
-        ->create(
+        ->usingSettings(
             new WidgetSettings(
                 leadingSpacer: new CharFrame("\x1b[1D", -1), // move cursor backward
                 charPalette: new PulseOrangeBlue(),
             )
         )
+        ->create()
 ;
 
 $spinner =
@@ -48,6 +58,6 @@ $spinner =
         ),
     );
 
-$spinner->add($widget->getContext());
-
 $widget->add($widgetTwo->getContext()); // note the nesting
+
+$spinner->add($widget->getContext());

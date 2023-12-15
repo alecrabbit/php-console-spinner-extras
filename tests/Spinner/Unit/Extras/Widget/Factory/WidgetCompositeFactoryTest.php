@@ -12,8 +12,10 @@ use AlecRabbit\Spinner\Core\Contract\IIntervalComparator;
 use AlecRabbit\Spinner\Core\Settings\Contract\IWidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
+use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetContext;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetRevolver;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetRevolverFactory;
+use AlecRabbit\Spinner\Extras\Settings\Contract\IMultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Builder\IWidgetCompositeBuilder;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Factory\IWidgetCompositeFactory;
 use AlecRabbit\Spinner\Extras\Widget\Factory\WidgetCompositeFactory;
@@ -266,6 +268,135 @@ final class WidgetCompositeFactoryTest extends TestCase
     private function getWidgetSettingsMock(): MockObject&IWidgetSettings
     {
         return $this->createMock(IWidgetSettings::class);
+    }
+
+    #[Test]
+    public function canCreateWidgetWithMultiWidgetSettings(): void
+    {
+        $intervalComparator = $this->getIntervalComparatorMock();
+        $widgetSettingsFirst = $this->getWidgetSettingsMock();
+        $widgetSettingsSecond = $this->getWidgetSettingsMock();
+        $widgetSettingsThird = $this->getWidgetSettingsMock();
+        $widgetSettingsFourth = $this->getWidgetSettingsMock();
+
+
+        $multiWidgetSettings = $this->getMultiWidgetSettingsMock();
+        $multiWidgetSettings
+            ->expects(self::once())
+            ->method('getFirst')
+            ->willReturn($widgetSettingsFirst)
+        ;
+        $multiWidgetSettings
+            ->expects(self::once())
+            ->method('getOther')
+            ->willReturn(
+                new \ArrayObject(
+                    [
+                        $widgetSettingsSecond,
+                        $widgetSettingsThird,
+                        $widgetSettingsFourth
+                    ]
+                )
+            )
+        ;
+
+        $widgetConfigFactory = $this->getWidgetConfigFactoryMock();
+        $widgetConfigFactory
+            ->expects(self::exactly(4))
+            ->method('create')
+            ->willReturn($this->getWidgetConfigMock())
+        ;
+
+        $firstWidget = $this->getWidgetCompositeMock();
+        $secondWidget = $this->getWidgetCompositeMock();
+        $thirdWidget = $this->getWidgetCompositeMock();
+        $fourthWidget = $this->getWidgetCompositeMock();
+
+        $widgetRevolverFactory = $this->getWidgetRevolverFactoryMock();
+        $widgetRevolverFactory
+            ->expects(self::exactly(4))
+            ->method('create')
+            ->willReturn($this->getWidgetRevolverMock())
+        ;
+
+        $widgetBuilder = $this->getWidgetCompositeBuilderMock();
+        $widgetBuilder
+            ->expects(self::exactly(4))
+            ->method('withLeadingSpacer')
+            ->willReturnSelf()
+        ;
+        $widgetBuilder
+            ->expects(self::exactly(4))
+            ->method('withTrailingSpacer')
+            ->willReturnSelf()
+        ;
+        $widgetBuilder
+            ->expects(self::exactly(4))
+            ->method('withWidgetRevolver')
+            ->willReturnSelf()
+        ;
+        $widgetBuilder
+            ->expects(self::exactly(4))
+            ->method('withIntervalComparator')
+            ->willReturnSelf()
+        ;
+
+        $widgetBuilder
+            ->expects(self::exactly(4))
+            ->method('build')
+            ->willReturnOnConsecutiveCalls(
+                $firstWidget,
+                $secondWidget,
+                $thirdWidget,
+                $fourthWidget,
+            )
+        ;
+
+        $firstWidget
+            ->expects(self::exactly(3))
+            ->method('add')
+            ->willReturn($this->getWidgetContextMock())
+        ;
+
+        $secondWidget
+            ->expects(self::once())
+            ->method('getContext')
+            ->willReturn($this->getWidgetContextMock())
+        ;
+
+        $thirdWidget
+            ->expects(self::once())
+            ->method('getContext')
+            ->willReturn($this->getWidgetContextMock())
+        ;
+
+        $fourthWidget
+            ->expects(self::once())
+            ->method('getContext')
+            ->willReturn($this->getWidgetContextMock())
+        ;
+
+        $widgetFactory = $this->getTesteeInstance(
+            widgetConfigFactory: $widgetConfigFactory,
+            widgetBuilder: $widgetBuilder,
+            widgetRevolverFactory: $widgetRevolverFactory,
+            intervalComparator: $intervalComparator,
+        );
+
+        self::assertInstanceOf(WidgetCompositeFactory::class, $widgetFactory);
+
+        $widgetComposite = $widgetFactory->usingSettings($multiWidgetSettings)->create();
+        self::assertSame($firstWidget, $widgetComposite);
+    }
+
+    private function getMultiWidgetSettingsMock(): MockObject&IMultiWidgetSettings
+    {
+        return $this->createMock(IMultiWidgetSettings::class);
+    }
+
+    private function getWidgetContextMock(): MockObject&IWidgetContext
+    {
+        return $this->createMock(IWidgetContext::class);
     }
 
     protected function getWidgetMock(): MockObject&IWidget

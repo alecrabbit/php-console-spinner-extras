@@ -217,4 +217,25 @@ final class ProgressWidgetSettingsTest extends TestCase
         $other->next();
         self::assertFalse($other->valid());
     }
+
+    #[Test]
+    public function canGetFirst(): void
+    {
+        $first = $this->getWidgetSettingsMock();
+        $second = $this->getWidgetSettingsMock();
+        $third = $this->getWidgetSettingsMock();
+        $settings = $this->getTesteeInstance(
+            $first,
+            $second,
+            $third
+        );
+        self::assertSame($first, $settings->getFirst());
+        $other = $settings->getOther();
+        self::assertInstanceOf(Generator::class, $other);
+        self::assertSame($second, $other->current());
+        $other->next();
+        self::assertSame($third, $other->current());
+        $other->next();
+        self::assertFalse($other->valid());
+    }
 }

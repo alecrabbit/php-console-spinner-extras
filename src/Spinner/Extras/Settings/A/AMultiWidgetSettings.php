@@ -60,4 +60,9 @@ abstract readonly class AMultiWidgetSettings implements IMultiWidgetSettings
     {
         yield from $this->other;
     }
+
+    public function getFirst(): IWidgetSettings
+    {
+        return $this->first;
+    }
 }

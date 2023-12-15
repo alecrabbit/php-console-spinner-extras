@@ -10,6 +10,7 @@ use AlecRabbit\Spinner\Core\Contract\IIntervalComparator;
 use AlecRabbit\Spinner\Core\Settings\Contract\IWidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetRevolverFactory;
+use AlecRabbit\Spinner\Extras\Settings\Contract\IMultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Builder\IWidgetCompositeBuilder;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Factory\IWidgetCompositeFactory;
 
@@ -26,7 +27,30 @@ final readonly class WidgetCompositeFactory implements IWidgetCompositeFactory
 
     public function create(): IWidgetComposite
     {
-        $widgetConfig = $this->widgetConfigFactory->create($this->widgetSettings);
+        if ($this->widgetSettings instanceof IMultiWidgetSettings) {
+            return $this->createMultiWidget($this->widgetSettings);
+        }
+        return $this->createWidget($this->widgetSettings);
+    }
+
+    private function createMultiWidget(IMultiWidgetSettings $widgetSettings): IWidgetComposite
+    {
+        $firstWidget = $this->createWidget($widgetSettings->getFirst());
+
+        foreach ($widgetSettings->getOther() as $other) {
+            $widgetComposite = $this->createWidget($other);
+
+            $firstWidget->add(
+                $widgetComposite->getContext()
+            );
+        }
+
+        return $firstWidget;
+    }
+
+    private function createWidget(IWidgetConfig|IWidgetSettings|null $widgetSettings = null): IWidgetComposite
+    {
+        $widgetConfig = $this->widgetConfigFactory->create($widgetSettings);
 
         $revolver = $this->widgetRevolverFactory->create($widgetConfig->getWidgetRevolverConfig());
 

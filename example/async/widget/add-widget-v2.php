@@ -25,7 +25,7 @@ $widget =
 /** @var IWidgetComposite $widgetTwo */
 $widgetTwo =
     Facade::getWidgetFactory()
-        ->create(
+        ->usingSettings(
             new WidgetSettings(
                 trailingSpacer: new CharFrame(' 🎊', 3),
                 stylePalette: new Rainbow(),
@@ -38,6 +38,7 @@ $widgetTwo =
                 ),
             )
         )
+        ->create()
 ;
 
 $spinner = Facade::createSpinner();
