@@ -54,6 +54,6 @@ $spinner = Facade::createSpinner(
     new SpinnerSettings(autoAttach: false)
 );
 
-Facade::getDriver()->add($spinner);
-
 $spinner->add($widget->getContext());
+
+Facade::getDriver()->add($spinner);
