@@ -20,7 +20,7 @@ require_once __DIR__ . '/../bootstrap.async.php';
 $progressValue =
     new ProgressValue(
         steps: 10,
-        threshold: 2, // isFinished(true) will return true on third call
+        threshold: 2, // isFinished(true) will return true on a third call
     );
 
 // without interval set, default value will be used - 15min
@@ -80,6 +80,7 @@ $spinner->add($widget->getContext());
 
 $loop = Facade::getLoop();
 
+// simulate progress
 $loop
     ->repeat(
         0.1,
@@ -89,6 +90,7 @@ $loop
     )
 ;
 
+// remove widget when progress is finished
 $loop
     ->repeat(
         1,
