@@ -50,11 +50,7 @@ final readonly class WidgetContextToIntervalMap implements IWidgetContextToInter
         return $this->map->offsetExists($offset);
     }
 
-    /**
-     * @psalm-param IWidgetContext $offset
-     *
-     * @psalm-return IInterval
-     */
+    /** @inheritDoc */
     public function offsetGet(mixed $offset): ?IInterval
     {
         $this->assertOffset($offset);
@@ -76,6 +72,7 @@ final readonly class WidgetContextToIntervalMap implements IWidgetContextToInter
         }
     }
 
+    /** @inheritDoc */
     public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->assertOffset($offset);
@@ -99,6 +96,7 @@ final readonly class WidgetContextToIntervalMap implements IWidgetContextToInter
         }
     }
 
+    /** @inheritDoc */
     public function offsetUnset(mixed $offset): void
     {
         $this->assertOffset($offset);

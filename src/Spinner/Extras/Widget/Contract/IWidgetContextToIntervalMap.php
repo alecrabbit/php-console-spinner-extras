@@ -6,6 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Widget\Contract;
 
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetContext;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use ArrayAccess;
 use Countable;
 use IteratorAggregate;
@@ -29,17 +30,23 @@ interface IWidgetContextToIntervalMap extends ArrayAccess, Countable, IteratorAg
      * @psalm-param IWidgetContext $offset
      *
      * @psalm-return IInterval
+     *
+     * @throws InvalidArgument
      */
     public function offsetGet(mixed $offset): ?IInterval;
 
     /**
      * @psalm-param IWidgetContext $offset
+     *
+     * @throws InvalidArgument
      */
     public function offsetUnset(mixed $offset): void;
 
     /**
      * @psalm-param IWidgetContext $offset
      * @psalm-param IInterval $value
+     *
+     * @throws InvalidArgument
      */
     public function offsetSet(mixed $offset, mixed $value): void;
 

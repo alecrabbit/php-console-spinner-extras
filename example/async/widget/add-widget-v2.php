@@ -15,11 +15,12 @@ require_once __DIR__ . '/../bootstrap.async.php';
 /** @var IWidgetComposite $widget */
 $widget =
     Facade::getWidgetFactory()
-        ->create(
-//            new WidgetSettings(
-//                trailingSpacer: new CharFrame('', 0),
-//            ),
+        ->usingSettings(
+            new WidgetSettings(
+                trailingSpacer: new CharFrame('', 0),
+            ),
         )
+        ->create()
 ;
 
 /** @var IWidgetComposite $widgetTwo */
