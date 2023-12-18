@@ -9,6 +9,9 @@ use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 
 abstract class AProgressValue extends AFloatValue implements IProgressValue
 {
+    protected const FINISH_THRESHOLD = 0;
+    protected const DECREMENT_STEPS = 1;
+
     protected bool $finished = false;
     protected float $stepValue;
 
@@ -21,8 +24,14 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
         float $max = 1.0,
         protected readonly int $steps = 100,
         protected readonly bool $autoFinish = true,
+        protected float|int $threshold = self::FINISH_THRESHOLD,
+        protected readonly float|int $decrement = self::DECREMENT_STEPS,
     ) {
-        parent::__construct($startValue, $min, $max);
+        parent::__construct(
+            startValue: $startValue,
+            min: $min,
+            max: $max,
+        );
         self::assert($this);
         $this->stepValue = ($this->max - $this->min) / $this->steps;
     }
@@ -48,9 +57,8 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
         if ($this->finished) {
             return;
         }
+        $this->setValue($this->value + $steps * $this->stepValue);
 
-        $this->value += $steps * $this->stepValue;
-        $this->checkBounds();
         $this->autoFinish();
     }
 
@@ -72,8 +80,21 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
         return $this->steps;
     }
 
-    public function isFinished(): bool
+    public function isFinished(bool $useThreshold = false): bool
     {
+        if ($this->finished && $useThreshold) {
+            if ($this->threshold <= 0) {
+                return $this->finished;
+            }
+
+            $this->decrementThreshold();
+            return false;
+        }
         return $this->finished;
+    }
+
+    protected function decrementThreshold(): void
+    {
+        $this->threshold -= $this->decrement;
     }
 }

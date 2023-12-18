@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Rainbow;
-use AlecRabbit\Spinner\Core\Settings\SpinnerSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
@@ -20,11 +19,7 @@ require_once __DIR__ . '/../bootstrap.async.php';
 $multiWidgetSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
-            stylePalette: new Rainbow(
-                new PaletteOptions(
-                    reversed: true
-                )
-            ),
+            stylePalette: new Rainbow(),
             charPalette: new Dice()
         ),
         new WidgetSettings(
@@ -35,13 +30,14 @@ $multiWidgetSettings =
             charPalette: new Runner()
         ),
         new WidgetSettings(
-            charPalette: new ShortSnake()
+            charPalette: new ShortSnake(
+                options: new PaletteOptions(
+                    reversed: true,
+                ),
+            )
         ),
     );
 
-$spinner = Facade::createSpinner(
-    new SpinnerSettings(autoAttach: false)
-);
 
 /** @var IWidgetComposite $widget */
 $widget =
@@ -52,6 +48,4 @@ $widget =
         ->create()
 ;
 
-$spinner->add($widget->getContext());
-
-Facade::getDriver()->add($spinner);
+Facade::createSpinner()->add($widget->getContext());

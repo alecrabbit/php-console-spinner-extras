@@ -18,5 +18,5 @@ interface IProgressValue extends IFloatValue
 
     public function finish(): void;
 
-    public function isFinished(): bool;
+    public function isFinished(bool $useThreshold = false): bool;
 }

@@ -8,6 +8,8 @@ use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\A\AProgressValue;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Tests\TestCase\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class AProgressValueTest extends TestCase
 {
@@ -246,43 +248,65 @@ final class AProgressValueTest extends TestCase
 
     public static function getTesteeInstance(array $args = []): IProgressValue
     {
-        return new class(startValue: $args[self::START] ?? 0.0, steps: $args[self::STEPS] ?? 100, min: $args[self::MIN] ?? 0.0, max: $args[self::MAX] ?? 1.0, autoFinish: $args[self::AUTO_FINISH] ?? false,) extends
+        return new class(
+            startValue: $args[self::START] ?? 0.0,
+            steps: $args[self::STEPS] ?? 100,
+            min: $args[self::MIN] ?? 0.0,
+            max: $args[self::MAX] ?? 1.0,
+            autoFinish: $args[self::AUTO_FINISH] ?? false,
+            threshold: $args[self::FINISH_DELAY] ?? 0,
+            decrement: $args[self::DECREMENT] ?? 1,
+        ) extends
             AProgressValue {
         };
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider createDataProvider
-     */
+    #[Test]
+    #[DataProvider('createDataProvider')]
     public function canBeFinished(array $expected, array $incoming): void
     {
         $this->expectsException($expected);
 
-        $fractionValue = self::getTesteeInstance($incoming[self::ARGUMENTS] ?? []);
+        $progressValue = self::getTesteeInstance($incoming[self::ARGUMENTS] ?? []);
 
         if (isset($incoming[self::STEPS])) {
             $steps = abs($incoming[self::STEPS]);
             $step = $incoming[self::STEPS] < 0 ? -1 : 1;
             for ($i = 0; $i < $steps; $i++) {
-                $fractionValue->advance($step);
+                $progressValue->advance($step);
             }
         }
 
         self::assertEqualsWithDelta(
             $expected[self::VALUE],
-            $fractionValue->getValue(),
+            $progressValue->getValue(),
             self::FLOAT_EQUALITY_DELTA
         );
 
-        self::assertSame($expected[self::FINISHED], $fractionValue->isFinished());
-        self::assertSame($expected[self::MIN], $fractionValue->getMin());
-        self::assertSame($expected[self::MAX], $fractionValue->getMax());
-        self::assertSame($expected[self::STEPS], $fractionValue->getSteps());
+        self::assertSame($expected[self::FINISHED], $progressValue->isFinished());
+        self::assertSame($expected[self::MIN], $progressValue->getMin());
+        self::assertSame($expected[self::MAX], $progressValue->getMax());
+        self::assertSame($expected[self::STEPS], $progressValue->getSteps());
 
-        $fractionValue->finish();
+        $progressValue->finish();
 
-        self::assertTrue($fractionValue->isFinished());
+        self::assertTrue($progressValue->isFinished());
+    }
+
+    #[Test]
+    public function isFinishedCanBeDelayed(): void
+    {
+        $progressValue = self::getTesteeInstance([
+            self::AUTO_FINISH => true,
+            self::FINISH_DELAY => 3,
+        ]);
+
+        $progressValue->finish();
+
+        self::assertTrue($progressValue->isFinished());
+        self::assertFalse($progressValue->isFinished(useThreshold: true));
+        self::assertFalse($progressValue->isFinished(useThreshold: true));
+        self::assertFalse($progressValue->isFinished(useThreshold: true));
+        self::assertTrue($progressValue->isFinished(useThreshold: true));
     }
 }

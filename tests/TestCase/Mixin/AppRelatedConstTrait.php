@@ -9,6 +9,8 @@ trait AppRelatedConstTrait
     final protected const ALPHA = 'alpha';
     final protected const ARGUMENTS = 'arguments';
     final protected const AUTO_FINISH = 'autoFinish';
+    final protected const DECREMENT = 'decrement';
+    final protected const FINISH_DELAY = 'finishDelay';
     final protected const BLUE = 'blue';
     final protected const BUILD_WITH = 'buildWith';
     final protected const BUILDER = 'builder';

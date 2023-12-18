@@ -5,31 +5,46 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Procedure\A;
 
 use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 
-/**
- * @deprecated
- */
+use function AlecRabbit\WCWidth\wcswidth;
+
 abstract class AFloatValueProcedure extends AProcedure
 {
-    protected const FORMAT = '%s';
-    protected string $format;
+    private const FORMAT = '%s';
 
     public function __construct(
         protected readonly IFloatValue $floatValue,
-        ?string $format = null,
+        protected readonly string $format = self::FORMAT,
     ) {
-        $this->format = $format ?? self::FORMAT;
     }
 
     public function getFrame(?float $dt = null): IFrame
     {
-        $v = sprintf(
+        return $this->createFrame(
+            $this->createFrameSequence()
+        );
+    }
+
+    protected function createFrame(string $sequence): IFrame
+    {
+        if ($sequence === '') {
+            return new CharFrame('', 0);
+        }
+        return new CharFrame($sequence, $this->getWidth($sequence));
+    }
+
+    protected function getWidth(string $value): int
+    {
+        return wcswidth($value);
+    }
+
+    protected function createFrameSequence(): string
+    {
+        return sprintf(
             $this->format,
             $this->floatValue->getValue()
         );
-        // fixme refactor this to use FrameFactory?
-//        return
-//            new Frame($v, WidthDeterminer::determine($v));
     }
 }
