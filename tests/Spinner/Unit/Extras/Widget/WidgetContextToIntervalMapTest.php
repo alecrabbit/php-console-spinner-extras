@@ -43,9 +43,11 @@ final class WidgetContextToIntervalMapTest extends TestCase
 
     public function getTesteeInstance(
         null|(ArrayAccess&Countable&IteratorAggregate) $map = null,
+        null|\ArrayObject $contexts = null,
     ): IWidgetContextToIntervalMap {
         return new WidgetContextToIntervalMap(
             map: $map ?? new WeakMap(),
+            contexts: $contexts ?? new \ArrayObject(),
         );
     }
 
@@ -97,27 +99,47 @@ final class WidgetContextToIntervalMapTest extends TestCase
     public function falseValueReplacedWithNullOnOffsetGet(): void
     {
         $map = new WeakMap();
+        $contexts = new \ArrayObject();
         $container = $this->getTesteeInstance(
             map: $map,
+            contexts: $contexts,
         );
 
         $context = $this->getWidgetContextMock();
         $container->offsetSet($context, null);
         self::assertNull($container->offsetGet($context));
+        self::assertContains($context, $contexts);
     }
 
     #[Test]
     public function getIteratorMethodTransformFalseValueToNull(): void
     {
         $map = new WeakMap();
+        $contexts = new \ArrayObject();
         $container = $this->getTesteeInstance(
             map: $map,
+            contexts: $contexts,
         );
 
-        $container->offsetSet($this->getWidgetContextMock(), null);
-        $container->offsetSet($this->getWidgetContextMock(), null);
-        $container->offsetSet($this->getWidgetContextMock(), null);
-        $container->offsetSet($this->getWidgetContextMock(), null);
+        $context1 = $this->getWidgetContextMock();
+        $container->offsetSet($context1, null);
+        self::assertFalse($map->offsetGet($context1));
+        self::assertContains($context1, $contexts);
+
+        $context2 = $this->getWidgetContextMock();
+        $container->offsetSet($context2, null);
+        self::assertFalse($map->offsetGet($context2));
+        self::assertContains($context2, $contexts);
+
+        $context3 = $this->getWidgetContextMock();
+        $container->offsetSet($context3, null);
+        self::assertFalse($map->offsetGet($context3));
+        self::assertContains($context3, $contexts);
+
+        $context4 = $this->getWidgetContextMock();
+        $container->offsetSet($context4, null);
+        self::assertFalse($map->offsetGet($context4));
+        self::assertContains($context4, $contexts);
 
         foreach ($container as $item) {
             self::assertNull($item);
@@ -128,17 +150,39 @@ final class WidgetContextToIntervalMapTest extends TestCase
     public function getIteratorMethodTransformFalseValueToNullButNotIntervalObjects(): void
     {
         $map = new WeakMap();
+        $contexts = new \ArrayObject();
         $container = $this->getTesteeInstance(
             map: $map,
+            contexts: $contexts,
         );
 
         $context = $this->getWidgetContextMock();
         $interval = $this->getIntervalMock();
 
-        $container->offsetSet($this->getWidgetContextMock(), null);
+        $context1 = $this->getWidgetContextMock();
+        $container->offsetSet($context1, null);
+        self::assertFalse($map->offsetGet($context1));
+        self::assertContains($context1, $contexts);
+
+        $context2 = $this->getWidgetContextMock();
+        $container->offsetSet($context2, null);
+        self::assertFalse($map->offsetGet($context2));
+        self::assertContains($context2, $contexts);
+
+        // intentional position
         $container->offsetSet($context, $interval);
-        $container->offsetSet($this->getWidgetContextMock(), null);
-        $container->offsetSet($this->getWidgetContextMock(), null);
+        self::assertSame($interval, $map->offsetGet($context));
+        self::assertContains($context, $contexts);
+
+        $context3 = $this->getWidgetContextMock();
+        $container->offsetSet($context3, null);
+        self::assertFalse($map->offsetGet($context3));
+        self::assertContains($context3, $contexts);
+
+        $context4 = $this->getWidgetContextMock();
+        $container->offsetSet($context4, null);
+        self::assertFalse($map->offsetGet($context4));
+        self::assertContains($context4, $contexts);
 
         foreach ($container as $key => $item) {
             if ($key === $context) {
@@ -197,8 +241,10 @@ final class WidgetContextToIntervalMapTest extends TestCase
     public function canUnsetOffset(): void
     {
         $map = new WeakMap();
+        $contexts = new \ArrayObject();
         $container = $this->getTesteeInstance(
             map: $map,
+            contexts: $contexts,
         );
 
         $context0 = $this->getWidgetContextMock();
@@ -209,12 +255,16 @@ final class WidgetContextToIntervalMapTest extends TestCase
 
         self::assertTrue($container->offsetExists($context0));
         self::assertTrue($container->offsetExists($context1));
+        self::assertContains($context0, $contexts);
+        self::assertContains($context1, $contexts);
 
         $container->offsetUnset($context0);
         $container->offsetUnset($context1);
 
         self::assertFalse($container->offsetExists($context0));
         self::assertFalse($container->offsetExists($context1));
+        self::assertNotContains($context0, $contexts);
+        self::assertNotContains($context1, $contexts);
     }
 
     #[Test]

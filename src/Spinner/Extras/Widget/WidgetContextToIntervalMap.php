@@ -24,6 +24,7 @@ final readonly class WidgetContextToIntervalMap implements IWidgetContextToInter
 {
     public function __construct(
         private ArrayAccess&Countable&IteratorAggregate $map = new WeakMap(),
+        private \ArrayObject $contexts = new \ArrayObject(),
     ) {
     }
 
@@ -84,6 +85,8 @@ final readonly class WidgetContextToIntervalMap implements IWidgetContextToInter
             $offset,
             $value ?? false
         );
+
+        $this->contexts->append($offset);
     }
 
     private function assertValue(mixed $value): void
@@ -101,6 +104,12 @@ final readonly class WidgetContextToIntervalMap implements IWidgetContextToInter
         $this->assertOffset($offset);
 
         $this->map->offsetUnset($offset);
+
+        $key = array_search($offset, $this->contexts->getArrayCopy(), true);
+        if ($key !== false) {
+            $this->contexts->offsetUnset($key);
+        }
+
     }
 
     public function count(): int
