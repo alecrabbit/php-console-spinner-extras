@@ -10,7 +10,7 @@ use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 abstract class AProgressValue extends AFloatValue implements IProgressValue
 {
     protected const FINISH_THRESHOLD = 0;
-    protected const DECREMENT_STEPS = 1;
+    protected const DECREMENT = 1;
 
     protected bool $finished = false;
     protected float $stepValue;
@@ -25,7 +25,7 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
         protected readonly int $steps = 100,
         protected readonly bool $autoFinish = true,
         protected float|int $threshold = self::FINISH_THRESHOLD,
-        protected readonly float|int $decrement = self::DECREMENT_STEPS,
+        protected readonly float|int $decrement = self::DECREMENT,
     ) {
         parent::__construct(
             startValue: $startValue,

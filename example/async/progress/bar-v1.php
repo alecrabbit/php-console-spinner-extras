@@ -10,6 +10,8 @@ use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\Progress\InvokablePalette;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProgressCharPalette;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\ProgressETCProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressValueProcedure;
 use AlecRabbit\Spinner\Extras\ProgressValue;
@@ -19,7 +21,7 @@ require_once __DIR__ . '/../bootstrap.async.php';
 
 $progressValue =
     new ProgressValue(
-        steps: 10,
+        steps: 100,
         threshold: 2, // isFinished(true) will return true on a third call
     );
 
@@ -33,6 +35,16 @@ $progressWidgetSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
             trailingSpacer: new CharFrame('', 0),
+        ),
+        new WidgetSettings(
+            charPalette: new ProgressCharPalette(
+                palette: new InvokablePalette(
+                    procedure: new ProgressElapsedProcedure(
+                        progressValue: $progressValue,
+                    ),
+                ),
+                options: $progressOptions,
+            ),
         ),
         new WidgetSettings(
             charPalette: new ProgressCharPalette(
@@ -59,6 +71,16 @@ $progressWidgetSettings =
             charPalette: new ProgressCharPalette(
                 palette: new InvokablePalette(
                     procedure: new ProgressValueProcedure(
+                        progressValue: $progressValue
+                    ),
+                ),
+                options: $progressOptions,
+            ),
+        ),
+        new WidgetSettings(
+            charPalette: new ProgressCharPalette(
+                palette: new InvokablePalette(
+                    procedure: new ProgressETCProcedure(
                         progressValue: $progressValue
                     ),
                 ),
