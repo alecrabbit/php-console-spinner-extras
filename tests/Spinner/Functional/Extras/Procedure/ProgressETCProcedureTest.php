@@ -71,8 +71,8 @@ final class ProgressETCProcedureTest extends TestCase
         );
 
         $frame = $procedure->getFrame();
-        self::assertSame('--', $frame->getSequence());
-        self::assertSame(2, $frame->getWidth());
+        self::assertSame('', $frame->getSequence());
+        self::assertSame(0, $frame->getWidth());
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
@@ -90,7 +90,7 @@ final class ProgressETCProcedureTest extends TestCase
         self::assertSame(8, $frame->getWidth());
         $progressValue->advance(85);
         $frame = $procedure->getFrame();
-        self::assertSame('--', $frame->getSequence());
-        self::assertSame(2, $frame->getWidth());
+        self::assertSame('', $frame->getSequence());
+        self::assertSame(0, $frame->getWidth());
     }
 }

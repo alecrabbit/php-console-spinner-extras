@@ -52,10 +52,7 @@ final class ProgressElapsedProcedure extends AProgressValueProcedure
             );
         }
 
-        return sprintf(
-            $this->format,
-            '',
-        );
+        return '';
     }
 
     private function secondsPassed(\DateTimeImmutable $createdAt): int

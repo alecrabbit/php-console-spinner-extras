@@ -81,7 +81,8 @@ $progressWidgetSettings =
             charPalette: new ProgressCharPalette(
                 palette: new InvokablePalette(
                     procedure: new ProgressETCProcedure(
-                        progressValue: $progressValue
+                        progressValue: $progressValue,
+                        format:'[%6s]',
                     ),
                 ),
                 options: $progressOptions,
