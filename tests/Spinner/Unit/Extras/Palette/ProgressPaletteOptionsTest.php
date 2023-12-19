@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Palette;
 
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
-use AlecRabbit\Spinner\Extras\Palette\ProgressPaletteOptions;
+use AlecRabbit\Spinner\Extras\Palette\PaletteOptions;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -16,7 +16,7 @@ final class ProgressPaletteOptionsTest extends TestCase
     {
         $palette = $this->getTesteeInstance();
 
-        self::assertInstanceOf(ProgressPaletteOptions::class, $palette);
+        self::assertInstanceOf(PaletteOptions::class, $palette);
     }
 
     private function getTesteeInstance(
@@ -24,7 +24,7 @@ final class ProgressPaletteOptionsTest extends TestCase
         ?bool $reversed = null,
     ): IPaletteOptions {
         return
-            new ProgressPaletteOptions(
+            new PaletteOptions(
                 interval: $interval,
                 reversed: $reversed ?? false,
             );
@@ -80,6 +80,6 @@ final class ProgressPaletteOptionsTest extends TestCase
     private function getTesteeInstanceWithDefaults(): IPaletteOptions
     {
         return
-            new ProgressPaletteOptions();
+            new PaletteOptions();
     }
 }

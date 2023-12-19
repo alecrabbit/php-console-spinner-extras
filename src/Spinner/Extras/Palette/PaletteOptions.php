@@ -6,7 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Palette;
 
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 
-final readonly class ProgressPaletteOptions implements IPaletteOptions
+final readonly class PaletteOptions implements IPaletteOptions
 {
     public function __construct(
         private ?int $interval = 200,

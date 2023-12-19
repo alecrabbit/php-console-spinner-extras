@@ -10,13 +10,13 @@ use AlecRabbit\Spinner\Core\Contract\ICharFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Extras\Palette\A\AInfiniteCharPalette;
 
-use AlecRabbit\Spinner\Extras\Palette\ProgressPaletteOptions;
+use AlecRabbit\Spinner\Extras\Palette\PaletteOptions;
 
-final class ProgressCharPalette extends AInfiniteCharPalette
+final class ProcedureCharPalette extends AInfiniteCharPalette
 {
     public function __construct(
         IProcedure $procedure,
-        IPaletteOptions $options = new ProgressPaletteOptions()
+        IPaletteOptions $options = new PaletteOptions()
     ) {
 
             parent::__construct(frames: $this->wrapProcedure($procedure), options: $options);

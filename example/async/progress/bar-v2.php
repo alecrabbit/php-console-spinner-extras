@@ -8,8 +8,8 @@ use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\Moon;
-use AlecRabbit\Spinner\Extras\Palette\Char\ProgressCharPalette;
-use AlecRabbit\Spinner\Extras\Palette\Style\ProgressStylePalette;
+use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
+use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
@@ -36,7 +36,7 @@ $progressWidgetSettings =
         // nested multi settings
         new MultiWidgetSettings(
             new WidgetSettings(
-                charPalette: new ProgressCharPalette(
+                charPalette: new ProcedureCharPalette(
                     procedure: new ProgressElapsedProcedure(
                         progressValue: $progressValue,
                         format: '🕐 [%6s]',
@@ -48,7 +48,7 @@ $progressWidgetSettings =
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProgressCharPalette(
+            charPalette: new ProcedureCharPalette(
                 procedure: new ProgressStepsProcedure(
                     progressValue: $progressValue,
                     format: '%2s/%2s',
@@ -56,12 +56,12 @@ $progressWidgetSettings =
             ),
         ),
         new WidgetSettings(
-            stylePalette: new ProgressStylePalette(
+            stylePalette: new ProcedureStylePalette(
                 procedure: new ProgressStyleProcedure(
                     progressValue: $progressValue,
                 ),
             ),
-            charPalette: new ProgressCharPalette(
+            charPalette: new ProcedureCharPalette(
                 procedure: new ProgressBarProcedure(
                     progressValue: $progressValue,
                     sprite: new ProgressBarSprite(
@@ -75,19 +75,19 @@ $progressWidgetSettings =
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProgressCharPalette(
+            charPalette: new ProcedureCharPalette(
                 procedure: new ProgressValueProcedure(
                     progressValue: $progressValue
                 ),
             ),
         ),
         new WidgetSettings(
-            stylePalette: new ProgressStylePalette(
+            stylePalette: new ProcedureStylePalette(
                 procedure: new ProgressStyleProcedure(
                     progressValue: $progressValue,
                 ),
             ),
-            charPalette: new ProgressCharPalette(
+            charPalette: new ProcedureCharPalette(
                 procedure: new ProgressEstimateProcedure(
                     progressValue: $progressValue,
                     format: '🏁 [%6s]',

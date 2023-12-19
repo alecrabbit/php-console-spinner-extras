@@ -6,7 +6,7 @@ use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
-use AlecRabbit\Spinner\Extras\Palette\Char\ProgressCharPalette;
+use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
@@ -29,14 +29,14 @@ $progressWidgetSettings =
             trailingSpacer: new CharFrame('', 0),
         ),
         new WidgetSettings(
-            charPalette: new ProgressCharPalette(
+            charPalette: new ProcedureCharPalette(
                 procedure: new ProgressElapsedProcedure(
                     progressValue: $progressValue,
                 ),
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProgressCharPalette(
+            charPalette: new ProcedureCharPalette(
                 procedure: new ProgressStepsProcedure(
                     progressValue: $progressValue,
                     format: '%2s/%2s',
@@ -44,21 +44,21 @@ $progressWidgetSettings =
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProgressCharPalette(
+            charPalette: new ProcedureCharPalette(
                 procedure: new ProgressBarProcedure(
                     progressValue: $progressValue
                 ),
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProgressCharPalette(
+            charPalette: new ProcedureCharPalette(
                 procedure: new ProgressValueProcedure(
                     progressValue: $progressValue
                 ),
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProgressCharPalette(
+            charPalette: new ProcedureCharPalette(
                 procedure: new ProgressEstimateProcedure(
                     progressValue: $progressValue,
                     format: '[%6s]',

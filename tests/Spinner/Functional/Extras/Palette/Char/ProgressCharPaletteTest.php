@@ -10,7 +10,7 @@ use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
-use AlecRabbit\Spinner\Extras\Palette\Char\ProgressCharPalette;
+use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
 
 use AlecRabbit\Tests\TestCase\TestCase;
 use ArrayObject;
@@ -25,14 +25,14 @@ final class ProgressCharPaletteTest extends TestCase
     {
         $palette = $this->getTesteeInstance();
 
-        self::assertInstanceOf(ProgressCharPalette::class, $palette);
+        self::assertInstanceOf(ProcedureCharPalette::class, $palette);
     }
 
     private function getTesteeInstance(
         ?IProcedure $procedure = null,
         IPaletteOptions $options = new PaletteOptions(),
     ): IInfinitePalette {
-        return new ProgressCharPalette(
+        return new ProcedureCharPalette(
             procedure: $procedure ?? $this->getProcedureMock(),
             options: $options,
         );

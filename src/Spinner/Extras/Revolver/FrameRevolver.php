@@ -10,6 +10,7 @@ use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\A\ARevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
+use AlecRabbit\Spinner\Extras\Contract\IStylingFrame;
 use Generator;
 use Traversable;
 
@@ -51,11 +52,22 @@ final class FrameRevolver extends ARevolver implements IFrameRevolver
 
     protected function next(?float $dt = null): void
     {
+        // FIXME (2023-12-19 16:17) [Alec Rabbit]: remove param `?float $dt = null` it seems it is not needed anywhere
         $this->frames->next();
     }
 
     protected function current(): IFrame
     {
-        return $this->frames->current();
+        $frame = $this->frames->current();
+        if($frame instanceof IStylingFrame) {
+            $frame = $this->render($frame);
+        }
+        return $frame;
+    }
+
+    private function render(IStylingFrame $frame): IFrame
+    {
+        // TODO (2023-12-19 16:17) [Alec Rabbit]: call style renderer
+        return $frame;
     }
 }
