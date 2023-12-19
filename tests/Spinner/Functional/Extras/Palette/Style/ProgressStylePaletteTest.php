@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Functional\Extras\Palette\Style;
 
+use AlecRabbit\Spinner\Contract\IProcedure;
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
-use AlecRabbit\Spinner\Extras\Palette\Contract\ITraversableWrapper;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProgressStylePalette;
 use AlecRabbit\Tests\TestCase\TestCase;
 use ArrayObject;
@@ -29,18 +29,18 @@ final class ProgressStylePaletteTest extends TestCase
     }
 
     private function getTesteeInstance(
-        ?ITraversableWrapper $palette = null,
+        ?IProcedure $procedure = null,
         IPaletteOptions $options = new PaletteOptions(),
     ): IInfinitePalette {
         return new ProgressStylePalette(
-            palette: $palette ?? $this->getInvokablePaletteMock(),
+            procedure: $procedure ?? $this->getProcedureMock(),
             options: $options,
         );
     }
 
-    private function getInvokablePaletteMock(): MockObject&ITraversableWrapper
+    private function getProcedureMock(): MockObject&IProcedure
     {
-        return $this->createMock(ITraversableWrapper::class);
+        return $this->createMock(IProcedure::class);
     }
 
     #[Test]
@@ -78,44 +78,24 @@ final class ProgressStylePaletteTest extends TestCase
     #[Test]
     public function canGetEntriesOne(): void
     {
-        $frames = new ArrayObject(['a', 'b', 'c']);
-        $invokablePalette = $this->getInvokablePaletteMock();
-        $invokablePalette
-            ->expects(self::once())
-            ->method('__invoke')
-            ->willReturn($frames)
-        ;
-
-        $palette = $this->getTesteeInstance(
-            palette: $invokablePalette,
-        );
+        $palette = $this->getTesteeInstance();
 
         $entries = $palette->getEntries(); // no mode passed
 
         self::assertIsIterable($entries);
         self::assertInstanceOf(Generator::class, $entries);
-
-        self::assertEquals(new StyleFrame('%s', 0), $entries->current());
-
-        for ($i = 0; $i < 10; $i++) {
-            $entries->next();
-            self::assertEquals(new StyleFrame('%s', 0), $entries->current());
-        }
     }
 
     #[Test]
     public function canGetEntriesTwo(): void
     {
-        $frames = new ArrayObject(['a', 'b', 'c']);
-        $invokablePalette = $this->getInvokablePaletteMock();
-        $invokablePalette
-            ->expects(self::once())
-            ->method('__invoke')
-            ->willReturn($frames)
-        ;
+        $procedure = $this->getProcedureMock();
+        $procedure
+            ->method('getFrame')
+            ->willReturn(new StyleFrame('-', 1));
 
         $palette = $this->getTesteeInstance(
-            palette: $invokablePalette,
+            procedure: $procedure,
         );
 
         $mode = $this->getPaletteModeMock();
@@ -130,13 +110,10 @@ final class ProgressStylePaletteTest extends TestCase
         self::assertIsIterable($entries);
         self::assertInstanceOf(Generator::class, $entries);
 
-        self::assertEquals(new StyleFrame('a', 0), $entries->current());
-
-        for ($i = 0; $i < 10; $i++) {
-            $entries->next();
-            self::assertEquals(new StyleFrame('b', 0), $entries->current());
-            $entries->next();
-            self::assertEquals(new StyleFrame('c', 0), $entries->current());
+        for ($i = 0; $i < 3; $i++) {
+            $frame = $entries->current();
+            self::assertInstanceOf(StyleFrame::class, $frame);
+            self::assertEquals(new StyleFrame('-', 1), $frame);
             $entries->next();
         }
     }

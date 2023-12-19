@@ -7,15 +7,14 @@ use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
-use AlecRabbit\Spinner\Extras\Palette\Char\DotBinaryCount;
 use AlecRabbit\Spinner\Extras\Palette\Char\Moon;
-use AlecRabbit\Spinner\Extras\Palette\Char\Progress\ProcedureWrapper;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProgressCharPalette;
-use AlecRabbit\Spinner\Extras\Palette\Style\Red;
+use AlecRabbit\Spinner\Extras\Palette\Style\ProgressStylePalette;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\ProgressStyleProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressValueProcedure;
 use AlecRabbit\Spinner\Extras\ProgressBarSprite;
 use AlecRabbit\Spinner\Extras\ProgressValue;
@@ -38,11 +37,9 @@ $progressWidgetSettings =
         new MultiWidgetSettings(
             new WidgetSettings(
                 charPalette: new ProgressCharPalette(
-                    palette: new ProcedureWrapper(
-                        procedure: new ProgressElapsedProcedure(
-                            progressValue: $progressValue,
-                            format: '🕐 [%6s]',
-                        ),
+                    procedure: new ProgressElapsedProcedure(
+                        progressValue: $progressValue,
+                        format: '🕐 [%6s]',
                     ),
                 ),
             ),
@@ -52,46 +49,48 @@ $progressWidgetSettings =
         ),
         new WidgetSettings(
             charPalette: new ProgressCharPalette(
-                palette: new ProcedureWrapper(
-                    procedure: new ProgressStepsProcedure(
-                        progressValue: $progressValue,
-                        format: '%2s/%2s',
-                    ),
+                procedure: new ProgressStepsProcedure(
+                    progressValue: $progressValue,
+                    format: '%2s/%2s',
                 ),
             ),
         ),
         new WidgetSettings(
+            stylePalette: new ProgressStylePalette(
+                procedure: new ProgressStyleProcedure(
+                    progressValue: $progressValue,
+                ),
+            ),
             charPalette: new ProgressCharPalette(
-                palette: new ProcedureWrapper(
-                    procedure: new ProgressBarProcedure(
-                        progressValue: $progressValue,
-                        sprite: new ProgressBarSprite(
-                            sample: '■▨□',
+                procedure: new ProgressBarProcedure(
+                    progressValue: $progressValue,
+                    sprite: new ProgressBarSprite(
+                        sample: '■▨□',
 //                            sample: '⬛⬛⬜',
 //                            sample: '⬤⬤◯',
 //                            sample: '▰▱▱',
-                        ),
-                        units: 20,
                     ),
+                    units: 20,
                 ),
             ),
         ),
         new WidgetSettings(
             charPalette: new ProgressCharPalette(
-                palette: new ProcedureWrapper(
-                    procedure: new ProgressValueProcedure(
-                        progressValue: $progressValue
-                    ),
+                procedure: new ProgressValueProcedure(
+                    progressValue: $progressValue
                 ),
             ),
         ),
         new WidgetSettings(
+            stylePalette: new ProgressStylePalette(
+                procedure: new ProgressStyleProcedure(
+                    progressValue: $progressValue,
+                ),
+            ),
             charPalette: new ProgressCharPalette(
-                palette: new ProcedureWrapper(
-                    procedure: new ProgressEstimateProcedure(
-                        progressValue: $progressValue,
-                        format:'🏁 [%6s]',
-                    ),
+                procedure: new ProgressEstimateProcedure(
+                    progressValue: $progressValue,
+                    format: '🏁 [%6s]',
                 ),
             ),
         ),
@@ -115,7 +114,7 @@ $loop
     ->repeat(
         0.01,
         static function () use ($progressValue): void {
-            if(\random_int(0, 100) < 5) {
+            if (\random_int(0, 100) < 5) {
                 $progressValue->advance();
             }
         }

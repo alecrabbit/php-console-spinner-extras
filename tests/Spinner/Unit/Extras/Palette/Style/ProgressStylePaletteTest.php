@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Palette\Style;
 
 
+use AlecRabbit\Spinner\Contract\IProcedure;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
-use AlecRabbit\Spinner\Extras\Palette\Contract\ITraversableWrapper;
+
 use AlecRabbit\Spinner\Extras\Palette\Style\ProgressStylePalette;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -25,17 +26,17 @@ final class ProgressStylePaletteTest extends TestCase
     }
 
     private function getTesteeInstance(
-        ?ITraversableWrapper $palette = null,
+        ?IProcedure $procedure = null,
         IPaletteOptions $options = new PaletteOptions(),
     ): IInfinitePalette {
         return new ProgressStylePalette(
-            palette: $palette ?? $this->getInvokablePaletteMock(),
+            procedure: $procedure ?? $this->getProcedureMock(),
             options: $options,
         );
     }
 
-    private function getInvokablePaletteMock(): MockObject&ITraversableWrapper
+    private function getProcedureMock(): MockObject&IProcedure
     {
-        return $this->createMock(ITraversableWrapper::class);
+        return $this->createMock(IProcedure::class);
     }
 }

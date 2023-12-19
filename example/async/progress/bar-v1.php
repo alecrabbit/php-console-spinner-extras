@@ -3,11 +3,9 @@
 declare(strict_types=1);
 
 use AlecRabbit\Spinner\Core\CharFrame;
-use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
-use AlecRabbit\Spinner\Extras\Palette\Char\Progress\ProcedureWrapper;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProgressCharPalette;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
@@ -32,48 +30,38 @@ $progressWidgetSettings =
         ),
         new WidgetSettings(
             charPalette: new ProgressCharPalette(
-                palette: new ProcedureWrapper(
-                    procedure: new ProgressElapsedProcedure(
-                        progressValue: $progressValue,
-                    ),
+                procedure: new ProgressElapsedProcedure(
+                    progressValue: $progressValue,
                 ),
             ),
         ),
         new WidgetSettings(
             charPalette: new ProgressCharPalette(
-                palette: new ProcedureWrapper(
-                    procedure: new ProgressStepsProcedure(
-                        progressValue: $progressValue,
-                        format: '%2s/%2s',
-                    ),
+                procedure: new ProgressStepsProcedure(
+                    progressValue: $progressValue,
+                    format: '%2s/%2s',
                 ),
             ),
         ),
         new WidgetSettings(
             charPalette: new ProgressCharPalette(
-                palette: new ProcedureWrapper(
-                    procedure: new ProgressBarProcedure(
-                        progressValue: $progressValue
-                    ),
+                procedure: new ProgressBarProcedure(
+                    progressValue: $progressValue
                 ),
             ),
         ),
         new WidgetSettings(
             charPalette: new ProgressCharPalette(
-                palette: new ProcedureWrapper(
-                    procedure: new ProgressValueProcedure(
-                        progressValue: $progressValue
-                    ),
+                procedure: new ProgressValueProcedure(
+                    progressValue: $progressValue
                 ),
             ),
         ),
         new WidgetSettings(
             charPalette: new ProgressCharPalette(
-                palette: new ProcedureWrapper(
-                    procedure: new ProgressEstimateProcedure(
-                        progressValue: $progressValue,
-                        format:'[%6s]',
-                    ),
+                procedure: new ProgressEstimateProcedure(
+                    progressValue: $progressValue,
+                    format: '[%6s]',
                 ),
             ),
         ),

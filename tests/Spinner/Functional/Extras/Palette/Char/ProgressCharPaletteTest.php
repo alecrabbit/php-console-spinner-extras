@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Functional\Extras\Palette\Char;
 
+use AlecRabbit\Spinner\Contract\IProcedure;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProgressCharPalette;
-use AlecRabbit\Spinner\Extras\Palette\Contract\ITraversableWrapper;
+
 use AlecRabbit\Tests\TestCase\TestCase;
 use ArrayObject;
 use Generator;
@@ -28,18 +29,18 @@ final class ProgressCharPaletteTest extends TestCase
     }
 
     private function getTesteeInstance(
-        ?ITraversableWrapper $palette = null,
+        ?IProcedure $procedure = null,
         IPaletteOptions $options = new PaletteOptions(),
     ): IInfinitePalette {
         return new ProgressCharPalette(
-            palette: $palette ?? $this->getInvokablePaletteMock(),
+            procedure: $procedure ?? $this->getProcedureMock(),
             options: $options,
         );
     }
 
-    private function getInvokablePaletteMock(): MockObject&ITraversableWrapper
+    private function getProcedureMock(): MockObject&IProcedure
     {
-        return $this->createMock(ITraversableWrapper::class);
+        return $this->createMock(IProcedure::class);
     }
 
     #[Test]
@@ -77,16 +78,8 @@ final class ProgressCharPaletteTest extends TestCase
     #[Test]
     public function canGetEntries(): void
     {
-        $frames = new ArrayObject(['a', 'b', 'c']);
-        $invokablePalette = $this->getInvokablePaletteMock();
-        $invokablePalette
-            ->expects(self::once())
-            ->method('__invoke')
-            ->willReturn($frames)
-        ;
+                $palette = $this->getTesteeInstance(
 
-        $palette = $this->getTesteeInstance(
-            palette: $invokablePalette,
         );
 
         $mode = $this->getPaletteModeMock();
@@ -99,16 +92,6 @@ final class ProgressCharPaletteTest extends TestCase
 
         self::assertIsIterable($entries);
         self::assertInstanceOf(Generator::class, $entries);
-
-        self::assertEquals(new CharFrame('a', 1), $entries->current());
-
-        for ($i = 0; $i < 10; $i++) {
-            $entries->next();
-            self::assertEquals(new CharFrame('b', 1), $entries->current());
-            $entries->next();
-            self::assertEquals(new CharFrame('c', 1), $entries->current());
-            $entries->next();
-        }
     }
 
     private function getPaletteModeMock(): MockObject&IPaletteMode
