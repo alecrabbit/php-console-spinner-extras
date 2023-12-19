@@ -24,8 +24,7 @@ require_once __DIR__ . '/../bootstrap.async.php';
 
 $progressValue =
     new ProgressValue(
-        steps: 100,
-        threshold: 20, // long threshold
+        steps: 10,
     );
 
 $progressWidgetSettings =
@@ -125,9 +124,14 @@ $loop
 $loop
     ->repeat(
         1,
-        static function () use ($progressValue, $spinner, $widget): void {
-            if ($progressValue->isFinished() && $progressValue->isFinished(useThreshold: true)) {
-                $spinner->remove($widget->getContext());
+        static function () use ($progressValue, $spinner, $widget, $loop): void {
+            if ($progressValue->isFinished()) {
+                $loop->delay(
+                    5,
+                    static function () use ($spinner, $widget): void {
+                        $spinner->remove($widget->getContext());
+                    }
+                );
             }
         }
     )
