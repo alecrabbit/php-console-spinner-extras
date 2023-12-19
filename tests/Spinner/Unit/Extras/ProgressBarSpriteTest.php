@@ -35,6 +35,24 @@ final class ProgressBarSpriteTest extends TestCase
         ];
         yield [
             [
+                self::EXCEPTION => [
+                    self::CLASS_ => InvalidArgument::class,
+                    self::MESSAGE => 'Sample must be 3 or 5 characters long.',
+                ],
+            ],
+            '█', // sample
+        ];
+        yield [
+            [
+                self::EXCEPTION => [
+                    self::CLASS_ => InvalidArgument::class,
+                    self::MESSAGE => 'Sample must be 3 or 5 characters long.',
+                ],
+            ],
+            '█ ', // sample
+        ];
+        yield [
+            [
                 self::DONE => '█',
                 self::CURSOR => '▓',
                 self::EMPTY => '░',
@@ -42,6 +60,16 @@ final class ProgressBarSpriteTest extends TestCase
                 self::CLOSE => '',
             ],
             '█▓░', // sample
+        ];
+        yield [
+            [
+                self::DONE => '■',
+                self::CURSOR => '▨',
+                self::EMPTY => '□',
+                self::OPEN => '',
+                self::CLOSE => '',
+            ],
+            '■▨□', // sample
         ];
         yield [
             [
@@ -76,7 +104,7 @@ final class ProgressBarSpriteTest extends TestCase
     }
 
     #[Test]
-    public function canCreateDefault(): void
+    public function canBeCreatedWithDefaults(): void
     {
         $instance = new ProgressBarSprite();
         self::assertSame('', $instance->getOpen());
@@ -87,7 +115,7 @@ final class ProgressBarSpriteTest extends TestCase
     }
 
     #[Test]
-    public function canCreate(): void
+    public function canBeCreated(): void
     {
         $empty = 'e';
         $done = 'd';
@@ -126,7 +154,5 @@ final class ProgressBarSpriteTest extends TestCase
         self::assertSame($expected[self::EMPTY], $instance->getEmpty());
         self::assertSame($expected[self::OPEN], $instance->getOpen());
         self::assertSame($expected[self::CLOSE], $instance->getClose());
-
-
     }
 }

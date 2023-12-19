@@ -9,6 +9,7 @@ use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetContext;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Widget\Contract\IWidgetContextToIntervalMap;
 use ArrayAccess;
+use ArrayObject;
 use Countable;
 use IteratorAggregate;
 use Traversable;
@@ -24,7 +25,7 @@ final readonly class WidgetContextToIntervalMap implements IWidgetContextToInter
 {
     public function __construct(
         private ArrayAccess&Countable&IteratorAggregate $map = new WeakMap(),
-        private \ArrayObject $contexts = new \ArrayObject(),
+        private ArrayObject $contexts = new ArrayObject(),
     ) {
     }
 
@@ -107,7 +108,6 @@ final readonly class WidgetContextToIntervalMap implements IWidgetContextToInter
         if ($key !== false) {
             $this->contexts->offsetUnset($key);
         }
-
     }
 
     public function count(): int

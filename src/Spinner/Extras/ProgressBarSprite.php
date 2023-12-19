@@ -7,6 +7,9 @@ namespace AlecRabbit\Spinner\Extras;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\IProgressBarSprite;
 
+use function is_string;
+use function mb_strlen;
+
 /** @psalm-suppress UnusedClass */
 final readonly class ProgressBarSprite implements IProgressBarSprite
 {

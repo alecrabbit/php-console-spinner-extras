@@ -6,7 +6,6 @@ namespace AlecRabbit\Spinner\Extras\Palette\Style;
 
 use AlecRabbit\Spinner\Core\Contract\IStyleFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
-use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Palette\A\AInfiniteStylePalette;
 use AlecRabbit\Spinner\Extras\Palette\Contract\ITraversableWrapper;

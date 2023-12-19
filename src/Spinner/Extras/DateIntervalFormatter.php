@@ -5,20 +5,22 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras;
 
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
+use ArrayObject;
+use DateInterval;
 
 final readonly class DateIntervalFormatter implements IDateIntervalFormatter
 {
-    private \ArrayObject $labels;
+    private ArrayObject $labels;
 
     public function __construct(
-        null|\ArrayObject $labels = null,
+        null|ArrayObject $labels = null,
     ) {
         $this->labels = $this->refineLabels($labels);
     }
 
-    protected function refineLabels(?\ArrayObject $labels): \ArrayObject
+    protected function refineLabels(?ArrayObject $labels): ArrayObject
     {
-        return $labels ?? new \ArrayObject([
+        return $labels ?? new ArrayObject([
             'y' => 'y',
             'd' => 'd',
             'h' => 'h',
@@ -27,7 +29,7 @@ final readonly class DateIntervalFormatter implements IDateIntervalFormatter
         ]);
     }
 
-    public function format(\DateInterval $interval): string
+    public function format(DateInterval $interval): string
     {
         return match (true) {
             $interval->y > 0 => $interval->format('%y ' . $this->labels['y']),

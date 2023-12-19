@@ -10,6 +10,8 @@ use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\DateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
+use DateInterval;
+use DateTimeImmutable;
 
 /**
  * @psalm-suppress UnusedClass
@@ -19,7 +21,7 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
     private const FORMAT = '%3s';
     private float $stepValue;
     private float $startValue;
-    private \DateTimeImmutable $createdAt;
+    private DateTimeImmutable $createdAt;
 
     public function __construct(
         IProgressValue $progressValue,
@@ -61,7 +63,7 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
                 return sprintf(
                     $this->format,
                     $this->intervalFormatter->format(
-                        new \DateInterval(
+                        new DateInterval(
                             sprintf('PT%dS', (int)$remainingTime)
                         )
                     ),
@@ -72,7 +74,7 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
         return '';
     }
 
-    private function secondsPassed(\DateTimeImmutable $createdAt): int
+    private function secondsPassed(DateTimeImmutable $createdAt): int
     {
         return $this->currentTimeProvider->now()->getTimestamp() - $createdAt->getTimestamp();
     }

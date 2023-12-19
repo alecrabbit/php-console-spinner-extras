@@ -15,10 +15,10 @@ use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetContext;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetRevolver;
+use AlecRabbit\Spinner\Exception\RuntimeException;
 use AlecRabbit\Spinner\Extras\Widget\Contract\IWidgetCompositeChildrenContainer;
 use AlecRabbit\Spinner\Extras\Widget\WidgetCompositeChildrenContainer;
 use AlecRabbit\Spinner\Extras\Widget\WidgetContext;
-use AlecRabbit\Tests\TestCase\Helper\PickLock;
 
 abstract class AWidgetComposite extends AWidget implements IWidgetComposite
 {
@@ -104,7 +104,7 @@ abstract class AWidgetComposite extends AWidget implements IWidgetComposite
         if ($this->observer instanceof IWidgetContext) {
             return $this->observer;
         }
-        throw new \RuntimeException(sprintf('Observer is not an instance of %s', IWidgetContext::class));
+        throw new RuntimeException(sprintf('Observer is not an instance of %s', IWidgetContext::class));
     }
 
     public function add(IWidgetContext $context): IWidgetContext
