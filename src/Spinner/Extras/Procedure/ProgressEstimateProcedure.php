@@ -14,7 +14,7 @@ use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 /**
  * @psalm-suppress UnusedClass
  */
-final class ProgressETCProcedure extends AProgressValueProcedure
+final class ProgressEstimateProcedure extends AProgressValueProcedure
 {
     private const FORMAT = '%3s';
     private float $stepValue;
@@ -52,6 +52,10 @@ final class ProgressETCProcedure extends AProgressValueProcedure
             $timeNeededForAllSteps = $timePerStep * $this->progressValue->getSteps();
 
             $remainingTime = $timeNeededForAllSteps - $timePassed;
+
+            if ($this->progressValue->isFinished()) {
+                $remainingTime = 0;
+            }
 
             if ($remainingTime > 0) {
                 return sprintf(

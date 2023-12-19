@@ -7,7 +7,7 @@ namespace AlecRabbit\Tests\Spinner\Unit\Extras\Procedure;
 use AlecRabbit\Spinner\Contract\IProcedure;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
-use AlecRabbit\Spinner\Extras\Procedure\ProgressETCProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
 use AlecRabbit\Spinner\Extras\ProgressValue;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -30,7 +30,7 @@ final class ProgressETCProcedureTest extends TestCase
             progressValue: $progressValue
         );
 
-        self::assertInstanceOf(ProgressETCProcedure::class, $procedure);
+        self::assertInstanceOf(ProgressEstimateProcedure::class, $procedure);
     }
 
     private function getProgressValueMock(): MockObject&IProgressValue
@@ -42,7 +42,7 @@ final class ProgressETCProcedureTest extends TestCase
         ?IProgressValue $progressValue = null,
         ?string $format = null,
     ): IProcedure {
-        return new ProgressETCProcedure(
+        return new ProgressEstimateProcedure(
             progressValue: $progressValue ?? $this->getProgressValueMock(),
             format: $format ?? '-%s-',
         );

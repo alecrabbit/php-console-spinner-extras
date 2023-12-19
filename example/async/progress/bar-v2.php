@@ -7,13 +7,17 @@ use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
+use AlecRabbit\Spinner\Extras\Palette\Char\DotBinaryCount;
+use AlecRabbit\Spinner\Extras\Palette\Char\Moon;
 use AlecRabbit\Spinner\Extras\Palette\Char\Progress\ProcedureWrapper;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProgressCharPalette;
+use AlecRabbit\Spinner\Extras\Palette\Style\Red;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressValueProcedure;
+use AlecRabbit\Spinner\Extras\ProgressBarSprite;
 use AlecRabbit\Spinner\Extras\ProgressValue;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 
@@ -22,7 +26,7 @@ require_once __DIR__ . '/../bootstrap.async.php';
 $progressValue =
     new ProgressValue(
         steps: 100,
-        threshold: 2, // isFinished(true) will return true on a third call
+        threshold: 20, // long threshold
     );
 
 $progressWidgetSettings =
@@ -30,13 +34,20 @@ $progressWidgetSettings =
         new WidgetSettings(
             trailingSpacer: new CharFrame('', 0),
         ),
-        new WidgetSettings(
-            charPalette: new ProgressCharPalette(
-                palette: new ProcedureWrapper(
-                    procedure: new ProgressElapsedProcedure(
-                        progressValue: $progressValue,
+        // nested multi settings
+        new MultiWidgetSettings(
+            new WidgetSettings(
+                charPalette: new ProgressCharPalette(
+                    palette: new ProcedureWrapper(
+                        procedure: new ProgressElapsedProcedure(
+                            progressValue: $progressValue,
+                            format: '🕐 [%6s]',
+                        ),
                     ),
                 ),
+            ),
+            new WidgetSettings(
+                charPalette: new Moon(options: new PaletteOptions(interval: 100)),
             ),
         ),
         new WidgetSettings(
@@ -53,7 +64,14 @@ $progressWidgetSettings =
             charPalette: new ProgressCharPalette(
                 palette: new ProcedureWrapper(
                     procedure: new ProgressBarProcedure(
-                        progressValue: $progressValue
+                        progressValue: $progressValue,
+                        sprite: new ProgressBarSprite(
+                            sample: '■▨□',
+//                            sample: '⬛⬛⬜',
+//                            sample: '⬤⬤◯',
+//                            sample: '▰▱▱',
+                        ),
+                        units: 20,
                     ),
                 ),
             ),
@@ -72,7 +90,7 @@ $progressWidgetSettings =
                 palette: new ProcedureWrapper(
                     procedure: new ProgressEstimateProcedure(
                         progressValue: $progressValue,
-                        format:'[%6s]',
+                        format:'🏁 [%6s]',
                     ),
                 ),
             ),
@@ -95,9 +113,11 @@ $loop = Facade::getLoop();
 // simulate progress
 $loop
     ->repeat(
-        0.1,
+        0.01,
         static function () use ($progressValue): void {
-            $progressValue->advance();
+            if(\random_int(0, 100) < 5) {
+                $progressValue->advance();
+            }
         }
     )
 ;
@@ -107,7 +127,6 @@ $loop
     ->repeat(
         1,
         static function () use ($progressValue, $spinner, $widget): void {
-            // note: isFinished(useThreshold: true) will return true after number of calls set by threshold
             if ($progressValue->isFinished() && $progressValue->isFinished(useThreshold: true)) {
                 $spinner->remove($widget->getContext());
             }

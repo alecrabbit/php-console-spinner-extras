@@ -8,7 +8,7 @@ namespace AlecRabbit\Tests\Spinner\Unit\Extras\Palette\Style;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
-use AlecRabbit\Spinner\Extras\Palette\Contract\IInvokablePalette;
+use AlecRabbit\Spinner\Extras\Palette\Contract\ITraversableWrapper;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProgressStylePalette;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -25,7 +25,7 @@ final class ProgressStylePaletteTest extends TestCase
     }
 
     private function getTesteeInstance(
-        ?IInvokablePalette $palette = null,
+        ?ITraversableWrapper $palette = null,
         IPaletteOptions $options = new PaletteOptions(),
     ): IInfinitePalette {
         return new ProgressStylePalette(
@@ -34,8 +34,8 @@ final class ProgressStylePaletteTest extends TestCase
         );
     }
 
-    private function getInvokablePaletteMock(): MockObject&IInvokablePalette
+    private function getInvokablePaletteMock(): MockObject&ITraversableWrapper
     {
-        return $this->createMock(IInvokablePalette::class);
+        return $this->createMock(ITraversableWrapper::class);
     }
 }

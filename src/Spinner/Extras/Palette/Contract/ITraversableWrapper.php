@@ -6,7 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Palette\Contract;
 
 use Traversable;
 
-interface IInvokablePalette
+interface ITraversableWrapper
 {
     public function __invoke(): Traversable;
 }

@@ -9,13 +9,14 @@ use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Palette\A\AInfiniteStylePalette;
-use AlecRabbit\Spinner\Extras\Palette\Contract\IInvokablePalette;
+use AlecRabbit\Spinner\Extras\Palette\Contract\ITraversableWrapper;
+use AlecRabbit\Spinner\Extras\Palette\ProgressPaletteOptions;
 
 final class ProgressStylePalette extends AInfiniteStylePalette
 {
     public function __construct(
-        IInvokablePalette $palette,
-        IPaletteOptions $options = new PaletteOptions()
+        ITraversableWrapper $palette,
+        IPaletteOptions $options = new ProgressPaletteOptions()
     ) {
         parent::__construct(frames: $palette(), options: $options);
     }

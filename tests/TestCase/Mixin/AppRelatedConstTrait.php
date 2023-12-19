@@ -7,6 +7,11 @@ namespace AlecRabbit\Tests\TestCase\Mixin;
 trait AppRelatedConstTrait
 {
     final protected const ALPHA = 'alpha';
+    final protected const DONE = 'done';
+    final protected const CURSOR = 'cursor';
+    final protected const EMPTY = 'empty';
+    final protected const OPEN = 'open';
+    final protected const CLOSE = 'close';
     final protected const ARGUMENTS = 'arguments';
     final protected const AUTO_FINISH = 'autoFinish';
     final protected const DECREMENT = 'decrement';

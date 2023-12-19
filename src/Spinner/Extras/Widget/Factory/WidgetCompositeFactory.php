@@ -38,7 +38,10 @@ final readonly class WidgetCompositeFactory implements IWidgetCompositeFactory
         $firstWidget = $this->createWidget($widgetSettings->getFirst());
 
         foreach ($widgetSettings->getOther() as $otherSettings) {
-            $otherWidget = $this->createWidget($otherSettings);
+            $otherWidget =
+                $otherSettings instanceof IMultiWidgetSettings
+                    ? $this->createMultiWidget($otherSettings)
+                    : $this->createWidget($otherSettings);
 
             $firstWidget->add(
                 $otherWidget->getContext()

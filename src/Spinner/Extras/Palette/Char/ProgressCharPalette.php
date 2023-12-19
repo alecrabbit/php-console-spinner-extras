@@ -7,15 +7,15 @@ namespace AlecRabbit\Spinner\Extras\Palette\Char;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\ICharFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
-use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Palette\A\AInfiniteCharPalette;
-use AlecRabbit\Spinner\Extras\Palette\Contract\IInvokablePalette;
+use AlecRabbit\Spinner\Extras\Palette\Contract\ITraversableWrapper;
+use AlecRabbit\Spinner\Extras\Palette\ProgressPaletteOptions;
 
 final class ProgressCharPalette extends AInfiniteCharPalette
 {
     public function __construct(
-        IInvokablePalette $palette,
-        IPaletteOptions $options = new PaletteOptions()
+        ITraversableWrapper $palette,
+        IPaletteOptions $options = new ProgressPaletteOptions()
     ) {
         parent::__construct(frames: $palette(), options: $options);
     }

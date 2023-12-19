@@ -10,7 +10,7 @@ use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProgressCharPalette;
-use AlecRabbit\Spinner\Extras\Palette\Contract\IInvokablePalette;
+use AlecRabbit\Spinner\Extras\Palette\Contract\ITraversableWrapper;
 use AlecRabbit\Tests\TestCase\TestCase;
 use ArrayObject;
 use Generator;
@@ -28,7 +28,7 @@ final class ProgressCharPaletteTest extends TestCase
     }
 
     private function getTesteeInstance(
-        ?IInvokablePalette $palette = null,
+        ?ITraversableWrapper $palette = null,
         IPaletteOptions $options = new PaletteOptions(),
     ): IInfinitePalette {
         return new ProgressCharPalette(
@@ -37,9 +37,9 @@ final class ProgressCharPaletteTest extends TestCase
         );
     }
 
-    private function getInvokablePaletteMock(): MockObject&IInvokablePalette
+    private function getInvokablePaletteMock(): MockObject&ITraversableWrapper
     {
-        return $this->createMock(IInvokablePalette::class);
+        return $this->createMock(ITraversableWrapper::class);
     }
 
     #[Test]
