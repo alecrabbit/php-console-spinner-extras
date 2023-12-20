@@ -24,7 +24,7 @@ require_once __DIR__ . '/../bootstrap.async.php';
 
 $progressValue =
     new ProgressValue(
-        steps: 10,
+        steps: 50,
     );
 
 $progressWidgetSettings =
@@ -63,12 +63,15 @@ $progressWidgetSettings =
             charPalette: new ProcedureCharPalette(
                 procedure: new ProgressBarProcedure(
                     progressValue: $progressValue,
-                    sprite: new ProgressBarSprite(
-                        sample: '■▨□',
-//                            sample: '⬛⬛⬜',
-//                            sample: '⬤⬤◯',
-//                            sample: '▰▱▱',
-                    ),
+//                    sprite: new ProgressBarSprite(
+////                        empty: '□ ',
+////                        done: '■ ',
+////                        cursor: '▨ ',
+////                        sample: '■▨□',
+////                        sample: '⬛⬛⬜',
+////                            sample: '⬤⬤◯',
+////                            sample: '▰▱▱',
+//                    ),
                     units: 20,
                 ),
             ),
