@@ -43,9 +43,9 @@ final class ProgressStyleProcedure extends AProgressValueProcedure
 
         return match (true) {
             $value < 0 => '#000000',
-            $value < 25 => '#ff0000',
-            $value < 50 => '#0000ff',
-            $value < 75 => '#00ff00',
+            $value < 25 => '#aa0011',
+            $value < 50 => '#dddd00',
+            $value < 75 => '#00ffdd',
             default => null,
         };
     }
