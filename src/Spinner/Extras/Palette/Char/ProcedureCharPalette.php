@@ -9,8 +9,8 @@ use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\ICharFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Extras\Palette\A\AInfiniteCharPalette;
-
 use AlecRabbit\Spinner\Extras\Palette\PaletteOptions;
+use Traversable;
 
 final class ProcedureCharPalette extends AInfiniteCharPalette
 {
@@ -18,12 +18,10 @@ final class ProcedureCharPalette extends AInfiniteCharPalette
         IProcedure $procedure,
         IPaletteOptions $options = new PaletteOptions()
     ) {
-
-            parent::__construct(frames: $this->wrapProcedure($procedure), options: $options);
-
+        parent::__construct(frames: $this->wrapProcedure($procedure), options: $options);
     }
 
-    private function wrapProcedure(IProcedure $procedure): \Traversable
+    private function wrapProcedure(IProcedure $procedure): Traversable
     {
         while (true) {
             yield $procedure->getFrame();

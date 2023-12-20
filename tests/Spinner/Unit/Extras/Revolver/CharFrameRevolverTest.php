@@ -11,7 +11,7 @@ use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
-use AlecRabbit\Spinner\Extras\Revolver\FrameRevolver;
+use AlecRabbit\Spinner\Extras\Revolver\CharFrameRevolver;
 use AlecRabbit\Tests\TestCase\TestCase;
 use ArrayObject;
 use Generator;
@@ -19,14 +19,14 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use Traversable;
 
-final class FrameRevolverTest extends TestCase
+final class CharFrameRevolverTest extends TestCase
 {
     #[Test]
     public function canBeInstantiated(): void
     {
         $frameRevolver = $this->getTesteeInstance();
 
-        self::assertInstanceOf(FrameRevolver::class, $frameRevolver);
+        self::assertInstanceOf(CharFrameRevolver::class, $frameRevolver);
     }
 
     public function getTesteeInstance(
@@ -35,7 +35,7 @@ final class FrameRevolverTest extends TestCase
         ?ITolerance $tolerance = null,
     ): IFrameRevolver {
         return
-            new FrameRevolver(
+            new CharFrameRevolver(
                 frames: $frames ?? $this->getGenerator(),
                 interval: $interval ?? $this->getIntervalMock(),
                 tolerance: $tolerance ?? $this->getToleranceMock(),
@@ -77,7 +77,7 @@ final class FrameRevolverTest extends TestCase
             interval: $interval,
         );
 
-        self::assertInstanceOf(FrameRevolver::class, $frameRevolver);
+        self::assertInstanceOf(CharFrameRevolver::class, $frameRevolver);
         self::assertEquals(new CharFrame('1', 0), $frameRevolver->getFrame());
         self::assertEquals(new CharFrame('2', 0), $frameRevolver->getFrame());
     }
@@ -91,7 +91,7 @@ final class FrameRevolverTest extends TestCase
             interval: $interval,
         );
 
-        self::assertInstanceOf(FrameRevolver::class, $frameRevolver);
+        self::assertInstanceOf(CharFrameRevolver::class, $frameRevolver);
         self::assertSame($interval, $frameRevolver->getInterval());
     }
 

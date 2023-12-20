@@ -18,7 +18,10 @@ use AlecRabbit\Spinner\Extras\Palette\Builder\InfinitePaletteTemplateBuilder;
 use AlecRabbit\Spinner\Extras\Palette\Contract\Builder\IInfinitePaletteTemplateBuilder;
 use AlecRabbit\Spinner\Extras\Palette\Factory\PaletteTemplateFactory;
 use AlecRabbit\Spinner\Extras\Pattern\Factory\PatternFactory;
-use AlecRabbit\Spinner\Extras\Revolver\Builder\FrameRevolverBuilder;
+use AlecRabbit\Spinner\Extras\Revolver\Builder\CharFrameRevolverBuilder;
+use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\ICharFrameRevolverBuilder;
+use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\IStyleFrameRevolverBuilder;
+use AlecRabbit\Spinner\Extras\Revolver\Builder\StyleFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Widget\Builder\WidgetCompositeBuilder;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Builder\IWidgetCompositeBuilder;
 use AlecRabbit\Spinner\Extras\Widget\Factory\WidgetCompositeFactory;
@@ -58,8 +61,12 @@ DefinitionRegistry::getInstance()
             CharFrameRevolverFactory::class,
         ),
         new ServiceDefinition(
-            IFrameRevolverBuilder::class,
-            FrameRevolverBuilder::class,
+            ICharFrameRevolverBuilder::class,
+            CharFrameRevolverBuilder::class,
+        ),
+        new ServiceDefinition(
+            IStyleFrameRevolverBuilder::class,
+            StyleFrameRevolverBuilder::class,
         ),
         new ServiceDefinition(
             IPatternFactory::class,

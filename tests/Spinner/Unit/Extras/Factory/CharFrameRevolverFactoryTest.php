@@ -17,6 +17,7 @@ use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Factory\CharFrameRevolverFactory;
 use AlecRabbit\Spinner\Extras\Pattern\Contract\IInfinitePattern;
+use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\ICharFrameRevolverBuilder;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -33,14 +34,14 @@ final class CharFrameRevolverFactoryTest extends TestCase
     }
 
     public function getTesteeInstance(
-        ?IFrameRevolverBuilder $frameRevolverBuilder = null,
+        ?ICharFrameRevolverBuilder $frameRevolverBuilder = null,
         ?IFrameCollectionRevolverBuilder $frameCollectionRevolverBuilder = null,
         ?IFrameCollectionFactory $frameCollectionFactory = null,
         ?IRevolverConfig $revolverConfig = null,
     ): ICharFrameRevolverFactory {
         return
             new CharFrameRevolverFactory(
-                frameRevolverBuilder: $frameRevolverBuilder ?? $this->getFrameRevolverBuilderMock(),
+                frameRevolverBuilder: $frameRevolverBuilder ?? $this->getCharFrameRevolverBuilderMock(),
                 frameCollectionRevolverBuilder: $frameCollectionRevolverBuilder ?? $this->getFrameCollectionRevolverBuilderMock(
             ),
                 frameCollectionFactory: $frameCollectionFactory ?? $this->getFrameCollectionFactoryMock(),
@@ -48,9 +49,9 @@ final class CharFrameRevolverFactoryTest extends TestCase
             );
     }
 
-    protected function getFrameRevolverBuilderMock(): MockObject&IFrameRevolverBuilder
+    protected function getCharFrameRevolverBuilderMock(): MockObject&ICharFrameRevolverBuilder
     {
-        return $this->createMock(IFrameRevolverBuilder::class);
+        return $this->createMock(ICharFrameRevolverBuilder::class);
     }
 
     protected function getFrameCollectionRevolverBuilderMock(): MockObject&IFrameCollectionRevolverBuilder
@@ -196,7 +197,7 @@ final class CharFrameRevolverFactoryTest extends TestCase
             ->method('create')
         ;
 
-        $frameRevolverBuilder = $this->getFrameRevolverBuilderMock();
+        $frameRevolverBuilder = $this->getCharFrameRevolverBuilderMock();
         $frameRevolverBuilder
             ->expects(self::once())
             ->method('withFrames')

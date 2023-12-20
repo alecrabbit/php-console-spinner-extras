@@ -12,11 +12,12 @@ use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolverBuilder;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Pattern\Contract\IInfinitePattern;
+use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\ICharFrameRevolverBuilder;
 
 final readonly class CharFrameRevolverFactory implements ICharFrameRevolverFactory
 {
     public function __construct(
-        private IFrameRevolverBuilder $frameRevolverBuilder,
+        private ICharFrameRevolverBuilder $frameRevolverBuilder,
         private IFrameCollectionRevolverBuilder $frameCollectionRevolverBuilder,
         private IFrameCollectionFactory $frameCollectionFactory,
         private IRevolverConfig $revolverConfig,

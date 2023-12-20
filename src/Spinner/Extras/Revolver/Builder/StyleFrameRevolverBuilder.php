@@ -8,15 +8,15 @@ use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
-use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
 use AlecRabbit\Spinner\Exception\LogicException;
-use AlecRabbit\Spinner\Extras\Revolver\FrameRevolver;
+use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\IStyleFrameRevolverBuilder;
+use AlecRabbit\Spinner\Extras\Revolver\StyleFrameRevolver;
 use Traversable;
 
 /**
  * @psalm-suppress PossiblyNullArgument
  */
-final class FrameRevolverBuilder implements IFrameRevolverBuilder
+final class StyleFrameRevolverBuilder implements IStyleFrameRevolverBuilder
 {
     /** @var Traversable<IFrame>|null */
     private ?Traversable $frames = null;
@@ -27,7 +27,7 @@ final class FrameRevolverBuilder implements IFrameRevolverBuilder
     {
         $this->validate();
 
-        return new FrameRevolver(
+        return new StyleFrameRevolver(
             $this->frames,
             $this->interval,
             $this->tolerance,
@@ -48,21 +48,21 @@ final class FrameRevolverBuilder implements IFrameRevolverBuilder
     }
 
     /** @inheritDoc */
-    public function withFrames(Traversable $frames): IFrameRevolverBuilder
+    public function withFrames(Traversable $frames): IStyleFrameRevolverBuilder
     {
         $clone = clone $this;
         $clone->frames = $frames;
         return $clone;
     }
 
-    public function withInterval(IInterval $interval): IFrameRevolverBuilder
+    public function withInterval(IInterval $interval): IStyleFrameRevolverBuilder
     {
         $clone = clone $this;
         $clone->interval = $interval;
         return $clone;
     }
 
-    public function withTolerance(ITolerance $tolerance): IFrameRevolverBuilder
+    public function withTolerance(ITolerance $tolerance): IStyleFrameRevolverBuilder
     {
         $clone = clone $this;
         $clone->tolerance = $tolerance;

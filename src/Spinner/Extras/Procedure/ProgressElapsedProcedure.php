@@ -38,11 +38,11 @@ final class ProgressElapsedProcedure extends AProgressValueProcedure
 
     protected function createFrameSequence(): string
     {
-        $timePassed = $this->secondsPassed($this->createdAt);
+        $elapsed = $this->secondsPassed($this->createdAt);
 
-        if ($timePassed > 0) {
+        if ($elapsed > 0) {
             if (!$this->progressValue->isFinished()) {
-                $this->elapsed = $timePassed;
+                $this->elapsed = $elapsed;
             }
             return sprintf(
                 $this->format,

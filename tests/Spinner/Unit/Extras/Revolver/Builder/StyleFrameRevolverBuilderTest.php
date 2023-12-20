@@ -7,28 +7,28 @@ namespace AlecRabbit\Tests\Spinner\Unit\Extras\Revolver\Builder;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
-use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
 use AlecRabbit\Spinner\Exception\LogicException;
-use AlecRabbit\Spinner\Extras\Revolver\Builder\FrameRevolverBuilder;
-use AlecRabbit\Spinner\Extras\Revolver\FrameRevolver;
+use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\IStyleFrameRevolverBuilder;
+use AlecRabbit\Spinner\Extras\Revolver\Builder\StyleFrameRevolverBuilder;
+use AlecRabbit\Spinner\Extras\Revolver\StyleFrameRevolver;
 use AlecRabbit\Tests\TestCase\TestCase;
 use Generator;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 
-final class FrameRevolverBuilderTest extends TestCase
+final class StyleFrameRevolverBuilderTest extends TestCase
 {
     #[Test]
     public function canBeInstantiated(): void
     {
         $frameRevolverBuilder = $this->getTesteeInstance();
 
-        self::assertInstanceOf(FrameRevolverBuilder::class, $frameRevolverBuilder);
+        self::assertInstanceOf(StyleFrameRevolverBuilder::class, $frameRevolverBuilder);
     }
 
-    public function getTesteeInstance(): IFrameRevolverBuilder
+    public function getTesteeInstance(): IStyleFrameRevolverBuilder
     {
-        return new FrameRevolverBuilder();
+        return new StyleFrameRevolverBuilder();
     }
 
     #[Test]
@@ -45,8 +45,8 @@ final class FrameRevolverBuilderTest extends TestCase
                 ->build()
         ;
 
-        self::assertInstanceOf(FrameRevolverBuilder::class, $frameRevolverBuilder);
-        self::assertInstanceOf(FrameRevolver::class, $revolver);
+        self::assertInstanceOf(StyleFrameRevolverBuilder::class, $frameRevolverBuilder);
+        self::assertInstanceOf(StyleFrameRevolver::class, $revolver);
     }
 
     private function getGenerator(): Generator
@@ -78,8 +78,8 @@ final class FrameRevolverBuilderTest extends TestCase
                     ->withInterval($this->getIntervalMock())
                     ->build()
             ;
-            self::assertInstanceOf(FrameRevolverBuilder::class, $frameRevolverBuilder);
-            self::assertInstanceOf(FrameRevolver::class, $revolver);
+            self::assertInstanceOf(StyleFrameRevolverBuilder::class, $frameRevolverBuilder);
+            self::assertInstanceOf(StyleFrameRevolver::class, $revolver);
         };
 
         $this->wrapExceptionTest(
@@ -103,8 +103,8 @@ final class FrameRevolverBuilderTest extends TestCase
                     ->withFrames($this->getGenerator())
                     ->build()
             ;
-            self::assertInstanceOf(FrameRevolverBuilder::class, $frameRevolverBuilder);
-            self::assertInstanceOf(FrameRevolver::class, $revolver);
+            self::assertInstanceOf(StyleFrameRevolverBuilder::class, $frameRevolverBuilder);
+            self::assertInstanceOf(StyleFrameRevolver::class, $revolver);
         };
 
         $this->wrapExceptionTest(

@@ -20,7 +20,6 @@ require_once __DIR__ . '/../bootstrap.async.php';
 $progressValue =
     new ProgressValue(
         steps: 100,
-        threshold: 2, // isFinished(true) will return true on a third call
     );
 
 $progressWidgetSettings =

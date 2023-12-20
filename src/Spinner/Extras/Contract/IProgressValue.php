@@ -18,5 +18,5 @@ interface IProgressValue extends IFloatValue
 
     public function finish(): void;
 
-    public function isFinished(bool $useThreshold = false): bool; // FIXME (2023-12-19 16:26) [Alec Rabbit]: remove param $useThreshold - move feature elsewhere
+    public function isFinished(): bool;
 }

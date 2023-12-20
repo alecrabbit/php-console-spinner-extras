@@ -6,6 +6,9 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Core\StyleFrame;
+use AlecRabbit\Spinner\Extras\Color\Style\Style;
+use AlecRabbit\Spinner\Extras\Contract\IStylingFrame;
+use AlecRabbit\Spinner\Extras\Frame\StylingFrame;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 
 /**
@@ -13,6 +16,20 @@ use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
  */
 final class ProgressStyleProcedure extends AProgressValueProcedure
 {
+    public function getFrame(?float $dt = null): IFrame
+    {
+        return $this->createStylingFrame();
+    }
+
+    private function createStylingFrame(): IStylingFrame
+    {
+        return new StylingFrame(
+            sequence: $this->createFrameSequence(),
+            width: 0,
+            style: new Style(),
+        );
+    }
+
     protected function createFrame(string $sequence): IFrame
     {
         return new StyleFrame($sequence, 0);

@@ -9,9 +9,6 @@ use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 
 abstract class AProgressValue extends AFloatValue implements IProgressValue
 {
-    protected const FINISH_THRESHOLD = 0;
-    protected const DECREMENT = 1;
-
     protected bool $finished = false;
     protected float $stepValue;
 
@@ -24,10 +21,6 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
         float $max = 1.0,
         protected readonly int $steps = 100,
         protected readonly bool $autoFinish = true,
-        /** // FIXME (2023-12-19 16:29) [Alec Rabbit]: @deprecated */
-        protected float|int $threshold = self::FINISH_THRESHOLD, // @deprecated
-        /** // FIXME (2023-12-19 16:29) [Alec Rabbit]: @deprecated */
-        protected readonly float|int $decrement = self::DECREMENT, // @deprecated
     )
     {
         parent::__construct(
@@ -83,21 +76,8 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
         return $this->steps;
     }
 
-    public function isFinished(bool $useThreshold = false): bool
+    public function isFinished(): bool
     {
-        if ($this->finished && $useThreshold) {
-            if ($this->threshold <= 0) {
-                return $this->finished;
-            }
-
-            $this->decrementThreshold();
-            return false;
-        }
         return $this->finished;
-    }
-
-    protected function decrementThreshold(): void
-    {
-        $this->threshold -= $this->decrement;
     }
 }

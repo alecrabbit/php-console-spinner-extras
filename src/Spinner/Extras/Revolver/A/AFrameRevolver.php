@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Extras\Revolver;
+namespace AlecRabbit\Spinner\Extras\Revolver\A;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
@@ -11,13 +11,14 @@ use AlecRabbit\Spinner\Core\Revolver\A\ARevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\IStylingFrame;
+use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use Generator;
 use Traversable;
 
-final class FrameRevolver extends ARevolver implements IFrameRevolver
+abstract class AFrameRevolver extends ARevolver implements IFrameRevolver
 {
     /** @var Generator<IFrame> */
-    private Generator $frames;
+    protected Generator $frames;
 
     /**
      * @param Traversable<IFrame> $frames
@@ -57,16 +58,6 @@ final class FrameRevolver extends ARevolver implements IFrameRevolver
 
     protected function current(): IFrame
     {
-        $frame = $this->frames->current();
-        if($frame instanceof IStylingFrame) {
-            $frame = $this->render($frame);
-        }
-        return $frame;
-    }
-
-    private function render(IStylingFrame $frame): IFrame
-    {
-        // TODO (2023-12-19 16:17) [Alec Rabbit]: call style renderer
-        return $frame;
+        return $this->frames->current();
     }
 }

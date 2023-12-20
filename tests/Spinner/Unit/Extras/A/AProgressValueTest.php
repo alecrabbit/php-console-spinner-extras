@@ -254,8 +254,6 @@ final class AProgressValueTest extends TestCase
             min: $args[self::MIN] ?? 0.0,
             max: $args[self::MAX] ?? 1.0,
             autoFinish: $args[self::AUTO_FINISH] ?? false,
-            threshold: $args[self::FINISH_DELAY] ?? 0,
-            decrement: $args[self::DECREMENT] ?? 1,
         ) extends
             AProgressValue {
         };
@@ -291,22 +289,5 @@ final class AProgressValueTest extends TestCase
         $progressValue->finish();
 
         self::assertTrue($progressValue->isFinished());
-    }
-
-    #[Test]
-    public function isFinishedCanBeDelayed(): void
-    {
-        $progressValue = self::getTesteeInstance([
-            self::AUTO_FINISH => true,
-            self::FINISH_DELAY => 3,
-        ]);
-
-        $progressValue->finish();
-
-        self::assertTrue($progressValue->isFinished());
-        self::assertFalse($progressValue->isFinished(useThreshold: true));
-        self::assertFalse($progressValue->isFinished(useThreshold: true));
-        self::assertFalse($progressValue->isFinished(useThreshold: true));
-        self::assertTrue($progressValue->isFinished(useThreshold: true));
     }
 }

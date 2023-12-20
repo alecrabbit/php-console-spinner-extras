@@ -23,7 +23,7 @@ final class ProcedureStylePalette extends AInfiniteStylePalette
         parent::__construct(frames: $this->wrapProcedure($procedure), options: $options);
     }
 
-    private function wrapProcedure(IProcedure $procedure): \Traversable
+    private function wrapProcedure(IProcedure $procedure): Traversable
     {
         while (true) {
             yield $procedure->getFrame();
@@ -38,12 +38,12 @@ final class ProcedureStylePalette extends AInfiniteStylePalette
         }
     }
 
-    protected function createStyleFrame(mixed $element, ?int $width = null): IStyleFrame
+    protected function createStyleFrame(IStyleFrame|string $element, ?int $width = null): IStyleFrame
     {
-        if ($element instanceof IStyleFrame) {
-            return $element;
+        if (is_string($element)) {
+            return new StyleFrame($element, $width ?? 0);
         }
-        return new StyleFrame($element, $width ?? 0);
+        return $element;
     }
 
     protected function createFrame(string $element, ?int $width = null): IStyleFrame
