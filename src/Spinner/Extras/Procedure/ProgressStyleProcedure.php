@@ -57,14 +57,6 @@ final class ProgressStyleProcedure extends AProgressValueProcedure
 
     protected function createFrameSequence(): string
     {
-        $value = $this->progressValue->getValue() * 100;
-
-        return match (true) {
-            $value < 0 => "\e[34m%s\e[39m",
-            $value < 25 => "\e[31m%s\e[39m",
-            $value < 50 => "\e[33m%s\e[39m",
-            $value < 75 => "\e[32m%s\e[39m",
-            default => '%s',
-        };
+        throw new \RuntimeException('Not implemented');
     }
 }
