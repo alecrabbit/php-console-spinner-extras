@@ -33,6 +33,7 @@ final class StyleFrameRevolverBuilder implements IStyleFrameRevolverBuilder
             $this->frames,
             $this->interval,
             $this->tolerance,
+            $this->styleRenderer,
         );
     }
 

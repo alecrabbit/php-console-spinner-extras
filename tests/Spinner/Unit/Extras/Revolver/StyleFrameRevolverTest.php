@@ -6,11 +6,12 @@ namespace AlecRabbit\Tests\Spinner\Unit\Extras\Revolver;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
+use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Revolver\StyleFrameRevolver;
 use AlecRabbit\Tests\TestCase\TestCase;
 use ArrayObject;
@@ -33,20 +34,22 @@ final class StyleFrameRevolverTest extends TestCase
         ?Traversable $frames = null,
         ?IInterval $interval = null,
         ?ITolerance $tolerance = null,
+        ?IStyleRenderer $styleRenderer = null,
     ): IFrameRevolver {
         return
             new StyleFrameRevolver(
                 frames: $frames ?? $this->getGenerator(),
                 interval: $interval ?? $this->getIntervalMock(),
                 tolerance: $tolerance ?? $this->getToleranceMock(),
+                styleRenderer: $styleRenderer ?? $this->getStyleRendererMock(),
             );
     }
 
     private function getGenerator(): Generator
     {
-        yield new CharFrame('0', 0);
-        yield new CharFrame('1', 0);
-        yield new CharFrame('2', 0);
+        yield new StyleFrame('0', 0);
+        yield new StyleFrame('1', 0);
+        yield new StyleFrame('2', 0);
     }
 
     protected function getIntervalMock(): MockObject&IInterval
@@ -78,8 +81,8 @@ final class StyleFrameRevolverTest extends TestCase
         );
 
         self::assertInstanceOf(StyleFrameRevolver::class, $frameRevolver);
-        self::assertEquals(new CharFrame('1', 0), $frameRevolver->getFrame());
-        self::assertEquals(new CharFrame('2', 0), $frameRevolver->getFrame());
+        self::assertEquals(new StyleFrame('1', 0), $frameRevolver->getFrame());
+        self::assertEquals(new StyleFrame('2', 0), $frameRevolver->getFrame());
     }
 
     #[Test]
@@ -121,5 +124,10 @@ final class StyleFrameRevolverTest extends TestCase
         $mockObject = $this->createMock(IFrameCollection::class);
         $mockObject->method('count')->willReturn(1);
         return $mockObject;
+    }
+
+    private function getStyleRendererMock(): MockObject&IStyleRenderer
+    {
+        return $this->createMock(IStyleRenderer::class);
     }
 }

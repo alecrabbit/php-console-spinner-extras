@@ -6,6 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Core\StyleFrame;
+use AlecRabbit\Spinner\Extras\Color\Contract\IColor;
 use AlecRabbit\Spinner\Extras\Color\Style\Style;
 use AlecRabbit\Spinner\Extras\Contract\IStylingFrame;
 use AlecRabbit\Spinner\Extras\Frame\StylingFrame;
@@ -23,11 +24,30 @@ final class ProgressStyleProcedure extends AProgressValueProcedure
 
     private function createStylingFrame(): IStylingFrame
     {
+        $fgColor = $this->getFgColor();
+
+        $style = $fgColor === null
+            ? new Style()
+            : new Style(
+                fgColor: $fgColor
+            );
+
         return new StylingFrame(
-            sequence: $this->createFrameSequence(),
-            width: 0,
-            style: new Style(),
+            style: $style,
         );
+    }
+
+    private function getFgColor(): IColor|string|null
+    {
+        $value = $this->progressValue->getValue() * 100;
+
+        return match (true) {
+            $value < 0 => '#000000',
+            $value < 25 => '#ff0000',
+            $value < 50 => '#0000ff',
+            $value < 75 => '#00ff00',
+            default => null,
+        };
     }
 
     protected function createFrame(string $sequence): IFrame

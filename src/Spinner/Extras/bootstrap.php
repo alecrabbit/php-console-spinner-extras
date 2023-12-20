@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use AlecRabbit\Spinner\Container\Contract\IContainer;
 use AlecRabbit\Spinner\Container\DefinitionRegistry;
 use AlecRabbit\Spinner\Container\ServiceDefinition;
 use AlecRabbit\Spinner\Core\Factory\Contract\ICharFrameRevolverFactory;
@@ -92,8 +93,14 @@ DefinitionRegistry::getInstance()
         ),
         new ServiceDefinition(
             IHexColorToAnsiCodeConverter::class,
-            HexColorToAnsiCodeConverter::class,
+            static function (IContainer $container): IHexColorToAnsiCodeConverter {
+                return $container->get(IHexColorToAnsiCodeConverterFactory::class)->create();
+            },
         ),
+//        new ServiceDefinition(
+//            IHexColorToAnsiCodeConverter::class,
+//            HexColorToAnsiCodeConverter::class,
+//        ),
         new ServiceDefinition(
             IStyleOptionsParser::class,
             StyleOptionsParser::class,

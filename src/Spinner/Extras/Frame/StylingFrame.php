@@ -11,13 +11,13 @@ use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 final readonly class StylingFrame extends AFrame implements IStylingFrame
 {
     public function __construct(
-        string $sequence,
-        int $width,
         private IStyle $style,
+        ?string $sequence = null,
+        ?int $width = null,
     ) {
         parent::__construct(
-            sequence: $sequence,
-            width: $width
+            sequence: $sequence ?? '%s',
+            width: $width ?? 0,
         );
     }
 

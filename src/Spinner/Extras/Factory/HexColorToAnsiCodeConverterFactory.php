@@ -6,15 +6,24 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Factory;
 
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Core\Config\Contract\IOutputConfig;
 use AlecRabbit\Spinner\Extras\Color\HexColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Contract\IHexColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IHexColorToAnsiCodeConverterFactory;
 
 final class HexColorToAnsiCodeConverterFactory implements IHexColorToAnsiCodeConverterFactory
 {
-    public function create(StylingMethodMode $styleMode): IHexColorToAnsiCodeConverter
+    private StylingMethodMode $styleMode;
+
+    public function __construct(
+        IOutputConfig $outputConfig,
+    )
     {
-        return new HexColorToAnsiCodeConverter($styleMode);
+        $this->styleMode = $outputConfig->getStylingMethodMode();
+    }
+
+    public function create(): IHexColorToAnsiCodeConverter
+    {
+        return new HexColorToAnsiCodeConverter($this->styleMode);
     }
 }

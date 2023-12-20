@@ -35,6 +35,7 @@ final readonly class StyleFrameRevolverFactory implements IStyleFrameRevolverFac
                 )
                 ->withInterval($pattern->getInterval())
                 ->withTolerance($this->revolverConfig->getTolerance())
+                ->withStyleRenderer($this->styleRenderer)
                 ->build()
             ;
         }

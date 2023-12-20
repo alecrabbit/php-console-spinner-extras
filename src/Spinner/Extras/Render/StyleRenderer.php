@@ -23,7 +23,7 @@ final class StyleRenderer implements IStyleRenderer
     public function render(IStyle $style): string
     {
         if ($style->isEmpty()) {
-            throw new InvalidArgument('Style is empty.');
+            return '%s';
         }
 
         return $this->converter->convert($style);

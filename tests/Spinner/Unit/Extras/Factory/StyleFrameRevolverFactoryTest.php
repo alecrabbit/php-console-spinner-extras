@@ -222,6 +222,12 @@ final class StyleFrameRevolverFactoryTest extends TestCase
             ->with($tolerance)
             ->willReturnSelf()
         ;
+        $frameRevolverBuilder
+            ->expects(self::once())
+            ->method('withStyleRenderer')
+            ->with($styleRenderer)
+            ->willReturnSelf()
+        ;
 
         $frameRevolver = $this->getFrameRevolverMock();
         $frameRevolverBuilder
