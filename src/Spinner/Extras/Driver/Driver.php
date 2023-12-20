@@ -3,13 +3,14 @@
 declare(strict_types=1);
 
 
-namespace AlecRabbit\Spinner\Extras;
+namespace AlecRabbit\Spinner\Extras\Driver;
 
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Contract\ITimer;
 use AlecRabbit\Spinner\Core\A\ADriver;
+use AlecRabbit\Spinner\Core\Contract\ISequenceState;
 use AlecRabbit\Spinner\Core\Contract\ISpinner;
 use AlecRabbit\Spinner\Core\Contract\ISpinnerState;
 use AlecRabbit\Spinner\Core\Output\Contract\IDriverOutput;
@@ -31,6 +32,7 @@ final class Driver extends ADriver
         IDriverSettings $driverSettings,
         ?IObserver $observer = null,
     ) {
+        ISequenceState::
         parent::__construct(
             $output,
             $timer,

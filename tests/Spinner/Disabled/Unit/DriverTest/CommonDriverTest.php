@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Disabled\Unit\DriverTest;
 
 use AlecRabbit\Spinner\Core\Interval;
-use AlecRabbit\Spinner\Extras\Driver;
+use AlecRabbit\Spinner\Extras\Driver\Driver;
 use PHPUnit\Framework\Attributes\Test;
 
 final class CommonDriverTest extends TestCaseForDriver

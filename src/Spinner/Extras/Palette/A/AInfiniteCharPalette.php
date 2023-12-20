@@ -17,13 +17,7 @@ abstract class AInfiniteCharPalette extends ACharPalette implements IInfinitePal
         protected readonly Traversable $frames,
         IPaletteOptions $options = new PaletteOptions()
     ) {
-        self::assertOptions($options);
         parent::__construct($options);
-    }
-
-    private static function assertOptions(IPaletteOptions $options): void
-    {
-        // FIXME (2023-12-14 14:48) [Alec Rabbit]: options with reversed = true is not supported
     }
 
     protected function modeInterval(?IPaletteMode $mode = null): ?int

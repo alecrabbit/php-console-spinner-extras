@@ -50,9 +50,8 @@ final class FrameRevolver extends ARevolver implements IFrameRevolver
         };
     }
 
-    protected function next(?float $dt = null): void
+    protected function next(): void
     {
-        // FIXME (2023-12-19 16:17) [Alec Rabbit]: remove param `?float $dt = null` it seems it is not needed anywhere
         $this->frames->next();
     }
 
