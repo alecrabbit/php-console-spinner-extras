@@ -17,6 +17,7 @@ use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Factory\StyleFrameRevolverFactory;
 use AlecRabbit\Spinner\Extras\Pattern\Contract\IInfinitePattern;
+use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\IStyleFrameRevolverBuilder;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -38,6 +39,7 @@ final class StyleFrameRevolverFactoryTest extends TestCase
         ?IFrameCollectionRevolverBuilder $frameCollectionRevolverBuilder = null,
         ?IFrameCollectionFactory $frameCollectionFactory = null,
         ?IRevolverConfig $revolverConfig = null,
+        ?IStyleRenderer $styleRenderer = null,
     ): IStyleFrameRevolverFactory {
         return
             new StyleFrameRevolverFactory(
@@ -46,6 +48,7 @@ final class StyleFrameRevolverFactoryTest extends TestCase
             ),
                 frameCollectionFactory: $frameCollectionFactory ?? $this->getFrameCollectionFactoryMock(),
                 revolverConfig: $revolverConfig ?? $this->getRevolverConfigMock(),
+                styleRenderer: $styleRenderer ?? $this->getStyleRendererMock(),
             );
     }
 
@@ -75,6 +78,7 @@ final class StyleFrameRevolverFactoryTest extends TestCase
         $interval = $this->getIntervalMock();
         $frames = $this->getTraversableMock();
         $tolerance = $this->getToleranceMock();
+
         $pattern = $this->getPatternMock();
         $pattern
             ->expects(self::once())
@@ -180,6 +184,8 @@ final class StyleFrameRevolverFactoryTest extends TestCase
         $interval = $this->getIntervalMock();
         $frames = $this->getTraversableMock();
         $tolerance = $this->getToleranceMock();
+        $styleRenderer = $this->getStyleRendererMock();
+
         $pattern = $this->getInfinitePatternMock();
         $pattern
             ->expects(self::once())
@@ -236,6 +242,7 @@ final class StyleFrameRevolverFactoryTest extends TestCase
                 frameRevolverBuilder: $frameRevolverBuilder,
                 frameCollectionFactory: $frameCollectionFactory,
                 revolverConfig: $revolverConfig,
+                styleRenderer: $styleRenderer,
             );
 
         self::assertInstanceOf(StyleFrameRevolverFactory::class, $styleRevolverFactory);
@@ -254,5 +261,10 @@ final class StyleFrameRevolverFactoryTest extends TestCase
     private function getFrameRevolverMock(): MockObject&IFrameRevolver
     {
         return $this->createMock(IFrameRevolver::class);
+    }
+
+    private function getStyleRendererMock(): MockObject&IStyleRenderer
+    {
+        return $this->createMock(IStyleRenderer::class);
     }
 }

@@ -8,7 +8,6 @@ use AlecRabbit\Spinner\Extras\Revolver\A\AFrameRevolver;
 
 final class StyleFrameRevolver extends AFrameRevolver
 {
-
 //    protected function current(): IFrame
 //    {
 //        $frame = $this->frames->current();

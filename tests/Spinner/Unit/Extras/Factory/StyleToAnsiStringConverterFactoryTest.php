@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Factory;
 
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptionsParser;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IAnsiColorParserFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleToAnsiStringConverterFactory;
@@ -36,7 +36,7 @@ final class StyleToAnsiStringConverterFactoryTest extends TestCaseWithPrebuiltMo
     #[Test]
     public function canCreateConverter(): void
     {
-        $styleMode = StylingMethodOption::NONE;
+        $styleMode = StylingMethodMode::NONE;
         $colorParser = $this->getAnsiColorParserMock();
         $optionsParser = $this->getStyleOptionsParserMock();
         $parserFactory = $this->getAnsiColorParserFactoryMock();

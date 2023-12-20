@@ -5,7 +5,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color\A;
 
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
+
+use AlecRabbit\Spinner\Core\Config\Contract\IOutputConfig;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\Ansi4Color;
 use AlecRabbit\Spinner\Extras\Color\Ansi8Color;
@@ -16,14 +18,14 @@ abstract class AColorToAnsiCodeConverter
     use Ansi8ColorTableTrait;
 
     public function __construct(
-        protected StylingMethodOption $styleMode,
+        protected StylingMethodMode $styleMode,
     ) {
         self::assert($this);
     }
 
     protected static function assert(self $obj): void
     {
-        if ($obj->styleMode === StylingMethodOption::NONE) {
+        if ($obj->styleMode === StylingMethodMode::NONE) {
             throw new InvalidArgument(
                 sprintf(
                     'Unsupported style mode "%s".',

@@ -9,6 +9,7 @@ use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Exception\LogicException;
+use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\IStyleFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Revolver\StyleFrameRevolver;
 use Traversable;
@@ -22,6 +23,7 @@ final class StyleFrameRevolverBuilder implements IStyleFrameRevolverBuilder
     private ?Traversable $frames = null;
     private ?IInterval $interval = null;
     private ?ITolerance $tolerance = null;
+    private ?IStyleRenderer $styleRenderer = null;
 
     public function build(): IFrameRevolver
     {
@@ -43,6 +45,7 @@ final class StyleFrameRevolverBuilder implements IStyleFrameRevolverBuilder
             $this->frames === null => throw new LogicException('Frame collection is not set.'),
             $this->interval === null => throw new LogicException('Interval is not set.'),
             $this->tolerance === null => throw new LogicException('Tolerance is not set.'),
+            $this->styleRenderer === null => throw new LogicException('Style renderer is not set.'),
             default => null,
         };
     }
@@ -66,6 +69,13 @@ final class StyleFrameRevolverBuilder implements IStyleFrameRevolverBuilder
     {
         $clone = clone $this;
         $clone->tolerance = $tolerance;
+        return $clone;
+    }
+
+    public function withStyleRenderer(IStyleRenderer $styleRenderer): IStyleFrameRevolverBuilder
+    {
+        $clone = clone $this;
+        $clone->styleRenderer = $styleRenderer;
         return $clone;
     }
 }

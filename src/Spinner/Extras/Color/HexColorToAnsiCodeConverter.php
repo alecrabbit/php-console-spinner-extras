@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color;
 
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\A\AColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Contract\IHexColorToAnsiCodeConverter;
@@ -17,8 +17,8 @@ final class HexColorToAnsiCodeConverter extends AColorToAnsiCodeConverter implem
         $color = $this->normalize($color);
 
         return match ($this->styleMode) {
-            StylingMethodOption::ANSI4 => $this->convert4($color),
-            StylingMethodOption::ANSI8 => $this->convert8($color),
+            StylingMethodMode::ANSI4 => $this->convert4($color),
+            StylingMethodMode::ANSI8 => $this->convert8($color),
             default => $this->convertHexColorToAnsiColorCode($color),
         };
     }
@@ -35,9 +35,9 @@ final class HexColorToAnsiCodeConverter extends AColorToAnsiCodeConverter implem
         $b = $color & 255;
 
         return match ($this->styleMode) {
-            StylingMethodOption::ANSI4 => (string)$this->convertFromRGB($r, $g, $b),
-            StylingMethodOption::ANSI8 => '8;5;' . (string)$this->convertFromRGB($r, $g, $b),
-            StylingMethodOption::ANSI24 => sprintf('8;2;%d;%d;%d', $r, $g, $b),
+            StylingMethodMode::ANSI4 => (string)$this->convertFromRGB($r, $g, $b),
+            StylingMethodMode::ANSI8 => '8;5;' . (string)$this->convertFromRGB($r, $g, $b),
+            StylingMethodMode::ANSI24 => sprintf('8;2;%d;%d;%d', $r, $g, $b),
             default => throw new InvalidArgument('Should not be thrown: Unsupported style mode.'),
         };
     }
@@ -48,8 +48,8 @@ final class HexColorToAnsiCodeConverter extends AColorToAnsiCodeConverter implem
     protected function convertFromRGB(int $r, int $g, int $b): int
     {
         return match ($this->styleMode) {
-            StylingMethodOption::ANSI4 => $this->degradeHexColorToAnsi4($r, $g, $b),
-            StylingMethodOption::ANSI8 => $this->degradeHexColorToAnsi8($r, $g, $b),
+            StylingMethodMode::ANSI4 => $this->degradeHexColorToAnsi4($r, $g, $b),
+            StylingMethodMode::ANSI8 => $this->degradeHexColorToAnsi8($r, $g, $b),
             default => throw new InvalidArgument(
                 sprintf(
                     'RGB cannot be converted to "%s".',

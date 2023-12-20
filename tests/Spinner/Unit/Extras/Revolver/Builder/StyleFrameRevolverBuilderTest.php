@@ -8,6 +8,7 @@ use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Exception\LogicException;
+use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\IStyleFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Revolver\Builder\StyleFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Revolver\StyleFrameRevolver;
@@ -42,6 +43,7 @@ final class StyleFrameRevolverBuilderTest extends TestCase
                 ->withFrames($frames)
                 ->withInterval($this->getIntervalMock())
                 ->withTolerance($this->getToleranceMock())
+                ->withStyleRenderer($this->getStyleRendererMock())
                 ->build()
         ;
 
@@ -64,6 +66,11 @@ final class StyleFrameRevolverBuilderTest extends TestCase
         return $this->createMock(ITolerance::class);
     }
 
+    private function getStyleRendererMock(): MockObject&IStyleRenderer
+    {
+        return $this->createMock(IStyleRenderer::class);
+    }
+
     #[Test]
     public function throwsIfFrameIsNotSet(): void
     {
@@ -76,6 +83,8 @@ final class StyleFrameRevolverBuilderTest extends TestCase
             $revolver =
                 $frameRevolverBuilder
                     ->withInterval($this->getIntervalMock())
+                    ->withTolerance($this->getToleranceMock())
+                    ->withStyleRenderer($this->getStyleRendererMock())
                     ->build()
             ;
             self::assertInstanceOf(StyleFrameRevolverBuilder::class, $frameRevolverBuilder);
@@ -101,6 +110,35 @@ final class StyleFrameRevolverBuilderTest extends TestCase
             $revolver =
                 $frameRevolverBuilder
                     ->withFrames($this->getGenerator())
+                    ->withTolerance($this->getToleranceMock())
+                    ->withStyleRenderer($this->getStyleRendererMock())
+                    ->build()
+            ;
+            self::assertInstanceOf(StyleFrameRevolverBuilder::class, $frameRevolverBuilder);
+            self::assertInstanceOf(StyleFrameRevolver::class, $revolver);
+        };
+
+        $this->wrapExceptionTest(
+            test: $test,
+            exception: $exceptionClass,
+            message: $exceptionMessage,
+        );
+    }
+
+    #[Test]
+    public function throwsIfStyleRendererIsNotSet(): void
+    {
+        $exceptionClass = LogicException::class;
+        $exceptionMessage = 'Style renderer is not set.';
+
+        $test = function (): void {
+            $frameRevolverBuilder = $this->getTesteeInstance();
+
+            $revolver =
+                $frameRevolverBuilder
+                    ->withFrames($this->getGenerator())
+                    ->withInterval($this->getIntervalMock())
+                    ->withTolerance($this->getToleranceMock())
                     ->build()
             ;
             self::assertInstanceOf(StyleFrameRevolverBuilder::class, $frameRevolverBuilder);

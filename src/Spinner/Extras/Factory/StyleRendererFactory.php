@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Factory;
 
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleRendererFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleToAnsiStringConverterFactory;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
@@ -18,7 +18,7 @@ final class StyleRendererFactory implements IStyleRendererFactory
     ) {
     }
 
-    public function create(StylingMethodOption $styleMode): IStyleRenderer
+    public function create(StylingMethodMode $styleMode): IStyleRenderer
     {
         return new StyleRenderer(
             converter: $this->converterFactory->create($styleMode),

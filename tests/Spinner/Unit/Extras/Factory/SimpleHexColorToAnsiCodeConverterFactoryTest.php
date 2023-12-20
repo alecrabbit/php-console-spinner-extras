@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Factory;
 
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\SimpleHexColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IHexColorToAnsiCodeConverterFactory;
@@ -32,7 +32,7 @@ final class SimpleHexColorToAnsiCodeConverterFactoryTest extends TestCaseWithPre
     {
         $converterFactory = $this->getTesteeInstance();
 
-        $converter = $converterFactory->create(StylingMethodOption::ANSI4);
+        $converter = $converterFactory->create(StylingMethodMode::ANSI4);
         self::assertInstanceOf(SimpleHexColorToAnsiCodeConverterFactory::class, $converterFactory);
         self::assertInstanceOf(SimpleHexColorToAnsiCodeConverter::class, $converter);
     }
@@ -46,7 +46,7 @@ final class SimpleHexColorToAnsiCodeConverterFactoryTest extends TestCaseWithPre
         $test = function (): void {
             $converterFactory = $this->getTesteeInstance();
 
-            $converter = $converterFactory->create(StylingMethodOption::NONE);
+            $converter = $converterFactory->create(StylingMethodMode::NONE);
             self::assertInstanceOf(SimpleHexColorToAnsiCodeConverterFactory::class, $converterFactory);
             self::assertInstanceOf(SimpleHexColorToAnsiCodeConverter::class, $converter);
         };

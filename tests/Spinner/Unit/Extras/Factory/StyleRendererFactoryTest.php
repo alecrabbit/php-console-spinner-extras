@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Factory;
 
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleRendererFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleToAnsiStringConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\StyleRendererFactory;
@@ -33,7 +33,7 @@ final class StyleRendererFactoryTest extends TestCaseWithPrebuiltMocksAndStubs
     #[Test]
     public function canCreate(): void
     {
-        $styleMode = StylingMethodOption::ANSI4;
+        $styleMode = StylingMethodMode::ANSI4;
         $converter = $this->getStyleToAnsiStringConverterMock();
 
         $converterFactory = $this->getStyleToAnsiStringConverterFactoryMock();

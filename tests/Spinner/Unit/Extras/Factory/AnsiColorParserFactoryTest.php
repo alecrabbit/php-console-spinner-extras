@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Factory;
 
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Extras\Color\AnsiColorParser;
 use AlecRabbit\Spinner\Extras\Factory\AnsiColorParserFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IAnsiColorParserFactory;
@@ -38,7 +38,7 @@ final class AnsiColorParserFactoryTest extends TestCaseWithPrebuiltMocksAndStubs
         self::assertInstanceOf(AnsiColorParserFactory::class, $parserFactory);
         self::assertInstanceOf(
             AnsiColorParser::class,
-            $parserFactory->create(StylingMethodOption::ANSI8)
+            $parserFactory->create(StylingMethodMode::ANSI8)
         );
     }
 }

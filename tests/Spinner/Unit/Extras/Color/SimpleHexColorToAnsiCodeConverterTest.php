@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Color;
 
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\SimpleHexColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Contract\IHexColorToAnsiCodeConverter;
@@ -34,9 +34,9 @@ final class SimpleHexColorToAnsiCodeConverterTest extends TestCaseWithPrebuiltMo
 
     protected static function simpleCanConvertDataFeeder(): iterable
     {
-        $ansi4 = StylingMethodOption::ANSI4;
-        $ansi8 = StylingMethodOption::ANSI8;
-        $ansi24 = StylingMethodOption::ANSI24;
+        $ansi4 = StylingMethodMode::ANSI4;
+        $ansi8 = StylingMethodMode::ANSI8;
+        $ansi24 = StylingMethodMode::ANSI24;
 
         yield from [
             // result, color, styleMode
@@ -325,10 +325,10 @@ final class SimpleHexColorToAnsiCodeConverterTest extends TestCaseWithPrebuiltMo
     protected static function simpleInvalidInputDataFeeder(): iterable
     {
         $e = InvalidArgument::class;
-        $none = StylingMethodOption::NONE;
-        $ansi4 = StylingMethodOption::ANSI4;
-        $ansi8 = StylingMethodOption::ANSI8;
-        $ansi24 = StylingMethodOption::ANSI24;
+        $none = StylingMethodMode::NONE;
+        $ansi4 = StylingMethodMode::ANSI4;
+        $ansi8 = StylingMethodMode::ANSI8;
+        $ansi24 = StylingMethodMode::ANSI24;
 
         yield from [
             // exceptionClass, exceptionMessage, color, styleMode
@@ -349,10 +349,10 @@ final class SimpleHexColorToAnsiCodeConverterTest extends TestCaseWithPrebuiltMo
     }
 
     public function getTesteeInstance(
-        ?StylingMethodOption $styleMode = null,
+        ?StylingMethodMode $styleMode = null,
     ): IHexColorToAnsiCodeConverter {
         return new SimpleHexColorToAnsiCodeConverter(
-            styleMode: $styleMode ?? StylingMethodOption::ANSI24,
+            styleMode: $styleMode ?? StylingMethodMode::ANSI24,
         );
     }
 
@@ -405,7 +405,7 @@ final class SimpleHexColorToAnsiCodeConverterTest extends TestCaseWithPrebuiltMo
         $exceptionMessage = 'Unsupported style mode "NONE".';
 
         $test = function (): void {
-            $this->getTesteeInstance(styleMode: StylingMethodOption::NONE);
+            $this->getTesteeInstance(styleMode: StylingMethodMode::NONE);
         };
 
         $this->wrapExceptionTest(

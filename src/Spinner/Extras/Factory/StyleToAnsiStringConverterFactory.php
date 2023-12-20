@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Factory;
 
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Extras\Contract\IStyleToAnsiStringConverter;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptionsParser;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IAnsiColorParserFactory;
@@ -20,7 +20,7 @@ final class StyleToAnsiStringConverterFactory implements IStyleToAnsiStringConve
     ) {
     }
 
-    public function create(StylingMethodOption $styleMode): IStyleToAnsiStringConverter
+    public function create(StylingMethodMode $styleMode): IStyleToAnsiStringConverter
     {
         return new StyleToAnsiStringConverter(
             colorParser: $this->parserFactory->create($styleMode),
