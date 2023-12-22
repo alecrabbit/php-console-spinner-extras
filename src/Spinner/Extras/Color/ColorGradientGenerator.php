@@ -11,6 +11,9 @@ use AlecRabbit\Spinner\Extras\Color\Contract\IColorProcessor;
 use Generator;
 use Traversable;
 
+/**
+ * @deprecated // FIXME (2023-12-22 14:33) [Alec Rabbit]: REMOVE
+ */
 final class ColorGradientGenerator implements IColorGradientGenerator
 {
     protected const MAX = 1000;

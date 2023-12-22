@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
+use AlecRabbit\Color\ColorRange;
+use AlecRabbit\Color\Gradient\Gradient;
+use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
+use AlecRabbit\Spinner\Core\Settings\OutputSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
@@ -16,17 +20,33 @@ use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStyleProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressValueProcedure;
-use AlecRabbit\Spinner\Extras\ProgressBarSprite;
 use AlecRabbit\Spinner\Extras\ProgressValue;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 
 require_once __DIR__ . '/../bootstrap.async.php';
 
+Facade::getSettings()
+    ->set(
+        new OutputSettings(
+            stylingMethodOption: StylingMethodOption::ANSI24,
+        )
+    )
+;
+
+$steps = 50;
+
 $progressValue =
     new ProgressValue(
-        steps: 50,
+        steps: $steps,
     );
 
+$gradient = new Gradient(
+    new ColorRange(
+        'hsl(358, 96%, 37%)',
+        'hsl(167, 38%, 57%)',
+    ),
+    $steps
+);
 $progressWidgetSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
@@ -58,6 +78,7 @@ $progressWidgetSettings =
             stylePalette: new ProcedureStylePalette(
                 procedure: new ProgressStyleProcedure(
                     progressValue: $progressValue,
+                    gradient: $gradient,
                 ),
             ),
             charPalette: new ProcedureCharPalette(
@@ -87,6 +108,7 @@ $progressWidgetSettings =
             stylePalette: new ProcedureStylePalette(
                 procedure: new ProgressStyleProcedure(
                     progressValue: $progressValue,
+                    gradient: $gradient,
                 ),
             ),
             charPalette: new ProcedureCharPalette(
@@ -116,7 +138,7 @@ $loop
     ->repeat(
         0.01,
         static function () use ($progressValue): void {
-            if (\random_int(0, 100) < 5) {
+            if (random_int(0, 100) < 5) {
                 $progressValue->advance();
             }
         }

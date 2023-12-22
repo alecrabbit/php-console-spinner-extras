@@ -188,7 +188,7 @@ final class ColorGradientGeneratorTest extends TestCaseWithPrebuiltMocksAndStubs
         foreach ($generator->gradients(...$incoming) as $item) {
             $result[] = $item;
         }
-        $this->dump($result);
+//        $this->dump($result);
 
         self::assertEquals($expected, $result);
     }

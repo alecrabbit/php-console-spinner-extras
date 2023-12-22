@@ -12,7 +12,6 @@ final readonly class StylingFrame implements IStylingFrame
 {
     public function __construct(
         private IStyle $style,
-
     ) {
     }
 

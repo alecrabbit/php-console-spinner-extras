@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
+use AlecRabbit\Color\Contract\Gradient\IGradient;
+use AlecRabbit\Color\Contract\IHexColor;
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColor;
 use AlecRabbit\Spinner\Extras\Color\Style\Style;
+use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Contract\IStylingFrame;
 use AlecRabbit\Spinner\Extras\Frame\StylingFrame;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
@@ -17,12 +20,19 @@ use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
  */
 final class ProgressStyleProcedure extends AProgressValueProcedure
 {
-    public function getFrame(?float $dt = null): IFrame
-    {
-        return $this->createStylingFrame();
+    public function __construct(
+        IProgressValue $progressValue,
+        private IGradient $gradient,
+    ) {
+        parent::__construct($progressValue);
     }
 
-    private function createStylingFrame(): IStylingFrame
+    public function getFrame(?float $dt = null): IFrame
+    {
+        return $this->createStyleFrame();
+    }
+
+    private function createStyleFrame(): IStylingFrame
     {
         $fgColor = $this->getFgColor();
 
@@ -39,15 +49,14 @@ final class ProgressStyleProcedure extends AProgressValueProcedure
 
     private function getFgColor(): IColor|string|null
     {
-        $value = $this->progressValue->getValue() * 100;
+        $count = $this->gradient->getCount();
+        $index =
+            min(
+                $count,
+                max((int)($this->progressValue->getValue() * $count) - 1, 0)
+            );
 
-        return match (true) {
-            $value < 0 => '#000000',
-            $value < 25 => '#aa0011',
-            $value < 50 => '#dddd00',
-            $value < 75 => '#00ffdd',
-            default => null,
-        };
+        return $this->gradient->getOne($index)->to(IHexColor::class)->toString();
     }
 
     protected function createFrame(string $sequence): IFrame
