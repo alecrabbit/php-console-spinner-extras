@@ -33,7 +33,7 @@ Facade::getSettings()
     )
 ;
 
-$steps = 50;
+$steps = 100;
 
 $progressValue =
     new ProgressValue(
@@ -41,12 +41,13 @@ $progressValue =
     );
 
 $gradient = new Gradient(
-    new ColorRange(
-        'hsl(358, 96%, 37%)',
-        'hsl(167, 38%, 57%)',
+    range: new ColorRange(
+        'hsl(0, 100%, 42%)',
+        'hsl(120, 100%, 42%)',
     ),
-    $steps
+    count: $steps
 );
+
 $progressWidgetSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
@@ -84,15 +85,6 @@ $progressWidgetSettings =
             charPalette: new ProcedureCharPalette(
                 procedure: new ProgressBarProcedure(
                     progressValue: $progressValue,
-//                    sprite: new ProgressBarSprite(
-////                        empty: '□ ',
-////                        done: '■ ',
-////                        cursor: '▨ ',
-////                        sample: '■▨□',
-////                        sample: '⬛⬛⬜',
-////                            sample: '⬤⬤◯',
-////                            sample: '▰▱▱',
-//                    ),
                     units: 20,
                 ),
             ),
