@@ -48,13 +48,15 @@ final class StyleToAnsiStringConverter implements IStyleToAnsiStringConverter
 
     private function fg(IStyle $style): string
     {
-        $parsed = $this->colorParser->parseColor($style->getFgColor());
+        $code = $this->colorParser->parseColor($style->getFgColor());
+        $parsed = $code->toString();
         return $parsed === '' ? '' : '3' . $parsed;
     }
 
     private function bg(IStyle $style): string
     {
-        $parsed = $this->colorParser->parseColor($style->getBgColor());
+        $code = $this->colorParser->parseColor($style->getBgColor());
+        $parsed = $code->toString();
         return $parsed === '' ? '' : '4' . $parsed;
     }
 

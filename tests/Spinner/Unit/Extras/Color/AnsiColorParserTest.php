@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Color;
 
+use AlecRabbit\Spinner\Extras\Color\AnsiCode;
 use AlecRabbit\Spinner\Extras\Color\AnsiColorParser;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiCode;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiColorParser;
@@ -41,12 +42,11 @@ final class AnsiColorParserTest extends TestCase
     {
         $converter = $this->getColorToAnsiCodeConverterMock();
         $color = '#ffaacc';
-        $result = 'result';
+
         $ansiCode = $this->getAnsiCodeMock();
         $ansiCode
-            ->expects(self::once())
+            ->expects(self::never())
             ->method('toString')
-            ->willReturn($result)
         ;
         $converter
             ->expects(self::once())
@@ -56,7 +56,7 @@ final class AnsiColorParserTest extends TestCase
         ;
         $colorParser = $this->getTesteeInstance(converter: $converter);
 
-        self::assertSame($result, $colorParser->parseColor($color));
+        self::assertSame($ansiCode, $colorParser->parseColor($color));
     }
 
     private function getAnsiCodeMock(): MockObject&IAnsiCode
@@ -69,7 +69,7 @@ final class AnsiColorParserTest extends TestCase
     {
         $converter = $this->getColorToAnsiCodeConverterMock();
         $color = null;
-        $result = '';
+        $result = new AnsiCode();
 
         $converter
             ->expects(self::never())
@@ -77,7 +77,7 @@ final class AnsiColorParserTest extends TestCase
         ;
         $colorParser = $this->getTesteeInstance(converter: $converter);
 
-        self::assertSame($result, $colorParser->parseColor($color));
+        self::assertEquals($result, $colorParser->parseColor($color));
     }
 
     #[Test]
@@ -85,7 +85,7 @@ final class AnsiColorParserTest extends TestCase
     {
         $converter = $this->getColorToAnsiCodeConverterMock();
         $color = '';
-        $result = '';
+        $result = new AnsiCode();
 
         $converter
             ->expects(self::never())
@@ -93,14 +93,6 @@ final class AnsiColorParserTest extends TestCase
         ;
         $colorParser = $this->getTesteeInstance(converter: $converter);
 
-        self::assertSame($result, $colorParser->parseColor($color));
-    }
-
-    #[Test]
-    public function emptyColorReturnsEmptyParsedString(): void
-    {
-        $colorParser = $this->getTesteeInstance();
-
-        self::assertSame('', $colorParser->parseColor(''));
+        self::assertEquals($result, $colorParser->parseColor($color));
     }
 }

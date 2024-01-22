@@ -9,5 +9,5 @@ use AlecRabbit\Color\Contract\IColor;
 
 interface IAnsiColorParser
 {
-    public function parseColor(IColor|null|string $color): string;
+    public function parseColor(IColor|null|string $color): IAnsiCode;
 }

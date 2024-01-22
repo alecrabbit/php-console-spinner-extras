@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Render;
 
+use AlecRabbit\Spinner\Extras\Color\AnsiCode;
 use AlecRabbit\Spinner\Extras\Color\Style\StyleOptions;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiColorParser;
 use AlecRabbit\Spinner\Extras\Contract\IStyleToAnsiStringConverter;
@@ -63,7 +64,7 @@ final class StyleToAnsiStringConverterTest extends TestCaseWithPrebuiltMocksAndS
         $colorParser = $this->getAnsiColorParserMock();
         $colorParser
             ->method('parseColor')
-            ->willReturn('1')
+            ->willReturn(new AnsiCode(1))
         ;
         $optionsParser = $this->getStyleOptionsParserMock();
         $optionsParser
@@ -119,7 +120,7 @@ final class StyleToAnsiStringConverterTest extends TestCaseWithPrebuiltMocksAndS
         $colorParser = $this->getAnsiColorParserMock();
         $colorParser
             ->method('parseColor')
-            ->willReturn('1')
+            ->willReturn(new AnsiCode(1))
         ;
         $optionsParser = $this->getStyleOptionsParserMock();
         $optionsParser
