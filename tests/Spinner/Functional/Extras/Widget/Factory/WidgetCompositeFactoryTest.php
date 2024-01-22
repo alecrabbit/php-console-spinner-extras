@@ -11,12 +11,9 @@ use AlecRabbit\Spinner\Core\Config\Contract\IWidgetRevolverConfig;
 use AlecRabbit\Spinner\Core\Contract\IIntervalComparator;
 use AlecRabbit\Spinner\Core\Settings\Contract\IWidgetSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
-use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
-use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetContext;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetRevolver;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetRevolverFactory;
-use AlecRabbit\Spinner\Extras\Settings\Contract\IMultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Builder\IWidgetCompositeBuilder;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Factory\IWidgetCompositeFactory;
@@ -201,14 +198,13 @@ final class WidgetCompositeFactoryTest extends FacadeAwareTestCase
                 new WidgetSettings(),
             );
 
-        $widgetFactory = $this->getTesteeInstance(       );
+        $widgetFactory = $this->getTesteeInstance();
 
         self::assertInstanceOf(WidgetCompositeFactory::class, $widgetFactory);
 
         $widgetComposite = $widgetFactory->usingSettings($multiWidgetSettings)->create();
 
         self::assertInstanceOf(WidgetComposite::class, $widgetComposite);
-
         // TODO (2023-12-19 13:08) [Alec Rabbit]: enhance test, add checks for nested widgets
     }
 }

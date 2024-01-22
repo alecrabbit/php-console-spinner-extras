@@ -6,9 +6,11 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Functional\Extras\Color;
 
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
+use AlecRabbit\Spinner\Extras\Color\Ansi4BrightnessChecker;
 use AlecRabbit\Spinner\Extras\Color\Ansi4ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Ansi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;
+use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4BrightnessChecker;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\HexColorNormalizer;
@@ -21,6 +23,12 @@ use PHPUnit\Framework\Attributes\Test;
 
 final class ColorToAnsiCodeConverterTest extends TestCase
 {
+    protected static function coreTestCanConvertDataProvider(): iterable
+    {
+        $src = SimpleHexColorToAnsiCodeConverterTest::class;
+        yield from $src::canConvertDataProvider();
+    }
+
     public static function canConvertDataProvider(): iterable
     {
         foreach (self::simpleCanConvertDataFeeder() as $item) {
@@ -36,12 +44,6 @@ final class ColorToAnsiCodeConverterTest extends TestCase
                 ],
             ];
         }
-    }
-
-    protected static function coreTestCanConvertDataProvider(): iterable
-    {
-        $src = SimpleHexColorToAnsiCodeConverterTest::class;
-        yield from $src::canConvertDataProvider();
     }
 
     protected static function simpleCanConvertDataFeeder(): iterable
@@ -80,13 +82,15 @@ final class ColorToAnsiCodeConverterTest extends TestCase
 
     public function getTesteeInstance(
         ?StylingMethodMode $styleMode = null,
-        ?IHexColorNormalizer $hexColorNormalizer= null,
+        ?IHexColorNormalizer $hexColorNormalizer = null,
+        ?IAnsi4BrightnessChecker $ans4BrightnessChecker = null,
         ?IAnsi4ColorDegrader $ansi4ColorDegrader = null,
         ?IAnsi8ColorDegrader $ansi8ColorDegrader = null,
     ): IColorToAnsiCodeConverter {
         return new ColorToAnsiCodeConverter(
             mode: $styleMode ?? StylingMethodMode::ANSI24,
             hexColorNormalizer: $hexColorNormalizer ?? new HexColorNormalizer(),
+            ans4BrightnessChecker: $ans4BrightnessChecker ?? new Ansi4BrightnessChecker(),
             ansi4ColorDegrader: $ansi4ColorDegrader ?? new Ansi4ColorDegrader(),
             ansi8ColorDegrader: $ansi8ColorDegrader ?? new Ansi8ColorDegrader(),
         );

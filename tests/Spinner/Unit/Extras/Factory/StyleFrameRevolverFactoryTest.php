@@ -14,7 +14,6 @@ use AlecRabbit\Spinner\Core\Factory\Contract\IStyleFrameRevolverFactory;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolverBuilder;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
-use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Factory\StyleFrameRevolverFactory;
 use AlecRabbit\Spinner\Extras\Pattern\Contract\IInfinitePattern;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
@@ -70,6 +69,11 @@ final class StyleFrameRevolverFactoryTest extends TestCase
     private function getRevolverConfigMock(): MockObject&IRevolverConfig
     {
         return $this->createMock(IRevolverConfig::class);
+    }
+
+    private function getStyleRendererMock(): MockObject&IStyleRenderer
+    {
+        return $this->createMock(IStyleRenderer::class);
     }
 
     #[Test]
@@ -267,10 +271,5 @@ final class StyleFrameRevolverFactoryTest extends TestCase
     private function getFrameRevolverMock(): MockObject&IFrameRevolver
     {
         return $this->createMock(IFrameRevolver::class);
-    }
-
-    private function getStyleRendererMock(): MockObject&IStyleRenderer
-    {
-        return $this->createMock(IStyleRenderer::class);
     }
 }

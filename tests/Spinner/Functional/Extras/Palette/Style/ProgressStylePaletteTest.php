@@ -13,7 +13,6 @@ use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
 use AlecRabbit\Tests\TestCase\TestCase;
-use ArrayObject;
 use Generator;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -92,7 +91,8 @@ final class ProgressStylePaletteTest extends TestCase
         $procedure = $this->getProcedureMock();
         $procedure
             ->method('getFrame')
-            ->willReturn(new StyleFrame('-', 1));
+            ->willReturn(new StyleFrame('-', 1))
+        ;
 
         $palette = $this->getTesteeInstance(
             procedure: $procedure,

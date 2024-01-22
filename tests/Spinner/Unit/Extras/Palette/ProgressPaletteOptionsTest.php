@@ -66,6 +66,12 @@ final class ProgressPaletteOptionsTest extends TestCase
         self::assertSame(200, $palette->getInterval());
     }
 
+    private function getTesteeInstanceWithDefaults(): IPaletteOptions
+    {
+        return
+            new PaletteOptions();
+    }
+
     #[Test]
     public function canGetIntervalWithNumber(): void
     {
@@ -75,11 +81,5 @@ final class ProgressPaletteOptionsTest extends TestCase
         );
 
         self::assertSame($interval, $palette->getInterval());
-    }
-
-    private function getTesteeInstanceWithDefaults(): IPaletteOptions
-    {
-        return
-            new PaletteOptions();
     }
 }

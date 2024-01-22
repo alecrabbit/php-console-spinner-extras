@@ -11,6 +11,7 @@ use AlecRabbit\Spinner\Extras\Widget\Contract\IWidgetContextToIntervalMap;
 use AlecRabbit\Spinner\Extras\Widget\WidgetContextToIntervalMap;
 use AlecRabbit\Tests\TestCase\TestCase;
 use ArrayAccess;
+use ArrayObject;
 use Countable;
 use IteratorAggregate;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -43,11 +44,11 @@ final class WidgetContextToIntervalMapTest extends TestCase
 
     public function getTesteeInstance(
         null|(ArrayAccess&Countable&IteratorAggregate) $map = null,
-        null|\ArrayObject $contexts = null,
+        null|ArrayObject $contexts = null,
     ): IWidgetContextToIntervalMap {
         return new WidgetContextToIntervalMap(
             map: $map ?? new WeakMap(),
-            contexts: $contexts ?? new \ArrayObject(),
+            contexts: $contexts ?? new ArrayObject(),
         );
     }
 
@@ -99,7 +100,7 @@ final class WidgetContextToIntervalMapTest extends TestCase
     public function falseValueReplacedWithNullOnOffsetGet(): void
     {
         $map = new WeakMap();
-        $contexts = new \ArrayObject();
+        $contexts = new ArrayObject();
         $container = $this->getTesteeInstance(
             map: $map,
             contexts: $contexts,
@@ -115,7 +116,7 @@ final class WidgetContextToIntervalMapTest extends TestCase
     public function getIteratorMethodTransformFalseValueToNull(): void
     {
         $map = new WeakMap();
-        $contexts = new \ArrayObject();
+        $contexts = new ArrayObject();
         $container = $this->getTesteeInstance(
             map: $map,
             contexts: $contexts,
@@ -150,7 +151,7 @@ final class WidgetContextToIntervalMapTest extends TestCase
     public function getIteratorMethodTransformFalseValueToNullButNotIntervalObjects(): void
     {
         $map = new WeakMap();
-        $contexts = new \ArrayObject();
+        $contexts = new ArrayObject();
         $container = $this->getTesteeInstance(
             map: $map,
             contexts: $contexts,
@@ -241,7 +242,7 @@ final class WidgetContextToIntervalMapTest extends TestCase
     public function canUnsetOffset(): void
     {
         $map = new WeakMap();
-        $contexts = new \ArrayObject();
+        $contexts = new ArrayObject();
         $container = $this->getTesteeInstance(
             map: $map,
             contexts: $contexts,

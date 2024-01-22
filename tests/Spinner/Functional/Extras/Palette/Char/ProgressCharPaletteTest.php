@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Functional\Extras\Palette\Char;
 
 use AlecRabbit\Spinner\Contract\IProcedure;
-use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
-
 use AlecRabbit\Tests\TestCase\TestCase;
-use ArrayObject;
 use Generator;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -78,9 +75,7 @@ final class ProgressCharPaletteTest extends TestCase
     #[Test]
     public function canGetEntries(): void
     {
-                $palette = $this->getTesteeInstance(
-
-        );
+        $palette = $this->getTesteeInstance();
 
         $mode = $this->getPaletteModeMock();
         $mode

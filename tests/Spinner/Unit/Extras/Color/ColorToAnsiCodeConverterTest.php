@@ -6,10 +6,10 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Color;
 
 use AlecRabbit\Color\Contract\IHexColor;
-use AlecRabbit\Color\Hex;
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Extras\Color\AnsiCode;
 use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;
+use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4BrightnessChecker;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\IHexColorNormalizer;
@@ -30,6 +30,7 @@ final class ColorToAnsiCodeConverterTest extends TestCase
 
     public function getTesteeInstance(
         ?StylingMethodMode $styleMode = null,
+        ?IAnsi4BrightnessChecker $ans4BrightnessChecker = null,
         ?IHexColorNormalizer $hexColorNormalizer = null,
         ?IAnsi4ColorDegrader $ansi4ColorDegrader = null,
         ?IAnsi8ColorDegrader $ansi8ColorDegrader = null,
@@ -37,6 +38,7 @@ final class ColorToAnsiCodeConverterTest extends TestCase
         return new ColorToAnsiCodeConverter(
             mode: $styleMode ?? StylingMethodMode::ANSI24,
             hexColorNormalizer: $hexColorNormalizer ?? $this->getHexColorNormalizerMock(),
+            ans4BrightnessChecker: $ans4BrightnessChecker ?? $this->getAns4BrightnessCheckerMock(),
             ansi4ColorDegrader: $ansi4ColorDegrader ?? $this->getAnsi4DegraderMock(),
             ansi8ColorDegrader: $ansi8ColorDegrader ?? $this->getAnsi8DegraderMock(),
 
@@ -46,6 +48,11 @@ final class ColorToAnsiCodeConverterTest extends TestCase
     private function getHexColorNormalizerMock(): MockObject&IHexColorNormalizer
     {
         return $this->createMock(IHexColorNormalizer::class);
+    }
+
+    private function getAns4BrightnessCheckerMock(): MockObject&IAnsi4BrightnessChecker
+    {
+        return $this->createMock(IAnsi4BrightnessChecker::class);
     }
 
     private function getAnsi4DegraderMock(): MockObject&IAnsi4ColorDegrader
@@ -117,6 +124,12 @@ final class ColorToAnsiCodeConverterTest extends TestCase
         self::assertInstanceOf(AnsiCode::class, $actual);
         self::assertSame('0', $actual->toString());
     }
+
+    private function getHexColorMock(): MockObject&IHexColor
+    {
+        return $this->createMock(IHexColor::class);
+    }
+
     #[Test]
     public function canConvertAnsi8(): void
     {
@@ -176,6 +189,7 @@ final class ColorToAnsiCodeConverterTest extends TestCase
         self::assertInstanceOf(AnsiCode::class, $actual);
         self::assertSame('8;5;100', $actual->toString());
     }
+
     #[Test]
     public function canConvertAnsi24(): void
     {
@@ -232,10 +246,5 @@ final class ColorToAnsiCodeConverterTest extends TestCase
 
         self::assertInstanceOf(AnsiCode::class, $actual);
         self::assertSame('8;2;1;12;123', $actual->toString());
-    }
-
-    private function getHexColorMock(): MockObject&IHexColor
-    {
-        return $this->createMock(IHexColor::class);
     }
 }

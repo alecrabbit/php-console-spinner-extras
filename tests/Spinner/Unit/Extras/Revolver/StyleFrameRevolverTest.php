@@ -6,10 +6,10 @@ namespace AlecRabbit\Tests\Spinner\Unit\Extras\Revolver;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
-use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
+use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Revolver\StyleFrameRevolver;
@@ -60,6 +60,11 @@ final class StyleFrameRevolverTest extends TestCase
     private function getToleranceMock(): MockObject&ITolerance
     {
         return $this->createMock(ITolerance::class);
+    }
+
+    private function getStyleRendererMock(): MockObject&IStyleRenderer
+    {
+        return $this->createMock(IStyleRenderer::class);
     }
 
     #[Test]
@@ -124,10 +129,5 @@ final class StyleFrameRevolverTest extends TestCase
         $mockObject = $this->createMock(IFrameCollection::class);
         $mockObject->method('count')->willReturn(1);
         return $mockObject;
-    }
-
-    private function getStyleRendererMock(): MockObject&IStyleRenderer
-    {
-        return $this->createMock(IStyleRenderer::class);
     }
 }

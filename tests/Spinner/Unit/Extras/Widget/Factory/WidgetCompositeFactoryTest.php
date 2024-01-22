@@ -20,6 +20,7 @@ use AlecRabbit\Spinner\Extras\Widget\Contract\Builder\IWidgetCompositeBuilder;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Factory\IWidgetCompositeFactory;
 use AlecRabbit\Spinner\Extras\Widget\Factory\WidgetCompositeFactory;
 use AlecRabbit\Tests\TestCase\TestCase;
+use ArrayObject;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -290,7 +291,7 @@ final class WidgetCompositeFactoryTest extends TestCase
             ->expects(self::once())
             ->method('getOther')
             ->willReturn(
-                new \ArrayObject(
+                new ArrayObject(
                     [
                         $widgetSettingsSecond,
                         $widgetSettingsThird,

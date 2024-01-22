@@ -11,7 +11,6 @@ use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
-use AlecRabbit\Spinner\Extras\Revolver\CharFrameRevolver;
 use AlecRabbit\Tests\Spinner\Unit\Extras\Revolver\A\Override\AFrameRevolverOverride;
 use AlecRabbit\Tests\TestCase\TestCase;
 use ArrayObject;

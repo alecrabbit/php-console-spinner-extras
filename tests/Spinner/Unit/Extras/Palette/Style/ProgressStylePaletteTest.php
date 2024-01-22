@@ -9,7 +9,6 @@ use AlecRabbit\Spinner\Contract\IProcedure;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
-
 use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;

@@ -63,7 +63,8 @@ final class StyleTest extends TestCase
         );
 
         self::assertNull($style->getFgColor());
-        self::assertNull($style->getBgColor()); self::assertSame($options, $style->getOptions());
+        self::assertNull($style->getBgColor());
+        self::assertSame($options, $style->getOptions());
         self::assertFalse($style->isEmpty());
         self::assertTrue($style->isOptionsOnly());
         self::assertTrue($style->hasOptions());

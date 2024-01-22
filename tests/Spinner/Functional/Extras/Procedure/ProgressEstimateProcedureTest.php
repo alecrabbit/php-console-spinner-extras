@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Functional\Extras\Procedure;
 
 use AlecRabbit\Spinner\Contract\IProcedure;
-use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
@@ -13,6 +12,7 @@ use AlecRabbit\Spinner\Extras\DateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
 use AlecRabbit\Spinner\Extras\ProgressValue;
 use AlecRabbit\Tests\TestCase\TestCase;
+use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -50,7 +50,7 @@ final class ProgressEstimateProcedureTest extends TestCase
     {
         $progressValue = new ProgressValue();
 
-        $createdAt = new \DateTimeImmutable('-5 seconds');
+        $createdAt = new DateTimeImmutable('-5 seconds');
 
         $currentTimeProvider = $this->getCurrentTimeProviderMock();
         $currentTimeProvider

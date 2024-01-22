@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras;
 
 use AlecRabbit\Spinner\Extras\Contract\IAnsiColorParser;
+use AlecRabbit\Spinner\Extras\Contract\IBrightAnsiCode;
 use AlecRabbit\Spinner\Extras\Contract\IStyleToAnsiStringConverter;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptionsParser;
@@ -49,15 +50,17 @@ final class StyleToAnsiStringConverter implements IStyleToAnsiStringConverter
     private function fg(IStyle $style): string
     {
         $code = $this->colorParser->parseColor($style->getFgColor());
-        $parsed = $code->toString();
-        return $parsed === '' ? '' : '3' . $parsed;
+
+        $codePrefix = $code instanceof IBrightAnsiCode ? '9' : '3';
+        return $code->isEmpty() ? '' : $codePrefix . $code->toString();
     }
 
     private function bg(IStyle $style): string
     {
         $code = $this->colorParser->parseColor($style->getBgColor());
-        $parsed = $code->toString();
-        return $parsed === '' ? '' : '4' . $parsed;
+        
+        $codePrefix = $code instanceof IBrightAnsiCode ? '10' : '4';
+        return $code->isEmpty() ? '' : $codePrefix . $code->toString();
     }
 
     private function set(string $fg, string $bg, iterable $options = []): string

@@ -193,21 +193,6 @@ final class ColorGradientGeneratorTest extends TestCaseWithPrebuiltMocksAndStubs
         self::assertEquals($expected, $result);
     }
 
-    private function dump(array $result): void
-    {
-        $s = PHP_EOL;
-        foreach ($result as $item) {
-            $s .= sprintf(
-                'new RGBColor(%d, %d, %d, %02f),' . PHP_EOL,
-                $item->red,
-                $item->green,
-                $item->blue,
-                $item->alpha
-            );
-        }
-//        dump($s);
-    }
-
     #[Test]
     public function throwsIfCountLessThenTwo(): void
     {
@@ -246,5 +231,20 @@ final class ColorGradientGeneratorTest extends TestCaseWithPrebuiltMocksAndStubs
             test: $test,
             exception: $e,
         );
+    }
+
+    private function dump(array $result): void
+    {
+        $s = PHP_EOL;
+        foreach ($result as $item) {
+            $s .= sprintf(
+                'new RGBColor(%d, %d, %d, %02f),' . PHP_EOL,
+                $item->red,
+                $item->green,
+                $item->blue,
+                $item->alpha
+            );
+        }
+//        dump($s);
     }
 }
