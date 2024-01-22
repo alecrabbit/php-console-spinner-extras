@@ -6,8 +6,10 @@ namespace AlecRabbit\Spinner\Extras\Color;
 
 use AlecRabbit\Color\Contract\IColor;
 use AlecRabbit\Color\Contract\IHexColor;
-use AlecRabbit\Color\Util\Color;
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
+use AlecRabbit\Spinner\Exception\LogicException;
+use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4ColorDegrader;
+use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiCode;
 use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;
 
@@ -15,27 +17,32 @@ final readonly class ColorToAnsiCodeConverter implements IColorToAnsiCodeConvert
 {
     public function __construct(
         private StylingMethodMode $mode,
+        private IHexColorNormalizer $hexColorNormalizer,
+        private IAnsi4ColorDegrader $ansi4ColorDegrader,
+        private IAnsi8ColorDegrader $ansi8ColorDegrader,
     ) {
     }
 
     public function convert(IColor|string $color): IAnsiCode
     {
-        $color = $this->normalize($color);
+        $color = $this->hexColorNormalizer->normalize($color);
 
         return $this->doConvert($color);
     }
 
-    private function normalize(IColor|string $color): IHexColor
-    {
-        if (\is_string($color)) {
-            $color = Color::from($color);
-        }
-
-        return $color->to(IHexColor::class);
-    }
-
     private function doConvert(IHexColor $color): IAnsiCode
     {
-        return new AnsiCode(8, 2, 198, 198, 198);
+        $r = $color->getRed();
+        $g = $color->getGreen();
+        $b = $color->getBlue();
+
+        $codes = match ($this->mode) {
+            StylingMethodMode::ANSI4 => [$this->ansi4ColorDegrader->degrade($r, $g, $b)],
+            StylingMethodMode::ANSI8 => [8, 5, $this->ansi8ColorDegrader->degrade($r, $g, $b)],
+            StylingMethodMode::ANSI24 => [8, 2, $r, $g, $b,],
+            default => throw new LogicException('Unsupported mode.'),
+        };
+
+        return new AnsiCode(...$codes);
     }
 }

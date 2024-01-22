@@ -5,66 +5,21 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Color;
 
+use AlecRabbit\Color\Contract\IHexColor;
+use AlecRabbit\Color\Hex;
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
+use AlecRabbit\Spinner\Extras\Color\AnsiCode;
 use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;
+use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4ColorDegrader;
+use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi8ColorDegrader;
+use AlecRabbit\Spinner\Extras\Color\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;
 use AlecRabbit\Tests\TestCase\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 
 final class ColorToAnsiCodeConverterTest extends TestCase
 {
-    public static function canConvertDataProvider(): iterable
-    {
-//        yield from self::coreTestCanConvertDataProvider();
-
-        foreach (self::simpleCanConvertDataFeeder() as $item) {
-            yield [
-                [
-                    self::RESULT => $item[0],
-                ],
-                [
-                    self::ARGUMENTS => [
-                        self::COLOR => $item[1],
-                        self::STYLE_MODE => $item[2],
-                    ],
-                ],
-            ];
-        }
-    }
-
-    protected static function coreTestCanConvertDataProvider(): iterable
-    {
-        $src = SimpleHexColorToAnsiCodeConverterTest::class;
-        yield from $src::canConvertDataProvider();
-    }
-
-    protected static function simpleCanConvertDataFeeder(): iterable
-    {
-        $ansi4 = StylingMethodMode::ANSI4;
-        $ansi8 = StylingMethodMode::ANSI8;
-        $ansi24 = StylingMethodMode::ANSI24;
-
-        yield from [
-            // result, color, styleMode
-//            ['0', '#761176', $ansi4], // color degrading
-//            ['4', '#00008f', $ansi4], // color degrading
-//            ['5', '#861185', $ansi4], // color degrading
-//            ['5', '#d75f87', $ansi4], // color degrading
-//            ['5', '#d134f2', $ansi4], // color degrading
-//
-//            ['8;5;238', '#444', $ansi8],
-//            ['8;5;255', '#eee', $ansi8],
-//            ['8;5;231', '#fff', $ansi8],
-//            ['8;5;59', '#434544', $ansi8],
-//            ['8;5;238', '#454545', $ansi8],
-//            ['8;5;231', '#fafafa', $ansi8],
-//            ['8;5;16', '#070707', $ansi8],
-            ['8;2;198;198;198', '#c6c6c6', $ansi24],
-
-        ];
-    }
-
     #[Test]
     public function canBeInstantiated(): void
     {
@@ -75,34 +30,212 @@ final class ColorToAnsiCodeConverterTest extends TestCase
 
     public function getTesteeInstance(
         ?StylingMethodMode $styleMode = null,
+        ?IHexColorNormalizer $hexColorNormalizer = null,
+        ?IAnsi4ColorDegrader $ansi4ColorDegrader = null,
+        ?IAnsi8ColorDegrader $ansi8ColorDegrader = null,
     ): IColorToAnsiCodeConverter {
         return new ColorToAnsiCodeConverter(
             mode: $styleMode ?? StylingMethodMode::ANSI24,
+            hexColorNormalizer: $hexColorNormalizer ?? $this->getHexColorNormalizerMock(),
+            ansi4ColorDegrader: $ansi4ColorDegrader ?? $this->getAnsi4DegraderMock(),
+            ansi8ColorDegrader: $ansi8ColorDegrader ?? $this->getAnsi8DegraderMock(),
+
         );
     }
 
-    #[Test]
-    #[DataProvider('canConvertDataProvider')]
-    public function canConvert(array $expected, array $incoming): void
+    private function getHexColorNormalizerMock(): MockObject&IHexColorNormalizer
     {
-        $expectedException = $this->expectsException($expected);
+        return $this->createMock(IHexColorNormalizer::class);
+    }
 
-        $args = $incoming[self::ARGUMENTS];
-        $expectedResult = $expected[self::RESULT];
+    private function getAnsi4DegraderMock(): MockObject&IAnsi4ColorDegrader
+    {
+        return $this->createMock(IAnsi4ColorDegrader::class);
+    }
 
-        $color = $args[self::COLOR];
-        $styleMode = $args[self::STYLE_MODE];
+    private function getAnsi8DegraderMock(): MockObject&IAnsi8ColorDegrader
+    {
+        return $this->createMock(IAnsi8ColorDegrader::class);
+    }
+
+    #[Test]
+    public function canConvertAnsi4(): void
+    {
+        $r = 1;
+        $g = 12;
+        $b = 123;
+
+        $color = $this->getHexColorMock();
+        $color
+            ->expects(self::once())
+            ->method('getRed')
+            ->willReturn($r)
+        ;
+        $color
+            ->expects(self::once())
+            ->method('getGreen')
+            ->willReturn($g)
+        ;
+        $color
+            ->expects(self::once())
+            ->method('getBlue')
+            ->willReturn($b)
+        ;
+
+        $hexColorNormalizer = $this->getHexColorNormalizerMock();
+        $ansi4ColorDegrader = $this->getAnsi4DegraderMock();
+        $ansi8ColorDegrader = $this->getAnsi8DegraderMock();
+
+        $hexColorNormalizer
+            ->expects(self::once())
+            ->method('normalize')
+            ->with($color)
+            ->willReturn($color)
+        ;
+
+        $ansi4ColorDegrader
+            ->expects(self::once())
+            ->method('degrade')
+            ->with($r, $g, $b)
+            ->willReturn(0)
+        ;
+
+        $ansi8ColorDegrader
+            ->expects(self::never())
+            ->method('degrade')
+        ;
 
         $converter = $this->getTesteeInstance(
-            styleMode: $styleMode,
+            styleMode: StylingMethodMode::ANSI4,
+            hexColorNormalizer: $hexColorNormalizer,
+            ansi4ColorDegrader: $ansi4ColorDegrader,
+            ansi8ColorDegrader: $ansi8ColorDegrader,
         );
 
-        $actual = $converter->convert($color)->toString();
+        $actual = $converter->convert($color);
 
-        if ($expectedException) {
-            self::failTest($expectedException);
-        }
+        self::assertInstanceOf(AnsiCode::class, $actual);
+        self::assertSame('0', $actual->toString());
+    }
+    #[Test]
+    public function canConvertAnsi8(): void
+    {
+        $r = 1;
+        $g = 12;
+        $b = 123;
 
-        self::assertSame($expectedResult, $actual);
+        $color = $this->getHexColorMock();
+        $color
+            ->expects(self::once())
+            ->method('getRed')
+            ->willReturn($r)
+        ;
+        $color
+            ->expects(self::once())
+            ->method('getGreen')
+            ->willReturn($g)
+        ;
+        $color
+            ->expects(self::once())
+            ->method('getBlue')
+            ->willReturn($b)
+        ;
+
+        $hexColorNormalizer = $this->getHexColorNormalizerMock();
+        $ansi4ColorDegrader = $this->getAnsi4DegraderMock();
+        $ansi8ColorDegrader = $this->getAnsi8DegraderMock();
+
+        $hexColorNormalizer
+            ->expects(self::once())
+            ->method('normalize')
+            ->with($color)
+            ->willReturn($color)
+        ;
+
+        $ansi4ColorDegrader
+            ->expects(self::never())
+            ->method('degrade')
+        ;
+
+        $ansi8ColorDegrader
+            ->expects(self::once())
+            ->method('degrade')
+            ->with($r, $g, $b)
+            ->willReturn(100)
+        ;
+
+        $converter = $this->getTesteeInstance(
+            styleMode: StylingMethodMode::ANSI8,
+            hexColorNormalizer: $hexColorNormalizer,
+            ansi4ColorDegrader: $ansi4ColorDegrader,
+            ansi8ColorDegrader: $ansi8ColorDegrader,
+        );
+
+        $actual = $converter->convert($color);
+
+        self::assertInstanceOf(AnsiCode::class, $actual);
+        self::assertSame('8;5;100', $actual->toString());
+    }
+    #[Test]
+    public function canConvertAnsi24(): void
+    {
+        $r = 1;
+        $g = 12;
+        $b = 123;
+
+        $color = $this->getHexColorMock();
+        $color
+            ->expects(self::once())
+            ->method('getRed')
+            ->willReturn($r)
+        ;
+        $color
+            ->expects(self::once())
+            ->method('getGreen')
+            ->willReturn($g)
+        ;
+        $color
+            ->expects(self::once())
+            ->method('getBlue')
+            ->willReturn($b)
+        ;
+
+        $hexColorNormalizer = $this->getHexColorNormalizerMock();
+        $ansi4ColorDegrader = $this->getAnsi4DegraderMock();
+        $ansi8ColorDegrader = $this->getAnsi8DegraderMock();
+
+        $hexColorNormalizer
+            ->expects(self::once())
+            ->method('normalize')
+            ->with($color)
+            ->willReturn($color)
+        ;
+
+        $ansi4ColorDegrader
+            ->expects(self::never())
+            ->method('degrade')
+        ;
+
+        $ansi8ColorDegrader
+            ->expects(self::never())
+            ->method('degrade')
+        ;
+
+        $converter = $this->getTesteeInstance(
+            styleMode: StylingMethodMode::ANSI24,
+            hexColorNormalizer: $hexColorNormalizer,
+            ansi4ColorDegrader: $ansi4ColorDegrader,
+            ansi8ColorDegrader: $ansi8ColorDegrader,
+        );
+
+        $actual = $converter->convert($color);
+
+        self::assertInstanceOf(AnsiCode::class, $actual);
+        self::assertSame('8;2;1;12;123', $actual->toString());
+    }
+
+    private function getHexColorMock(): MockObject&IHexColor
+    {
+        return $this->createMock(IHexColor::class);
     }
 }
