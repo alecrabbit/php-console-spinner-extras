@@ -15,10 +15,15 @@ use AlecRabbit\Spinner\Extras\Color\AnsiColorParser;
 use AlecRabbit\Spinner\Extras\Color\HexColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Color\Style\StyleOptionsParser;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiColorParser;
+use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Contract\IHexColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Contract\IStyleToAnsiStringConverter;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptionsParser;
+use AlecRabbit\Spinner\Extras\Factory\AnsiColorParserFactory;
 use AlecRabbit\Spinner\Extras\Factory\CharFrameRevolverFactory;
+use AlecRabbit\Spinner\Extras\Factory\ColorToAnsiCodeConverterFactory;
+use AlecRabbit\Spinner\Extras\Factory\Contract\IAnsiColorParserFactory;
+use AlecRabbit\Spinner\Extras\Factory\Contract\IColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IHexColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\HexColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\StyleFrameRevolverFactory;
@@ -63,10 +68,10 @@ DefinitionRegistry::getInstance()
             IInfinitePaletteTemplateBuilder::class,
             InfinitePaletteTemplateBuilder::class,
         ),
-        new ServiceDefinition(
-            IStyleFrameRevolverFactory::class,
-            StyleFrameRevolverFactory::class,
-        ),
+//        new ServiceDefinition(
+//            IStyleFrameRevolverFactory::class,
+//            StyleFrameRevolverFactory::class,
+//        ),
         new ServiceDefinition(
             ICharFrameRevolverFactory::class,
             CharFrameRevolverFactory::class,
@@ -79,28 +84,28 @@ DefinitionRegistry::getInstance()
             IStyleFrameRevolverBuilder::class,
             StyleFrameRevolverBuilder::class,
         ),
+//        new ServiceDefinition(
+//            IStyleRenderer::class,
+//            StyleRenderer::class,
+//        ),
+//        new ServiceDefinition(
+//            IStyleToAnsiStringConverter::class,
+//            StyleToAnsiStringConverter::class,
+//        ),
         new ServiceDefinition(
-            IStyleRenderer::class,
-            StyleRenderer::class,
-        ),
-        new ServiceDefinition(
-            IStyleToAnsiStringConverter::class,
-            StyleToAnsiStringConverter::class,
-        ),
-        new ServiceDefinition(
-            IAnsiColorParser::class,
-            AnsiColorParser::class,
-        ),
-        new ServiceDefinition(
-            IHexColorToAnsiCodeConverter::class,
-            static function (IContainer $container): IHexColorToAnsiCodeConverter {
-                return $container->get(IHexColorToAnsiCodeConverterFactory::class)->create();
-            },
+            IAnsiColorParserFactory::class,
+            AnsiColorParserFactory::class,
         ),
 //        new ServiceDefinition(
 //            IHexColorToAnsiCodeConverter::class,
-//            HexColorToAnsiCodeConverter::class,
+//            static function (IContainer $container): IHexColorToAnsiCodeConverter {
+//                return $container->get(IHexColorToAnsiCodeConverterFactory::class)->create();
+//            },
 //        ),
+        new ServiceDefinition(
+            IColorToAnsiCodeConverterFactory::class,
+            ColorToAnsiCodeConverterFactory::class,
+        ),
         new ServiceDefinition(
             IStyleOptionsParser::class,
             StyleOptionsParser::class,
