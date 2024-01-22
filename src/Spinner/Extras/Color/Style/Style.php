@@ -5,18 +5,18 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Color\Style;
 
-use AlecRabbit\Spinner\Extras\Color\Contract\IColor;
+use AlecRabbit\Color\Contract\IColor;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptions;
 
 final readonly class Style implements IStyle
 {
     public function __construct(
-        protected IColor|string|null $fgColor = null,
-        protected IColor|string|null $bgColor = null,
-        protected ?IStyleOptions $options = null,
-        protected string $format = '%s',
-        protected int $width = 0,
+        private IColor|string|null $fgColor = null,
+        private IColor|string|null $bgColor = null,
+        private ?IStyleOptions $options = null,
+        private string $format = '%s',
+        private int $width = 0,
     ) {
     }
 

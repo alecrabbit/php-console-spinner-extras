@@ -16,6 +16,21 @@ final class StyleTest extends TestCase
     #[Test]
     public function canBeInstantiated(): void
     {
+        $style = new Style();
+
+        self::assertNull($style->getFgColor());
+        self::assertNull($style->getBgColor());
+        self::assertNull($style->getOptions());
+        self::assertSame('%s', $style->getFormat());
+        self::assertSame(0, $style->getWidth());
+        self::assertTrue($style->isEmpty());
+        self::assertFalse($style->isOptionsOnly());
+        self::assertFalse($style->hasOptions());
+    }
+
+    #[Test]
+    public function canBeInstantiatedWithValues(): void
+    {
         $fgColor = '#000000';
         $bgColor = '#000000';
         $options = new StyleOptions(StyleOption::BOLD);
@@ -36,6 +51,21 @@ final class StyleTest extends TestCase
         self::assertSame($width, $style->getWidth());
         self::assertFalse($style->isEmpty());
         self::assertFalse($style->isOptionsOnly());
+        self::assertTrue($style->hasOptions());
+    }
+
+    #[Test]
+    public function canBeInstantiatedWithOptionsOnly(): void
+    {
+        $options = new StyleOptions(StyleOption::BOLD);
+        $style = new Style(
+            options: $options,
+        );
+
+        self::assertNull($style->getFgColor());
+        self::assertNull($style->getBgColor()); self::assertSame($options, $style->getOptions());
+        self::assertFalse($style->isEmpty());
+        self::assertTrue($style->isOptionsOnly());
         self::assertTrue($style->hasOptions());
     }
 }
