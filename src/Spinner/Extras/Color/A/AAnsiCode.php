@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Extras\Color;
+namespace AlecRabbit\Spinner\Extras\Color\A;
 
 use AlecRabbit\Spinner\Extras\Contract\IAnsiCode;
 

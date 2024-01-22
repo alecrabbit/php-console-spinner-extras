@@ -17,9 +17,6 @@ final class StyleRenderer implements IStyleRenderer
     ) {
     }
 
-    /**
-     * @throws InvalidArgument
-     */
     public function render(IStyle $style): string
     {
         if ($style->isEmpty()) {
