@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\Test;
 final class CharFrameRendererTest extends TestCaseWithPrebuiltMocksAndStubs
 {
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $charFrameRenderer = $this->getTesteeInstance();
 

@@ -13,7 +13,7 @@ use PHPUnit\Framework\Attributes\Test;
 final class WidthMeasurerFactoryTest extends TestCaseWithPrebuiltMocksAndStubs
 {
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $widthMeasurerFactory = $this->getTesteeInstance();
 

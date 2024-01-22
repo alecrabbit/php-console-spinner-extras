@@ -17,7 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 final class SimpleHexColorToAnsiCodeConverterFactoryTest extends TestCaseWithPrebuiltMocksAndStubs
 {
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $stylingMode = StylingMethodMode::NONE;
 

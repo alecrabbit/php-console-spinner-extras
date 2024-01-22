@@ -115,7 +115,7 @@ final class ProgressBarSpriteTest extends TestCase
     }
 
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $empty = 'e';
         $done = 'd';

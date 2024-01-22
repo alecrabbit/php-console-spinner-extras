@@ -341,7 +341,7 @@ final class SimpleHexColorToAnsiCodeConverterTest extends TestCaseWithPrebuiltMo
     }
 
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $converter = $this->getTesteeInstance();
 

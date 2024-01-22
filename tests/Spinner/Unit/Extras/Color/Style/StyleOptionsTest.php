@@ -21,7 +21,7 @@ final class StyleOptionsTest extends TestCase
     }
 
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $options = new StyleOptions(StyleOption::BOLD);
 

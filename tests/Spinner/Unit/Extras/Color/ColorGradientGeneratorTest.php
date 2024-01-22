@@ -149,7 +149,7 @@ final class ColorGradientGeneratorTest extends TestCaseWithPrebuiltMocksAndStubs
         ];
     }
 
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $processor = $this->getTesteeInstance();
 

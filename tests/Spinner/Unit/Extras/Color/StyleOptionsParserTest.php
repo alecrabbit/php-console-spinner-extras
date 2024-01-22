@@ -18,7 +18,7 @@ final class StyleOptionsParserTest extends TestCaseWithPrebuiltMocksAndStubs
     private const UNSET = 'unset';
 
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $optionsParser = $this->getTesteeInstance();
 

@@ -15,7 +15,7 @@ use PHPUnit\Framework\Attributes\Test;
 final class AnsiColorParserTest extends TestCaseWithPrebuiltMocksAndStubs
 {
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $colorParser = $this->getTesteeInstance();
 

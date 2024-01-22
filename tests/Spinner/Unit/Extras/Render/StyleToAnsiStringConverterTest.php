@@ -17,7 +17,7 @@ use PHPUnit\Framework\Attributes\Test;
 final class StyleToAnsiStringConverterTest extends TestCaseWithPrebuiltMocksAndStubs
 {
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $converter = $this->getTesteeInstance();
 

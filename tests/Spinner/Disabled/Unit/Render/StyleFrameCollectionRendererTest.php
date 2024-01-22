@@ -19,7 +19,7 @@ use PHPUnit\Framework\Attributes\Test;
 final class StyleFrameCollectionRendererTest extends TestCaseWithPrebuiltMocksAndStubs
 {
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $collectionRenderer = $this->getTesteeInstance();
 

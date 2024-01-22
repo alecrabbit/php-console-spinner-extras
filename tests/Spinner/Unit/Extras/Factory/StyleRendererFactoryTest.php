@@ -15,7 +15,7 @@ use PHPUnit\Framework\Attributes\Test;
 final class StyleRendererFactoryTest extends TestCaseWithPrebuiltMocksAndStubs
 {
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $styleRendererFactory = $this->getTesteeInstance();
 

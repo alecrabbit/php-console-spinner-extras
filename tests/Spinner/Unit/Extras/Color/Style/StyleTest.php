@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\Test;
 final class StyleTest extends TestCase
 {
     #[Test]
-    public function canBeCreated(): void
+    public function canBeInstantiated(): void
     {
         $fgColor = '#000000';
         $bgColor = '#000000';
