@@ -6,6 +6,8 @@ namespace AlecRabbit\Spinner\Extras\Color;
 
 use AlecRabbit\Spinner\Extras\Contract\IAnsiCode;
 
+use function implode;
+
 final readonly class AnsiCode implements IAnsiCode
 {
     private array $codes;
@@ -16,13 +18,13 @@ final readonly class AnsiCode implements IAnsiCode
         $this->codes = $code;
     }
 
-    public function __toString(): string
-    {
-        return \implode(';', $this->codes);
-    }
-
     public function toString(): string
     {
         return $this->__toString();
+    }
+
+    public function __toString(): string
+    {
+        return implode(';', $this->codes);
     }
 }

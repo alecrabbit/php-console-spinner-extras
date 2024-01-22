@@ -14,6 +14,7 @@ use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Contract\IStylingFrame;
 use AlecRabbit\Spinner\Extras\Frame\StylingFrame;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
+use RuntimeException;
 
 /**
  * @psalm-suppress UnusedClass
@@ -66,6 +67,6 @@ final class ProgressStyleProcedure extends AProgressValueProcedure
 
     protected function createFrameSequence(): string
     {
-        throw new \RuntimeException('Not implemented');
+        throw new RuntimeException('Not implemented');
     }
 }

@@ -21,8 +21,7 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
         float $max = 1.0,
         protected readonly int $steps = 100,
         protected readonly bool $autoFinish = true,
-    )
-    {
+    ) {
         parent::__construct(
             startValue: $startValue,
             min: $min,

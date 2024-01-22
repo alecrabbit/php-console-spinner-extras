@@ -10,8 +10,6 @@ use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\A\ARevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
-use AlecRabbit\Spinner\Extras\Contract\IStylingFrame;
-use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use Generator;
 use Traversable;
 

@@ -17,8 +17,7 @@ final class HexColorToAnsiCodeConverterFactory implements IHexColorToAnsiCodeCon
 
     public function __construct(
         IOutputConfig $outputConfig,
-    )
-    {
+    ) {
         $this->styleMode = $outputConfig->getStylingMethodMode();
     }
 
