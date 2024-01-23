@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-color.git",
-                "reference": "967ab401e9288f0beb71a2b0c931b9cf711d1c58"
+                "reference": "4aa4559734d3181f49d74dc9aa7566e28e43a2bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-color/zipball/967ab401e9288f0beb71a2b0c931b9cf711d1c58",
-                "reference": "967ab401e9288f0beb71a2b0c931b9cf711d1c58",
+                "url": "https://api.github.com/repos/alecrabbit/php-color/zipball/4aa4559734d3181f49d74dc9aa7566e28e43a2bf",
+                "reference": "4aa4559734d3181f49d74dc9aa7566e28e43a2bf",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
                 "issues": "https://github.com/alecrabbit/php-color/issues",
                 "source": "https://github.com/alecrabbit/php-color/tree/prepare-next"
             },
-            "time": "2024-01-19T14:58:28+00:00"
+            "time": "2024-01-23T14:30:00+00:00"
         },
         {
             "name": "alecrabbit/php-console-spinner",
@@ -63,12 +63,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
-                "reference": "b25aa4b8d091a5ad3d1ba2d135ef5e7601702686"
+                "reference": "11abd5478cbef3086a929acbda141861218361fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/b25aa4b8d091a5ad3d1ba2d135ef5e7601702686",
-                "reference": "b25aa4b8d091a5ad3d1ba2d135ef5e7601702686",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/11abd5478cbef3086a929acbda141861218361fa",
+                "reference": "11abd5478cbef3086a929acbda141861218361fa",
                 "shasum": ""
             },
             "require": {
@@ -131,7 +131,7 @@
                 "issues": "https://github.com/alecrabbit/php-console-spinner/issues",
                 "source": "https://github.com/alecrabbit/php-console-spinner/tree/prepare-next"
             },
-            "time": "2024-01-23T10:13:12+00:00"
+            "time": "2024-01-23T13:40:59+00:00"
         },
         {
             "name": "alecrabbit/php-wcwidth",

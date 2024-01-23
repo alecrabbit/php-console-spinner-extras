@@ -18,21 +18,19 @@ use RuntimeException;
 /**
  * @psalm-suppress UnusedClass
  */
-final class ProgressStyleProcedure extends AProgressValueProcedure
+final class ProgressGradientProcedure extends AProgressValueProcedure
 {
+    private int $count;
+
     public function __construct(
         IProgressValue $progressValue,
         private readonly IGradient $gradient,
     ) {
         parent::__construct($progressValue);
+        $this->count = $gradient->getCount();
     }
 
     public function getFrame(?float $dt = null): IFrame
-    {
-        return $this->createStyleFrame();
-    }
-
-    private function createStyleFrame(): IStylingFrame
     {
         return new StylingFrame(
             style: new Style(
@@ -43,14 +41,7 @@ final class ProgressStyleProcedure extends AProgressValueProcedure
 
     private function getFgColor(): IColor
     {
-        $count = $this->gradient->getCount();
-        $index =
-            min(
-                $count,
-                max((int)($this->progressValue->getValue() * $count) - 1, 0)
-            );
-
-        return $this->gradient->getOne($index);
+        return $this->gradient->getOne($this->getIndex());
     }
 
     protected function createFrame(string $sequence): IFrame
@@ -60,6 +51,15 @@ final class ProgressStyleProcedure extends AProgressValueProcedure
 
     protected function createFrameSequence(): string
     {
+        // TODO (2024-01-23 17:04) [Alec Rabbit]: refactor to remove this method
         throw new RuntimeException('Not implemented');
+    }
+
+    protected function getIndex(): mixed
+    {
+        return min(
+            $this->count,
+            max(0, (int)($this->progressValue->getValue() * $this->count) - 1)
+        );
     }
 }
