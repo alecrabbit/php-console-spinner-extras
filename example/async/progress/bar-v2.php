@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-use AlecRabbit\Color\ColorRange;
-use AlecRabbit\Color\Gradient\Gradient;
+use AlecRabbit\Color\Gradient\ColorRange;
 use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
@@ -28,7 +27,7 @@ require_once __DIR__ . '/../bootstrap.async.php';
 Facade::getSettings()
     ->set(
         new OutputSettings(
-            stylingMethodOption: StylingMethodOption::ANSI24,
+            stylingMethodOption: StylingMethodOption::ANSI8,
         )
     )
 ;
@@ -40,10 +39,12 @@ $progressValue =
         steps: $steps,
     );
 
-$gradient = new Gradient(
+$gradient = new AlecRabbit\Color\Gradient\RGBAGradient(
     range: new ColorRange(
-        'hsl(0, 100%, 42%)',
-        'hsl(120, 100%, 42%)',
+        start: '#000',
+        end: '#fff',
+//        start: 'hsl(0, 100%, 42%)',
+//        end: 'hsl(120, 100%, 42%)',
     ),
     count: $steps
 );
@@ -76,12 +77,12 @@ $progressWidgetSettings =
             ),
         ),
         new WidgetSettings(
-            stylePalette: new ProcedureStylePalette(
-                procedure: new ProgressStyleProcedure(
-                    progressValue: $progressValue,
-                    gradient: $gradient,
-                ),
-            ),
+//            stylePalette: new ProcedureStylePalette(
+//                procedure: new ProgressStyleProcedure(
+//                    progressValue: $progressValue,
+//                    gradient: $gradient,
+//                ),
+//            ),
             charPalette: new ProcedureCharPalette(
                 procedure: new ProgressBarProcedure(
                     progressValue: $progressValue,
@@ -97,12 +98,12 @@ $progressWidgetSettings =
             ),
         ),
         new WidgetSettings(
-            stylePalette: new ProcedureStylePalette(
-                procedure: new ProgressStyleProcedure(
-                    progressValue: $progressValue,
-                    gradient: $gradient,
-                ),
-            ),
+//            stylePalette: new ProcedureStylePalette(
+//                procedure: new ProgressStyleProcedure(
+//                    progressValue: $progressValue,
+//                    gradient: $gradient,
+//                ),
+//            ),
             charPalette: new ProcedureCharPalette(
                 procedure: new ProgressEstimateProcedure(
                     progressValue: $progressValue,

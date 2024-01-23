@@ -49,7 +49,7 @@ abstract class AFrameRevolver extends ARevolver implements IFrameRevolver
         };
     }
 
-    protected function next(): void
+    protected function next(?float $dt = null): void
     {
         $this->frames->next();
     }

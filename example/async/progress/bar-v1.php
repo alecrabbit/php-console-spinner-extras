@@ -93,10 +93,14 @@ $loop
 $loop
     ->repeat(
         1,
-        static function () use ($progressValue, $spinner, $widget): void {
-            // note: isFinished(useThreshold: true) will return true after number of calls set by threshold
-            if ($progressValue->isFinished() && $progressValue->isFinished(useThreshold: true)) {
-                $spinner->remove($widget->getContext());
+        static function () use ($progressValue, $spinner, $widget, $loop): void {
+            if ($progressValue->isFinished()) {
+                $loop->delay(
+                    5,
+                    static function () use ($spinner, $widget): void {
+                        $spinner->remove($widget->getContext());
+                    }
+                );
             }
         }
     )
