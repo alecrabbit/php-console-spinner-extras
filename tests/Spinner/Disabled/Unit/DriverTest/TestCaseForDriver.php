@@ -7,9 +7,7 @@ namespace AlecRabbit\Tests\Spinner\Disabled\Unit\DriverTest;
 
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Contract\IObserver;
-use AlecRabbit\Spinner\Contract\ITimer;
 use AlecRabbit\Spinner\Core\Contract\IDriver;
-use AlecRabbit\Spinner\Core\Output\Contract\IDriverOutput;
 use AlecRabbit\Spinner\Core\Settings\Contract\IDriverSettings;
 use AlecRabbit\Spinner\Extras\Driver\Driver;
 use AlecRabbit\Tests\TestCase\TestCaseWithPrebuiltMocksAndStubs;

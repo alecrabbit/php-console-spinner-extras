@@ -41,12 +41,10 @@ $progressValue =
 
 $gradient = new AlecRabbit\Color\Gradient\RGBAGradient(
     range: new ColorRange(
-        start: '#000',
-        end: '#fff',
-//        start: 'hsl(0, 100%, 42%)',
-//        end: 'hsl(120, 100%, 42%)',
+        start: 'hsl(0, 100%, 50%)',
+        end: 'hsl(120, 0%, 100%)',
     ),
-    count: $steps
+    count: $progressValue->getSteps(),
 );
 
 $progressWidgetSettings =
@@ -77,12 +75,12 @@ $progressWidgetSettings =
             ),
         ),
         new WidgetSettings(
-//            stylePalette: new ProcedureStylePalette(
-//                procedure: new ProgressStyleProcedure(
-//                    progressValue: $progressValue,
-//                    gradient: $gradient,
-//                ),
-//            ),
+            stylePalette: new ProcedureStylePalette(
+                procedure: new ProgressStyleProcedure(
+                    progressValue: $progressValue,
+                    gradient: $gradient,
+                ),
+            ),
             charPalette: new ProcedureCharPalette(
                 procedure: new ProgressBarProcedure(
                     progressValue: $progressValue,
@@ -98,12 +96,12 @@ $progressWidgetSettings =
             ),
         ),
         new WidgetSettings(
-//            stylePalette: new ProcedureStylePalette(
-//                procedure: new ProgressStyleProcedure(
-//                    progressValue: $progressValue,
-//                    gradient: $gradient,
-//                ),
-//            ),
+            stylePalette: new ProcedureStylePalette(
+                procedure: new ProgressStyleProcedure(
+                    progressValue: $progressValue,
+                    gradient: $gradient,
+                ),
+            ),
             charPalette: new ProcedureCharPalette(
                 procedure: new ProgressEstimateProcedure(
                     progressValue: $progressValue,

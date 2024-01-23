@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
+use AlecRabbit\Spinner\Container\Contract\IContainer;
 use AlecRabbit\Spinner\Container\DefinitionRegistry;
 use AlecRabbit\Spinner\Container\ServiceDefinition;
 use AlecRabbit\Spinner\Core\Factory\Contract\ICharFrameRevolverFactory;
+use AlecRabbit\Spinner\Core\Factory\Contract\IStyleFrameRevolverFactory;
 use AlecRabbit\Spinner\Core\Palette\Factory\Contract\IPaletteTemplateFactory;
 use AlecRabbit\Spinner\Core\Pattern\Factory\Contract\IPatternFactory;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
 use AlecRabbit\Spinner\Extras\Color\Style\StyleOptionsParser;
+use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptionsParser;
 use AlecRabbit\Spinner\Extras\Factory\AnsiColorParserFactory;
 use AlecRabbit\Spinner\Extras\Factory\CharFrameRevolverFactory;
@@ -16,11 +19,17 @@ use AlecRabbit\Spinner\Extras\Factory\ColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IAnsiColorParserFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IHexColorToAnsiCodeConverterFactory;
+use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleRendererFactory;
+use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleToAnsiStringConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\HexColorToAnsiCodeConverterFactory;
+use AlecRabbit\Spinner\Extras\Factory\StyleFrameRevolverFactory;
+use AlecRabbit\Spinner\Extras\Factory\StyleRendererFactory;
+use AlecRabbit\Spinner\Extras\Factory\StyleToAnsiStringConverterFactory;
 use AlecRabbit\Spinner\Extras\Palette\Builder\InfinitePaletteTemplateBuilder;
 use AlecRabbit\Spinner\Extras\Palette\Contract\Builder\IInfinitePaletteTemplateBuilder;
 use AlecRabbit\Spinner\Extras\Palette\Factory\PaletteTemplateFactory;
 use AlecRabbit\Spinner\Extras\Pattern\Factory\PatternFactory;
+use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Revolver\Builder\CharFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\ICharFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\IStyleFrameRevolverBuilder;
@@ -55,10 +64,10 @@ DefinitionRegistry::getInstance()
             IInfinitePaletteTemplateBuilder::class,
             InfinitePaletteTemplateBuilder::class,
         ),
-//        new ServiceDefinition(
-//            IStyleFrameRevolverFactory::class,
-//            StyleFrameRevolverFactory::class,
-//        ),
+        new ServiceDefinition(
+            IStyleFrameRevolverFactory::class,
+            StyleFrameRevolverFactory::class,
+        ),
         new ServiceDefinition(
             ICharFrameRevolverFactory::class,
             CharFrameRevolverFactory::class,
@@ -73,12 +82,27 @@ DefinitionRegistry::getInstance()
         ),
 //        new ServiceDefinition(
 //            IStyleRenderer::class,
-//            StyleRenderer::class,
+//            new class implements IStyleRenderer {
+//                public function render(IStyle $style): string
+//                {
+//                    return '%s';
+//                }
+//            },
 //        ),
-//        new ServiceDefinition(
-//            IStyleToAnsiStringConverter::class,
-//            StyleToAnsiStringConverter::class,
-//        ),
+        new ServiceDefinition(
+            IStyleRenderer::class,
+            static function (IContainer $container): IStyleRenderer {
+                return $container->get(IStyleRendererFactory::class)->create();
+            },
+        ),
+        new ServiceDefinition(
+            IStyleRendererFactory::class,
+            StyleRendererFactory::class,
+        ),
+        new ServiceDefinition(
+             IStyleToAnsiStringConverterFactory::class,
+             StyleToAnsiStringConverterFactory::class,
+        ),
         new ServiceDefinition(
             IAnsiColorParserFactory::class,
             AnsiColorParserFactory::class,

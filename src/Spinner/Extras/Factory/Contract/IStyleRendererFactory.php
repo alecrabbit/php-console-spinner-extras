@@ -10,5 +10,5 @@ use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 
 interface IStyleRendererFactory
 {
-    public function create(StylingMethodMode $styleMode): IStyleRenderer;
+    public function create(): IStyleRenderer;
 }
