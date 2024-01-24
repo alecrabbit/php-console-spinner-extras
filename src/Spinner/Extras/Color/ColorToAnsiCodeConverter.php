@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Color;
 
 use AlecRabbit\Color\Contract\IColor;
-use AlecRabbit\Color\Contract\IHexColor;
-use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
-use AlecRabbit\Spinner\Exception\LogicException;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
+use AlecRabbit\Spinner\Extras\Color\Contract\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiCode;
 use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;
 

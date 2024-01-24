@@ -56,7 +56,8 @@ final class Ansi4ColorCodesGetterTest extends TestCase
             ->expects(self::once())
             ->method('degrade')
             ->with(...$input)
-            ->willReturn($degradedColor);
+            ->willReturn($degradedColor)
+        ;
 
         $getter = $this->getTesteeInstance($degrader);
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Render;
 
-use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\IStyleToAnsiStringConverter;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;

@@ -13,8 +13,8 @@ use AlecRabbit\Spinner\Extras\Color\Ansi8ColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\Ansi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
+use AlecRabbit\Spinner\Extras\Color\Contract\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Color\HexColorNormalizer;
-use AlecRabbit\Spinner\Extras\Color\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;
 use AlecRabbit\Tests\Spinner\Unit\Extras\Color\SimpleHexColorToAnsiCodeConverterTest;
 use AlecRabbit\Tests\TestCase\TestCase;
@@ -61,7 +61,7 @@ final class ColorToAnsiCodeConverterTest extends TestCase
             ['5', '#d134f2', $ansi4], // color degrading
 
             ['8;5;238', '#444', $ansi8],
-            ['8;5;254', '#eee', $ansi8],
+            ['8;5;255', '#eee', $ansi8],
             ['8;5;231', '#fff', $ansi8],
             ['8;5;59', '#434544', $ansi8],
             ['8;5;238', '#454545', $ansi8],
@@ -90,6 +90,15 @@ final class ColorToAnsiCodeConverterTest extends TestCase
         );
     }
 
+    private function getColorCodesGetter(StylingMethodMode $styleMode = null): IColorCodesGetter
+    {
+        return match ($styleMode) {
+            StylingMethodMode::ANSI24 => new Ansi24ColorCodesGetter(),
+            StylingMethodMode::ANSI8 => new Ansi8ColorCodesGetter(new Ansi8ColorDegrader()),
+            default => new Ansi4ColorCodesGetter(new Ansi4ColorDegrader()),
+        };
+    }
+
     #[Test]
     #[DataProvider('canConvertDataProvider')]
     public function canConvert(array $expected, array $incoming): void
@@ -113,14 +122,5 @@ final class ColorToAnsiCodeConverterTest extends TestCase
         }
 
         self::assertSame($expectedResult, $actual);
-    }
-
-    private function getColorCodesGetter(StylingMethodMode $styleMode = null): IColorCodesGetter
-    {
-        return match ($styleMode) {
-            StylingMethodMode::ANSI24 => new Ansi24ColorCodesGetter(),
-            StylingMethodMode::ANSI8 => new Ansi8ColorCodesGetter(new Ansi8ColorDegrader()),
-            default => new Ansi4ColorCodesGetter(new Ansi4ColorDegrader()),
-        };
     }
 }

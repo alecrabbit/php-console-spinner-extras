@@ -12,10 +12,9 @@ use AlecRabbit\Spinner\Core\Pattern\Factory\Contract\IPatternFactory;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
 use AlecRabbit\Spinner\Extras\Builder\ColorToAnsiCodeConverterBuilder;
 use AlecRabbit\Spinner\Extras\Builder\Contract\IColorToAnsiCodeConverterBuilder;
+use AlecRabbit\Spinner\Extras\Color\Contract\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Color\HexColorNormalizer;
-use AlecRabbit\Spinner\Extras\Color\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Color\Style\StyleOptionsParser;
-use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptionsParser;
 use AlecRabbit\Spinner\Extras\Factory\AnsiColorParserFactory;
 use AlecRabbit\Spinner\Extras\Factory\CharFrameRevolverFactory;
@@ -24,10 +23,8 @@ use AlecRabbit\Spinner\Extras\Factory\ColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IAnsiColorParserFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IColorCodesGetterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IColorToAnsiCodeConverterFactory;
-use AlecRabbit\Spinner\Extras\Factory\Contract\IHexColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleRendererFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleToAnsiStringConverterFactory;
-use AlecRabbit\Spinner\Extras\Factory\HexColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\StyleFrameRevolverFactory;
 use AlecRabbit\Spinner\Extras\Factory\StyleRendererFactory;
 use AlecRabbit\Spinner\Extras\Factory\StyleToAnsiStringConverterFactory;
@@ -97,8 +94,8 @@ DefinitionRegistry::getInstance()
             StyleRendererFactory::class,
         ),
         new ServiceDefinition(
-             IStyleToAnsiStringConverterFactory::class,
-             StyleToAnsiStringConverterFactory::class,
+            IStyleToAnsiStringConverterFactory::class,
+            StyleToAnsiStringConverterFactory::class,
         ),
         new ServiceDefinition(
             IAnsiColorParserFactory::class,

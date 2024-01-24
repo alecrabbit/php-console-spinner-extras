@@ -13,6 +13,7 @@ use AlecRabbit\Spinner\Extras\Color\Ansi8ColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Factory\ColorCodesGetterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IColorCodesGetterFactory;
 use AlecRabbit\Tests\TestCase\TestCase;
+use LogicException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -57,7 +58,8 @@ final class ColorCodesGetterFactoryTest extends TestCase
         $outputConfig
             ->expects(self::once())
             ->method('getStylingMethodMode')
-            ->willReturn($stylingMode);
+            ->willReturn($stylingMode)
+        ;
 
         $factory = $this->getTesteeInstance(outputConfig: $outputConfig);
 
@@ -68,14 +70,15 @@ final class ColorCodesGetterFactoryTest extends TestCase
     #[Test]
     public function throwsIfModeIsUnknown(): void
     {
-        $this->expectException(\LogicException::class);
+        $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Unknown mode.');
 
         $outputConfig = $this->getOutputConfigMock();
         $outputConfig
             ->expects(self::once())
             ->method('getStylingMethodMode')
-            ->willReturn(StylingMethodMode::NONE);
+            ->willReturn(StylingMethodMode::NONE)
+        ;
 
         $factory = $this->getTesteeInstance(outputConfig: $outputConfig);
 

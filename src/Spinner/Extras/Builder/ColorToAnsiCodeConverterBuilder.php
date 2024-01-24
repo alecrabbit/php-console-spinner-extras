@@ -10,8 +10,9 @@ use AlecRabbit\Spinner\Extras\Builder\Dummy\Dummy;
 use AlecRabbit\Spinner\Extras\Builder\Dummy\IDummy;
 use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
-use AlecRabbit\Spinner\Extras\Color\IHexColorNormalizer;
+use AlecRabbit\Spinner\Extras\Color\Contract\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;
+use LogicException;
 
 final class ColorToAnsiCodeConverterBuilder extends AbstractBuilder implements IColorToAnsiCodeConverterBuilder
 {
@@ -37,10 +38,10 @@ final class ColorToAnsiCodeConverterBuilder extends AbstractBuilder implements I
     protected function validate(): void
     {
         match (true) {
-            $this->isDummy($this->hexColorNormalizer) => throw new \LogicException(
+            $this->isDummy($this->hexColorNormalizer) => throw new LogicException(
                 'HexColorNormalizer is not set.'
             ),
-            $this->isDummy($this->colorCodesGetter) => throw new \LogicException(
+            $this->isDummy($this->colorCodesGetter) => throw new LogicException(
                 'ColorCodesGetter is not set.'
             ),
             default => null,

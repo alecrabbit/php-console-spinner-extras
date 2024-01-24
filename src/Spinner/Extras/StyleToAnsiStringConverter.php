@@ -56,7 +56,7 @@ final class StyleToAnsiStringConverter implements IStyleToAnsiStringConverter
     private function bg(IStyle $style): string
     {
         $code = $this->colorParser->parseColor($style->getBgColor());
-        
+
         return $code->isEmpty() ? '' : '4' . $code->toString();
     }
 

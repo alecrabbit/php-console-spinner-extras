@@ -13,6 +13,7 @@ use AlecRabbit\Spinner\Extras\Color\Ansi8ColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\Ansi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IColorCodesGetterFactory;
+use LogicException;
 
 final readonly class ColorCodesGetterFactory implements IColorCodesGetterFactory
 {
@@ -29,7 +30,7 @@ final readonly class ColorCodesGetterFactory implements IColorCodesGetterFactory
             StylingMethodMode::ANSI4 => new Ansi4ColorCodesGetter(new Ansi4ColorDegrader()),
             StylingMethodMode::ANSI8 => new Ansi8ColorCodesGetter(new Ansi8ColorDegrader()),
             StylingMethodMode::ANSI24 => new Ansi24ColorCodesGetter(),
-            default => throw new \LogicException(
+            default => throw new LogicException(
                 'Unknown mode.' .
                 sprintf(
                     ' Got: "%s::%s"',

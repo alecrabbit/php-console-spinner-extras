@@ -39,6 +39,7 @@ final class Ansi8ColorCodesGetterTest extends TestCase
             $ansi8ColorDegrader ?? new Ansi8ColorDegrader()
         );
     }
+
     #[Test]
     #[DataProvider('canGetCodesDataProvider')]
     public function canGetCodes(array $expected, array $input): void

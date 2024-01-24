@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Factory;
 
-use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Core\Config\Contract\IOutputConfig;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleRendererFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleToAnsiStringConverterFactory;
@@ -32,11 +31,6 @@ final class StyleRendererFactoryTest extends TestCaseWithPrebuiltMocksAndStubs
         );
     }
 
-    private function getOutputConfigMock(): MockObject&IOutputConfig
-    {
-        return $this->createMock(IOutputConfig::class);
-    }
-
     #[Test]
     public function canCreate(): void
     {
@@ -57,5 +51,10 @@ final class StyleRendererFactoryTest extends TestCaseWithPrebuiltMocksAndStubs
         self::assertInstanceOf(StyleRendererFactory::class, $styleRendererFactory);
         self::assertInstanceOf(StyleRenderer::class, $renderer);
         self::assertSame($converter, self::getPropertyValue('converter', $renderer));
+    }
+
+    private function getOutputConfigMock(): MockObject&IOutputConfig
+    {
+        return $this->createMock(IOutputConfig::class);
     }
 }

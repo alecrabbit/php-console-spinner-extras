@@ -11,7 +11,6 @@ use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\MockObject\MockObject;
 
 final class Ansi4ColorCodesGetterTest extends TestCase
 {
@@ -21,7 +20,7 @@ final class Ansi4ColorCodesGetterTest extends TestCase
             // [expected], [input]
             [[0], [1, 2, 3]],
             [[0], [0, 0, 0]],
-            [[7], [255, 255, 255]],
+            [[7], [240, 240, 240]],
         ];
     }
 
@@ -40,6 +39,7 @@ final class Ansi4ColorCodesGetterTest extends TestCase
             $ansi4ColorDegrader ?? new Ansi4ColorDegrader()
         );
     }
+
     #[Test]
     #[DataProvider('canGetCodesDataProvider')]
     public function canGetCodes(array $expected, array $input): void

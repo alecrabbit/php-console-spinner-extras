@@ -13,6 +13,7 @@ final readonly class Ansi4ColorCodesGetter implements IColorCodesGetter
         private IAnsi4ColorDegrader $ansi4ColorDegrader,
     ) {
     }
+
     public function getCodes(int $r, int $g, int $b): iterable
     {
         return [$this->ansi4ColorDegrader->degrade($r, $g, $b)];

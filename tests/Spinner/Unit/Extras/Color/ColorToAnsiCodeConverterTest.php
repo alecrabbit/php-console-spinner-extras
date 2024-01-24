@@ -11,7 +11,7 @@ use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
-use AlecRabbit\Spinner\Extras\Color\IHexColorNormalizer;
+use AlecRabbit\Spinner\Extras\Color\Contract\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -43,19 +43,9 @@ final class ColorToAnsiCodeConverterTest extends TestCase
         return $this->createMock(IHexColorNormalizer::class);
     }
 
-    private function getAnsi4DegraderMock(): MockObject&IAnsi4ColorDegrader
+    private function getColorCodesGetterMock(): MockObject&IColorCodesGetter
     {
-        return $this->createMock(IAnsi4ColorDegrader::class);
-    }
-
-    private function getAnsi8DegraderMock(): MockObject&IAnsi8ColorDegrader
-    {
-        return $this->createMock(IAnsi8ColorDegrader::class);
-    }
-
-    private function getHexColorMock(): MockObject&IHexColor
-    {
-        return $this->createMock(IHexColor::class);
+        return $this->createMock(IColorCodesGetter::class);
     }
 
     #[Test]
@@ -109,8 +99,18 @@ final class ColorToAnsiCodeConverterTest extends TestCase
         self::assertSame('1;2;3', $actual->toString());
     }
 
-    private function getColorCodesGetterMock(): MockObject&IColorCodesGetter
+    private function getHexColorMock(): MockObject&IHexColor
     {
-        return $this->createMock(IColorCodesGetter::class);
+        return $this->createMock(IHexColor::class);
+    }
+
+    private function getAnsi4DegraderMock(): MockObject&IAnsi4ColorDegrader
+    {
+        return $this->createMock(IAnsi4ColorDegrader::class);
+    }
+
+    private function getAnsi8DegraderMock(): MockObject&IAnsi8ColorDegrader
+    {
+        return $this->createMock(IAnsi8ColorDegrader::class);
     }
 }

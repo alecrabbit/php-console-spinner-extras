@@ -26,6 +26,7 @@ final class Ansi8ColorDegraderTest extends TestCase
             [226, [240, 231, 5]],
             [231, [255, 255, 255]],
             [255, [240, 240, 240]],
+            [120, [0x87, 0xff, 0x87]],
         ];
     }
 
