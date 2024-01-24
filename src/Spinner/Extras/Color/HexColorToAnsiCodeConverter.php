@@ -10,6 +10,9 @@ use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Color\A\AColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Contract\IHexColorToAnsiCodeConverter;
 
+/**
+ * @deprecated // TODO (2024-01-24 13:19) [Alec Rabbit]: remove
+ */
 final class HexColorToAnsiCodeConverter extends AColorToAnsiCodeConverter implements IHexColorToAnsiCodeConverter
 {
     public function convert(string $color): string
