@@ -11,6 +11,7 @@ use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Color\HexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Color\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;
+use AlecRabbit\Spinner\Extras\Factory\Contract\IColorCodesGetterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IColorToAnsiCodeConverterFactory;
 
 final readonly class ColorToAnsiCodeConverterFactory implements IColorToAnsiCodeConverterFactory
@@ -18,6 +19,7 @@ final readonly class ColorToAnsiCodeConverterFactory implements IColorToAnsiCode
     public function __construct(
         private IOutputConfig $outputConfig,
         private IHexColorNormalizer $hexColorNormalizer,
+        private IColorCodesGetterFactory $colorCodesGetterFactory,
     ) {
     }
 

@@ -17,8 +17,10 @@ use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptionsParser;
 use AlecRabbit\Spinner\Extras\Factory\AnsiColorParserFactory;
 use AlecRabbit\Spinner\Extras\Factory\CharFrameRevolverFactory;
+use AlecRabbit\Spinner\Extras\Factory\ColorCodesGetterFactory;
 use AlecRabbit\Spinner\Extras\Factory\ColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IAnsiColorParserFactory;
+use AlecRabbit\Spinner\Extras\Factory\Contract\IColorCodesGetterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IHexColorToAnsiCodeConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleRendererFactory;
@@ -112,6 +114,10 @@ DefinitionRegistry::getInstance()
         new ServiceDefinition(
             IHexColorNormalizer::class,
             HexColorNormalizer::class,
+        ),
+        new ServiceDefinition(
+            IColorCodesGetterFactory::class,
+            ColorCodesGetterFactory::class,
         ),
 //        new ServiceDefinition(
 //            IHexColorToAnsiCodeConverter::class,

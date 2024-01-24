@@ -6,7 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Color;
 
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
 
-final readonly class Ansi24ColorCodesGetter extends AColorCodesGetter implements IColorCodesGetter
+final readonly class Ansi24ColorCodesGetter implements IColorCodesGetter
 {
     public function getCodes(int $r, int $g, int $b): iterable
     {

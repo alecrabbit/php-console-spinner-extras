@@ -7,7 +7,7 @@ namespace AlecRabbit\Spinner\Extras\Color;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
 
-final readonly class Ansi8ColorCodesGetter extends AColorCodesGetter implements IColorCodesGetter
+final readonly class Ansi8ColorCodesGetter implements IColorCodesGetter
 {
     public function __construct(
         private IAnsi8ColorDegrader $ansi8ColorDegrader,
