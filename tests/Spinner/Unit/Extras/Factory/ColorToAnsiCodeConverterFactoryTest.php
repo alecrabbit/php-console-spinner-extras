@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Factory;
 
 
-use AlecRabbit\Spinner\Core\Config\Contract\IOutputConfig;
+use AlecRabbit\Spinner\Extras\Builder\Contract\IColorToAnsiCodeConverterBuilder;
+use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Factory\ColorToAnsiCodeConverterFactory;
@@ -26,21 +27,16 @@ final class ColorToAnsiCodeConverterFactoryTest extends TestCase
     }
 
     private function getTesteeInstance(
-        ?IOutputConfig $outputConfig = null,
         ?IHexColorNormalizer $hexColorNormalizer = null,
         ?IColorCodesGetterFactory $colorCodesGetterFactory = null,
-    ): IColorToAnsiCodeConverterFactory
-    {
+        ?IColorToAnsiCodeConverterBuilder $colorToAnsiCodeConverterBuilder = null,
+    ): IColorToAnsiCodeConverterFactory {
         return new ColorToAnsiCodeConverterFactory(
-            outputConfig: $outputConfig ?? $this->getOutputConfigMock(),
             hexColorNormalizer: $hexColorNormalizer ?? $this->getHexColorNormalizerMock(),
             colorCodesGetterFactory: $colorCodesGetterFactory ?? $this->getColorCodesGetterFactoryMock(),
+            colorToAnsiCodeConverterBuilder: $colorToAnsiCodeConverterBuilder ?? $this->getColorToAnsiCodeConverterBuilderMock(
+        ),
         );
-    }
-
-    private function getOutputConfigMock(): MockObject&IOutputConfig
-    {
-        return $this->createMock(IOutputConfig::class);
     }
 
     private function getHexColorNormalizerMock(): MockObject&IHexColorNormalizer
@@ -51,5 +47,56 @@ final class ColorToAnsiCodeConverterFactoryTest extends TestCase
     private function getColorCodesGetterFactoryMock(): MockObject&IColorCodesGetterFactory
     {
         return $this->createMock(IColorCodesGetterFactory::class);
+    }
+
+    private function getColorToAnsiCodeConverterBuilderMock(): MockObject&IColorToAnsiCodeConverterBuilder
+    {
+        return $this->createMock(IColorToAnsiCodeConverterBuilder::class);
+    }
+
+    #[Test]
+    public function canCreate(): void
+    {
+        $converter = $this->createMock(IColorToAnsiCodeConverter::class);
+
+        $colorCodesGetter = $this->getColorCodesGetterMock();
+        $colorCodesGetterFactory = $this->getColorCodesGetterFactoryMock();
+        $colorCodesGetterFactory
+            ->expects(self::once())
+            ->method('create')
+            ->willReturn($colorCodesGetter)
+        ;
+        $hexColorNormalizer = $this->getHexColorNormalizerMock();
+
+        $builder = $this->getColorToAnsiCodeConverterBuilderMock();
+        $builder
+            ->expects(self::once())
+            ->method('withHexColorNormalizer')
+            ->with($hexColorNormalizer)
+            ->willReturnSelf()
+        ;
+        $builder
+            ->expects(self::once())
+            ->method('withColorCodesGetter')
+            ->with($colorCodesGetter)
+            ->willReturnSelf();
+        $builder
+            ->expects(self::once())
+            ->method('build')
+            ->willReturn($converter)
+        ;
+
+        $factory = $this->getTesteeInstance(
+            hexColorNormalizer: $hexColorNormalizer,
+            colorCodesGetterFactory: $colorCodesGetterFactory,
+            colorToAnsiCodeConverterBuilder: $builder,
+        );
+
+        self::assertSame($converter, $factory->create());
+    }
+
+    private function getColorCodesGetterMock(): MockObject&IColorCodesGetter
+    {
+        return $this->createMock(IColorCodesGetter::class);
     }
 }

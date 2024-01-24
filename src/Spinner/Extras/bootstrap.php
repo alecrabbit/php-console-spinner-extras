@@ -10,6 +10,8 @@ use AlecRabbit\Spinner\Core\Factory\Contract\IStyleFrameRevolverFactory;
 use AlecRabbit\Spinner\Core\Palette\Factory\Contract\IPaletteTemplateFactory;
 use AlecRabbit\Spinner\Core\Pattern\Factory\Contract\IPatternFactory;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
+use AlecRabbit\Spinner\Extras\Builder\ColorToAnsiCodeConverterBuilder;
+use AlecRabbit\Spinner\Extras\Builder\Contract\IColorToAnsiCodeConverterBuilder;
 use AlecRabbit\Spinner\Extras\Color\HexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Color\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Color\Style\StyleOptionsParser;
@@ -63,6 +65,10 @@ DefinitionRegistry::getInstance()
         new ServiceDefinition(
             IInfinitePaletteTemplateBuilder::class,
             InfinitePaletteTemplateBuilder::class,
+        ),
+        new ServiceDefinition(
+            IColorToAnsiCodeConverterBuilder::class,
+            ColorToAnsiCodeConverterBuilder::class,
         ),
         new ServiceDefinition(
             IStyleFrameRevolverFactory::class,

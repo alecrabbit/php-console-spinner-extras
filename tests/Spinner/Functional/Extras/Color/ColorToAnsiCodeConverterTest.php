@@ -6,11 +6,13 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Functional\Extras\Color;
 
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
+use AlecRabbit\Spinner\Extras\Color\Ansi24ColorCodesGetter;
+use AlecRabbit\Spinner\Extras\Color\Ansi4ColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\Ansi4ColorDegrader;
+use AlecRabbit\Spinner\Extras\Color\Ansi8ColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\Ansi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;
-use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4ColorDegrader;
-use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi8ColorDegrader;
+use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\HexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Color\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;
@@ -79,16 +81,12 @@ final class ColorToAnsiCodeConverterTest extends TestCase
     }
 
     public function getTesteeInstance(
-        ?StylingMethodMode $styleMode = null,
         ?IHexColorNormalizer $hexColorNormalizer = null,
-        ?IAnsi4ColorDegrader $ansi4ColorDegrader = null,
-        ?IAnsi8ColorDegrader $ansi8ColorDegrader = null,
+        ?IColorCodesGetter $colorCodesGetter = null,
     ): IColorToAnsiCodeConverter {
         return new ColorToAnsiCodeConverter(
-            mode: $styleMode ?? StylingMethodMode::ANSI24,
             hexColorNormalizer: $hexColorNormalizer ?? new HexColorNormalizer(),
-            ansi4ColorDegrader: $ansi4ColorDegrader ?? new Ansi4ColorDegrader(),
-            ansi8ColorDegrader: $ansi8ColorDegrader ?? new Ansi8ColorDegrader(),
+            colorCodesGetter: $colorCodesGetter ?? $this->getColorCodesGetter(),
         );
     }
 
@@ -105,7 +103,7 @@ final class ColorToAnsiCodeConverterTest extends TestCase
         $styleMode = $args[self::STYLE_MODE];
 
         $converter = $this->getTesteeInstance(
-            styleMode: $styleMode,
+            colorCodesGetter: $this->getColorCodesGetter($styleMode),
         );
 
         $actual = $converter->convert($color)->toString();
@@ -115,5 +113,14 @@ final class ColorToAnsiCodeConverterTest extends TestCase
         }
 
         self::assertSame($expectedResult, $actual);
+    }
+
+    private function getColorCodesGetter(StylingMethodMode $styleMode = null): IColorCodesGetter
+    {
+        return match ($styleMode) {
+            StylingMethodMode::ANSI24 => new Ansi24ColorCodesGetter(),
+            StylingMethodMode::ANSI8 => new Ansi8ColorCodesGetter(new Ansi8ColorDegrader()),
+            default => new Ansi4ColorCodesGetter(new Ansi4ColorDegrader()),
+        };
     }
 }
