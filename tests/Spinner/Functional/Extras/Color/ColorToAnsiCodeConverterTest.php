@@ -83,14 +83,12 @@ final class ColorToAnsiCodeConverterTest extends TestCase
     public function getTesteeInstance(
         ?StylingMethodMode $styleMode = null,
         ?IHexColorNormalizer $hexColorNormalizer = null,
-        ?IAnsi4BrightnessChecker $ans4BrightnessChecker = null,
         ?IAnsi4ColorDegrader $ansi4ColorDegrader = null,
         ?IAnsi8ColorDegrader $ansi8ColorDegrader = null,
     ): IColorToAnsiCodeConverter {
         return new ColorToAnsiCodeConverter(
             mode: $styleMode ?? StylingMethodMode::ANSI24,
             hexColorNormalizer: $hexColorNormalizer ?? new HexColorNormalizer(),
-            ans4BrightnessChecker: $ans4BrightnessChecker ?? new Ansi4BrightnessChecker(),
             ansi4ColorDegrader: $ansi4ColorDegrader ?? new Ansi4ColorDegrader(),
             ansi8ColorDegrader: $ansi8ColorDegrader ?? new Ansi8ColorDegrader(),
         );

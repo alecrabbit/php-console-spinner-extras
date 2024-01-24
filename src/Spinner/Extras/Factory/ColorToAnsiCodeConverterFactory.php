@@ -27,7 +27,6 @@ final readonly class ColorToAnsiCodeConverterFactory implements IColorToAnsiCode
         return new ColorToAnsiCodeConverter(
             mode: $this->outputConfig->getStylingMethodMode(),
             hexColorNormalizer: new HexColorNormalizer(),
-            ans4BrightnessChecker: new Ansi4BrightnessChecker(),
             ansi4ColorDegrader: new Ansi4ColorDegrader(),
             ansi8ColorDegrader: new Ansi8ColorDegrader(),
         );

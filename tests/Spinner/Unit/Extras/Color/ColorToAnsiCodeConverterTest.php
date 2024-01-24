@@ -30,7 +30,6 @@ final class ColorToAnsiCodeConverterTest extends TestCase
 
     public function getTesteeInstance(
         ?StylingMethodMode $styleMode = null,
-        ?IAnsi4BrightnessChecker $ans4BrightnessChecker = null,
         ?IHexColorNormalizer $hexColorNormalizer = null,
         ?IAnsi4ColorDegrader $ansi4ColorDegrader = null,
         ?IAnsi8ColorDegrader $ansi8ColorDegrader = null,
@@ -38,7 +37,6 @@ final class ColorToAnsiCodeConverterTest extends TestCase
         return new ColorToAnsiCodeConverter(
             mode: $styleMode ?? StylingMethodMode::ANSI24,
             hexColorNormalizer: $hexColorNormalizer ?? $this->getHexColorNormalizerMock(),
-            ans4BrightnessChecker: $ans4BrightnessChecker ?? $this->getAns4BrightnessCheckerMock(),
             ansi4ColorDegrader: $ansi4ColorDegrader ?? $this->getAnsi4DegraderMock(),
             ansi8ColorDegrader: $ansi8ColorDegrader ?? $this->getAnsi8DegraderMock(),
 

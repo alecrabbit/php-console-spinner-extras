@@ -19,7 +19,6 @@ final readonly class ColorToAnsiCodeConverter implements IColorToAnsiCodeConvert
     public function __construct(
         private StylingMethodMode $mode,
         private IHexColorNormalizer $hexColorNormalizer,
-        private IAnsi4BrightnessChecker $ans4BrightnessChecker,
         private IAnsi4ColorDegrader $ansi4ColorDegrader,
         private IAnsi8ColorDegrader $ansi8ColorDegrader,
     ) {
@@ -36,9 +35,7 @@ final readonly class ColorToAnsiCodeConverter implements IColorToAnsiCodeConvert
     {
         $codes = $this->getCodes($color->getRed(), $color->getGreen(), $color->getBlue());
 
-        return $this->isBright($color)
-            ? new BrightAnsiCode(...$codes)
-            : new AnsiCode(...$codes);
+        return new AnsiCode(...$codes);
     }
 
     protected function getCodes(int $r, int $g, int $b): iterable
@@ -48,14 +45,6 @@ final readonly class ColorToAnsiCodeConverter implements IColorToAnsiCodeConvert
             StylingMethodMode::ANSI8 => [8, 5, $this->ansi8ColorDegrader->degrade($r, $g, $b)],
             StylingMethodMode::ANSI24 => [8, 2, $r, $g, $b,],
             default => throw new LogicException('Unsupported mode.'),
-        };
-    }
-
-    protected function isBright(IHexColor $color): bool
-    {
-        return match ($this->mode) {
-            StylingMethodMode::ANSI4 => $this->ans4BrightnessChecker->isBright($color),
-            default => false,
         };
     }
 }
