@@ -8,7 +8,6 @@ use AlecRabbit\Color\Contract\IColor;
 use AlecRabbit\Color\Contract\IHexColor;
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Exception\LogicException;
-use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4BrightnessChecker;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiCode;

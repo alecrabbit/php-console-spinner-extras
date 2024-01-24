@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Factory;
 
 use AlecRabbit\Spinner\Core\Config\Contract\IOutputConfig;
-use AlecRabbit\Spinner\Extras\Color\Ansi4BrightnessChecker;
 use AlecRabbit\Spinner\Extras\Color\Ansi4ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Ansi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;

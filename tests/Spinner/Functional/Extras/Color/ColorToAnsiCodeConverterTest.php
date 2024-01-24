@@ -6,11 +6,9 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Functional\Extras\Color;
 
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
-use AlecRabbit\Spinner\Extras\Color\Ansi4BrightnessChecker;
 use AlecRabbit\Spinner\Extras\Color\Ansi4ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Ansi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;
-use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4BrightnessChecker;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\HexColorNormalizer;

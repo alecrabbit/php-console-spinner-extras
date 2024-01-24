@@ -9,7 +9,6 @@ use AlecRabbit\Color\Contract\IHexColor;
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Extras\Color\AnsiCode;
 use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;
-use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4BrightnessChecker;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi4ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\Contract\IAnsi8ColorDegrader;
 use AlecRabbit\Spinner\Extras\Color\IHexColorNormalizer;
@@ -46,11 +45,6 @@ final class ColorToAnsiCodeConverterTest extends TestCase
     private function getHexColorNormalizerMock(): MockObject&IHexColorNormalizer
     {
         return $this->createMock(IHexColorNormalizer::class);
-    }
-
-    private function getAns4BrightnessCheckerMock(): MockObject&IAnsi4BrightnessChecker
-    {
-        return $this->createMock(IAnsi4BrightnessChecker::class);
     }
 
     private function getAnsi4DegraderMock(): MockObject&IAnsi4ColorDegrader
