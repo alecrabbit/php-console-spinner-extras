@@ -16,14 +16,13 @@ final readonly class StyleRendererFactory implements IStyleRendererFactory
 {
     public function __construct(
         private IStyleToAnsiStringConverterFactory $converterFactory,
-        private IOutputConfig $outputConfig,
     ) {
     }
 
     public function create(): IStyleRenderer
     {
         return new StyleRenderer(
-            converter: $this->converterFactory->create($this->outputConfig->getStylingMethodMode()),
+            converter: $this->converterFactory->create(),
         );
     }
 }

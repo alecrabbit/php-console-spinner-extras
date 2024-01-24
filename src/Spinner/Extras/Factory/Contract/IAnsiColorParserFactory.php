@@ -10,5 +10,5 @@ use AlecRabbit\Spinner\Extras\Contract\IAnsiColorParser;
 
 interface IAnsiColorParserFactory
 {
-    public function create(StylingMethodMode $styleMode): IAnsiColorParser;
+    public function create(): IAnsiColorParser;
 }

@@ -9,5 +9,5 @@ use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;
 
 interface IColorToAnsiCodeConverterFactory
 {
-    public function create(StylingMethodMode $styleMode): IColorToAnsiCodeConverter;
+    public function create(): IColorToAnsiCodeConverter;
 }

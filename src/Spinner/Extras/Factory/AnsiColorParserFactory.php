@@ -18,10 +18,10 @@ final class AnsiColorParserFactory implements IAnsiColorParserFactory
     ) {
     }
 
-    public function create(StylingMethodMode $styleMode): IAnsiColorParser
+    public function create(): IAnsiColorParser
     {
         return new AnsiColorParser(
-            converter: $this->converterFactory->create($styleMode),
+            converter: $this->converterFactory->create(),
         );
     }
 }

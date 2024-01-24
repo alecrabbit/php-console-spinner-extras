@@ -26,11 +26,9 @@ final class StyleRendererFactoryTest extends TestCaseWithPrebuiltMocksAndStubs
 
     public function getTesteeInstance(
         ?IStyleToAnsiStringConverterFactory $converterFactory = null,
-        ?IOutputConfig $outputConfig = null,
     ): IStyleRendererFactory {
         return new StyleRendererFactory(
             converterFactory: $converterFactory ?? $this->getStyleToAnsiStringConverterFactoryMock(),
-            outputConfig: $outputConfig ?? $this->getOutputConfigMock(),
         );
     }
 
@@ -42,28 +40,17 @@ final class StyleRendererFactoryTest extends TestCaseWithPrebuiltMocksAndStubs
     #[Test]
     public function canCreate(): void
     {
-        $styleMode = StylingMethodMode::ANSI4;
-
-        $config = $this->getOutputConfigMock();
-        $config
-            ->expects(self::once())
-            ->method('getStylingMethodMode')
-            ->willReturn($styleMode)
-        ;
-
         $converter = $this->getStyleToAnsiStringConverterMock();
 
         $converterFactory = $this->getStyleToAnsiStringConverterFactoryMock();
         $converterFactory
             ->expects(self::once())
             ->method('create')
-            ->with($styleMode)
             ->willReturn($converter)
         ;
 
         $styleRendererFactory = $this->getTesteeInstance(
             converterFactory: $converterFactory,
-            outputConfig: $config,
         );
 
         $renderer = $styleRendererFactory->create();

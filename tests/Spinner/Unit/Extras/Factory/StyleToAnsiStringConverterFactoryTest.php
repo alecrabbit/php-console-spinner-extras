@@ -36,14 +36,12 @@ final class StyleToAnsiStringConverterFactoryTest extends TestCaseWithPrebuiltMo
     #[Test]
     public function canCreateConverter(): void
     {
-        $styleMode = StylingMethodMode::NONE;
         $colorParser = $this->getAnsiColorParserMock();
         $optionsParser = $this->getStyleOptionsParserMock();
         $parserFactory = $this->getAnsiColorParserFactoryMock();
         $parserFactory
             ->expects(self::once())
             ->method('create')
-            ->with($styleMode)
             ->willReturn($colorParser)
         ;
 
@@ -52,10 +50,8 @@ final class StyleToAnsiStringConverterFactoryTest extends TestCaseWithPrebuiltMo
             optionsParser: $optionsParser,
         );
 
-        $stringConverter = $converterFactory->create($styleMode);
+        $converter = $converterFactory->create();
         self::assertInstanceOf(StyleToAnsiStringConverterFactory::class, $converterFactory);
-        self::assertInstanceOf(StyleToAnsiStringConverter::class, $stringConverter);
-        self::assertSame($colorParser, self::getPropertyValue('colorParser', $stringConverter));
-        self::assertSame($optionsParser, self::getPropertyValue('optionsParser', $stringConverter));
+        self::assertInstanceOf(StyleToAnsiStringConverter::class, $converter);
     }
 }

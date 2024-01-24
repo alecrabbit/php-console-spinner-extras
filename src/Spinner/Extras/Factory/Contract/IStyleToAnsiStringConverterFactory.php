@@ -10,5 +10,5 @@ use AlecRabbit\Spinner\Extras\Contract\IStyleToAnsiStringConverter;
 
 interface IStyleToAnsiStringConverterFactory
 {
-    public function create(StylingMethodMode $styleMode): IStyleToAnsiStringConverter;
+    public function create(): IStyleToAnsiStringConverter;
 }

@@ -20,10 +20,10 @@ final class StyleToAnsiStringConverterFactory implements IStyleToAnsiStringConve
     ) {
     }
 
-    public function create(StylingMethodMode $styleMode): IStyleToAnsiStringConverter
+    public function create(): IStyleToAnsiStringConverter
     {
         return new StyleToAnsiStringConverter(
-            colorParser: $this->parserFactory->create($styleMode),
+            colorParser: $this->parserFactory->create(),
             optionsParser: $this->optionsParser,
         );
     }
