@@ -49,10 +49,6 @@ use AlecRabbit\Spinner\Extras\Widget\Factory\WidgetCompositeFactory;
 DefinitionRegistry::getInstance()
     ->bind(
         new ServiceDefinition(
-            IHexColorToAnsiCodeConverterFactory::class,
-            HexColorToAnsiCodeConverterFactory::class,
-        ),
-        new ServiceDefinition(
             IWidgetFactory::class,
             WidgetCompositeFactory::class,
         ),
@@ -84,15 +80,6 @@ DefinitionRegistry::getInstance()
             IStyleFrameRevolverBuilder::class,
             StyleFrameRevolverBuilder::class,
         ),
-//        new ServiceDefinition(
-//            IStyleRenderer::class,
-//            new class implements IStyleRenderer {
-//                public function render(IStyle $style): string
-//                {
-//                    return '%s';
-//                }
-//            },
-//        ),
         new ServiceDefinition(
             IStyleRenderer::class,
             static function (IContainer $container): IStyleRenderer {
@@ -119,12 +106,6 @@ DefinitionRegistry::getInstance()
             IColorCodesGetterFactory::class,
             ColorCodesGetterFactory::class,
         ),
-//        new ServiceDefinition(
-//            IHexColorToAnsiCodeConverter::class,
-//            static function (IContainer $container): IHexColorToAnsiCodeConverter {
-//                return $container->get(IHexColorToAnsiCodeConverterFactory::class)->create();
-//            },
-//        ),
         new ServiceDefinition(
             IColorToAnsiCodeConverterFactory::class,
             ColorToAnsiCodeConverterFactory::class,
