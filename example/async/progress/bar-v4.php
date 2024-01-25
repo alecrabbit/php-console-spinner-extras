@@ -36,7 +36,7 @@ Facade::getSettings()
 ;
 
 $units = 10;
-$steps = 1_000_000_000_000;
+$steps = 3000;
 
 // Note: We'll use the same progress value for both widgets
 $progressValue =

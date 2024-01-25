@@ -36,7 +36,7 @@ final class ProgressEstimateProcedureTest extends TestCase
             progressValue: $progressValue ?? new ProgressValue(),
             format: $format ?? '-%s-',
             currentTimeProvider: $currentTimeProvider ?? $this->getCurrentTimeProviderMock(),
-            intervalFormatter: $intervalFormatter,
+            estimateFormatter: $intervalFormatter,
         );
     }
 

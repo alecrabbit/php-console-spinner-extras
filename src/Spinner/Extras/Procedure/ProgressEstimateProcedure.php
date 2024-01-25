@@ -9,6 +9,7 @@ use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Contract\ISecondsToDateIntervalConverter;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
+use AlecRabbit\Spinner\Extras\ElapsedDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\EstimatedDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 use AlecRabbit\Spinner\Extras\SecondsToDateIntervalConverter;
@@ -28,7 +29,8 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
         IProgressValue $progressValue,
         string $format = self::FORMAT,
         private readonly ICurrentTimeProvider $currentTimeProvider = new CurrentTimeProvider(),
-        private readonly IDateIntervalFormatter $intervalFormatter = new EstimatedDateIntervalFormatter(),
+        private readonly IDateIntervalFormatter $estimateFormatter = new EstimatedDateIntervalFormatter(),
+        private readonly IDateIntervalFormatter $elapsedFormatter = new ElapsedDateIntervalFormatter(),
         private readonly ISecondsToDateIntervalConverter $converter = new SecondsToDateIntervalConverter(),
     ) {
         $this->createdAt = $this->currentTimeProvider->now();
@@ -64,9 +66,7 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
             if ($remainingTime > 0) {
                 return sprintf(
                     $this->format,
-                    $this->intervalFormatter->format(
-                        $this->converter->convert((int)$remainingTime)
-                    ),
+                    $this->formatEstimate($remainingTime),
                 );
             }
         }
@@ -77,5 +77,18 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
     private function secondsPassed(DateTimeImmutable $createdAt): int
     {
         return $this->currentTimeProvider->now()->getTimestamp() - $createdAt->getTimestamp();
+    }
+
+    protected function formatEstimate(float|int $remainingTime): string
+    {
+        if ($remainingTime > 600) {
+            return $this->estimateFormatter->format(
+                $this->converter->convert((int)$remainingTime)
+            );
+        }
+
+        return $this->elapsedFormatter->format(
+            $this->converter->convert((int)$remainingTime)
+        );
     }
 }
