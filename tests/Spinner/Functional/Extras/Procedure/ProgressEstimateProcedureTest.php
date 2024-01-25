@@ -76,18 +76,18 @@ final class ProgressEstimateProcedureTest extends TestCase
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
-        self::assertSame('-95sec-', $frame->getSequence());
-        self::assertSame(7, $frame->getWidth());
+        self::assertSame('-2min-', $frame->getSequence());
+        self::assertSame(6, $frame->getWidth());
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
-        self::assertSame('-90sec-', $frame->getSequence());
-        self::assertSame(7, $frame->getWidth());
+        self::assertSame('-1min-', $frame->getSequence());
+        self::assertSame(6, $frame->getWidth());
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
-        self::assertSame('-85sec-', $frame->getSequence());
-        self::assertSame(7, $frame->getWidth());
+        self::assertSame('-1min-', $frame->getSequence());
+        self::assertSame(6, $frame->getWidth());
         $progressValue->advance(85);
         $frame = $procedure->getFrame();
         self::assertSame('', $frame->getSequence());

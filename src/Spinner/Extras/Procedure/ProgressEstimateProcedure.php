@@ -7,10 +7,11 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
+use AlecRabbit\Spinner\Extras\Contract\ISecondsToDateIntervalConverter;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\EstimatedDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
-use DateInterval;
+use AlecRabbit\Spinner\Extras\SecondsToDateIntervalConverter;
 use DateTimeImmutable;
 
 /**
@@ -28,6 +29,7 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
         string $format = self::FORMAT,
         private readonly ICurrentTimeProvider $currentTimeProvider = new CurrentTimeProvider(),
         private readonly IDateIntervalFormatter $intervalFormatter = new EstimatedDateIntervalFormatter(),
+        private readonly ISecondsToDateIntervalConverter $converter = new SecondsToDateIntervalConverter(),
     ) {
         $this->createdAt = $this->currentTimeProvider->now();
 
@@ -63,9 +65,7 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
                 return sprintf(
                     $this->format,
                     $this->intervalFormatter->format(
-                        new DateInterval(
-                            sprintf('PT%dS', (int)$remainingTime)
-                        )
+                        $this->converter->convert((int)$remainingTime)
                     ),
                 );
             }
