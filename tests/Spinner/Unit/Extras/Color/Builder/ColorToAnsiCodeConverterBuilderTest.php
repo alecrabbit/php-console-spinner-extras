@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Tests\Spinner\Unit\Extras\Builder;
+namespace AlecRabbit\Tests\Spinner\Unit\Extras\Color\Builder;
 
 
-use AlecRabbit\Spinner\Extras\Builder\ColorToAnsiCodeConverterBuilder;
-use AlecRabbit\Spinner\Extras\Builder\Contract\IColorToAnsiCodeConverterBuilder;
+use AlecRabbit\Spinner\Extras\Color\Builder\ColorToAnsiCodeConverterBuilder;
+use AlecRabbit\Spinner\Extras\Color\Builder\Contract\IColorToAnsiCodeConverterBuilder;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\Contract\IHexColorNormalizer;
 use AlecRabbit\Tests\TestCase\TestCase;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Factory;
 
 
-use AlecRabbit\Spinner\Extras\Builder\Contract\IColorToAnsiCodeConverterBuilder;
+use AlecRabbit\Spinner\Extras\Color\Builder\Contract\IColorToAnsiCodeConverterBuilder;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\Contract\IHexColorNormalizer;
 use AlecRabbit\Spinner\Extras\Contract\IColorToAnsiCodeConverter;

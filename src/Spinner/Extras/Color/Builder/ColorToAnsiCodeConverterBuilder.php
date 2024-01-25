@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Extras\Builder;
+namespace AlecRabbit\Spinner\Extras\Color\Builder;
 
-use AlecRabbit\Spinner\Extras\Builder\Contract\IColorToAnsiCodeConverterBuilder;
 use AlecRabbit\Spinner\Extras\Builder\Dummy\AbstractBuilder;
 use AlecRabbit\Spinner\Extras\Builder\Dummy\Dummy;
 use AlecRabbit\Spinner\Extras\Builder\Dummy\IDummy;
+use AlecRabbit\Spinner\Extras\Color\Builder\Contract\IColorToAnsiCodeConverterBuilder;
 use AlecRabbit\Spinner\Extras\Color\ColorToAnsiCodeConverter;
 use AlecRabbit\Spinner\Extras\Color\Contract\IColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\Contract\IHexColorNormalizer;
