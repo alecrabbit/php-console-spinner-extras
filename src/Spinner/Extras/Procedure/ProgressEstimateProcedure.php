@@ -40,33 +40,25 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
             format: $format
         );
 
-        $this->stepValue = ($progressValue->getMax() - $progressValue->getMin()) / $progressValue->getSteps();
+        $this->stepValue = $this->calculateStepValue($progressValue);
         $this->startValue = $progressValue->getValue();
     }
 
     protected function createFrameSequence(): string
     {
-        $currentValue = $this->progressValue->getValue();
+        $stepsDone = $this->getStepsDone();
 
-        $stepsPerformed = (int)(($currentValue - $this->startValue) / $this->stepValue);
-
-        if ($stepsPerformed > 0) {
-            $timePassed = $this->secondsPassed($this->createdAt);
-
-            $timePerStep = $timePassed / $stepsPerformed;
-
-            $timeNeededForAllSteps = $timePerStep * $this->progressValue->getSteps();
-
-            $remainingTime = $timeNeededForAllSteps - $timePassed;
+        if ($stepsDone > 0) {
+            $estimate = $this->getEstimate($stepsDone);
 
             if ($this->progressValue->isFinished()) {
-                $remainingTime = 0;
+                $estimate = 0;
             }
 
-            if ($remainingTime > 0) {
+            if ($estimate > 0) {
                 return sprintf(
                     $this->format,
-                    $this->formatEstimate($remainingTime),
+                    $this->formatEstimate($estimate),
                 );
             }
         }
@@ -74,9 +66,25 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
         return '';
     }
 
-    private function secondsPassed(DateTimeImmutable $createdAt): int
+    protected function getStepsDone(): int
     {
-        return $this->currentTimeProvider->now()->getTimestamp() - $createdAt->getTimestamp();
+        return (int)(($this->progressValue->getValue() - $this->startValue) / $this->stepValue);
+    }
+
+    protected function getEstimate(int $stepsDone): int|float
+    {
+        $elapsed = $this->elapsed();
+
+        $timePerStep = $elapsed / $stepsDone;
+
+        $timeNeededForAllSteps = $timePerStep * $this->progressValue->getSteps();
+
+        return $timeNeededForAllSteps - $elapsed;
+    }
+
+    private function elapsed(): int
+    {
+        return $this->currentTimeProvider->now()->getTimestamp() - $this->createdAt->getTimestamp();
     }
 
     protected function formatEstimate(float|int $remainingTime): string
@@ -90,5 +98,10 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
         return $this->elapsedFormatter->format(
             $this->converter->convert((int)$remainingTime)
         );
+    }
+
+    protected function calculateStepValue(IProgressValue $progressValue): float
+    {
+        return ($progressValue->getMax() - $progressValue->getMin()) / $progressValue->getSteps();
     }
 }
