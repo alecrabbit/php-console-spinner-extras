@@ -19,7 +19,7 @@ final class StyleFrameRevolver extends AFrameRevolver
         Traversable $frames,
         IInterval $interval,
         ITolerance $tolerance,
-        private IStyleRenderer $styleRenderer,
+        private readonly IStyleRenderer $styleRenderer,
     ) {
         parent::__construct($frames, $interval, $tolerance);
     }
@@ -27,19 +27,19 @@ final class StyleFrameRevolver extends AFrameRevolver
     protected function current(): IStyleFrame
     {
         $frame = $this->frames->current();
+
         if ($frame instanceof IStylingFrame) {
-            $frame = new StyleFrame(
-                sequence: $this->styleRenderer->render($frame->getStyle()),
-                width: 0
-            );
+            return $this->render($frame);
         }
+
         return $frame;
     }
 
-//    private function render(IStylingFrame $frame): IFrame
-//    {
-//        dump($frame);
-//        // TODO (2023-12-19 16:17) [Alec Rabbit]: call style renderer
-//        return $frame;
-//    }
+    private function render(IStylingFrame $frame): IStyleFrame
+    {
+        return new StyleFrame(
+            sequence: $this->styleRenderer->render($frame->getStyle()),
+            width: 0,
+        );
+    }
 }

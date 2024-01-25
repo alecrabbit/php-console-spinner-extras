@@ -9,6 +9,9 @@ use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 
+/**
+ * @deprecated
+ */
 interface IStyleFrameRenderer
 {
     /**
