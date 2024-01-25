@@ -21,6 +21,7 @@ final class SecondsToDurationStringConverterTest extends TestCase
             [3600, 'P0Y0M0DT1H0M0S'],
             [3601, 'P0Y0M0DT1H0M1S'],
             [86400, 'P0Y0M1DT0H0M0S'],
+            [121245, 'P0Y0M1DT9H40M45S'],
             [86401, 'P0Y0M1DT0H0M1S'],
             [124353451, 'P3Y11M29DT6H37M31S'],
         ];

@@ -17,8 +17,13 @@ final class ElapsedDateIntervalFormatterTest extends TestCase
 {
     public static function canFormatDataProvider(): iterable
     {
+        $before = new \DateTimeImmutable('-121245 seconds');
+        $now = new \DateTimeImmutable();
+
         yield from [
             ['4m 2d 15h 22min 10sec', new \DateInterval('P4M2DT15H22M10S')],
+            ['1d 9h 40min 45sec', new \DateInterval('P0Y0M1DT9H40M45S')],
+            ['1d 9h 40min 45sec', $before->diff($now)],
             ['', new \DateInterval('PT0S')],
             ['7m 18d 13h 46min 40sec', new \DateInterval('P7M18DT13H46M40S')],
             ['2y 1m 27d 2h', new \DateInterval('P2Y1M27DT2H0M0S')],

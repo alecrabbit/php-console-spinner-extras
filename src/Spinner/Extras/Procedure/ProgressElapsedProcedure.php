@@ -10,7 +10,6 @@ use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\ElapsedDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
-use DateInterval;
 use DateTimeImmutable;
 
 /**
@@ -20,7 +19,6 @@ final class ProgressElapsedProcedure extends AProgressValueProcedure
 {
     private const FORMAT = '%3s';
     private DateTimeImmutable $createdAt;
-    private int $elapsed = 0;
 
     public function __construct(
         IProgressValue $progressValue,
@@ -38,30 +36,16 @@ final class ProgressElapsedProcedure extends AProgressValueProcedure
 
     protected function createFrameSequence(): string
     {
-        $elapsed = $this->secondsPassed($this->createdAt);
+        $diff = $this->elapsed();
 
-        if ($elapsed > 0) {
-            if (!$this->progressValue->isFinished()) {
-                $this->elapsed = $elapsed;
-            }
-            return sprintf(
-                $this->format,
-                $this->intervalFormatter->format(
-                    $this->secondsToDateInterval($this->elapsed)
-                ),
-            );
-        }
-
-        return '';
+        return sprintf(
+            $this->format,
+            $this->intervalFormatter->format($diff),
+        );
     }
 
-    private function secondsPassed(DateTimeImmutable $createdAt): int
+    private function elapsed(): \DateInterval
     {
-        return $this->currentTimeProvider->now()->getTimestamp() - $createdAt->getTimestamp();
-    }
-
-    private function secondsToDateInterval(int $elapsed): \DateInterval
-    {
-        return new DateInterval('PT' . $elapsed . 'S');
+        return dump($this->createdAt->diff($this->currentTimeProvider->now()));
     }
 }
