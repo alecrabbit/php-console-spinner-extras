@@ -49,16 +49,12 @@ final readonly class EstimatedDateIntervalFormatter implements IDateIntervalForm
             $label = $this->labels->year();
             $factor = 12;
         }
-//        dump($values, $label);
+
         if (count($values) > 1) {
             $values = array_slice(array_reverse($values, true), 0, 2);
         }
 
-//        dump($values, $label,);
-
         $value = array_shift($values) + ((array_shift($values) ?? 0) > ($factor / 2) ? 1 : 0);
-
-        //        dump($values, $label, $value, $factor);
 
         return $value === 0
             ? '' :

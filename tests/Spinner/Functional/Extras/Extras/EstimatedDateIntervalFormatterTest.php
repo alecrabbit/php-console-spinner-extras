@@ -19,11 +19,12 @@ final class EstimatedDateIntervalFormatterTest extends TestCase
     {
         yield from [
             ['4m', new \DateInterval('P4M2DT13H46M40S')],
-            ['0', new \DateInterval('PT0S')],
+            ['', new \DateInterval('PT0S')],
             ['8m', new \DateInterval('P7M18DT13H46M40S')],
             ['2y', new \DateInterval('P2Y1M11DT13H46M40S')],
             ['42sec', new \DateInterval('P0Y0M0DT0H0M42S')],
             ['47min', new \DateInterval('P0Y0M0DT0H46M40S')],
+            ['47min', new \DateInterval('P0Y0M0DT0H46M56S')],
             ['12d', new \DateInterval('P11DT13H46M40S')],
             ['3y', new \DateInterval('P2Y7M11DT13H46M40S')],
             ['1000sec', new \DateInterval('PT1000S')],
