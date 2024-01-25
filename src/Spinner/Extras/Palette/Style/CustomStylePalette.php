@@ -14,7 +14,7 @@ use Traversable;
 final class CustomStylePalette extends AInfiniteStylePalette
 {
     public function __construct(
-        readonly Traversable $frames,
+        Traversable $frames,
         private readonly ?int $frameWidth = null,
         IPaletteOptions $options = new PaletteOptions()
     ) {
