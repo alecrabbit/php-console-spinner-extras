@@ -59,8 +59,7 @@ final class EstimatedDateIntervalFormatterTest extends TestCase
     public function canFormat(string $expected, \DateInterval $input): void
     {
         $formatter = $this->getTesteeInstance();
-//        dump($input);
-//        dump($input->format('%y %m %d %h %i %s'));
+
         self::assertEquals($expected, $formatter->format($input));
     }
 }
