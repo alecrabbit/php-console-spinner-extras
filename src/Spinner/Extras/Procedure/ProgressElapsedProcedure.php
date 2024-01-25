@@ -8,7 +8,7 @@ use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
-use AlecRabbit\Spinner\Extras\EstimatedDateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\ElapsedDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 use DateInterval;
 use DateTimeImmutable;
@@ -26,7 +26,7 @@ final class ProgressElapsedProcedure extends AProgressValueProcedure
         IProgressValue $progressValue,
         string $format = self::FORMAT,
         private readonly ICurrentTimeProvider $currentTimeProvider = new CurrentTimeProvider(),
-        private readonly IDateIntervalFormatter $intervalFormatter = new EstimatedDateIntervalFormatter(),
+        private readonly IDateIntervalFormatter $intervalFormatter = new ElapsedDateIntervalFormatter(),
     ) {
         $this->createdAt = $this->currentTimeProvider->now();
 
@@ -47,9 +47,7 @@ final class ProgressElapsedProcedure extends AProgressValueProcedure
             return sprintf(
                 $this->format,
                 $this->intervalFormatter->format(
-                    new DateInterval(
-                        sprintf('PT%dS', $this->elapsed)
-                    )
+                    $this->secondsToDateInterval($this->elapsed)
                 ),
             );
         }
@@ -60,5 +58,10 @@ final class ProgressElapsedProcedure extends AProgressValueProcedure
     private function secondsPassed(DateTimeImmutable $createdAt): int
     {
         return $this->currentTimeProvider->now()->getTimestamp() - $createdAt->getTimestamp();
+    }
+
+    private function secondsToDateInterval(int $elapsed): \DateInterval
+    {
+        return new DateInterval('PT' . $elapsed . 'S');
     }
 }

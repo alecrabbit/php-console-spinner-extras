@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Tests\Spinner\Functional\Extras\Extras;
+namespace AlecRabbit\Tests\Spinner\Functional\Extras;
 
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\EstimatedDateIntervalFormatter;
