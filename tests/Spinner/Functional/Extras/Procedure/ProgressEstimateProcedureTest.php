@@ -8,7 +8,7 @@ use AlecRabbit\Spinner\Contract\IProcedure;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
-use AlecRabbit\Spinner\Extras\DateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\EstimatedDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
 use AlecRabbit\Spinner\Extras\ProgressValue;
 use AlecRabbit\Tests\TestCase\TestCase;
@@ -30,7 +30,7 @@ final class ProgressEstimateProcedureTest extends TestCase
         ?IProgressValue $progressValue = null,
         ?string $format = null,
         ICurrentTimeProvider $currentTimeProvider = null,
-        IDateIntervalFormatter $intervalFormatter = new DateIntervalFormatter()
+        IDateIntervalFormatter $intervalFormatter = new EstimatedDateIntervalFormatter()
     ): IProcedure {
         return new ProgressEstimateProcedure(
             progressValue: $progressValue ?? new ProgressValue(),
@@ -76,18 +76,18 @@ final class ProgressEstimateProcedureTest extends TestCase
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
-        self::assertSame('-95 sec-', $frame->getSequence());
-        self::assertSame(8, $frame->getWidth());
+        self::assertSame('-95sec-', $frame->getSequence());
+        self::assertSame(7, $frame->getWidth());
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
-        self::assertSame('-90 sec-', $frame->getSequence());
-        self::assertSame(8, $frame->getWidth());
+        self::assertSame('-90sec-', $frame->getSequence());
+        self::assertSame(7, $frame->getWidth());
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
-        self::assertSame('-85 sec-', $frame->getSequence());
-        self::assertSame(8, $frame->getWidth());
+        self::assertSame('-85sec-', $frame->getSequence());
+        self::assertSame(7, $frame->getWidth());
         $progressValue->advance(85);
         $frame = $procedure->getFrame();
         self::assertSame('', $frame->getSequence());
