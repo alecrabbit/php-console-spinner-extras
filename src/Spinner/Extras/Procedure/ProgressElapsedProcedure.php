@@ -36,16 +36,11 @@ final class ProgressElapsedProcedure extends AProgressValueProcedure
 
     protected function createFrameSequence(): string
     {
-        $diff = $this->elapsed();
+        $elapsed = $this->createdAt->diff($this->currentTimeProvider->now());
 
         return sprintf(
             $this->format,
-            $this->intervalFormatter->format($diff),
+            $this->intervalFormatter->format($elapsed),
         );
-    }
-
-    private function elapsed(): \DateInterval
-    {
-        return dump($this->createdAt->diff($this->currentTimeProvider->now()));
     }
 }

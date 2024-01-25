@@ -10,7 +10,7 @@ use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\OutputSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
-use AlecRabbit\Spinner\Extras\EstimatedDateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\ElapsedDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Labels;
 use AlecRabbit\Spinner\Extras\Palette\Char\Moon;
@@ -108,7 +108,7 @@ $progressWidgetTwoSettings =
                 procedure: new ProgressElapsedProcedure(
                     progressValue: $progressValue,
                     format: '%s',
-                    intervalFormatter: new EstimatedDateIntervalFormatter(new Labels(second: 's')),
+                    intervalFormatter: new ElapsedDateIntervalFormatter(new Labels(second: 's')),
                 ),
             ),
         ),
