@@ -54,7 +54,7 @@ final class ProgressEstimateProcedureTest extends TestCase
 
         $currentTimeProvider = $this->getCurrentTimeProviderMock();
         $currentTimeProvider
-            ->expects(self::exactly(5))
+            ->expects(self::exactly(6))
             ->method('now')
             ->willReturnOnConsecutiveCalls(
                 $createdAt,
@@ -62,6 +62,7 @@ final class ProgressEstimateProcedureTest extends TestCase
                 $createdAt->modify('+115 second'),
                 $createdAt->modify('+215 second'),
                 $createdAt->modify('+285 second'),
+                $createdAt->modify('+315 second'),
             )
         ;
 
@@ -81,12 +82,12 @@ final class ProgressEstimateProcedureTest extends TestCase
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
-        self::assertSame('-17min-', $frame->getSequence());
+        self::assertSame('-32min-', $frame->getSequence());
         self::assertSame(7, $frame->getWidth());
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
-        self::assertSame('-20min-', $frame->getSequence());
+        self::assertSame('-27min-', $frame->getSequence());
         self::assertSame(7, $frame->getWidth());
         $progressValue->advance(85);
         $frame = $procedure->getFrame();
