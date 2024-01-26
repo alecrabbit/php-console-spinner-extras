@@ -44,6 +44,11 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
         $this->startValue = $progressValue->getValue();
     }
 
+    private function calculateStepValue(IProgressValue $progressValue): float
+    {
+        return ($progressValue->getMax() - $progressValue->getMin()) / $progressValue->getSteps();
+    }
+
     protected function createFrameSequence(): string
     {
         $stepsDone = $this->getStepsDone();
@@ -66,12 +71,12 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
         return '';
     }
 
-    protected function getStepsDone(): int
+    private function getStepsDone(): int
     {
         return (int)(($this->progressValue->getValue() - $this->startValue) / $this->stepValue);
     }
 
-    protected function getEstimate(int $stepsDone): int|float
+    private function getEstimate(int $stepsDone): int|float
     {
         $elapsed = $this->elapsed();
 
@@ -87,21 +92,14 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
         return $this->currentTimeProvider->now()->getTimestamp() - $this->createdAt->getTimestamp();
     }
 
-    protected function formatEstimate(float|int $remainingTime): string
+    private function formatEstimate(float|int $estimate): string
     {
-        if ($remainingTime > 600) {
-            return $this->estimateFormatter->format(
-                $this->converter->convert((int)$remainingTime)
-            );
+        $interval = $this->converter->convert((int)$estimate);
+
+        if ($estimate < 300 && $this->elapsed() > 30) {
+            return $this->elapsedFormatter->format($interval);
         }
 
-        return $this->elapsedFormatter->format(
-            $this->converter->convert((int)$remainingTime)
-        );
-    }
-
-    protected function calculateStepValue(IProgressValue $progressValue): float
-    {
-        return ($progressValue->getMax() - $progressValue->getMin()) / $progressValue->getSteps();
+        return $this->estimateFormatter->format($interval);
     }
 }

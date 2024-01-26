@@ -50,7 +50,7 @@ final class ProgressEstimateProcedureTest extends TestCase
     {
         $progressValue = new ProgressValue();
 
-        $createdAt = new DateTimeImmutable('-5 seconds');
+        $createdAt = new DateTimeImmutable('-900 seconds');
 
         $currentTimeProvider = $this->getCurrentTimeProviderMock();
         $currentTimeProvider
@@ -58,10 +58,10 @@ final class ProgressEstimateProcedureTest extends TestCase
             ->method('now')
             ->willReturnOnConsecutiveCalls(
                 $createdAt,
-                $createdAt->modify('+5 second'),
-                $createdAt->modify('+10 second'),
                 $createdAt->modify('+15 second'),
-                $createdAt->modify('+85 second'),
+                $createdAt->modify('+115 second'),
+                $createdAt->modify('+215 second'),
+                $createdAt->modify('+285 second'),
             )
         ;
 
@@ -76,18 +76,18 @@ final class ProgressEstimateProcedureTest extends TestCase
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
-        self::assertSame('-2min-', $frame->getSequence());
-        self::assertSame(6, $frame->getWidth());
+        self::assertSame('-4min 45sec-', $frame->getSequence());
+        self::assertSame(12, $frame->getWidth());
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
-        self::assertSame('-1min-', $frame->getSequence());
-        self::assertSame(6, $frame->getWidth());
+        self::assertSame('-17min-', $frame->getSequence());
+        self::assertSame(7, $frame->getWidth());
 
         $progressValue->advance(5);
         $frame = $procedure->getFrame();
-        self::assertSame('-1min-', $frame->getSequence());
-        self::assertSame(6, $frame->getWidth());
+        self::assertSame('-20min-', $frame->getSequence());
+        self::assertSame(7, $frame->getWidth());
         $progressValue->advance(85);
         $frame = $procedure->getFrame();
         self::assertSame('', $frame->getSequence());

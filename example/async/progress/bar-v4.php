@@ -10,9 +10,7 @@ use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\OutputSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
-use AlecRabbit\Spinner\Extras\ElapsedDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Facade;
-use AlecRabbit\Spinner\Extras\Labels;
 use AlecRabbit\Spinner\Extras\Palette\Char\Moon;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
@@ -36,7 +34,7 @@ Facade::getSettings()
 ;
 
 $units = 10;
-$steps = 3000;
+$steps = 800;
 
 // Note: We'll use the same progress value for both widgets
 $progressValue =
@@ -108,7 +106,6 @@ $progressWidgetTwoSettings =
                 procedure: new ProgressElapsedProcedure(
                     progressValue: $progressValue,
                     format: '%s',
-                    intervalFormatter: new ElapsedDateIntervalFormatter(new Labels(second: 's')),
                 ),
             ),
         ),
@@ -149,22 +146,33 @@ $widgetTwo =
 
 $spinner = Facade::createSpinner();
 
-$spinner->add($widgetOne->getContext());
-$spinner->add($widgetTwo->getContext());
-
 $loop = Facade::getLoop();
 
-// simulate progress
-$loop
-    ->repeat(
-        0.01,
-        static function () use ($progressValue): void {
-            if (random_int(0, 100) < 5) {
-                $progressValue->advance();
+$loop->delay(
+    20,
+    static function () use ($spinner, $widgetOne, $widgetTwo, $loop, $progressValue): void {
+        $spinner->add($widgetOne->getContext());
+        $spinner->add($widgetTwo->getContext());
+
+        $loop->delay(
+            5,
+            static function () use ($progressValue, $loop): void {
+                // simulate progress
+                $loop
+                    ->repeat(
+                        0.01,
+                        static function () use ($progressValue): void {
+                            if (random_int(0, 100) < 5) {
+                                $progressValue->advance();
+                            }
+                        }
+                    )
+                ;
             }
-        }
-    )
-;
+        );
+    }
+);
+
 
 // remove widget when progress is finished
 $loop

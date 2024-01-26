@@ -16,18 +16,19 @@ use AlecRabbit\Spinner\Extras\ProgressBarSprite;
 final class ProgressBarProcedure extends AProgressValueProcedure
 {
     private const UNITS = 5;
-    private float $cursorThreshold;
+    private readonly float $cursorThreshold;
+    private readonly int $units;
 
     public function __construct(
         IProgressValue $progressValue,
+        int $units = self::UNITS,
         private readonly IProgressBarSprite $sprite = new ProgressBarSprite(),
-        private int $units = self::UNITS,
         private readonly bool $withCursor = true,
     ) {
         parent::__construct($progressValue);
 
         $this->cursorThreshold = $this->progressValue->getMax();
-        $this->units = $this->withCursor ? $this->units - 1 : $this->units;
+        $this->units = $this->withCursor ? $units - 1 : $units;
     }
 
     protected function createFrameSequence(): string
