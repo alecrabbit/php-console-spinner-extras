@@ -20,10 +20,17 @@ final class SequenceHelperTest extends TestCase
             ['⣿', 2956],
             ['⠀', 0b00000000],
             ['⣿', 0b11111111],
-//            ['⢸', 0b00001111],
-//            ['⡇', 0b11110000],
-//            ['⣀', 0b10001000],
-//            ['⡀', 0b10000000],
+            ['⢸', 0b00001111],
+            ['⡇', 0b11110000],
+            ['⣀', 0b00010001],
+            ['⣤', 0b00110011],
+            ['⡀', 0b00010000],
+            ['⢀', 0b00000001],
+            ['⡄', 0b00110000],
+            ['⣶', 0b01110111],
+            ['⣦', 0b01110011],
+            ['⣴', 0b00110111],
+            ['⣄', 0b00110001],
         ];
     }
 
@@ -35,7 +42,7 @@ final class SequenceHelperTest extends TestCase
         self::assertInstanceOf(SequenceHelper::class, $helper);
     }
 
-    private function getTesteeInstance():ISequenceHelper
+    private function getTesteeInstance(): ISequenceHelper
     {
         return new SequenceHelper();
     }

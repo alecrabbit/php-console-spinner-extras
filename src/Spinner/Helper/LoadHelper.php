@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Helper;
 
-use Symfony\Component\VarDumper\Caster\ScalarStub;
-
 final class LoadHelper implements ILoadHelper
 {
     public function __construct(
