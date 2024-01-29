@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Helper;
 
-interface IBitConverterHelper
+interface IIndexConverter
 {
     public function convert(int $input): int;
+
+    public function getStartCodepoint(): int;
 }

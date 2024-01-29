@@ -8,20 +8,29 @@ final readonly class SequenceHelper implements ISequenceHelper
 {
     private const ENCODING = 'UTF-8';
 
+    private int $start;
+
     public function __construct(
-        private IBitConverterHelper $bitConverterHelper = new BitConverterHelper(),
+        private IIndexConverter $converter = new BrailleIndexConverter(),
+        private string $encoding = self::ENCODING,
     ) {
+        $this->start = $this->converter->getStartCodepoint();
     }
 
     public function get(int $input): string
     {
-        $input = max(0, min(255, $input));
-
-        return $this->getBraille($this->bitConverterHelper->convert($input));
+        return $this->getSymbol($this->getCodepoint($input));
     }
 
-    private function getBraille(int $input): string
+    private function getSymbol(int $codepoint): string
     {
-        return mb_chr(0x2800 + $input, self::ENCODING);
+        return mb_chr($codepoint, $this->encoding);
+    }
+
+    public function getCodepoint(int $input): int
+    {
+        $input = max(0, min(255, $input));
+
+        return $this->start + $this->converter->convert($input);
     }
 }
