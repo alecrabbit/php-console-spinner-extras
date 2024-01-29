@@ -5,25 +5,32 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Helper;
 
 use AlecRabbit\Spinner\Contract\IObserver;
+use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Core\A\ASubject;
+use AlecRabbit\Spinner\Extras\Value\ILoadValue;
 
-final class LoadValue extends ASubject implements ILoadValue
+final class LoadSymbolIndex extends ASubject implements ILoadSymbolIndex
 {
     private int $inter;
-    
+
+
     public function __construct(
         private int $current = 0,
         private bool $even = true,
+        private readonly ?ILoadValue $loadValue = null,
         ?IObserver $observer = null,
     ) {
         parent::__construct($observer);
-        
+
         $this->inter = $this->current;
     }
 
-    public function get(): int
+    public function update(ISubject $subject): void
     {
-        return $this->current;
+        if ($subject === $this->loadValue) {
+            /** @var ILoadValue $subject */
+            $this->add($subject->getValue());
+        }
     }
 
     public function add(float $input): void
@@ -40,12 +47,17 @@ final class LoadValue extends ASubject implements ILoadValue
         };
 
         $this->inter |= $v;
-        
+
         $this->even = !$this->even;
 
         if ($this->even) {
             $this->current = $this->inter;
             $this->notify();
         }
+    }
+
+    public function get(): int
+    {
+        return $this->current;
     }
 }

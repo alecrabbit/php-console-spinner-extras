@@ -10,7 +10,7 @@ use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\EstimatedDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
-use AlecRabbit\Spinner\Extras\ProgressValue;
+use AlecRabbit\Spinner\Extras\Value\ProgressValue;
 use AlecRabbit\Tests\TestCase\TestCase;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\Test;

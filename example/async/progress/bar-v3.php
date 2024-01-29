@@ -19,8 +19,8 @@ use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressGradientProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressValueProcedure;
-use AlecRabbit\Spinner\Extras\ProgressValue;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
+use AlecRabbit\Spinner\Extras\Value\ProgressValue;
 
 require_once __DIR__ . '/../bootstrap.async.php';
 

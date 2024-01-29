@@ -7,13 +7,13 @@ namespace AlecRabbit\Tests\Spinner\Functional\Helper;
 
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
-use AlecRabbit\Spinner\Helper\ILoadValue;
-use AlecRabbit\Spinner\Helper\LoadValue;
+use AlecRabbit\Spinner\Helper\ILoadSymbolIndex;
+use AlecRabbit\Spinner\Helper\LoadSymbolIndex;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
-final class LoadValueTest extends TestCase
+final class LoadSymbolIndexTest extends TestCase
 {
     public static function canGetDataProvider(): iterable
     {
@@ -38,15 +38,15 @@ final class LoadValueTest extends TestCase
     {
         $helper = $this->getTesteeInstance();
 
-        self::assertInstanceOf(LoadValue::class, $helper);
+        self::assertInstanceOf(LoadSymbolIndex::class, $helper);
     }
 
     private function getTesteeInstance(
         int $current = 0,
         bool $even = true,
         ?IObserver $observer = null,
-    ): ILoadValue {
-        return new LoadValue(
+    ): ILoadSymbolIndex {
+        return new LoadSymbolIndex(
             current: $current,
             even: $even,
             observer: $observer,
@@ -68,7 +68,7 @@ final class LoadValueTest extends TestCase
 
             public function update(ISubject $subject): void
             {
-                if ($subject instanceof ILoadValue) {
+                if ($subject instanceof ILoadSymbolIndex) {
                     $this->values->append(
                         str_pad(decbin($subject->get()), 8, '0', STR_PAD_LEFT),
                     );

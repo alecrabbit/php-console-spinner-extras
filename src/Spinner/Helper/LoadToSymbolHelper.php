@@ -10,7 +10,7 @@ namespace AlecRabbit\Spinner\Helper;
 final readonly class LoadToSymbolHelper implements ILoadToSymbolHelper
 {
     public function __construct(
-        private ILoadValue $loadHelper = new LoadValue(),
+        private ILoadSymbolIndex $loadHelper = new LoadSymbolIndex(),
         private ISequenceHelper $symbolHelper = new SequenceHelper(),
     ) {
     }
