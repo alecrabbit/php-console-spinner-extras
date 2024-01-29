@@ -51,8 +51,10 @@ $loop
     ->repeat(
         5,
         static function () use ($loadValue): void {
-            // FIXME (2024-01-29 17:36) [Alec Rabbit]: stub for 8 cpu system
-            $load = sys_getloadavg()[0] / 8;
+            $load = random_int(0, 100) / 100;
+
+//            // FIXME (2024-01-29 17:36) [Alec Rabbit]: stub for 8 cpu system
+//            $load = sys_getloadavg()[0] / 8;
 
             $loadValue->setLoad($load);
         }
