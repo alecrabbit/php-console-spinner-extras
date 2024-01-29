@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Helper;
 
-interface ILoadHelper
+use AlecRabbit\Spinner\Contract\ISubject;
+
+interface ILoadValue extends ISubject
 {
     public function get(): int;
 

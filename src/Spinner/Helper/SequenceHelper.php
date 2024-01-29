@@ -17,6 +17,9 @@ final readonly class SequenceHelper implements ISequenceHelper
         $this->start = $this->converter->getStartCodepoint();
     }
 
+    /**
+     * @deprecated Use getCodepoint() instead
+     */
     public function get(int $input): string
     {
         return $this->getSymbol($this->getCodepoint($input));
