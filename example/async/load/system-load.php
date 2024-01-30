@@ -6,6 +6,7 @@ use AlecRabbit\Color\Gradient\ColorRange;
 use AlecRabbit\Color\Gradient\RGBAGradient;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
+use AlecRabbit\Spinner\Extras\FineDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
 use AlecRabbit\Spinner\Extras\Palette\PaletteOptions;
@@ -14,6 +15,7 @@ use AlecRabbit\Spinner\Extras\Procedure\PercentageSymbolIndex;
 use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\PercentSequenceProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\TimerProcedure;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Value\PercentValue;
 
@@ -69,6 +71,15 @@ $loadWidgetSettings =
                     size: $size,
                 ),
                 options: $options,
+            ),
+        ),
+        new WidgetSettings(
+            charPalette: new ProcedureCharPalette(
+                procedure: new TimerProcedure(
+                    target: new DateTimeImmutable('+10 seconds'),
+                    intervalFormatter: new FineDateIntervalFormatter(),
+                    format: '[%s]',
+                ),
             ),
         ),
     );

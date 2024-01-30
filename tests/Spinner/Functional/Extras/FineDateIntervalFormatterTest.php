@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Functional\Extras;
 
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
-use AlecRabbit\Spinner\Extras\ElapsedDateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\FineDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\ILabels;
 use AlecRabbit\Spinner\Extras\Labels;
 use AlecRabbit\Tests\TestCase\TestCase;
@@ -13,7 +13,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
 
-final class ElapsedDateIntervalFormatterTest extends TestCase
+final class FineDateIntervalFormatterTest extends TestCase
 {
     public static function canFormatDataProvider(): iterable
     {
@@ -46,13 +46,13 @@ final class ElapsedDateIntervalFormatterTest extends TestCase
     {
         $formatter = $this->getTesteeInstance();
 
-        self::assertInstanceOf(ElapsedDateIntervalFormatter::class, $formatter);
+        self::assertInstanceOf(FineDateIntervalFormatter::class, $formatter);
     }
 
     private function getTesteeInstance(
         ?ILabels $labels = null,
     ): IDateIntervalFormatter {
-        return new ElapsedDateIntervalFormatter(
+        return new FineDateIntervalFormatter(
             labels: $labels ?? new Labels(),
         );
     }

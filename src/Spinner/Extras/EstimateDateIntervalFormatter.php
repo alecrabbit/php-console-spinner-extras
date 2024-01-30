@@ -7,7 +7,7 @@ namespace AlecRabbit\Spinner\Extras;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use DateInterval;
 
-final readonly class EstimatedDateIntervalFormatter implements IDateIntervalFormatter
+final readonly class EstimateDateIntervalFormatter implements IDateIntervalFormatter
 {
     public function __construct(
         private ILabels $labels = new Labels(),

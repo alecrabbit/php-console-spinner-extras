@@ -6,7 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Contract;
 
 use AlecRabbit\Spinner\Contract\ISubject;
 
-interface IFloatValue extends ISubject
+interface IFloatValue extends IValue, ISubject
 {
     public function getValue(): float;
 
