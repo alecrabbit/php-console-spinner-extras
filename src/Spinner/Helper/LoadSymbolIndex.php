@@ -18,7 +18,7 @@ final class LoadSymbolIndex extends ASubject implements ILoadSymbolIndex
         private readonly ILoadValue $loadValue,
         private int $current = 0,
         private bool $even = true,
-        private IFloatToIndex $floatToIndex = new FloatToIndex(),
+        private readonly IFloatToIndex $floatToIndex = new FloatToIndex(),
         ?IObserver $observer = null,
     ) {
         parent::__construct($observer);

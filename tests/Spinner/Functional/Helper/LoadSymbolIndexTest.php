@@ -9,6 +9,9 @@ use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Extras\Value\ILoadValue;
 use AlecRabbit\Spinner\Extras\Value\LoadValue;
+use AlecRabbit\Spinner\Helper\FloatToIndex;
+use AlecRabbit\Spinner\Helper\FloatToIndexFilled;
+use AlecRabbit\Spinner\Helper\IFloatToIndex;
 use AlecRabbit\Spinner\Helper\ILoadSymbolIndex;
 use AlecRabbit\Spinner\Helper\LoadSymbolIndex;
 use AlecRabbit\Tests\TestCase\TestCase;
@@ -48,12 +51,14 @@ final class LoadSymbolIndexTest extends TestCase
         ?ILoadValue $loadValue = null,
         int $current = 0,
         bool $even = true,
+        ?IFloatToIndex $floatToIndex = null,
         ?IObserver $observer = null,
     ): ILoadSymbolIndex {
         return new LoadSymbolIndex(
             loadValue: $loadValue ?? $this->getLoadValueMock(),
             current: $current,
             even: $even,
+            floatToIndex: $floatToIndex ?? new FloatToIndex(),
             observer: $observer,
         );
     }
@@ -90,6 +95,7 @@ final class LoadSymbolIndexTest extends TestCase
 
         $this->getTesteeInstance(
             loadValue: $loadValue,
+            floatToIndex: new FloatToIndexFilled(),
             observer: $observer,
         );
 

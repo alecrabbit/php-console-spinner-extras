@@ -24,7 +24,7 @@ $updateInterval = 500; // milliseconds
 
 $loadValue = new LoadValue();
 $loadSymbolIndex = new LoadSymbolIndex(loadValue: $loadValue);
-$size = 10;
+$size = 4;
 
 $options = new PaletteOptions(interval: $updateInterval);
 
@@ -36,27 +36,12 @@ $gradient = new RGBAGradient(
 );
 $gradientTwo = new RGBAGradient(
     range: new ColorRange(
-        start: '#666',
-        end: '#666',
+        start: '#aaa',
+        end: '#bbb',
     ),
 );
 $loadWidgetSettings =
     new MultiWidgetSettings(
-        new WidgetSettings(
-            stylePalette: new ProcedureStylePalette(
-                procedure: new PercentGradientProcedure(
-                    floatValue: $loadValue,
-                    gradient: $gradientTwo,
-                ),
-            ),
-            charPalette: new ProcedureCharPalette(
-                procedure: new LoadCharSequenceProcedure(
-                    loadSymbolIndex: $loadSymbolIndex,
-                    size: $size,
-                ),
-                options: $options,
-            ),
-        ),
         new WidgetSettings(
             stylePalette: new ProcedureStylePalette(
                 procedure: new PercentGradientProcedure(
@@ -68,6 +53,21 @@ $loadWidgetSettings =
             charPalette: new ProcedureCharPalette(
                 procedure: new PercentValueProcedure(
                     floatValue: $loadValue,
+                ),
+                options: $options,
+            ),
+        ),
+        new WidgetSettings(
+            stylePalette: new ProcedureStylePalette(
+                procedure: new PercentGradientProcedure(
+                    floatValue: $loadValue,
+                    gradient: $gradientTwo,
+                ),
+            ),
+            charPalette: new ProcedureCharPalette(
+                procedure: new LoadCharSequenceProcedure(
+                    loadSymbolIndex: $loadSymbolIndex,
+                    size: $size,
                 ),
                 options: $options,
             ),
@@ -99,7 +99,7 @@ $loop
 //            // FIXME (2024-01-29 17:36) [Alec Rabbit]: stub for 8 cpu system
 //            $current = sys_getloadavg()[0] / 8;
 
-            $load = $last * 0.6 + $current * 0.4;
+            $load = $last * 0.65 + $current * 0.35;
 
             $loadValue->setLoad($load);
             $last = $load;
