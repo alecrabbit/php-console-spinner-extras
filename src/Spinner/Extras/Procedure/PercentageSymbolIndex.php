@@ -7,9 +7,11 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Core\A\ASubject;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IFloatToIndex;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentageSymbolIndex;
 use AlecRabbit\Spinner\Extras\Value\ILoadValue;
 
-final class LoadSymbolIndex extends ASubject implements ILoadSymbolIndex
+final class PercentageSymbolIndex extends ASubject implements IPercentageSymbolIndex
 {
     private int $inter;
 

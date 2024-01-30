@@ -10,7 +10,7 @@ use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
 use AlecRabbit\Spinner\Extras\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
-use AlecRabbit\Spinner\Extras\Procedure\LoadSymbolIndex;
+use AlecRabbit\Spinner\Extras\Procedure\PercentageSymbolIndex;
 use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\PercentSequenceProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
@@ -22,7 +22,7 @@ require_once __DIR__ . '/../bootstrap.async.php';
 $updateInterval = 500; // milliseconds
 
 $loadValue = new LoadValue();
-$loadSymbolIndex = new LoadSymbolIndex(loadValue: $loadValue);
+$loadSymbolIndex = new PercentageSymbolIndex(loadValue: $loadValue);
 $size = 4;
 
 $options = new PaletteOptions(interval: $updateInterval);

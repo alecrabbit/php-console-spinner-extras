@@ -6,8 +6,8 @@ namespace AlecRabbit\Tests\Spinner\Functional\Extras\Procedure;
 
 
 use AlecRabbit\Spinner\Extras\Procedure\BrailleIndexConverter;
-use AlecRabbit\Spinner\Extras\Procedure\IIndexConverter;
-use AlecRabbit\Spinner\Extras\Procedure\IIndexToCodepointConverter;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IIndexConverter;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IIndexToCodepointConverter;
 use AlecRabbit\Spinner\Extras\Procedure\IndexToCodepointConverter;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;

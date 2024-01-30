@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IIndexConverter;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IIndexToCodepointConverter;
+
 final readonly class IndexToCodepointConverter implements IIndexToCodepointConverter
 {
     private int $start;

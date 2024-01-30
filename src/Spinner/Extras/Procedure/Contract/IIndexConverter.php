@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Extras\Procedure;
+namespace AlecRabbit\Spinner\Extras\Procedure\Contract;
 
 interface IIndexConverter
 {

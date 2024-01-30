@@ -6,7 +6,7 @@ namespace AlecRabbit\Tests\Spinner\Functional\Extras\Procedure;
 
 
 use AlecRabbit\Spinner\Extras\Procedure\BrailleIndexConverter;
-use AlecRabbit\Spinner\Extras\Procedure\IIndexConverter;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IIndexConverter;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;

@@ -6,6 +6,8 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IIndexToCodepointConverter;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentageSymbolIndex;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentSequenceProcedure;
 
 final class PercentSequenceProcedure extends AFloatValueProcedure implements IPercentSequenceProcedure
@@ -14,7 +16,7 @@ final class PercentSequenceProcedure extends AFloatValueProcedure implements IPe
     private array $charSequence;
 
     public function __construct(
-        private readonly ILoadSymbolIndex $loadSymbolIndex,
+        private readonly IPercentageSymbolIndex $loadSymbolIndex,
         private readonly int $size = self::DEFAULT_SIZE,
         private IIndexToCodepointConverter $sequenceHelper = new IndexToCodepointConverter(),
         array $charSequence = [],

@@ -7,11 +7,11 @@ namespace AlecRabbit\Tests\Spinner\Functional\Extras\Procedure;
 
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IFloatToIndex;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentageSymbolIndex;
 use AlecRabbit\Spinner\Extras\Procedure\FloatToIndex;
 use AlecRabbit\Spinner\Extras\Procedure\FloatToIndexFilled;
-use AlecRabbit\Spinner\Extras\Procedure\IFloatToIndex;
-use AlecRabbit\Spinner\Extras\Procedure\ILoadSymbolIndex;
-use AlecRabbit\Spinner\Extras\Procedure\LoadSymbolIndex;
+use AlecRabbit\Spinner\Extras\Procedure\PercentageSymbolIndex;
 use AlecRabbit\Spinner\Extras\Value\ILoadValue;
 use AlecRabbit\Spinner\Extras\Value\LoadValue;
 use AlecRabbit\Tests\TestCase\TestCase;
@@ -19,7 +19,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 
-final class LoadSymbolIndexTest extends TestCase
+final class PercentageSymbolIndexTest extends TestCase
 {
     public static function canGetDataProvider(): iterable
     {
@@ -44,7 +44,7 @@ final class LoadSymbolIndexTest extends TestCase
     {
         $helper = $this->getTesteeInstance();
 
-        self::assertInstanceOf(LoadSymbolIndex::class, $helper);
+        self::assertInstanceOf(PercentageSymbolIndex::class, $helper);
     }
 
     private function getTesteeInstance(
@@ -53,8 +53,8 @@ final class LoadSymbolIndexTest extends TestCase
         bool $even = true,
         ?IFloatToIndex $floatToIndex = null,
         ?IObserver $observer = null,
-    ): ILoadSymbolIndex {
-        return new LoadSymbolIndex(
+    ): IPercentageSymbolIndex {
+        return new PercentageSymbolIndex(
             loadValue: $loadValue ?? $this->getLoadValueMock(),
             current: $current,
             even: $even,
@@ -83,7 +83,7 @@ final class LoadSymbolIndexTest extends TestCase
 
             public function update(ISubject $subject): void
             {
-                if ($subject instanceof ILoadSymbolIndex) {
+                if ($subject instanceof IPercentageSymbolIndex) {
                     $this->values->append(
                         str_pad(decbin($subject->get()), 8, '0', STR_PAD_LEFT),
                     );

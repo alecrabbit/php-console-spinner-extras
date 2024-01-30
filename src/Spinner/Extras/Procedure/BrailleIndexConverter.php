@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IIndexConverter;
+
 final readonly class BrailleIndexConverter implements IIndexConverter
 {
     private const START_CODEPOINT = 0x2800;
+    private const MAX_INDEX = 0xFF;
     private const A = [
         0b10000000 => 0b00000001, // '⠁' // #0 -> #7
         0b01000000 => 0b00000010, // '⠂' // #1 -> #6
@@ -57,6 +60,6 @@ final readonly class BrailleIndexConverter implements IIndexConverter
 
     public function getMax(): int
     {
-        return 255;
+        return self::MAX_INDEX;
     }
 }
