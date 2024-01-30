@@ -15,13 +15,13 @@ use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\PercentSequenceProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
-use AlecRabbit\Spinner\Extras\Value\LoadValue;
+use AlecRabbit\Spinner\Extras\Value\PercentValue;
 
 require_once __DIR__ . '/../bootstrap.async.php';
 
 $updateInterval = 500; // milliseconds
 
-$loadValue = new LoadValue();
+$loadValue = new PercentValue();
 $loadSymbolIndex = new PercentageSymbolIndex(loadValue: $loadValue);
 $size = 4;
 
@@ -65,7 +65,7 @@ $loadWidgetSettings =
             ),
             charPalette: new ProcedureCharPalette(
                 procedure: new PercentSequenceProcedure(
-                    loadSymbolIndex: $loadSymbolIndex,
+                    percentageSymbolIndex: $loadSymbolIndex,
                     size: $size,
                 ),
                 options: $options,
@@ -100,7 +100,7 @@ $loop
 
             $load = $last * 0.65 + $current * 0.35;
 
-            $loadValue->setLoad($load);
+            $loadValue->setPercent($load);
             $last = $load;
         }
     )

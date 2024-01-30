@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Contract;
 
-interface IFloatValue
+use AlecRabbit\Spinner\Contract\ISubject;
+
+interface IFloatValue extends ISubject
 {
     public function getValue(): float;
 

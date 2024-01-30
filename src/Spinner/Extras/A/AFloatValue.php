@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\A;
 
+use AlecRabbit\Spinner\Contract\IObserver;
+use AlecRabbit\Spinner\Core\A\ASubject;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 
-abstract class AFloatValue implements IFloatValue
+abstract class AFloatValue extends ASubject implements IFloatValue
 {
     protected float $value;
 
@@ -18,29 +20,44 @@ abstract class AFloatValue implements IFloatValue
         float $startValue = 0.0,
         protected readonly float $min = 0.0,
         protected readonly float $max = 1.0,
+        ?IObserver $observer = null,
     ) {
-        $this->setValue($startValue);
-        self::assert($this);
+        self::assertRange($this->min, $this->max);
+
+        parent::__construct($observer);
+        $this->set($startValue);
     }
 
     /**
      * @throws InvalidArgument
      */
-    private static function assert(AFloatValue $value): void
+    private static function assertRange(float $min, float $max): void
     {
         match (true) {
-            $value->min > $value->max => throw new InvalidArgument(
+            $min > $max => throw new InvalidArgument(
                 sprintf(
                     'Max value should be greater than min value. Min: "%s", Max: "%s".',
-                    $value->min,
-                    $value->max,
+                    $min,
+                    $max,
                 )
             ),
-            $value->min === $value->max => throw new InvalidArgument(
+            $min === $max => throw new InvalidArgument(
                 'Min and Max values cannot be equal.'
             ),
             default => null,
         };
+    }
+
+    protected function set(float $value): void
+    {
+        $this->value = $this->refineValue($value);
+
+        $this->notify();
+    }
+
+    protected function refineValue(float $value): float
+    {
+        return max($this->min, min($value, $this->max));
     }
 
     public function getMin(): float
@@ -56,21 +73,5 @@ abstract class AFloatValue implements IFloatValue
     public function getValue(): float
     {
         return $this->value;
-    }
-
-    protected function setValue(float $value): void
-    {
-        $this->value = $value;
-        $this->checkBounds();
-    }
-
-    protected function checkBounds(): void
-    {
-        if ($this->value > $this->max) {
-            $this->value = $this->max;
-        }
-        if ($this->value < $this->min) {
-            $this->value = $this->min;
-        }
     }
 }

@@ -6,11 +6,11 @@ namespace AlecRabbit\Spinner\Extras\Procedure\Contract;
 
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
-use AlecRabbit\Spinner\Extras\Value\ILoadValue;
+use AlecRabbit\Spinner\Extras\Value\IPercentValue;
 
 interface IPercentageSymbolIndex extends ISubject, IObserver
 {
     public function get(): int;
 
-    public function getLoadValue(): ILoadValue;
+    public function getValue(): IPercentValue;
 }

@@ -16,27 +16,27 @@ final class PercentSequenceProcedure extends AFloatValueProcedure implements IPe
     private array $charSequence;
 
     public function __construct(
-        private readonly IPercentageSymbolIndex $loadSymbolIndex,
+        private readonly IPercentageSymbolIndex $percentageSymbolIndex,
         private readonly int $size = self::DEFAULT_SIZE,
-        private IIndexToCodepointConverter $sequenceHelper = new IndexToCodepointConverter(),
+        private readonly IIndexToCodepointConverter $codepointConverter = new IndexToCodepointConverter(),
         array $charSequence = [],
     ) {
-        parent::__construct($this->loadSymbolIndex->getLoadValue());
+        parent::__construct($this->percentageSymbolIndex->getValue());
 
-        $this->loadSymbolIndex->attach($this);
+        $this->percentageSymbolIndex->attach($this);
         $this->charSequence = array_pad($charSequence, $this->size, ' ');
     }
 
     public function update(ISubject $subject): void
     {
-        if ($subject === $this->loadSymbolIndex) {
+        if ($subject === $this->percentageSymbolIndex) {
             $this->addSymbolIndex($subject->get());
         }
     }
 
     private function addSymbolIndex(int $index): void
     {
-        $this->charSequence[] = mb_chr($this->sequenceHelper->getCodepoint($index));
+        $this->charSequence[] = mb_chr($this->codepointConverter->getCodepoint($index));
 
         $this->checkSize();
     }

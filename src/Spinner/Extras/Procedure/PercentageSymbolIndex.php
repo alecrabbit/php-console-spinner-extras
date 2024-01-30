@@ -9,7 +9,7 @@ use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Core\A\ASubject;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\IFloatToIndex;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentageSymbolIndex;
-use AlecRabbit\Spinner\Extras\Value\ILoadValue;
+use AlecRabbit\Spinner\Extras\Value\IPercentValue;
 
 final class PercentageSymbolIndex extends ASubject implements IPercentageSymbolIndex
 {
@@ -17,7 +17,7 @@ final class PercentageSymbolIndex extends ASubject implements IPercentageSymbolI
 
 
     public function __construct(
-        private readonly ILoadValue $loadValue,
+        private readonly IPercentValue $loadValue,
         private int $current = 0,
         private bool $even = true,
         private readonly IFloatToIndex $floatToIndex = new FloatToIndex(),
@@ -32,7 +32,7 @@ final class PercentageSymbolIndex extends ASubject implements IPercentageSymbolI
     public function update(ISubject $subject): void
     {
         if ($subject === $this->loadValue) {
-            /** @var ILoadValue $subject */
+            /** @var IPercentValue $subject */
             $this->add($subject->getValue());
         }
     }
@@ -59,7 +59,7 @@ final class PercentageSymbolIndex extends ASubject implements IPercentageSymbolI
         return $this->current;
     }
 
-    public function getLoadValue(): ILoadValue
+    public function getValue(): IPercentValue
     {
         return $this->loadValue;
     }

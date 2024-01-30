@@ -12,8 +12,8 @@ use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentageSymbolIndex;
 use AlecRabbit\Spinner\Extras\Procedure\FloatToIndex;
 use AlecRabbit\Spinner\Extras\Procedure\FloatToIndexFilled;
 use AlecRabbit\Spinner\Extras\Procedure\PercentageSymbolIndex;
-use AlecRabbit\Spinner\Extras\Value\ILoadValue;
-use AlecRabbit\Spinner\Extras\Value\LoadValue;
+use AlecRabbit\Spinner\Extras\Value\IPercentValue;
+use AlecRabbit\Spinner\Extras\Value\PercentValue;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -48,7 +48,7 @@ final class PercentageSymbolIndexTest extends TestCase
     }
 
     private function getTesteeInstance(
-        ?ILoadValue $loadValue = null,
+        ?IPercentValue $loadValue = null,
         int $current = 0,
         bool $even = true,
         ?IFloatToIndex $floatToIndex = null,
@@ -63,9 +63,9 @@ final class PercentageSymbolIndexTest extends TestCase
         );
     }
 
-    private function getLoadValueMock(): MockObject&ILoadValue
+    private function getLoadValueMock(): MockObject&IPercentValue
     {
-        return $this->createMock(ILoadValue::class);
+        return $this->createMock(IPercentValue::class);
     }
 
     #[Test]
@@ -91,7 +91,7 @@ final class PercentageSymbolIndexTest extends TestCase
             }
         };
 
-        $loadValue = new LoadValue();
+        $loadValue = new PercentValue();
 
         $this->getTesteeInstance(
             loadValue: $loadValue,
@@ -102,7 +102,7 @@ final class PercentageSymbolIndexTest extends TestCase
         foreach ($data as $item) {
             [$element, $input] = $item;
 
-            $loadValue->setLoad($input);
+            $loadValue->setPercent($input);
             $element && $expected->append(str_pad(decbin($element), 8, '0', STR_PAD_LEFT));
         }
 
