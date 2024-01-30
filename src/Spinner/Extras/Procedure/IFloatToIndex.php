@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Helper;
+namespace AlecRabbit\Spinner\Extras\Procedure;
 
 interface IFloatToIndex
 {

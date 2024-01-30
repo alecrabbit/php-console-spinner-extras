@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Tests\Spinner\Functional\Helper;
+namespace AlecRabbit\Tests\Spinner\Functional\Extras\Procedure;
 
 
-use AlecRabbit\Spinner\Helper\BrailleIndexConverter;
-use AlecRabbit\Spinner\Helper\IIndexConverter;
+use AlecRabbit\Spinner\Extras\Procedure\BrailleIndexConverter;
+use AlecRabbit\Spinner\Extras\Procedure\IIndexConverter;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Tests\Spinner\Functional\Helper;
+namespace AlecRabbit\Tests\Spinner\Functional\Extras\Procedure;
 
 
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
+use AlecRabbit\Spinner\Extras\Procedure\FloatToIndex;
+use AlecRabbit\Spinner\Extras\Procedure\FloatToIndexFilled;
+use AlecRabbit\Spinner\Extras\Procedure\IFloatToIndex;
+use AlecRabbit\Spinner\Extras\Procedure\ILoadSymbolIndex;
+use AlecRabbit\Spinner\Extras\Procedure\LoadSymbolIndex;
 use AlecRabbit\Spinner\Extras\Value\ILoadValue;
 use AlecRabbit\Spinner\Extras\Value\LoadValue;
-use AlecRabbit\Spinner\Helper\FloatToIndex;
-use AlecRabbit\Spinner\Helper\FloatToIndexFilled;
-use AlecRabbit\Spinner\Helper\IFloatToIndex;
-use AlecRabbit\Spinner\Helper\ILoadSymbolIndex;
-use AlecRabbit\Spinner\Helper\LoadSymbolIndex;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;

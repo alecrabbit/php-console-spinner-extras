@@ -9,14 +9,13 @@ use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
 use AlecRabbit\Spinner\Extras\Palette\PaletteOptions;
-use AlecRabbit\Spinner\Extras\Palette\Style\CustomStylePalette;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
-use AlecRabbit\Spinner\Extras\Procedure\LoadCharSequenceProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\LoadSymbolIndex;
 use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\PercentSequenceProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Value\LoadValue;
-use AlecRabbit\Spinner\Helper\LoadSymbolIndex;
 
 require_once __DIR__ . '/../bootstrap.async.php';
 
@@ -65,7 +64,7 @@ $loadWidgetSettings =
                 ),
             ),
             charPalette: new ProcedureCharPalette(
-                procedure: new LoadCharSequenceProcedure(
+                procedure: new PercentSequenceProcedure(
                     loadSymbolIndex: $loadSymbolIndex,
                     size: $size,
                 ),

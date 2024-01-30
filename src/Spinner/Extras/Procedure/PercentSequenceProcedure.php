@@ -6,12 +6,9 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
-use AlecRabbit\Spinner\Extras\Value\ILoadValue;
-use AlecRabbit\Spinner\Helper\ILoadSymbolIndex;
-use AlecRabbit\Spinner\Helper\ISequenceHelper;
-use AlecRabbit\Spinner\Helper\SequenceHelper;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentSequenceProcedure;
 
-final class LoadCharSequenceProcedure extends AFloatValueProcedure implements ILoadCharSequenceProcedure
+final class PercentSequenceProcedure extends AFloatValueProcedure implements IPercentSequenceProcedure
 {
     private const DEFAULT_SIZE = 10;
     private array $charSequence;
@@ -19,7 +16,7 @@ final class LoadCharSequenceProcedure extends AFloatValueProcedure implements IL
     public function __construct(
         private readonly ILoadSymbolIndex $loadSymbolIndex,
         private readonly int $size = self::DEFAULT_SIZE,
-        private ISequenceHelper $sequenceHelper = new SequenceHelper(),
+        private IIndexToCodepointConverter $sequenceHelper = new IndexToCodepointConverter(),
         array $charSequence = [],
     ) {
         parent::__construct($this->loadSymbolIndex->getLoadValue());

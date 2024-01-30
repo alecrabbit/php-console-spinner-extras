@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Helper;
+namespace AlecRabbit\Spinner\Extras\Procedure;
 
 final readonly class BrailleIndexConverter implements IIndexConverter
 {
@@ -53,5 +53,10 @@ final readonly class BrailleIndexConverter implements IIndexConverter
     public function getStartCodepoint(): int
     {
         return self::START_CODEPOINT;
+    }
+
+    public function getMax(): int
+    {
+        return 255;
     }
 }
