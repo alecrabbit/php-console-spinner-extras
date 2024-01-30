@@ -11,7 +11,7 @@ use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
-use AlecRabbit\Spinner\Extras\Procedure\ProgressValueProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Value\ProgressValue;
 
@@ -51,8 +51,8 @@ $progressWidgetSettings =
         ),
         new WidgetSettings(
             charPalette: new ProcedureCharPalette(
-                procedure: new ProgressValueProcedure(
-                    progressValue: $progressValue
+                procedure: new PercentValueProcedure(
+                    floatValue: $progressValue
                 ),
             ),
         ),

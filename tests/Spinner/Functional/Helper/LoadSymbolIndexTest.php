@@ -7,11 +7,14 @@ namespace AlecRabbit\Tests\Spinner\Functional\Helper;
 
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
+use AlecRabbit\Spinner\Extras\Value\ILoadValue;
+use AlecRabbit\Spinner\Extras\Value\LoadValue;
 use AlecRabbit\Spinner\Helper\ILoadSymbolIndex;
 use AlecRabbit\Spinner\Helper\LoadSymbolIndex;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 
 final class LoadSymbolIndexTest extends TestCase
 {
@@ -42,15 +45,22 @@ final class LoadSymbolIndexTest extends TestCase
     }
 
     private function getTesteeInstance(
+        ?ILoadValue $loadValue = null,
         int $current = 0,
         bool $even = true,
         ?IObserver $observer = null,
     ): ILoadSymbolIndex {
         return new LoadSymbolIndex(
+            loadValue: $loadValue ?? $this->getLoadValueMock(),
             current: $current,
             even: $even,
             observer: $observer,
         );
+    }
+
+    private function getLoadValueMock(): MockObject&ILoadValue
+    {
+        return $this->createMock(ILoadValue::class);
     }
 
     #[Test]
@@ -76,16 +86,21 @@ final class LoadSymbolIndexTest extends TestCase
             }
         };
 
-        $load = $this->getTesteeInstance(observer: $observer);
+        $loadValue = new LoadValue();
+
+        $this->getTesteeInstance(
+            loadValue: $loadValue,
+            observer: $observer,
+        );
 
         foreach ($data as $item) {
             [$element, $input] = $item;
 
-            $load->add($input);
+            $loadValue->setLoad($input);
             $element && $expected->append(str_pad(decbin($element), 8, '0', STR_PAD_LEFT));
         }
 
 
-        self::assertEquals( $expected->getArrayCopy(), $actual->getArrayCopy());
+        self::assertEquals($expected->getArrayCopy(), $actual->getArrayCopy());
     }
 }

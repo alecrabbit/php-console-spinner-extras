@@ -2,33 +2,62 @@
 
 declare(strict_types=1);
 
+use AlecRabbit\Color\Gradient\ColorRange;
+use AlecRabbit\Color\Gradient\RGBAGradient;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
 use AlecRabbit\Spinner\Extras\Palette\PaletteOptions;
+use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
 use AlecRabbit\Spinner\Extras\Procedure\LoadCharSequenceProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Value\LoadValue;
 use AlecRabbit\Spinner\Helper\LoadSymbolIndex;
 
 require_once __DIR__ . '/../bootstrap.async.php';
 
-$loadValue = new LoadValue();
+$updateInterval = 2000; // milliseconds
 
+$loadValue = new LoadValue();
 $loadSymbolIndex = new LoadSymbolIndex(loadValue: $loadValue);
+$size = 2;
+
+$options = new PaletteOptions(interval: $updateInterval);
+
+$gradient = new RGBAGradient(
+    range: new ColorRange(
+        start: '#fff',
+        end: '#f00',
+    ),
+);
 
 $loadWidgetSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
             charPalette: new ProcedureCharPalette(
                 procedure: new LoadCharSequenceProcedure(
-                    loadValue: $loadValue,
                     loadSymbolIndex: $loadSymbolIndex,
+                    size: $size,
                 ),
-                options: new PaletteOptions(
-                    interval: 10000,
+                options: $options,
+            ),
+        ),
+        new WidgetSettings(
+            stylePalette: new ProcedureStylePalette(
+                procedure: new PercentGradientProcedure(
+                    floatValue: $loadValue,
+                    gradient: $gradient,
                 ),
+                options: $options,
+            ),
+            charPalette: new ProcedureCharPalette(
+                procedure: new PercentValueProcedure(
+                    floatValue: $loadValue,
+                ),
+                options: $options,
             ),
         ),
     );
@@ -46,10 +75,10 @@ $spinner->add($widget->getContext());
 
 $loop = Facade::getLoop();
 
-// simulate progress
+// simulate load
 $loop
     ->repeat(
-        5,
+        $updateInterval / 2000, // seconds
         static function () use ($loadValue): void {
             $load = random_int(0, 100) / 100;
 

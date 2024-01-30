@@ -7,26 +7,29 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 use AlecRabbit\Color\Contract\Gradient\IGradient;
 use AlecRabbit\Color\Contract\IColor;
 use AlecRabbit\Spinner\Contract\IFrame;
-use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Color\Style\Style;
+use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Frame\StylingFrame;
+use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 use RuntimeException;
 
 /**
  * @psalm-suppress UnusedClass
  */
-final class ProgressGradientProcedure extends AProgressValueProcedure
+final class PercentGradientProcedure extends AFloatValueProcedure
 {
     private int $count;
 
     public function __construct(
-        IProgressValue $progressValue,
+        IFloatValue $floatValue,
         private readonly IGradient $gradient,
     ) {
-        parent::__construct($progressValue);
-        $this->count = $gradient->getCount();
+        parent::__construct($floatValue);
+        $this->count = $floatValue instanceof IProgressValue
+            ? $floatValue->getSteps()
+            : 100;
     }
 
     public function getFrame(?float $dt = null): IFrame
@@ -40,20 +43,21 @@ final class ProgressGradientProcedure extends AProgressValueProcedure
 
     private function getFgColor(): IColor
     {
-        return $this->gradient->getOne($this->getIndex());
+        return $this->gradient->getOne($this->getIndex(), $this->count);
     }
 
     protected function getIndex(): mixed
     {
         return min(
             $this->count,
-            max(0, (int)($this->progressValue->getValue() * $this->count) - 1)
+            max(0, (int)($this->floatValue->getValue() * $this->count) - 1)
         );
     }
 
     protected function createFrame(string $sequence): IFrame
     {
-        return new StyleFrame($sequence, 0);
+        // TODO (2024-01-23 17:04) [Alec Rabbit]: refactor to remove this method
+        throw new RuntimeException('Not implemented');
     }
 
     protected function createFrameSequence(): string

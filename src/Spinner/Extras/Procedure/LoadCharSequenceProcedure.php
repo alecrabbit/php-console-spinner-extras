@@ -17,15 +17,13 @@ final class LoadCharSequenceProcedure extends AFloatValueProcedure implements IL
     private array $charSequence;
 
     public function __construct(
-        ILoadValue $loadValue,
         private readonly ILoadSymbolIndex $loadSymbolIndex,
         private readonly int $size = self::DEFAULT_SIZE,
         private ISequenceHelper $sequenceHelper = new SequenceHelper(),
         array $charSequence = [],
     ) {
-        parent::__construct($loadValue);
+        parent::__construct($this->loadSymbolIndex->getLoadValue());
 
-        $loadValue->attach($this->loadSymbolIndex);
         $this->loadSymbolIndex->attach($this);
         $this->charSequence = array_pad($charSequence, $this->size, ' ');
     }

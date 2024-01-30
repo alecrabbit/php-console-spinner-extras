@@ -17,9 +17,9 @@ use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
-use AlecRabbit\Spinner\Extras\Procedure\ProgressGradientProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
-use AlecRabbit\Spinner\Extras\Procedure\ProgressValueProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Value\ProgressValue;
 
@@ -47,7 +47,6 @@ $gradientOne = new AlecRabbit\Color\Gradient\HSLAGradient(
         start: 'hsl(0, 100%, 20%)',
         end: 'hsl(120, 0%, 100%)',
     ),
-    count: 100,
 );
 
 $gradientTwo = new AlecRabbit\Color\Gradient\RGBAGradient(
@@ -55,7 +54,6 @@ $gradientTwo = new AlecRabbit\Color\Gradient\RGBAGradient(
         start: new DRGB(1, 0, 0),
         end: new DRGB(1, 1, 1),
     ),
-    count: 100,
 );
 
 $progressWidgetOneSettings =
@@ -73,7 +71,7 @@ $progressWidgetOneSettings =
         ),
         new WidgetSettings(
             stylePalette: new ProcedureStylePalette(
-                procedure: new ProgressGradientProcedure(
+                procedure: new PercentGradientProcedure(
                     progressValue: $progressValue,
                     gradient: $gradientOne,
                 ),
@@ -87,8 +85,8 @@ $progressWidgetOneSettings =
         ),
         new WidgetSettings(
             charPalette: new ProcedureCharPalette(
-                procedure: new ProgressValueProcedure(
-                    progressValue: $progressValue
+                procedure: new PercentValueProcedure(
+                    floatValue: $progressValue
                 ),
             ),
         ),
@@ -113,7 +111,7 @@ $progressWidgetTwoSettings =
             leadingSpacer: new CharFrame('', 0),
             trailingSpacer: new CharFrame('', 0),
             stylePalette: new ProcedureStylePalette(
-                procedure: new ProgressGradientProcedure(
+                procedure: new PercentGradientProcedure(
                     progressValue: $progressValue,
                     gradient: $gradientTwo,
                 ),

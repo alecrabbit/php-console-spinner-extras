@@ -15,14 +15,15 @@ final class LoadSymbolIndex extends ASubject implements ILoadSymbolIndex
 
 
     public function __construct(
+        private readonly ILoadValue $loadValue,
         private int $current = 0,
         private bool $even = true,
-        private readonly ?ILoadValue $loadValue = null,
         ?IObserver $observer = null,
     ) {
         parent::__construct($observer);
 
         $this->inter = $this->current;
+        $this->loadValue->attach($this);
     }
 
     public function update(ISubject $subject): void
@@ -33,7 +34,7 @@ final class LoadSymbolIndex extends ASubject implements ILoadSymbolIndex
         }
     }
 
-    public function add(float $input): void
+    protected function add(float $input): void
     {
         $this->inter &= 0b00001111;
         $this->inter <<= 4;
@@ -59,5 +60,10 @@ final class LoadSymbolIndex extends ASubject implements ILoadSymbolIndex
     public function get(): int
     {
         return $this->current;
+    }
+
+    public function getLoadValue(): ILoadValue
+    {
+        return $this->loadValue;
     }
 }
