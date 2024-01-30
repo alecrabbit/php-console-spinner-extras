@@ -18,6 +18,7 @@ final class LoadSymbolIndex extends ASubject implements ILoadSymbolIndex
         private readonly ILoadValue $loadValue,
         private int $current = 0,
         private bool $even = true,
+        private IFloatToIndex $floatToIndex = new FloatToIndex(),
         ?IObserver $observer = null,
     ) {
         parent::__construct($observer);
@@ -39,13 +40,7 @@ final class LoadSymbolIndex extends ASubject implements ILoadSymbolIndex
         $this->inter &= 0b00001111;
         $this->inter <<= 4;
 
-        $v = match (true) {
-            $input < 0.125 => 0,
-            $input < 0.375 => 1,
-            $input < 0.625 => 3,
-            $input < 0.875 => 7,
-            default => 15,
-        };
+        $v = $this->floatToIndex->get($input);
 
         $this->inter |= $v;
 

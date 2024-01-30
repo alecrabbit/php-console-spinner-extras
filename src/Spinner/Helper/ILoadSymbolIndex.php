@@ -12,7 +12,5 @@ interface ILoadSymbolIndex extends ISubject, IObserver
 {
     public function get(): int;
 
-//    public function add(float $input): void;
-
     public function getLoadValue(): ILoadValue;
 }

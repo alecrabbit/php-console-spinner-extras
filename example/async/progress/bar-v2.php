@@ -77,7 +77,7 @@ $progressWidgetSettings =
         new WidgetSettings(
             stylePalette: new ProcedureStylePalette(
                 procedure: new PercentGradientProcedure(
-                    progressValue: $progressValue,
+                    floatValue: $progressValue,
                     gradient: $gradient,
                 ),
             ),
@@ -98,7 +98,7 @@ $progressWidgetSettings =
         new WidgetSettings(
             stylePalette: new ProcedureStylePalette(
                 procedure: new PercentGradientProcedure(
-                    progressValue: $progressValue,
+                    floatValue: $progressValue,
                     gradient: $gradient,
                 ),
             ),
