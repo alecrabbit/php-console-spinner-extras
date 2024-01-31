@@ -21,10 +21,11 @@ final class ProcedureCharPalette extends AInfiniteCharPalette
         parent::__construct(frames: $this->wrapProcedure($procedure), options: $options);
     }
 
-    private function wrapProcedure(IProcedure $procedure): Traversable
+    private function wrapProcedure(IProcedure $procedure): \Generator
     {
+        $dt = null;
         while (true) {
-            yield $procedure->getFrame();
+            $dt = yield $procedure->getFrame($dt);
         }
     }
 

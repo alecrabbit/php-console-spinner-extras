@@ -26,13 +26,11 @@ final class StyleFrameRevolver extends AFrameRevolver
 
     protected function current(): IStyleFrame
     {
-        $frame = $this->frames->current();
-
-        if ($frame instanceof IStylingFrame) {
-            return $this->render($frame);
+        if ($this->current instanceof IStylingFrame) {
+            return $this->render($this->current);
         }
 
-        return $frame;
+        return $this->current;
     }
 
     private function render(IStylingFrame $frame): IStyleFrame

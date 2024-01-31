@@ -17,6 +17,7 @@ abstract class AFrameRevolver extends ARevolver implements IFrameRevolver
 {
     /** @var Generator<IFrame> */
     protected Generator $frames;
+    protected IFrame $current;
 
     /**
      * @param Traversable<IFrame> $frames
@@ -33,6 +34,8 @@ abstract class AFrameRevolver extends ARevolver implements IFrameRevolver
 
         /** @var Generator<IFrame> $frames */
         $this->frames = $frames;
+
+        $this->current = $this->frames->send(null);
     }
 
     protected static function assertFrames(Traversable $frames): void
@@ -51,11 +54,12 @@ abstract class AFrameRevolver extends ARevolver implements IFrameRevolver
 
     protected function next(?float $dt = null): void
     {
-        $this->frames->next();
+        $this->current = $this->frames->send($dt);
+        dump($dt, $this->current);
     }
 
     protected function current(): IFrame
     {
-        return $this->frames->current();
+        return $this->current;
     }
 }
