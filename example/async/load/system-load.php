@@ -77,7 +77,7 @@ $loadWidgetSettings =
         new WidgetSettings(
             charPalette: new ProcedureCharPalette(
                 procedure: new TimerProcedure(
-                    target: new DateTimeImmutable('+10 seconds'),
+                    target: new DateTimeImmutable('+86410 seconds'),
                     intervalFormatter: new ClockDateIntervalFormatter(),
                     format: '[%s]',
                 ),
