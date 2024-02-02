@@ -9,8 +9,8 @@ use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Contract\ISecondsToDateIntervalConverter;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
-use AlecRabbit\Spinner\Extras\ElapsedDateIntervalFormatter;
-use AlecRabbit\Spinner\Extras\EstimatedDateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\FineDateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\EstimateDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 use AlecRabbit\Spinner\Extras\SecondsToDateIntervalConverter;
 use DateTimeImmutable;
@@ -29,8 +29,8 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure
         IProgressValue $progressValue,
         string $format = self::FORMAT,
         private readonly ICurrentTimeProvider $currentTimeProvider = new CurrentTimeProvider(),
-        private readonly IDateIntervalFormatter $estimateFormatter = new EstimatedDateIntervalFormatter(),
-        private readonly IDateIntervalFormatter $elapsedFormatter = new ElapsedDateIntervalFormatter(),
+        private readonly IDateIntervalFormatter $estimateFormatter = new EstimateDateIntervalFormatter(),
+        private readonly IDateIntervalFormatter $elapsedFormatter = new FineDateIntervalFormatter(),
         private readonly ISecondsToDateIntervalConverter $converter = new SecondsToDateIntervalConverter(),
     ) {
         $this->createdAt = $this->currentTimeProvider->now();

@@ -52,7 +52,7 @@ abstract class AProgressValue extends AFloatValue implements IProgressValue
         if ($this->finished) {
             return;
         }
-        $this->setValue($this->value + $steps * $this->stepValue);
+        $this->set($this->value + $steps * $this->stepValue);
 
         $this->autoFinish();
     }

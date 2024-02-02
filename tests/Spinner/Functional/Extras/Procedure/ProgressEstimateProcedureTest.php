@@ -8,9 +8,9 @@ use AlecRabbit\Spinner\Contract\IProcedure;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
-use AlecRabbit\Spinner\Extras\EstimatedDateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\EstimateDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
-use AlecRabbit\Spinner\Extras\ProgressValue;
+use AlecRabbit\Spinner\Extras\Value\ProgressValue;
 use AlecRabbit\Tests\TestCase\TestCase;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\Test;
@@ -30,7 +30,7 @@ final class ProgressEstimateProcedureTest extends TestCase
         ?IProgressValue $progressValue = null,
         ?string $format = null,
         ICurrentTimeProvider $currentTimeProvider = null,
-        IDateIntervalFormatter $intervalFormatter = new EstimatedDateIntervalFormatter()
+        IDateIntervalFormatter $intervalFormatter = new EstimateDateIntervalFormatter()
     ): IProcedure {
         return new ProgressEstimateProcedure(
             progressValue: $progressValue ?? new ProgressValue(),
