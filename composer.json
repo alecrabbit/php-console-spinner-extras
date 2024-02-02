@@ -27,7 +27,8 @@
     "suggest": {
         "ext-mbstring": "For multibyte Unicode string functionality."
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "AlecRabbit\\Spinner\\": "src\\Spinner\\"
