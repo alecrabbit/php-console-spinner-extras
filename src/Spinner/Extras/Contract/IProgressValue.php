@@ -7,7 +7,7 @@ namespace AlecRabbit\Spinner\Extras\Contract;
 
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 
-interface IProgressValue extends IFloatValue
+interface IProgressValue extends IFloatValue, IHasIsFinished
 {
     public function getSteps(): int;
 
@@ -17,6 +17,4 @@ interface IProgressValue extends IFloatValue
     public function advance(int $steps): void;
 
     public function finish(): void;
-
-    public function isFinished(): bool;
 }

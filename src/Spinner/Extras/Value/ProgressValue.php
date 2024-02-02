@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Extras;
+namespace AlecRabbit\Spinner\Extras\Value;
 
 use AlecRabbit\Spinner\Extras\A\AProgressValue;
 
