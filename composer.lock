@@ -4,23 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "387a6ea24cae41e96405985b3fc00f8a",
+    "content-hash": "2752800053697b3f66740fd0ac8f39ae",
     "packages": [
         {
             "name": "alecrabbit/php-color",
-            "version": "dev-prepare-next",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-color.git",
-                "reference": "e39008e3a36e107bb5bc5cc14b307e1dc4eea572"
+                "reference": "92f9dcc34ca45809bad094de90f7f0eafd18635c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-color/zipball/e39008e3a36e107bb5bc5cc14b307e1dc4eea572",
-                "reference": "e39008e3a36e107bb5bc5cc14b307e1dc4eea572",
+                "url": "https://api.github.com/repos/alecrabbit/php-color/zipball/92f9dcc34ca45809bad094de90f7f0eafd18635c",
+                "reference": "92f9dcc34ca45809bad094de90f7f0eafd18635c",
                 "shasum": ""
             },
             "require": {
+                "alecrabbit/php-color-models": "1.x-dev",
                 "php": ">=8.2"
             },
             "require-dev": {
@@ -33,8 +34,7 @@
             "type": "library",
             "autoload": {
                 "files": [
-                    "src/bootstrap.php",
-                    "src/Color/Model/bootstrap.php"
+                    "src/bootstrap.php"
                 ],
                 "psr-4": {
                     "AlecRabbit\\Color\\": "src\\Color\\"
@@ -53,13 +53,64 @@
             ],
             "support": {
                 "issues": "https://github.com/alecrabbit/php-color/issues",
-                "source": "https://github.com/alecrabbit/php-color/tree/prepare-next"
+                "source": "https://github.com/alecrabbit/php-color/tree/1.x"
             },
-            "time": "2024-01-30T11:14:28+00:00"
+            "time": "2024-02-02T12:13:56+00:00"
+        },
+        {
+            "name": "alecrabbit/php-color-models",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alecrabbit/php-color-models.git",
+                "reference": "ed77bad11629b31a72456fbac67324841e1ae2dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alecrabbit/php-color-models/zipball/ed77bad11629b31a72456fbac67324841e1ae2dd",
+                "reference": "ed77bad11629b31a72456fbac67324841e1ae2dd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "*",
+                "phpunit/php-code-coverage": "*",
+                "phpunit/phpunit": "^10.0",
+                "symfony/console": "*",
+                "symfony/var-dumper": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Color/bootstrap.php"
+                ],
+                "psr-4": {
+                    "AlecRabbit\\Color\\": "src\\Color\\",
+                    "AlecRabbit\\Builder\\": "src\\Builder\\"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Package for color models",
+            "keywords": [
+                "color",
+                "convert",
+                "model",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/alecrabbit/php-color-models/issues",
+                "source": "https://github.com/alecrabbit/php-color-models/tree/prepare-next"
+            },
+            "time": "2024-02-02T11:51:22+00:00"
         },
         {
             "name": "alecrabbit/php-console-spinner",
-            "version": "dev-prepare-next",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
@@ -2331,16 +2382,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v7.0.2",
+            "version": "v7.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "f8587c4cdc5acad67af71c37db34ef03af91e59c"
+                "reference": "c5010d50f1ee4b25cfa0201d9915cf1b14071456"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/f8587c4cdc5acad67af71c37db34ef03af91e59c",
-                "reference": "f8587c4cdc5acad67af71c37db34ef03af91e59c",
+                "url": "https://api.github.com/repos/symfony/console/zipball/c5010d50f1ee4b25cfa0201d9915cf1b14071456",
+                "reference": "c5010d50f1ee4b25cfa0201d9915cf1b14071456",
                 "shasum": ""
             },
             "require": {
@@ -2404,7 +2455,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v7.0.2"
+                "source": "https://github.com/symfony/console/tree/v7.0.3"
             },
             "funding": [
                 {
@@ -2420,7 +2471,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-10T16:54:46+00:00"
+            "time": "2024-01-23T15:02:46+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2903,16 +2954,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v7.0.2",
+            "version": "v7.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "cc78f14f91f5e53b42044d0620961c48028ff9f5"
+                "reference": "524aac4a280b90a4420d8d6a040718d0586505ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/cc78f14f91f5e53b42044d0620961c48028ff9f5",
-                "reference": "cc78f14f91f5e53b42044d0620961c48028ff9f5",
+                "url": "https://api.github.com/repos/symfony/string/zipball/524aac4a280b90a4420d8d6a040718d0586505ac",
+                "reference": "524aac4a280b90a4420d8d6a040718d0586505ac",
                 "shasum": ""
             },
             "require": {
@@ -2969,7 +3020,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v7.0.2"
+                "source": "https://github.com/symfony/string/tree/v7.0.3"
             },
             "funding": [
                 {
@@ -2985,20 +3036,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-10T16:54:46+00:00"
+            "time": "2024-01-29T15:41:16+00:00"
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v7.0.2",
+            "version": "v7.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "5f6f1a527002068f6d40fda068399220eabebf71"
+                "reference": "a7a061abbf6fe3d4a79032cbc5149a4d65a10234"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/5f6f1a527002068f6d40fda068399220eabebf71",
-                "reference": "5f6f1a527002068f6d40fda068399220eabebf71",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/a7a061abbf6fe3d4a79032cbc5149a4d65a10234",
+                "reference": "a7a061abbf6fe3d4a79032cbc5149a4d65a10234",
                 "shasum": ""
             },
             "require": {
@@ -3052,7 +3103,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v7.0.2"
+                "source": "https://github.com/symfony/var-dumper/tree/v7.0.3"
             },
             "funding": [
                 {
@@ -3068,7 +3119,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-28T19:18:20+00:00"
+            "time": "2024-01-23T15:02:46+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -3122,12 +3173,12 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "alecrabbit/php-color": 20,
         "alecrabbit/php-console-spinner": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.2"

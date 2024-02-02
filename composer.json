@@ -10,8 +10,8 @@
     ],
     "require": {
         "php": ">=8.2",
-        "alecrabbit/php-color": "dev-prepare-next",
-        "alecrabbit/php-console-spinner": "dev-prepare-next",
+        "alecrabbit/php-color": "1.x-dev",
+        "alecrabbit/php-console-spinner": "1.x-dev",
         "alecrabbit/php-wcwidth": "^1.0.0"
     },
     "require-dev": {
