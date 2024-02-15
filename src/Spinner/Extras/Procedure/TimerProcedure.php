@@ -10,6 +10,7 @@ use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\EstimateDateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\Procedure\Contract\ITimerProcedure;
 use DateTimeImmutable;
 
 use function AlecRabbit\WCWidth\wcswidth;
