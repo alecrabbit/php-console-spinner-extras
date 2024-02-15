@@ -27,7 +27,7 @@ abstract class AFrameRevolver extends ARevolver implements IFrameRevolver
         IInterval $interval,
         ITolerance $tolerance,
     ) {
-        parent::__construct($interval, $tolerance);
+        parent::__construct($interval);
 
         self::assertFrames($frames);
 
@@ -49,9 +49,11 @@ abstract class AFrameRevolver extends ARevolver implements IFrameRevolver
         };
     }
 
-    protected function next(?float $dt = null): void
+    public function getFrame(?float $dt = null): IFrame
     {
         $this->frames->next();
+
+        return $this->current();
     }
 
     protected function current(): IFrame

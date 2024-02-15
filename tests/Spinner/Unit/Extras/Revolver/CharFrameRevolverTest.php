@@ -64,12 +64,6 @@ final class CharFrameRevolverTest extends TestCase
     {
         $interval = $this->getIntervalMock();
 
-        $interval
-            ->expects(self::once())
-            ->method('toMilliseconds')
-            ->willReturn(10.0)
-        ;
-
         $frames = $this->getGenerator();
 
         $frameRevolver = $this->getTesteeInstance(
