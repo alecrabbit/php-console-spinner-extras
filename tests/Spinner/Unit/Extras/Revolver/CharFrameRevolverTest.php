@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Revolver;
 
 use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\IHasFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
@@ -30,18 +31,20 @@ final class CharFrameRevolverTest extends TestCase
     }
 
     public function getTesteeInstance(
-        ?Traversable $frames = null,
+        ?IHasFrame $frames = null,
         ?IInterval $interval = null,
-        ?ITolerance $tolerance = null,
     ): IFrameRevolver {
         return
             new CharFrameRevolver(
-                frames: $frames ?? $this->getGenerator(),
+                frames: $frames ?? $this->getHasFramesMock(),
                 interval: $interval ?? $this->getIntervalMock(),
-                tolerance: $tolerance ?? $this->getToleranceMock(),
             );
     }
 
+    private function getHasFramesMock(): MockObject&IHasFrame
+    {
+        return $this->createMock(IHasFrame::class);
+    }
     private function getGenerator(): Generator
     {
         yield new CharFrame('0', 0);
@@ -54,18 +57,17 @@ final class CharFrameRevolverTest extends TestCase
         return $this->createMock(IInterval::class);
     }
 
-    private function getToleranceMock(): MockObject&ITolerance
-    {
-        return $this->createMock(ITolerance::class);
-    }
-
     #[Test]
     public function canUpdate(): void
     {
         $interval = $this->getIntervalMock();
 
-        $frames = $this->getGenerator();
-
+        $frames = $this->getHasFramesMock();
+        $frames->method('getFrame')
+            ->willReturnOnConsecutiveCalls(
+                new CharFrame('1', 0),
+                new CharFrame('2', 0),
+            );
         $frameRevolver = $this->getTesteeInstance(
             frames: $frames,
             interval: $interval,
@@ -87,17 +89,6 @@ final class CharFrameRevolverTest extends TestCase
 
         self::assertInstanceOf(CharFrameRevolver::class, $frameRevolver);
         self::assertSame($interval, $frameRevolver->getInterval());
-    }
-
-    #[Test]
-    public function throwsIfFramesIsNotAGenerator(): void
-    {
-        $this->expectException(InvalidArgument::class);
-        $this->expectExceptionMessage('Frames must be an instance of infinite Generator. "ArrayObject" given.');
-
-        $this->getTesteeInstance(
-            frames: new ArrayObject(),
-        );
     }
 
     protected function getFrameCollectionMock(): MockObject&IFrameCollection
