@@ -8,6 +8,8 @@ use AlecRabbit\Spinner\Contract\Pattern\IPattern;
 use AlecRabbit\Spinner\Core\Config\Contract\IRevolverConfig;
 use AlecRabbit\Spinner\Core\Factory\Contract\IFrameCollectionFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\IStyleFrameRevolverFactory;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPalette;
+use AlecRabbit\Spinner\Core\Pattern\Factory\Contract\IPatternFactory;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolverBuilder;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Spinner\Extras\Pattern\Contract\IInfinitePattern;
@@ -20,13 +22,16 @@ final readonly class StyleFrameRevolverFactory implements IStyleFrameRevolverFac
         private IStyleFrameRevolverBuilder $frameRevolverBuilder,
         private IFrameCollectionRevolverBuilder $frameCollectionRevolverBuilder,
         private IFrameCollectionFactory $frameCollectionFactory,
+        private IPatternFactory $patternFactory,
         private IRevolverConfig $revolverConfig,
         private IStyleRenderer $styleRenderer,
     ) {
     }
 
-    public function create(IPattern $pattern): IFrameRevolver
+    public function create(IPalette $palette): IFrameRevolver
     {
+        $pattern = $this->patternFactory->create($palette);
+
         if ($pattern instanceof IInfinitePattern) {
             return $this->frameRevolverBuilder
                 ->withFrames(

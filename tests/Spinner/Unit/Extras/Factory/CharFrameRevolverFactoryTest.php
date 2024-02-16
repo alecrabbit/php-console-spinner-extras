@@ -11,6 +11,8 @@ use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Factory\Contract\ICharFrameRevolverFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\IFrameCollectionFactory;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPalette;
+use AlecRabbit\Spinner\Core\Pattern\Factory\Contract\IPatternFactory;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolver;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameCollectionRevolverBuilder;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
@@ -36,6 +38,7 @@ final class CharFrameRevolverFactoryTest extends TestCase
         ?ICharFrameRevolverBuilder $frameRevolverBuilder = null,
         ?IFrameCollectionRevolverBuilder $frameCollectionRevolverBuilder = null,
         ?IFrameCollectionFactory $frameCollectionFactory = null,
+        ?IPatternFactory $patternFactory = null,
         ?IRevolverConfig $revolverConfig = null,
     ): ICharFrameRevolverFactory {
         return
@@ -43,12 +46,18 @@ final class CharFrameRevolverFactoryTest extends TestCase
                 frameRevolverBuilder: $frameRevolverBuilder ?? $this->getCharFrameRevolverBuilderMock(),
                 frameCollectionRevolverBuilder: $frameCollectionRevolverBuilder ?? $this->getFrameCollectionRevolverBuilderMock(
             ),
+                patternFactory: $patternFactory ?? $this->getPatternFactoryMock(),
                 frameCollectionFactory: $frameCollectionFactory ?? $this->getFrameCollectionFactoryMock(),
                 revolverConfig: $revolverConfig ?? $this->getRevolverConfigMock(),
             );
     }
 
-    protected function getCharFrameRevolverBuilderMock(): MockObject&ICharFrameRevolverBuilder
+    private function getPatternFactoryMock(): MockObject&IPatternFactory
+    {
+        return $this->createMock(IPatternFactory::class);
+    }
+
+    private function getCharFrameRevolverBuilderMock(): MockObject&ICharFrameRevolverBuilder
     {
         return $this->createMock(ICharFrameRevolverBuilder::class);
     }
@@ -68,6 +77,10 @@ final class CharFrameRevolverFactoryTest extends TestCase
         return $this->createMock(IRevolverConfig::class);
     }
 
+    private function getPaletteMock(): MockObject&IPalette
+    {
+        return $this->createMock(IPalette::class);
+    }
     #[Test]
     public function canCreate(): void
     {
@@ -85,6 +98,14 @@ final class CharFrameRevolverFactoryTest extends TestCase
             ->method('getFrames')
             ->willReturn($frames)
         ;
+        $palette = $this->getPaletteMock();
+
+        $patternFactory = $this->getPatternFactoryMock();
+        $patternFactory
+            ->expects(self::once())
+            ->method('create')
+            ->with($palette)
+            ->willReturn($pattern);
         $frameCollection = $this->getFrameCollectionMock();
         $frameCollectionFactory = $this->getFrameCollectionFactoryMock();
         $frameCollectionFactory
@@ -132,6 +153,7 @@ final class CharFrameRevolverFactoryTest extends TestCase
             $this->getTesteeInstance(
                 frameCollectionRevolverBuilder: $frameCollectionRevolverBuilder,
                 frameCollectionFactory: $frameCollectionFactory,
+                patternFactory: $patternFactory,
                 revolverConfig: $revolverConfig,
             );
 
@@ -139,7 +161,7 @@ final class CharFrameRevolverFactoryTest extends TestCase
 
         self::assertSame(
             $frameRevolver,
-            $styleRevolverFactory->create($pattern),
+            $styleRevolverFactory->create($palette),
         );
     }
 
@@ -189,7 +211,14 @@ final class CharFrameRevolverFactoryTest extends TestCase
             ->expects(self::once())
             ->method('getFrames')
             ->willReturn($frames)
-        ;
+        ; $palette = $this->getPaletteMock();
+
+        $patternFactory = $this->getPatternFactoryMock();
+        $patternFactory
+            ->expects(self::once())
+            ->method('create')
+            ->with($palette)
+            ->willReturn($pattern);
         $frameCollectionFactory = $this->getFrameCollectionFactoryMock();
         $frameCollectionFactory
             ->expects(self::never())
@@ -234,6 +263,7 @@ final class CharFrameRevolverFactoryTest extends TestCase
             $this->getTesteeInstance(
                 frameRevolverBuilder: $frameRevolverBuilder,
                 frameCollectionFactory: $frameCollectionFactory,
+                patternFactory: $patternFactory,
                 revolverConfig: $revolverConfig,
             );
 
@@ -241,7 +271,7 @@ final class CharFrameRevolverFactoryTest extends TestCase
 
         self::assertSame(
             $frameRevolver,
-            $styleRevolverFactory->create($pattern),
+            $styleRevolverFactory->create($palette),
         );
     }
 

@@ -7,6 +7,7 @@ namespace AlecRabbit\Spinner\Extras\Palette\Style;
 use AlecRabbit\Spinner\Core\Contract\IStyleFrame;
 use AlecRabbit\Spinner\Core\Palette\A\AStylePalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
 use AlecRabbit\Spinner\Core\StyleFrame;
 use Traversable;
 
@@ -27,5 +28,11 @@ final class Red extends AStylePalette
     protected function modeInterval(?IPaletteMode $mode = null): ?int
     {
         return null;
+    }
+
+    public function unwrap(?IPaletteMode $mode = null): IPaletteTemplate
+    {
+        // TODO: Implement unwrap() method.
+        throw new \RuntimeException(__METHOD__ . ' Not implemented.');
     }
 }

@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Palette\Style;
 
 use AlecRabbit\Spinner\Core\Contract\IStyleFrame;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Palette\A\AInfiniteStylePalette;
@@ -24,5 +26,11 @@ final class CustomStylePalette extends AInfiniteStylePalette
     protected function createFrame(string $element, ?int $width = null): IStyleFrame
     {
         return new StyleFrame($element, $width ?? $this->frameWidth ?? 0);
+    }
+
+    public function unwrap(?IPaletteMode $mode = null): IPaletteTemplate
+    {
+        // TODO: Implement unwrap() method.
+        throw new \RuntimeException(__METHOD__ . ' Not implemented.');
     }
 }
