@@ -12,6 +12,7 @@ use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
 use AlecRabbit\Spinner\Extras\Palette\A\AInfiniteCharPalette;
 use AlecRabbit\Spinner\Extras\Palette\PaletteOptions;
+use RuntimeException;
 use Traversable;
 
 final class ProcedureCharPalette extends AInfiniteCharPalette
@@ -30,14 +31,14 @@ final class ProcedureCharPalette extends AInfiniteCharPalette
         }
     }
 
-    protected function createFrame(string $element, ?int $width = null): ICharFrame
-    {
-        return new CharFrame($element, $width ?? 1);
-    }
-
     public function unwrap(?IPaletteMode $mode = null): IPaletteTemplate
     {
         // TODO: Implement unwrap() method.
-        throw new \RuntimeException(__METHOD__ . ' Not implemented.');
+        throw new RuntimeException(__METHOD__ . ' Not implemented.');
+    }
+
+    protected function createFrame(string $element, ?int $width = null): ICharFrame
+    {
+        return new CharFrame($element, $width ?? 1);
     }
 }

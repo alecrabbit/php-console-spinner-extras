@@ -7,6 +7,8 @@ namespace AlecRabbit\Spinner\Extras\Palette\Char;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\ICharFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
+use RuntimeException;
 use Traversable;
 
 /**
@@ -15,6 +17,12 @@ use Traversable;
  */
 final class PulseOrangeBlue extends ACharPalette
 {
+    public function unwrap(?IPaletteMode $mode = null): IPaletteTemplate
+    {
+        // TODO: Implement unwrap() method.
+        throw new RuntimeException(__METHOD__ . ' Not implemented.');
+    }
+
     protected function sequence(): Traversable
     {
         yield from ['🔸', '🔶', '🟠', '🟠', '🔶', '🔸', '🔹', '🔷', '🔵', '🔵', '🔷', '🔹'];
