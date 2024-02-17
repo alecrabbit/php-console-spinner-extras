@@ -6,12 +6,14 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Render;
 
 use AlecRabbit\Spinner\Extras\Contract\IStyleToAnsiStringConverter;
+use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Render\StyleRenderer;
-use AlecRabbit\Tests\TestCase\TestCaseWithPrebuiltMocksAndStubs;
+use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 
-final class StyleRendererTest extends TestCaseWithPrebuiltMocksAndStubs
+final class StyleRendererTest extends TestCase
 {
     #[Test]
     public function canBeInstantiated(): void
@@ -27,6 +29,11 @@ final class StyleRendererTest extends TestCaseWithPrebuiltMocksAndStubs
         return new StyleRenderer(
             converter: $converter ?? $this->getStyleToAnsiStringConverterMock(),
         );
+    }
+
+    protected function getStyleToAnsiStringConverterMock(): MockObject&IStyleToAnsiStringConverter
+    {
+        return $this->createMock(IStyleToAnsiStringConverter::class);
     }
 
     #[Test]
@@ -61,6 +68,11 @@ final class StyleRendererTest extends TestCaseWithPrebuiltMocksAndStubs
             '%s ',
             $styleFrameRenderer->render($style),
         );
+    }
+
+    protected function getStyleMock(): MockObject&IStyle
+    {
+        return $this->createMock(IStyle::class);
     }
 
 // // FIXME (2023-12-20 17:12) [Alec Rabbit]: add test for style is empty

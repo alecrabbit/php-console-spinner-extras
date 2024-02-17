@@ -8,11 +8,11 @@ namespace AlecRabbit\Tests\Spinner\Unit\Extras;
 use AlecRabbit\Spinner\Extras\Contract\IWidthGetter;
 use AlecRabbit\Spinner\Extras\Contract\IWidthMeasurer;
 use AlecRabbit\Spinner\Extras\WidthMeasurer;
-use AlecRabbit\Tests\TestCase\TestCaseWithPrebuiltMocksAndStubs;
+use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 
-final class WidthMeasurerTest extends TestCaseWithPrebuiltMocksAndStubs
+final class WidthMeasurerTest extends TestCase
 {
     #[Test]
     public function canBeInstantiated(): void

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Revolver\Builder;
 
-use AlecRabbit\Spinner\Contract\IHasFrame;
 use AlecRabbit\Spinner\Contract\IHasSequenceFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\CharFrame;
@@ -56,12 +55,7 @@ final class CharFrameRevolverBuilderTest extends TestCase
         return $this->createMock(IHasSequenceFrame::class);
     }
 
-    private function getGenerator(): Generator
-    {
-        yield new CharFrame('0', 0);
-    }
-
-    protected function getIntervalMock(): MockObject&IInterval
+    private function getIntervalMock(): MockObject&IInterval
     {
         return $this->createMock(IInterval::class);
     }
@@ -119,5 +113,10 @@ final class CharFrameRevolverBuilderTest extends TestCase
             exception: $exceptionClass,
             message: $exceptionMessage,
         );
+    }
+
+    private function getGenerator(): Generator
+    {
+        yield new CharFrame('0', 0);
     }
 }

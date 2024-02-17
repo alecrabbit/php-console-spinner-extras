@@ -54,10 +54,7 @@ final class StyleFrameRevolverFactoryTest extends TestCase
                 styleRenderer: $styleRenderer ?? $this->getStyleRendererMock(),
             );
     }
-    private function getPatternFactoryMock(): MockObject&IPatternFactory
-    {
-        return $this->createMock(IPatternFactory::class);
-    }
+
     protected function getStyleFrameRevolverBuilderMock(): MockObject&IStyleFrameRevolverBuilder
     {
         return $this->createMock(IStyleFrameRevolverBuilder::class);
@@ -71,6 +68,11 @@ final class StyleFrameRevolverFactoryTest extends TestCase
     protected function getFrameCollectionFactoryMock(): MockObject&IFrameCollectionFactory
     {
         return $this->createMock(IFrameCollectionFactory::class);
+    }
+
+    private function getPatternFactoryMock(): MockObject&IPatternFactory
+    {
+        return $this->createMock(IPatternFactory::class);
     }
 
     private function getRevolverConfigMock(): MockObject&IRevolverConfig
@@ -108,7 +110,8 @@ final class StyleFrameRevolverFactoryTest extends TestCase
             ->expects(self::once())
             ->method('create')
             ->with($palette)
-            ->willReturn($pattern);
+            ->willReturn($pattern)
+        ;
         $frameCollection = $this->getFrameCollectionMock();
         $frameCollectionFactory = $this->getFrameCollectionFactoryMock();
         $frameCollectionFactory
@@ -188,6 +191,11 @@ final class StyleFrameRevolverFactoryTest extends TestCase
         return $this->createMock(IPattern::class);
     }
 
+    private function getPaletteMock(): MockObject&IPalette
+    {
+        return $this->createMock(IPalette::class);
+    }
+
     private function getFrameCollectionMock(): MockObject&IFrameCollection
     {
         return $this->createMock(IFrameCollection::class);
@@ -225,7 +233,8 @@ final class StyleFrameRevolverFactoryTest extends TestCase
             ->expects(self::once())
             ->method('create')
             ->with($palette)
-            ->willReturn($pattern);
+            ->willReturn($pattern)
+        ;
 
         $frameCollectionFactory = $this->getFrameCollectionFactoryMock();
         $frameCollectionFactory
@@ -298,10 +307,5 @@ final class StyleFrameRevolverFactoryTest extends TestCase
     private function getFrameRevolverMock(): MockObject&IFrameRevolver
     {
         return $this->createMock(IFrameRevolver::class);
-    }
-
-    private function getPaletteMock(): MockObject&IPalette
-    {
-        return $this->createMock(IPalette::class);
     }
 }

@@ -9,13 +9,15 @@ use AlecRabbit\Spinner\Extras\Color\AnsiCode;
 use AlecRabbit\Spinner\Extras\Color\Style\StyleOptions;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiColorParser;
 use AlecRabbit\Spinner\Extras\Contract\IStyleToAnsiStringConverter;
+use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptionsParser;
 use AlecRabbit\Spinner\Extras\Contract\Style\StyleOption;
 use AlecRabbit\Spinner\Extras\StyleToAnsiStringConverter;
-use AlecRabbit\Tests\TestCase\TestCaseWithPrebuiltMocksAndStubs;
+use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 
-final class StyleToAnsiStringConverterTest extends TestCaseWithPrebuiltMocksAndStubs
+final class StyleToAnsiStringConverterTest extends TestCase
 {
     #[Test]
     public function canBeInstantiated(): void
@@ -33,6 +35,16 @@ final class StyleToAnsiStringConverterTest extends TestCaseWithPrebuiltMocksAndS
             colorParser: $colorParser ?? $this->getAnsiColorParserMock(),
             optionsParser: $optionsParser ?? $this->getStyleOptionsParserMock(),
         );
+    }
+
+    protected function getAnsiColorParserMock(): MockObject&IAnsiColorParser
+    {
+        return $this->createMock(IAnsiColorParser::class);
+    }
+
+    protected function getStyleOptionsParserMock(): MockObject&IStyleOptionsParser
+    {
+        return $this->createMock(IStyleOptionsParser::class);
     }
 
     #[Test]
@@ -53,6 +65,11 @@ final class StyleToAnsiStringConverterTest extends TestCaseWithPrebuiltMocksAndS
             ->willReturn('%s')
         ;
         self::assertSame('%s', $converter->convert($style));
+    }
+
+    protected function getStyleMock(): MockObject&IStyle
+    {
+        return $this->createMock(IStyle::class);
     }
 
     #[Test]

@@ -9,11 +9,11 @@ use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Extras\Contract\ICharFrameRenderer;
 use AlecRabbit\Spinner\Extras\Factory\Contract\ICharFrameFactory;
 use AlecRabbit\Spinner\Extras\Render\CharFrameRenderer;
-use AlecRabbit\Tests\TestCase\TestCaseWithPrebuiltMocksAndStubs;
+use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 
-final class CharFrameRendererTest extends TestCaseWithPrebuiltMocksAndStubs
+final class CharFrameRendererTest extends TestCase
 {
     #[Test]
     public function canBeInstantiated(): void
@@ -29,6 +29,11 @@ final class CharFrameRendererTest extends TestCaseWithPrebuiltMocksAndStubs
         return new CharFrameRenderer(
             frameFactory: $frameFactory ?? $this->getCharFrameFactoryMock(),
         );
+    }
+
+    private function getCharFrameFactoryMock(): MockObject&ICharFrameFactory
+    {
+        return $this->createMock(ICharFrameFactory::class);
     }
 
     #[Test]

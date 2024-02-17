@@ -10,9 +10,10 @@ use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Core\Contract\IDriver;
 use AlecRabbit\Spinner\Core\Settings\Contract\IDriverSettings;
 use AlecRabbit\Spinner\Extras\Driver\Driver;
-use AlecRabbit\Tests\TestCase\TestCaseWithPrebuiltMocksAndStubs;
+use AlecRabbit\Tests\TestCase\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
-class TestCaseForDriver extends TestCaseWithPrebuiltMocksAndStubs
+class TestCaseForDriver extends TestCase
 {
     public function getTesteeInstance(
         ?ITimer $timer = null,
@@ -29,5 +30,16 @@ class TestCaseForDriver extends TestCaseWithPrebuiltMocksAndStubs
                 driverSettings: $driverSettings ?? $this->getDriverSettingsMock(),
                 observer: $observer,
             );
+    }
+
+    protected function getDriverOutputMock(): MockObject&IDriverOutput
+    {
+        return $this->createMock(IDriverOutput::class);
+    }
+
+
+    protected function getDriverSettingsMock(): MockObject&IDriverSettings
+    {
+        return $this->createMock(IDriverSettings::class);
     }
 }

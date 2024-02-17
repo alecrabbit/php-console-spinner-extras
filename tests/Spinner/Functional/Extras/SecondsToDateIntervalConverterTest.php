@@ -7,6 +7,7 @@ namespace AlecRabbit\Tests\Spinner\Functional\Extras;
 use AlecRabbit\Spinner\Extras\Contract\ISecondsToDateIntervalConverter;
 use AlecRabbit\Spinner\Extras\SecondsToDateIntervalConverter;
 use AlecRabbit\Tests\TestCase\TestCase;
+use DateInterval;
 use PHPUnit\Framework\Attributes\Test;
 
 final class SecondsToDateIntervalConverterTest extends TestCase
@@ -30,7 +31,7 @@ final class SecondsToDateIntervalConverterTest extends TestCase
         $converter = $this->getTesteeInstance();
 
         self::assertEquals(
-            new \DateInterval('PT42S'),
+            new DateInterval('PT42S'),
             $converter->convert(42)
         );
     }

@@ -9,10 +9,10 @@ use AlecRabbit\Spinner\Extras\Color\Style\StyleOptions;
 use AlecRabbit\Spinner\Extras\Color\Style\StyleOptionsParser;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptionsParser;
 use AlecRabbit\Spinner\Extras\Contract\Style\StyleOption;
-use AlecRabbit\Tests\TestCase\TestCaseWithPrebuiltMocksAndStubs;
+use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
-final class StyleOptionsParserTest extends TestCaseWithPrebuiltMocksAndStubs
+final class StyleOptionsParserTest extends TestCase
 {
     private const SET = 'set';
     private const UNSET = 'unset';
