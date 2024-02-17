@@ -7,6 +7,7 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 use AlecRabbit\Color\Contract\Gradient\IGradient;
 use AlecRabbit\Color\Contract\IColor;
 use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Extras\Color\Style\Style;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
@@ -32,7 +33,7 @@ final class PercentGradientProcedure extends AFloatValueProcedure
             : 100;
     }
 
-    public function getFrame(?float $dt = null): IFrame
+    public function getFrame(?float $dt = null): ISequenceFrame
     {
         return new StylingFrame(
             style: new Style(
@@ -54,7 +55,7 @@ final class PercentGradientProcedure extends AFloatValueProcedure
         );
     }
 
-    protected function createFrame(string $sequence): IFrame
+    protected function createFrame(string $sequence): ISequenceFrame
     {
         // TODO (2024-01-23 17:04) [Alec Rabbit]: refactor to remove this method
         throw new RuntimeException('Not implemented');

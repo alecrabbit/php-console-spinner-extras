@@ -6,6 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Revolver\Builder;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\IHasFrame;
+use AlecRabbit\Spinner\Contract\IHasSequenceFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
@@ -21,7 +22,7 @@ use Traversable;
 final class StyleFrameRevolverBuilder implements IStyleFrameRevolverBuilder
 {
     /** @var Traversable<IFrame>|null */
-    private null|IHasFrame|Traversable $frames = null;
+    private null|IHasSequenceFrame|Traversable $frames = null;
     private ?IInterval $interval = null;
     private ?ITolerance $tolerance = null;
     private ?IStyleRenderer $styleRenderer = null;
@@ -52,7 +53,7 @@ final class StyleFrameRevolverBuilder implements IStyleFrameRevolverBuilder
     }
 
     /** @inheritDoc */
-    public function withFrames(IHasFrame|Traversable $frames): IStyleFrameRevolverBuilder
+    public function withFrames(IHasSequenceFrame|Traversable $frames): IStyleFrameRevolverBuilder
     {
         $clone = clone $this;
         $clone->frames = $frames;

@@ -33,6 +33,7 @@ final readonly class StyleFrameRevolverFactory implements IStyleFrameRevolverFac
         $pattern = $this->patternFactory->create($palette);
 
         if ($pattern instanceof IInfinitePattern) {
+            dump($palette);
             return $this->frameRevolverBuilder
                 ->withFrames(
                     $pattern->getFrames()
