@@ -11,7 +11,7 @@ use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Extras\Color\Style\Style;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
-use AlecRabbit\Spinner\Extras\Frame\StylingFrame;
+use AlecRabbit\Spinner\Extras\Frame\StyleFrame;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 use RuntimeException;
@@ -35,7 +35,7 @@ final class PercentGradientProcedure extends AFloatValueProcedure
 
     public function getFrame(?float $dt = null): ISequenceFrame
     {
-        return new StylingFrame(
+        return new StyleFrame(
             style: new Style(
                 fgColor: $this->getFgColor(),
             ),

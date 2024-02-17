@@ -10,7 +10,7 @@ use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\Contract\IStyleSequenceFrame;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\StyleFrame;
-use AlecRabbit\Spinner\Extras\Contract\IStylingFrame;
+use AlecRabbit\Spinner\Extras\Contract\IStyleFrame;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Revolver\A\AFrameRevolver;
 use Traversable;
@@ -29,14 +29,14 @@ final class StyleFrameRevolver extends AFrameRevolver
     {
         $frame = $this->frames->current();
 
-        if ($frame instanceof IStylingFrame) {
+        if ($frame instanceof IStyleFrame) {
             return $this->render($frame);
         }
 
         return $frame;
     }
 
-    private function render(IStylingFrame $frame): IStyleSequenceFrame
+    private function render(IStyleFrame $frame): IStyleSequenceFrame
     {
         return new StyleFrame(
             sequence: $this->styleRenderer->render($frame->getStyle()),
