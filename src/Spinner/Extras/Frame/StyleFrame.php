@@ -19,14 +19,4 @@ final readonly class StyleFrame implements IStyleFrame
     {
         return $this->style;
     }
-
-    public function getSequence(): string
-    {
-        throw new LogicException('Should not be called.');
-    }
-
-    public function getWidth(): int
-    {
-        throw new LogicException('Should not be called.');
-    }
 }
