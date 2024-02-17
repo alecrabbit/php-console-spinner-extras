@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Revolver;
 
-use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Contract\IHasFrame;
+use AlecRabbit\Spinner\Contract\IHasSequenceFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
@@ -39,15 +40,15 @@ final class StyleFrameRevolverTest extends TestCase
     ): IFrameRevolver {
         return
             new StyleFrameRevolver(
-                frames: $frames ?? $this->getHasFramesMock(),
+                frames: $frames ?? $this->getHasSequenceFrameMock(),
                 interval: $interval ?? $this->getIntervalMock(),
                 styleRenderer: $styleRenderer ?? $this->getStyleRendererMock(),
             );
     }
 
-    private function getHasFramesMock(): MockObject&IHasFrame
+    private function getHasSequenceFrameMock(): MockObject&IHasSequenceFrame
     {
-        return $this->createMock(IHasFrame::class);
+        return $this->createMock(IHasSequenceFrame::class);
     }
 
     private function getGenerator(): Generator
@@ -77,7 +78,7 @@ final class StyleFrameRevolverTest extends TestCase
     {
         $interval = $this->getIntervalMock();
 
-        $frames = $this->getHasFramesMock();
+        $frames = $this->getHasSequenceFrameMock();
         $frames->method('getFrame')
             ->willReturnOnConsecutiveCalls(
                 new StyleFrame('1', 0),
@@ -112,9 +113,9 @@ final class StyleFrameRevolverTest extends TestCase
         return $this->createMock(IFrameCollection::class);
     }
 
-    protected function getFrameMock(): MockObject&IFrame
+    protected function getSequenceFrameMock(): MockObject&ISequenceFrame
     {
-        return $this->createMock(IFrame::class);
+        return $this->createMock(ISequenceFrame::class);
     }
 
     protected function getOneElementFrameCollectionMock(): MockObject&IFrameCollection

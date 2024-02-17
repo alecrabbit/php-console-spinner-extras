@@ -8,6 +8,7 @@ namespace AlecRabbit\Tests\TestCase;
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Contract\IObserver;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Core\Contract\ISpinner;
 use AlecRabbit\Spinner\Core\Settings\Contract\IDriverSettings;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiColorParser;
@@ -24,10 +25,10 @@ use PHPUnit\Framework\MockObject\Stub;
 abstract class TestCaseWithPrebuiltMocksAndStubs extends TestCase
 {
 
-    protected function getFrameMock(): MockObject&IFrame
-    {
-        return $this->createMock(IFrame::class);
-    }
+//    protected function getSequenceFrameMock(): MockObject&ISequenceFrame
+//    {
+//        return $this->createMock(ISequenceFrame::class);
+//    }
 
     protected function getObserverMock(): MockObject&IObserver
     {

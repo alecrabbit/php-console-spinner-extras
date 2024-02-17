@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Palette\Style;
 
 use AlecRabbit\Spinner\Contract\IProcedure;
-use AlecRabbit\Spinner\Core\Contract\IStyleFrame;
+use AlecRabbit\Spinner\Core\Contract\IStyleSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
@@ -34,13 +34,13 @@ final class ProcedureStylePalette extends AInfiniteStylePalette
 
     public function getEntries(?IPaletteMode $mode = null): Traversable
     {
-        /** @var IStyleFrame|string $item */
+        /** @var IStyleSequenceFrame|string $item */
         foreach ($this->getFrames($mode) as $item) {
             yield $this->createStyleFrame($item);
         }
     }
 
-    protected function createStyleFrame(IStyleFrame|string $element, ?int $width = null): IStyleFrame
+    protected function createStyleFrame(IStyleSequenceFrame|string $element, ?int $width = null): IStyleSequenceFrame
     {
         if (is_string($element)) {
             return new StyleFrame($element, $width ?? 0);
@@ -54,7 +54,7 @@ final class ProcedureStylePalette extends AInfiniteStylePalette
         throw new RuntimeException(__METHOD__ . ' Not implemented.');
     }
 
-    protected function createFrame(string $element, ?int $width = null): IStyleFrame
+    protected function createFrame(string $element, ?int $width = null): IStyleSequenceFrame
     {
         throw new LogicException(sprintf('%s() should not be called', __METHOD__));
     }

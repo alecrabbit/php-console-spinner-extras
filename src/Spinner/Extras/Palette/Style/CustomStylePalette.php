@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Palette\Style;
 
-use AlecRabbit\Spinner\Core\Contract\IStyleFrame;
+use AlecRabbit\Spinner\Core\Contract\IStyleSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
@@ -30,7 +30,7 @@ final class CustomStylePalette extends AInfiniteStylePalette
         throw new RuntimeException(__METHOD__ . ' Not implemented.');
     }
 
-    protected function createFrame(string $element, ?int $width = null): IStyleFrame
+    protected function createFrame(string $element, ?int $width = null): IStyleSequenceFrame
     {
         return new StyleFrame($element, $width ?? $this->frameWidth ?? 0);
     }

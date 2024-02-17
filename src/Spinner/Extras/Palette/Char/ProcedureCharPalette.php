@@ -6,7 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Palette\Char;
 
 use AlecRabbit\Spinner\Contract\IProcedure;
 use AlecRabbit\Spinner\Core\CharFrame;
-use AlecRabbit\Spinner\Core\Contract\ICharFrame;
+use AlecRabbit\Spinner\Core\Contract\ICharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
@@ -37,7 +37,7 @@ final class ProcedureCharPalette extends AInfiniteCharPalette
         throw new RuntimeException(__METHOD__ . ' Not implemented.');
     }
 
-    protected function createFrame(string $element, ?int $width = null): ICharFrame
+    protected function createFrame(string $element, ?int $width = null): ICharSequenceFrame
     {
         return new CharFrame($element, $width ?? 1);
     }

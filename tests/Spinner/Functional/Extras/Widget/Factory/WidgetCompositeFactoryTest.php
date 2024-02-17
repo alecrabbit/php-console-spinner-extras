@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Functional\Extras\Widget\Factory;
 
-use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Core\Config\Contract\Factory\IWidgetConfigFactory;
 use AlecRabbit\Spinner\Core\Config\Contract\IWidgetConfig;
 use AlecRabbit\Spinner\Core\Config\Contract\IWidgetRevolverConfig;
@@ -51,8 +51,8 @@ final class WidgetCompositeFactoryTest extends FacadeAwareTestCase
     #[Test]
     public function canCreateWidgetWithWidgetSettings(): void
     {
-        $leadingSpacer = $this->getFrameMock();
-        $trailingSpacer = $this->getFrameMock();
+        $leadingSpacer = $this->getSequenceFrameMock();
+        $trailingSpacer = $this->getSequenceFrameMock();
         $revolverConfig = $this->getRevolverConfigMock();
         $intervalComparator = $this->getIntervalComparatorMock();
         $widgetConfig = $this->getWidgetConfigMock();
@@ -134,9 +134,9 @@ final class WidgetCompositeFactoryTest extends FacadeAwareTestCase
         self::assertSame($widget, $widgetFactory->usingSettings($widgetSettings)->create());
     }
 
-    protected function getFrameMock(): MockObject&IFrame
+    protected function getSequenceFrameMock(): MockObject&ISequenceFrame
     {
-        return $this->createMock(IFrame::class);
+        return $this->createMock(ISequenceFrame::class);
     }
 
     protected function getRevolverConfigMock(): MockObject&IWidgetRevolverConfig

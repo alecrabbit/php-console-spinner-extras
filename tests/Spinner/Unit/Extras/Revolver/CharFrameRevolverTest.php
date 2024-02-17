@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Revolver;
 
-use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\IHasSequenceFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Contract\IHasFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\CharFrame;
@@ -36,14 +37,14 @@ final class CharFrameRevolverTest extends TestCase
     ): IFrameRevolver {
         return
             new CharFrameRevolver(
-                frames: $frames ?? $this->getHasFramesMock(),
+                frames: $frames ?? $this->getHasSequenceFramesMock(),
                 interval: $interval ?? $this->getIntervalMock(),
             );
     }
 
-    private function getHasFramesMock(): MockObject&IHasFrame
+    private function getHasSequenceFramesMock(): MockObject&IHasSequenceFrame
     {
-        return $this->createMock(IHasFrame::class);
+        return $this->createMock(IHasSequenceFrame::class);
     }
     private function getGenerator(): Generator
     {
@@ -62,7 +63,7 @@ final class CharFrameRevolverTest extends TestCase
     {
         $interval = $this->getIntervalMock();
 
-        $frames = $this->getHasFramesMock();
+        $frames = $this->getHasSequenceFramesMock();
         $frames->method('getFrame')
             ->willReturnOnConsecutiveCalls(
                 new CharFrame('1', 0),
@@ -96,9 +97,9 @@ final class CharFrameRevolverTest extends TestCase
         return $this->createMock(IFrameCollection::class);
     }
 
-    protected function getFrameMock(): MockObject&IFrame
+    protected function getSequenceFrameMock(): MockObject&ISequenceFrame
     {
-        return $this->createMock(IFrame::class);
+        return $this->createMock(ISequenceFrame::class);
     }
 
     protected function getOneElementFrameCollectionMock(): MockObject&IFrameCollection

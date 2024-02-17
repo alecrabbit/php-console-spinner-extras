@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Procedure\A;
 
 use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 
@@ -20,14 +21,14 @@ abstract class AFloatValueProcedure extends AProcedure
     ) {
     }
 
-    public function getFrame(?float $dt = null): IFrame
+    public function getFrame(?float $dt = null): ISequenceFrame
     {
         return $this->createFrame(
             $this->createFrameSequence()
         );
     }
 
-    protected function createFrame(string $sequence): IFrame
+    protected function createFrame(string $sequence): ISequenceFrame
     {
         if ($sequence === '') {
             return new CharFrame('', 0);

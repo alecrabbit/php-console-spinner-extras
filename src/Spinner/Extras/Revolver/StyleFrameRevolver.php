@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Revolver;
 
 use AlecRabbit\Spinner\Contract\IHasFrame;
+use AlecRabbit\Spinner\Contract\IHasSequenceFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
-use AlecRabbit\Spinner\Core\Contract\IStyleFrame;
+use AlecRabbit\Spinner\Core\Contract\IStyleSequenceFrame;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Contract\IStylingFrame;
@@ -17,14 +18,14 @@ use Traversable;
 final class StyleFrameRevolver extends AFrameRevolver
 {
     public function __construct(
-        IHasFrame $frames,
+        IHasSequenceFrame $frames,
         IInterval $interval,
         private readonly IStyleRenderer $styleRenderer,
     ) {
         parent::__construct($frames, $interval);
     }
 
-    protected function current(): IStyleFrame
+    protected function current(): IStyleSequenceFrame
     {
         $frame = $this->frames->current();
 
@@ -35,7 +36,7 @@ final class StyleFrameRevolver extends AFrameRevolver
         return $frame;
     }
 
-    private function render(IStylingFrame $frame): IStyleFrame
+    private function render(IStylingFrame $frame): IStyleSequenceFrame
     {
         return new StyleFrame(
             sequence: $this->styleRenderer->render($frame->getStyle()),

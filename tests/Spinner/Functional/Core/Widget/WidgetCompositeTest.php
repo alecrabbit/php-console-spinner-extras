@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Functional\Core\Widget;
 
-use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\IIntervalComparator;
@@ -42,8 +42,8 @@ final class WidgetCompositeTest extends TestCase
 
         $widgetComposite = $this->getTesteeInstance(
             revolver: $revolver,
-            leadingSpacer: $this->getFrameMock(),
-            trailingSpacer: $this->getFrameMock(),
+            leadingSpacer: $this->getSequenceFrameMock(),
+            trailingSpacer: $this->getSequenceFrameMock(),
             intervalComparator: $intervalComparator,
             children: $children,
         );
@@ -86,8 +86,8 @@ final class WidgetCompositeTest extends TestCase
 
     public function getTesteeInstance(
         ?IRevolver $revolver = null,
-        ?IFrame $leadingSpacer = null,
-        ?IFrame $trailingSpacer = null,
+        ?ISequenceFrame $leadingSpacer = null,
+        ?ISequenceFrame $trailingSpacer = null,
         ?IIntervalComparator $intervalComparator = null,
         ?IWidgetCompositeChildrenContainer $children = null,
         ?IObserver $observer = null,
@@ -95,17 +95,17 @@ final class WidgetCompositeTest extends TestCase
         return
             new WidgetComposite(
                 revolver: $revolver ?? $this->getWidgetRevolverMock(),
-                leadingSpacer: $leadingSpacer ?? $this->getFrameMock(),
-                trailingSpacer: $trailingSpacer ?? $this->getFrameMock(),
+                leadingSpacer: $leadingSpacer ?? $this->getSequenceFrameMock(),
+                trailingSpacer: $trailingSpacer ?? $this->getSequenceFrameMock(),
                 intervalComparator: $intervalComparator ?? $this->getIntervalComparatorMock(),
                 children: $children ?? $this->getWidgetCompositeChildrenContainerMock(),
                 observer: $observer,
             );
     }
 
-    protected function getFrameMock(): MockObject&IFrame
+    protected function getSequenceFrameMock(): MockObject&ISequenceFrame
     {
-        return $this->createMock(IFrame::class);
+        return $this->createMock(ISequenceFrame::class);
     }
 
     private function getIntervalComparatorMock(): MockObject&IIntervalComparator
@@ -128,7 +128,7 @@ final class WidgetCompositeTest extends TestCase
     {
         $children = new WidgetCompositeChildrenContainer();
 
-        $revolverFrame = $this->getFrameMock();
+        $revolverFrame = $this->getSequenceFrameMock();
         $revolver = $this->getWidgetRevolverMock();
         $revolver
             ->expects(self::once())
@@ -136,8 +136,8 @@ final class WidgetCompositeTest extends TestCase
             ->willReturn($revolverFrame)
         ;
 
-        $leadingSpacer = $this->getFrameMock();
-        $trailingSpacer = $this->getFrameMock();
+        $leadingSpacer = $this->getSequenceFrameMock();
+        $trailingSpacer = $this->getSequenceFrameMock();
 
         $widgetComposite = $this->getTesteeInstance(
             revolver: $revolver,

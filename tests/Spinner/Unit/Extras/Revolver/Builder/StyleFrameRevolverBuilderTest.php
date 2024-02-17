@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Revolver\Builder;
 
 use AlecRabbit\Spinner\Contract\IHasFrame;
+use AlecRabbit\Spinner\Contract\IHasSequenceFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\CharFrame;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
@@ -36,7 +37,7 @@ final class StyleFrameRevolverBuilderTest extends TestCase
     #[Test]
     public function canBuild(): void
     {
-        $frames = $this->getHasFramesMock();
+        $frames = $this->getHasSequenceFramesMock();
 
         $frameRevolverBuilder = $this->getTesteeInstance();
         $revolver =
@@ -52,9 +53,9 @@ final class StyleFrameRevolverBuilderTest extends TestCase
         self::assertInstanceOf(StyleFrameRevolver::class, $revolver);
     }
 
-    private function getHasFramesMock(): MockObject&IHasFrame
+    private function getHasSequenceFramesMock(): MockObject&IHasSequenceFrame
     {
-        return $this->createMock(IHasFrame::class);
+        return $this->createMock(IHasSequenceFrame::class);
     }
     private function getGenerator(): Generator
     {
