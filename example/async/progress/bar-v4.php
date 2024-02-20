@@ -5,7 +5,7 @@ declare(strict_types=1);
 use AlecRabbit\Color\Gradient\ColorRange;
 use AlecRabbit\Color\Model\DTO\DRGB;
 use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\OutputSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
@@ -95,11 +95,11 @@ $progressWidgetOneSettings =
 $progressWidgetTwoSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
-            trailingSpacer: new CharFrame('[', 1)
+            trailingSpacer: new CharSequenceFrame('[', 1)
         ),
         new WidgetSettings(
-            leadingSpacer: new CharFrame('', 0),
-            trailingSpacer: new CharFrame('', 0),
+            leadingSpacer: new CharSequenceFrame('', 0),
+            trailingSpacer: new CharSequenceFrame('', 0),
             charPalette: new ProcedureCharPalette(
                 procedure: new ProgressElapsedProcedure(
                     progressValue: $progressValue,
@@ -108,8 +108,8 @@ $progressWidgetTwoSettings =
             ),
         ),
         new WidgetSettings(
-            leadingSpacer: new CharFrame('', 0),
-            trailingSpacer: new CharFrame('', 0),
+            leadingSpacer: new CharSequenceFrame('', 0),
+            trailingSpacer: new CharSequenceFrame('', 0),
             stylePalette: new ProcedureStylePalette(
                 procedure: new PercentGradientProcedure(
                     floatValue: $progressValue,
@@ -124,7 +124,7 @@ $progressWidgetTwoSettings =
             ),
         ),
         new WidgetSettings(
-            leadingSpacer: new CharFrame(']', 1)
+            leadingSpacer: new CharSequenceFrame(']', 1)
         ),
     );
 

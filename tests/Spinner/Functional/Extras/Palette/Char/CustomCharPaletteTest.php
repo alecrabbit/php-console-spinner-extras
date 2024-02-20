@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Functional\Extras\Palette\Char;
 
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
@@ -95,13 +95,13 @@ final class CustomCharPaletteTest extends TestCase
         self::assertIsIterable($entries);
         self::assertInstanceOf(Generator::class, $entries);
 
-        self::assertEquals(new CharFrame('a', 1), $entries->current());
+        self::assertEquals(new CharSequenceFrame('a', 1), $entries->current());
 
         for ($i = 0; $i < 10; $i++) {
             $entries->next();
-            self::assertEquals(new CharFrame('b', 1), $entries->current());
+            self::assertEquals(new CharSequenceFrame('b', 1), $entries->current());
             $entries->next();
-            self::assertEquals(new CharFrame('c', 1), $entries->current());
+            self::assertEquals(new CharSequenceFrame('c', 1), $entries->current());
             $entries->next();
         }
     }

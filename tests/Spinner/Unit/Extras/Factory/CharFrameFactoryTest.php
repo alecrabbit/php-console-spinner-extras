@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Factory;
 
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Extras\Contract\IWidthMeasurer;
 use AlecRabbit\Spinner\Extras\Factory\CharFrameFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\ICharFrameFactory;
@@ -39,6 +39,6 @@ final class CharFrameFactoryTest extends TestCase
         $frameFactory = $this->getTesteeInstance();
 
         self::assertInstanceOf(CharFrameFactory::class, $frameFactory);
-        self::assertInstanceOf(CharFrame::class, $frameFactory->create(''));
+        self::assertInstanceOf(CharSequenceFrame::class, $frameFactory->create(''));
     }
 }

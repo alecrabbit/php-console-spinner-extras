@@ -35,7 +35,7 @@ final class PercentGradientProcedure extends AFloatValueProcedure
 
     public function getFrame(?float $dt = null): IFrame
     {
-        return new StyleFrame(
+            return new StyleSequenceFrame(
             style: new Style(
                 fgColor: $this->getFgColor(),
             ),

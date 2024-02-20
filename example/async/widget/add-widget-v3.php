@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use AlecRabbit\Spinner\Contract\Option\CursorVisibilityOption;
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Settings\OutputSettings;
 use AlecRabbit\Spinner\Core\Settings\SpinnerSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
@@ -29,7 +29,7 @@ $widget =
     Facade::getWidgetFactory()
         ->usingSettings(
             new WidgetSettings(
-                trailingSpacer: new CharFrame('  ', 2), // move cursor up
+                trailingSpacer: new CharSequenceFrame('  ', 2), // move cursor up
                 charPalette: new ShortSnake(),
             )
         )
@@ -41,7 +41,7 @@ $widgetTwo =
     Facade::getWidgetFactory()
         ->usingSettings(
             new WidgetSettings(
-                leadingSpacer: new CharFrame("\x1b[1D", -1), // move cursor backward
+                leadingSpacer: new CharSequenceFrame("\x1b[1D", -1), // move cursor backward
                 charPalette: new PulseOrangeBlue(),
             )
         )
@@ -54,7 +54,7 @@ $spinner =
     Facade::createSpinner(
         new SpinnerSettings(
             new WidgetSettings(
-                leadingSpacer: new CharFrame("\x1b[3C", 3), // move cursor forward
+                leadingSpacer: new CharSequenceFrame("\x1b[3C", 3), // move cursor forward
                 stylePalette: new Red()
             )
         ),

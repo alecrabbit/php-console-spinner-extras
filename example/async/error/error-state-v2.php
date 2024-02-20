@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
-use AlecRabbit\Spinner\Core\StyleFrame;
+use AlecRabbit\Spinner\Core\StyleSequenceFrame;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\CustomCharPalette;
@@ -33,8 +33,8 @@ $errorState =
         $stylePalette =
             new CustomStylePalette(
                 frames: new \ArrayObject([
-                    new StyleFrame("\e[41;1m  %s  \e[0m", 4),
-                    new StyleFrame("\e[1m  %s  \e[0m", 4),
+                    new StyleSequenceFrame("\e[41;1m  %s  \e[0m", 4),
+                    new StyleSequenceFrame("\e[1m  %s  \e[0m", 4),
                 ]),
                 options: new PaletteOptions(interval: 200),
             );
@@ -42,7 +42,7 @@ $errorState =
         $charPalette =
             new CustomCharPalette(
                 new \ArrayObject([
-                    new CharFrame('>>> Error <<<', 13),
+                    new CharSequenceFrame('>>> Error <<<', 13),
                 ]),
             );
 
@@ -67,7 +67,7 @@ $errorState =
                     new WidgetSettings(
                         charPalette: new CustomCharPalette(
                             new \ArrayObject([
-                                new CharFrame($message, \AlecRabbit\WCWidth\wcswidth($message)),
+                                new CharSequenceFrame($message, \AlecRabbit\WCWidth\wcswidth($message)),
                             ]),
                         ),
                     ),

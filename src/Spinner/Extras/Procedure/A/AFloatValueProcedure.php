@@ -6,7 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Procedure\A;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\ISequenceFrame;
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 
 use function AlecRabbit\WCWidth\wcswidth;
@@ -31,9 +31,9 @@ abstract class AFloatValueProcedure extends AProcedure
     protected function createSequenceFrame(string $sequence): ISequenceFrame
     {
         if ($sequence === '') {
-            return new CharFrame('', 0);
+            return new CharSequenceFrame('', 0);
         }
-        return new CharFrame($sequence, $this->getWidth($sequence));
+        return new CharSequenceFrame($sequence, $this->getWidth($sequence));
     }
 
     protected function getWidth(string $value): int

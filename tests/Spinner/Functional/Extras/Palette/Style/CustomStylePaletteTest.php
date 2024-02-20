@@ -7,7 +7,7 @@ namespace AlecRabbit\Tests\Spinner\Functional\Extras\Palette\Style;
 use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
-use AlecRabbit\Spinner\Core\StyleFrame;
+use AlecRabbit\Spinner\Core\StyleSequenceFrame;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
 use AlecRabbit\Spinner\Extras\Palette\Style\CustomStylePalette;
 use AlecRabbit\Tests\TestCase\TestCase;
@@ -89,11 +89,11 @@ final class CustomStylePaletteTest extends TestCase
         self::assertIsIterable($entries);
         self::assertInstanceOf(Generator::class, $entries);
 
-        self::assertEquals(new StyleFrame('%s', 0), $entries->current());
+        self::assertEquals(new StyleSequenceFrame('%s', 0), $entries->current());
 
         for ($i = 0; $i < 10; $i++) {
             $entries->next();
-            self::assertEquals(new StyleFrame('%s', 0), $entries->current());
+            self::assertEquals(new StyleSequenceFrame('%s', 0), $entries->current());
         }
     }
 
@@ -118,13 +118,13 @@ final class CustomStylePaletteTest extends TestCase
         self::assertIsIterable($entries);
         self::assertInstanceOf(Generator::class, $entries);
 
-        self::assertEquals(new StyleFrame('a', 1), $entries->current());
+        self::assertEquals(new StyleSequenceFrame('a', 1), $entries->current());
 
         for ($i = 0; $i < 10; $i++) {
             $entries->next();
-            self::assertEquals(new StyleFrame('b', 1), $entries->current());
+            self::assertEquals(new StyleSequenceFrame('b', 1), $entries->current());
             $entries->next();
-            self::assertEquals(new StyleFrame('c', 1), $entries->current());
+            self::assertEquals(new StyleSequenceFrame('c', 1), $entries->current());
             $entries->next();
         }
     }

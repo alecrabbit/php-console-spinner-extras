@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
@@ -25,7 +25,7 @@ $progressValue =
 $progressWidgetSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
-            trailingSpacer: new CharFrame('', 0),
+            trailingSpacer: new CharSequenceFrame('', 0),
         ),
         new WidgetSettings(
             charPalette: new ProcedureCharPalette(

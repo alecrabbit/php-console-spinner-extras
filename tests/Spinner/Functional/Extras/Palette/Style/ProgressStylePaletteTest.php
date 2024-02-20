@@ -9,7 +9,7 @@ use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
-use AlecRabbit\Spinner\Core\StyleFrame;
+use AlecRabbit\Spinner\Core\StyleSequenceFrame;
 use AlecRabbit\Spinner\Extras\Contract\IInfinitePalette;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
 use AlecRabbit\Tests\TestCase\TestCase;
@@ -91,7 +91,7 @@ final class ProgressStylePaletteTest extends TestCase
         $procedure = $this->getProcedureMock();
         $procedure
             ->method('getFrame')
-            ->willReturn(new StyleFrame('-', 1))
+            ->willReturn(new StyleSequenceFrame('-', 1))
         ;
 
         $palette = $this->getTesteeInstance(
@@ -112,8 +112,8 @@ final class ProgressStylePaletteTest extends TestCase
 
         for ($i = 0; $i < 3; $i++) {
             $frame = $entries->current();
-            self::assertInstanceOf(StyleFrame::class, $frame);
-            self::assertEquals(new StyleFrame('-', 1), $frame);
+            self::assertInstanceOf(StyleSequenceFrame::class, $frame);
+            self::assertEquals(new StyleSequenceFrame('-', 1), $frame);
             $entries->next();
         }
     }

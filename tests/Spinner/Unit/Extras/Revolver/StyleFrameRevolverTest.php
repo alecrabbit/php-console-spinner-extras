@@ -11,7 +11,7 @@ use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
-use AlecRabbit\Spinner\Core\StyleFrame;
+use AlecRabbit\Spinner\Core\StyleSequenceFrame;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Revolver\StyleFrameRevolver;
 use AlecRabbit\Tests\TestCase\TestCase;
@@ -65,8 +65,8 @@ final class StyleFrameRevolverTest extends TestCase
         $frames = $this->getHasSequenceFrameMock();
         $frames->method('getFrame')
             ->willReturnOnConsecutiveCalls(
-                new StyleFrame('1', 0),
-                new StyleFrame('2', 0),
+                new StyleSequenceFrame('1', 0),
+                new StyleSequenceFrame('2', 0),
             )
         ;
 
@@ -76,8 +76,8 @@ final class StyleFrameRevolverTest extends TestCase
         );
 
         self::assertInstanceOf(StyleFrameRevolver::class, $frameRevolver);
-        self::assertEquals(new StyleFrame('1', 0), $frameRevolver->getFrame());
-        self::assertEquals(new StyleFrame('2', 0), $frameRevolver->getFrame());
+        self::assertEquals(new StyleSequenceFrame('1', 0), $frameRevolver->getFrame());
+        self::assertEquals(new StyleSequenceFrame('2', 0), $frameRevolver->getFrame());
     }
 
     #[Test]
@@ -112,13 +112,8 @@ final class StyleFrameRevolverTest extends TestCase
 
     private function getGenerator(): Generator
     {
-        yield new StyleFrame('0', 0);
-        yield new StyleFrame('1', 0);
-        yield new StyleFrame('2', 0);
-    }
-
-    private function getToleranceMock(): MockObject&ITolerance
-    {
-        return $this->createMock(ITolerance::class);
+        yield new StyleSequenceFrame('0', 0);
+        yield new StyleSequenceFrame('1', 0);
+        yield new StyleSequenceFrame('2', 0);
     }
 }

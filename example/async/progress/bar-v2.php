@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use AlecRabbit\Color\Gradient\ColorRange;
 use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\OutputSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
@@ -50,7 +50,7 @@ $gradient = new AlecRabbit\Color\Gradient\HSLAGradient(
 $progressWidgetSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
-            trailingSpacer: new CharFrame('', 0),
+            trailingSpacer: new CharSequenceFrame('', 0),
         ),
         // nested multi settings
         new MultiWidgetSettings(

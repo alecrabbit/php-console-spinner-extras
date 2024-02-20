@@ -6,7 +6,7 @@ namespace AlecRabbit\Tests\Spinner\Unit\Extras\Revolver\A;
 
 use AlecRabbit\Spinner\Contract\IHasSequenceFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Contract\IFrameCollection;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
 use AlecRabbit\Tests\Spinner\Unit\Extras\Revolver\A\Override\AFrameRevolverOverride;
@@ -54,8 +54,8 @@ final class AFrameRevolverTest extends TestCase
         $frames = $this->getHasSequenceFramesMock();
         $frames->method('getFrame')
             ->willReturnOnConsecutiveCalls(
-                new CharFrame('1', 0),
-                new CharFrame('2', 0),
+                new CharSequenceFrame('1', 0),
+                new CharSequenceFrame('2', 0),
             )
         ;
 
@@ -65,8 +65,8 @@ final class AFrameRevolverTest extends TestCase
         );
 
         self::assertInstanceOf(AFrameRevolverOverride::class, $frameRevolver);
-        self::assertEquals(new CharFrame('1', 0), $frameRevolver->getFrame());
-        self::assertEquals(new CharFrame('2', 0), $frameRevolver->getFrame());
+        self::assertEquals(new CharSequenceFrame('1', 0), $frameRevolver->getFrame());
+        self::assertEquals(new CharSequenceFrame('2', 0), $frameRevolver->getFrame());
     }
 
     #[Test]
@@ -96,8 +96,8 @@ final class AFrameRevolverTest extends TestCase
 
     private function getGenerator(): Generator
     {
-        yield new CharFrame('0', 0);
-        yield new CharFrame('1', 0);
-        yield new CharFrame('2', 0);
+        yield new CharSequenceFrame('0', 0);
+        yield new CharSequenceFrame('1', 0);
+        yield new CharSequenceFrame('2', 0);
     }
 }

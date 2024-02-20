@@ -9,7 +9,7 @@ use AlecRabbit\Spinner\Contract\IHasSequenceFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Contract\IStyleSequenceFrame;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
-use AlecRabbit\Spinner\Core\StyleFrame;
+use AlecRabbit\Spinner\Core\StyleSequenceFrame;
 use AlecRabbit\Spinner\Extras\Contract\IStyleFrame;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Revolver\A\AFrameRevolver;
@@ -38,7 +38,7 @@ final class StyleFrameRevolver extends AFrameRevolver
 
     private function render(IStyleFrame $frame): IStyleSequenceFrame
     {
-        return new StyleFrame(
+        return new StyleSequenceFrame(
             sequence: $this->styleRenderer->render($frame->getStyle()),
             width: 0,
         );

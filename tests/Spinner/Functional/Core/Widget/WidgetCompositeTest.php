@@ -6,7 +6,7 @@ namespace AlecRabbit\Tests\Spinner\Functional\Core\Widget;
 
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISequenceFrame;
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Contract\IIntervalComparator;
 use AlecRabbit\Spinner\Core\Interval;
 use AlecRabbit\Spinner\Core\IntervalComparator;
@@ -155,7 +155,7 @@ final class WidgetCompositeTest extends TestCase
 
         $otherWidget1
             ->method('getFrame')
-            ->willReturn(new CharFrame('o1', 2))
+            ->willReturn(new CharSequenceFrame('o1', 2))
         ;
         $otherWidgetContext2 = $this->getWidgetContextMock();
         $otherWidget2 = $this->getWidgetMock();
@@ -166,7 +166,7 @@ final class WidgetCompositeTest extends TestCase
 
         $otherWidget2
             ->method('getFrame')
-            ->willReturn(new CharFrame('o2', 2))
+            ->willReturn(new CharSequenceFrame('o2', 2))
         ;
 
         $widgetComposite->add($otherWidgetContext1);

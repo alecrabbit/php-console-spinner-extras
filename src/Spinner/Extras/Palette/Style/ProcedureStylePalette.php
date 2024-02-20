@@ -9,7 +9,7 @@ use AlecRabbit\Spinner\Contract\IStyleSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
-use AlecRabbit\Spinner\Core\StyleFrame;
+use AlecRabbit\Spinner\Core\StyleSequenceFrame;
 use AlecRabbit\Spinner\Exception\LogicException;
 use AlecRabbit\Spinner\Extras\Palette\A\AInfiniteStylePalette;
 use AlecRabbit\Spinner\Extras\Palette\PaletteOptions;
@@ -43,7 +43,7 @@ final class ProcedureStylePalette extends AInfiniteStylePalette
     protected function createStyleFrame(IStyleSequenceFrame|string $element, ?int $width = null): IStyleSequenceFrame
     {
         if (is_string($element)) {
-            return new StyleFrame($element, $width ?? 0);
+            return new StyleSequenceFrame($element, $width ?? 0);
         }
         return $element;
     }
