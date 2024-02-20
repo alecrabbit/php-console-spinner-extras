@@ -6,7 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Palette\Char;
 
 use AlecRabbit\Spinner\Contract\IProcedure;
 use AlecRabbit\Spinner\Core\CharFrame;
-use AlecRabbit\Spinner\Core\Contract\ICharSequenceFrame;
+use AlecRabbit\Spinner\Contract\ICharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;

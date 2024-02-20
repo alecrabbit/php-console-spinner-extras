@@ -21,14 +21,14 @@ abstract class AFloatValueProcedure extends AProcedure
     ) {
     }
 
-    public function getFrame(?float $dt = null): ISequenceFrame
+    public function getFrame(?float $dt = null): IFrame
     {
-        return $this->createFrame(
+        return $this->createSequenceFrame(
             $this->createFrameSequence()
         );
     }
 
-    protected function createFrame(string $sequence): ISequenceFrame
+    protected function createSequenceFrame(string $sequence): ISequenceFrame
     {
         if ($sequence === '') {
             return new CharFrame('', 0);

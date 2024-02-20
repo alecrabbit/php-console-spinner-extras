@@ -10,5 +10,5 @@ use AlecRabbit\Spinner\Contract\ISequenceFrame;
 
 abstract class AProcedure implements IProcedure
 {
-    abstract public function getFrame(?float $dt = null): ISequenceFrame;
+    abstract public function getFrame(?float $dt = null): IFrame;
 }

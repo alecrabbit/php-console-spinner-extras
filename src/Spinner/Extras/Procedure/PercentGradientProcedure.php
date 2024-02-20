@@ -33,7 +33,7 @@ final class PercentGradientProcedure extends AFloatValueProcedure
             : 100;
     }
 
-    public function getFrame(?float $dt = null): ISequenceFrame
+    public function getFrame(?float $dt = null): IFrame
     {
         return new StyleFrame(
             style: new Style(
@@ -55,7 +55,7 @@ final class PercentGradientProcedure extends AFloatValueProcedure
         );
     }
 
-    protected function createFrame(string $sequence): ISequenceFrame
+    protected function createSequenceFrame(string $sequence): ISequenceFrame
     {
         // TODO (2024-01-23 17:04) [Alec Rabbit]: refactor to remove this method
         throw new RuntimeException('Not implemented');

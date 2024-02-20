@@ -7,7 +7,7 @@ namespace AlecRabbit\Spinner\Extras\Revolver;
 use AlecRabbit\Spinner\Contract\IHasFrame;
 use AlecRabbit\Spinner\Contract\IHasSequenceFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
-use AlecRabbit\Spinner\Core\Contract\IStyleSequenceFrame;
+use AlecRabbit\Spinner\Contract\IStyleSequenceFrame;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\StyleFrame;
 use AlecRabbit\Spinner\Extras\Contract\IStyleFrame;
