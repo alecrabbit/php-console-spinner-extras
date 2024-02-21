@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Core\Factory\CharFrameFactory;
+use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Extras\Contract\IProgressBarSprite;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
@@ -13,7 +14,7 @@ use AlecRabbit\Spinner\Extras\ProgressBarSprite;
 /**
  * @psalm-suppress UnusedClass
  */
-final class ProgressBarProcedure extends AProgressValueProcedure
+final class ProgressBarProcedure extends AProgressValueProcedure implements ICharPalette
 {
     private const UNITS = 5;
     private readonly float $cursorThreshold;

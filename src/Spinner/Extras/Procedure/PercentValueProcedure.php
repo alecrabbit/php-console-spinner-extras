@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
+use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
 
 /**
  * @psalm-suppress UnusedClass
  */
-final class PercentValueProcedure extends AFloatValueProcedure
+final class PercentValueProcedure extends AFloatValueProcedure implements ICharPalette
 {
     private const FORMAT = "%' 3.0f%%"; // "%' 5.1f%%";
 
