@@ -9,10 +9,10 @@ use AlecRabbit\Spinner\Extras\Contract\IStyleToAnsiStringConverter;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 
-final class StyleRenderer implements IStyleRenderer
+final readonly class StyleRenderer implements IStyleRenderer
 {
     public function __construct(
-        protected IStyleToAnsiStringConverter $converter,
+        private IStyleToAnsiStringConverter $converter,
     ) {
     }
 
