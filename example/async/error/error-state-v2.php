@@ -8,8 +8,8 @@ use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\StyleSequenceFrame;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
-use AlecRabbit\Spinner\Extras\Palette\Char\CustomCharPalette;
-use AlecRabbit\Spinner\Extras\Palette\Style\CustomStylePalette;
+use AlecRabbit\Spinner\Core\Palette\CustomCharPalette;
+use AlecRabbit\Spinner\Core\Palette\CustomStylePalette;
 use Faker\Factory as FakerFactory;
 
 require_once __DIR__ . '/../bootstrap.async.php';
