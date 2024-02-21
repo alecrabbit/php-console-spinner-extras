@@ -10,5 +10,5 @@ use AlecRabbit\Spinner\Extras\Contract\IStyleFrame;
 
 interface IStyleFrameRenderer
 {
-    public function render(IStyleFrame $styleFrame): IStyleSequenceFrame;
+    public function render(IStyleFrame $frame): IStyleSequenceFrame;
 }
