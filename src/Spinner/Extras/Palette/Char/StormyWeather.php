@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Palette\Char;
 
-use AlecRabbit\Spinner\Core\CharFrame;
-use AlecRabbit\Spinner\Core\Contract\ICharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
+use AlecRabbit\Spinner\Contract\ICharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
+use RuntimeException;
 use Traversable;
 
 /**
@@ -16,6 +18,8 @@ use Traversable;
  */
 final class StormyWeather extends ACharPalette
 {
+    
+
     protected function sequence(): Traversable
     {
         yield from [
@@ -83,9 +87,9 @@ final class StormyWeather extends ACharPalette
         ];
     }
 
-    protected function createFrame(string $element, ?int $width = null): ICharFrame
+    protected function createFrame(string $element, ?int $width = null): ICharSequenceFrame
     {
-        return new CharFrame($element, $width ?? 2);
+        return new CharSequenceFrame($element, $width ?? 2);
     }
 
     protected function modeInterval(?IPaletteMode $mode = null): ?int

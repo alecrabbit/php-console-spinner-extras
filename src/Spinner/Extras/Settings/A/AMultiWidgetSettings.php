@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Settings\A;
 
-use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IStylePalette;
 use AlecRabbit\Spinner\Core\Settings\Contract\IWidgetSettings;
@@ -28,12 +28,12 @@ abstract readonly class AMultiWidgetSettings implements IMultiWidgetSettings
     /** @inheritDoc */
     abstract public function getIdentifier(): string;
 
-    public function getLeadingSpacer(): ?IFrame
+    public function getLeadingSpacer(): ?ISequenceFrame
     {
         return $this->first->getLeadingSpacer();
     }
 
-    public function getTrailingSpacer(): ?IFrame
+    public function getTrailingSpacer(): ?ISequenceFrame
     {
         return $this->first->getTrailingSpacer();
     }

@@ -11,7 +11,7 @@ use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 
-final class ProgressEstimeteProcedureTest extends TestCase
+final class ProgressEstimateProcedureTest extends TestCase
 {
     #[Test]
     public function canBeInstantiated(): void

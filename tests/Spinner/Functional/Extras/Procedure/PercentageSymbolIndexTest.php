@@ -15,6 +15,7 @@ use AlecRabbit\Spinner\Extras\Procedure\PercentageSymbolIndex;
 use AlecRabbit\Spinner\Extras\Value\IPercentValue;
 use AlecRabbit\Spinner\Extras\Value\PercentValue;
 use AlecRabbit\Tests\TestCase\TestCase;
+use ArrayObject;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -72,12 +73,12 @@ final class PercentageSymbolIndexTest extends TestCase
     #[DataProvider('canGetDataProvider')]
     public function canGet(array $data): void
     {
-        $expected = new \ArrayObject();
-        $actual = new \ArrayObject();
+        $expected = new ArrayObject();
+        $actual = new ArrayObject();
 
         $observer = new class(values: $actual) implements IObserver {
             public function __construct(
-                private readonly \ArrayObject $values,
+                private readonly ArrayObject $values,
             ) {
             }
 

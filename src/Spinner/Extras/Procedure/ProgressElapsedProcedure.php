@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
+use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
@@ -15,7 +16,7 @@ use DateTimeImmutable;
 /**
  * @psalm-suppress UnusedClass
  */
-final class ProgressElapsedProcedure extends AProgressValueProcedure
+final class ProgressElapsedProcedure extends AProgressValueProcedure implements ICharPalette
 {
     private const FORMAT = '%3s';
     private DateTimeImmutable $createdAt;

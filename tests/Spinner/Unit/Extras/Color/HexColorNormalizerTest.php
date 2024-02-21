@@ -48,7 +48,7 @@ final class HexColorNormalizerTest extends TestCase
         /** @noinspection UnnecessaryAssertionInspection */
         self::assertInstanceOf($expectedClass, $normalizer->normalize($input));
 
-        if($input instanceof IHexColor) {
+        if ($input instanceof IHexColor) {
             self::assertSame($input, $normalizer->normalize($input));
         }
     }

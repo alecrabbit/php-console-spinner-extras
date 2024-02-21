@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Settings;
 
-use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IStylePalette;
 use AlecRabbit\Spinner\Core\Settings\Contract\IWidgetSettings;
@@ -67,9 +67,9 @@ final class ProgressWidgetSettingsTest extends TestCase
         self::assertSame($frame, $settings->getLeadingSpacer());
     }
 
-    private function getLeadingSpacerMock(): MockObject&IFrame
+    private function getLeadingSpacerMock(): MockObject&ISequenceFrame
     {
-        return $this->createMock(IFrame::class);
+        return $this->createMock(ISequenceFrame::class);
     }
 
     #[Test]
@@ -91,9 +91,9 @@ final class ProgressWidgetSettingsTest extends TestCase
         self::assertSame($frame, $settings->getTrailingSpacer());
     }
 
-    private function getTrailingSpacerMock(): MockObject&IFrame
+    private function getTrailingSpacerMock(): MockObject&ISequenceFrame
     {
-        return $this->createMock(IFrame::class);
+        return $this->createMock(ISequenceFrame::class);
     }
 
     #[Test]

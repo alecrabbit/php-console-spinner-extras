@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Revolver\Builder;
 
 use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\IHasFrame;
+use AlecRabbit\Spinner\Contract\IHasSequenceFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolver;
@@ -19,7 +21,7 @@ use Traversable;
 final class CharFrameRevolverBuilder implements ICharFrameRevolverBuilder
 {
     /** @var Traversable<IFrame>|null */
-    private ?Traversable $frames = null;
+    private null|IHasSequenceFrame|Traversable $frames = null;
     private ?IInterval $interval = null;
     private ?ITolerance $tolerance = null;
 
@@ -48,7 +50,7 @@ final class CharFrameRevolverBuilder implements ICharFrameRevolverBuilder
     }
 
     /** @inheritDoc */
-    public function withFrames(Traversable $frames): ICharFrameRevolverBuilder
+    public function withFrames(IHasSequenceFrame|Traversable $frames): ICharFrameRevolverBuilder
     {
         $clone = clone $this;
         $clone->frames = $frames;

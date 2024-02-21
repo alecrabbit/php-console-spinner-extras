@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Widget\Builder;
 
-use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Core\Contract\IIntervalComparator;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetRevolver;
 use AlecRabbit\Spinner\Exception\LogicException;
@@ -40,8 +40,8 @@ final class WidgetCompositeBuilderTest extends TestCase
         $widgetComposite =
             $widgetBuilder
                 ->withWidgetRevolver($this->getWidgetRevolverMock())
-                ->withLeadingSpacer($this->getFrameMock())
-                ->withTrailingSpacer($this->getFrameMock())
+                ->withLeadingSpacer($this->getSequenceFrameMock())
+                ->withTrailingSpacer($this->getSequenceFrameMock())
                 ->withIntervalComparator($this->getIntervalComparatorMock())
                 ->build()
         ;
@@ -54,9 +54,9 @@ final class WidgetCompositeBuilderTest extends TestCase
         return $this->createMock(IWidgetRevolver::class);
     }
 
-    protected function getFrameMock(): MockObject&IFrame
+    protected function getSequenceFrameMock(): MockObject&ISequenceFrame
     {
-        return $this->createMock(IFrame::class);
+        return $this->createMock(ISequenceFrame::class);
     }
 
     private function getIntervalComparatorMock(): MockObject&IIntervalComparator
@@ -75,8 +75,8 @@ final class WidgetCompositeBuilderTest extends TestCase
 
             $widget =
                 $widgetBuilder
-                    ->withLeadingSpacer($this->getFrameMock())
-                    ->withTrailingSpacer($this->getFrameMock())
+                    ->withLeadingSpacer($this->getSequenceFrameMock())
+                    ->withTrailingSpacer($this->getSequenceFrameMock())
                     ->build()
             ;
 
@@ -102,7 +102,7 @@ final class WidgetCompositeBuilderTest extends TestCase
             $widget =
                 $widgetBuilder
                     ->withWidgetRevolver($this->getWidgetRevolverMock())
-                    ->withTrailingSpacer($this->getFrameMock())
+                    ->withTrailingSpacer($this->getSequenceFrameMock())
                     ->build()
             ;
 
@@ -128,7 +128,7 @@ final class WidgetCompositeBuilderTest extends TestCase
             $widget =
                 $widgetBuilder
                     ->withWidgetRevolver($this->getWidgetRevolverMock())
-                    ->withLeadingSpacer($this->getFrameMock())
+                    ->withLeadingSpacer($this->getSequenceFrameMock())
                     ->build()
             ;
 

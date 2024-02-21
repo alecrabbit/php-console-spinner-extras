@@ -5,7 +5,7 @@ declare(strict_types=1);
 use AlecRabbit\Color\Gradient\ColorRange;
 use AlecRabbit\Color\Model\DTO\DRGB;
 use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\OutputSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
@@ -62,69 +62,55 @@ $progressWidgetOneSettings =
             charPalette: new Moon(options: new PaletteOptions(interval: 100)),
         ),
         new WidgetSettings(
-            charPalette: new ProcedureCharPalette(
-                procedure: new ProgressStepsProcedure(
+            charPalette:  new ProgressStepsProcedure(
                     progressValue: $progressValue,
                     format: '%2s/%2s',
-                ),
             ),
         ),
         new WidgetSettings(
-            stylePalette: new ProcedureStylePalette(
-                procedure: new PercentGradientProcedure(
+            stylePalette: new PercentGradientProcedure(
                     floatValue: $progressValue,
                     gradient: $gradientOne,
-                ),
             ),
-            charPalette: new ProcedureCharPalette(
-                procedure: new ProgressBarProcedure(
+            charPalette:  new ProgressBarProcedure(
                     progressValue: $progressValue,
                     units: $units,
-                ),
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProcedureCharPalette(
-                procedure: new PercentValueProcedure(
+            charPalette:  new PercentValueProcedure(
                     floatValue: $progressValue
                 ),
-            ),
         ),
     );
 
 $progressWidgetTwoSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
-            trailingSpacer: new CharFrame('[', 1)
+            trailingSpacer: new CharSequenceFrame('[', 1)
         ),
         new WidgetSettings(
-            leadingSpacer: new CharFrame('', 0),
-            trailingSpacer: new CharFrame('', 0),
-            charPalette: new ProcedureCharPalette(
-                procedure: new ProgressElapsedProcedure(
+            leadingSpacer: new CharSequenceFrame('', 0),
+            trailingSpacer: new CharSequenceFrame('', 0),
+            charPalette:  new ProgressElapsedProcedure(
                     progressValue: $progressValue,
                     format: '%s',
                 ),
-            ),
         ),
         new WidgetSettings(
-            leadingSpacer: new CharFrame('', 0),
-            trailingSpacer: new CharFrame('', 0),
-            stylePalette: new ProcedureStylePalette(
-                procedure: new PercentGradientProcedure(
+            leadingSpacer: new CharSequenceFrame('', 0),
+            trailingSpacer: new CharSequenceFrame('', 0),
+            stylePalette: new PercentGradientProcedure(
                     floatValue: $progressValue,
                     gradient: $gradientTwo,
                 ),
-            ),
-            charPalette: new ProcedureCharPalette(
-                procedure: new ProgressEstimateProcedure(
+            charPalette:  new ProgressEstimateProcedure(
                     progressValue: $progressValue,
                     format: '/%s',
                 ),
-            ),
         ),
         new WidgetSettings(
-            leadingSpacer: new CharFrame(']', 1)
+            leadingSpacer: new CharSequenceFrame(']', 1)
         ),
     );
 

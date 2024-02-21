@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Revolver\Builder;
 
+use AlecRabbit\Spinner\Contract\IHasSequenceFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Contract\ITolerance;
 use AlecRabbit\Spinner\Core\Revolver\Contract\IFrameRevolverBuilder;
 use AlecRabbit\Spinner\Exception\LogicException;
@@ -34,7 +35,7 @@ final class CharFrameRevolverBuilderTest extends TestCase
     #[Test]
     public function canBuild(): void
     {
-        $frames = $this->getGenerator();
+        $frames = $this->getHasSequenseFrameMock();
 
         $frameRevolverBuilder = $this->getTesteeInstance();
         $revolver =
@@ -49,12 +50,12 @@ final class CharFrameRevolverBuilderTest extends TestCase
         self::assertInstanceOf(CharFrameRevolver::class, $revolver);
     }
 
-    private function getGenerator(): Generator
+    private function getHasSequenseFrameMock(): MockObject&IHasSequenceFrame
     {
-        yield new CharFrame('0', 0);
+        return $this->createMock(IHasSequenceFrame::class);
     }
 
-    protected function getIntervalMock(): MockObject&IInterval
+    private function getIntervalMock(): MockObject&IInterval
     {
         return $this->createMock(IInterval::class);
     }
@@ -112,5 +113,10 @@ final class CharFrameRevolverBuilderTest extends TestCase
             exception: $exceptionClass,
             message: $exceptionMessage,
         );
+    }
+
+    private function getGenerator(): Generator
+    {
+        yield new CharSequenceFrame('0', 0);
     }
 }

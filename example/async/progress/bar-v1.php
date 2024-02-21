@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
+use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
-use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Value\ProgressValue;
 
@@ -25,43 +25,33 @@ $progressValue =
 $progressWidgetSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
-            trailingSpacer: new CharFrame('', 0),
+            trailingSpacer: new CharSequenceFrame('', 0),
         ),
         new WidgetSettings(
-            charPalette: new ProcedureCharPalette(
-                procedure: new ProgressElapsedProcedure(
-                    progressValue: $progressValue,
-                ),
+            charPalette: new ProgressElapsedProcedure(
+                progressValue: $progressValue,
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProcedureCharPalette(
-                procedure: new ProgressStepsProcedure(
-                    progressValue: $progressValue,
-                    format: '%2s/%2s',
-                ),
+            charPalette: new ProgressStepsProcedure(
+                progressValue: $progressValue,
+                format: '%2s/%2s',
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProcedureCharPalette(
-                procedure: new ProgressBarProcedure(
-                    progressValue: $progressValue
-                ),
+            charPalette: new ProgressBarProcedure(
+                progressValue: $progressValue
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProcedureCharPalette(
-                procedure: new PercentValueProcedure(
-                    floatValue: $progressValue
-                ),
+            charPalette: new PercentValueProcedure(
+                floatValue: $progressValue
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProcedureCharPalette(
-                procedure: new ProgressEstimateProcedure(
-                    progressValue: $progressValue,
-                    format: '[%6s]',
-                ),
+            charPalette: new ProgressEstimateProcedure(
+                progressValue: $progressValue,
+                format: '[%6s]',
             ),
         ),
     );

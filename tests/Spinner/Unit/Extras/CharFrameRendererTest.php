@@ -5,13 +5,18 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras;
 
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Extras\Contract\ICharFrameRenderer;
 use AlecRabbit\Spinner\Extras\Factory\Contract\ICharFrameFactory;
 use AlecRabbit\Spinner\Extras\Render\CharFrameRenderer;
-use AlecRabbit\Tests\TestCase\TestCaseWithPrebuiltMocksAndStubs;
+use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 
-final class CharFrameRendererTest extends TestCaseWithPrebuiltMocksAndStubs
+/**
+ * @deprecated
+ */
+final class CharFrameRendererTest extends TestCase
 {
     #[Test]
     public function canBeInstantiated(): void
@@ -29,13 +34,18 @@ final class CharFrameRendererTest extends TestCaseWithPrebuiltMocksAndStubs
         );
     }
 
+    private function getCharFrameFactoryMock(): MockObject&ICharFrameFactory
+    {
+        return $this->createMock(ICharFrameFactory::class);
+    }
+
     #[Test]
     public function canRender(): void
     {
         $str = 'test';
 
         $frameFactory = $this->getCharFrameFactoryMock();
-        $frameMock = $this->getFrameMock();
+        $frameMock = $this->getSequenceFrameMock();
         $frameFactory
             ->expects(self::once())
             ->method('create')
@@ -44,5 +54,10 @@ final class CharFrameRendererTest extends TestCaseWithPrebuiltMocksAndStubs
 
         $charFrameRenderer = $this->getTesteeInstance(frameFactory: $frameFactory);
         self::assertSame($frameMock, $charFrameRenderer->render($str));
+    }
+
+    protected function getSequenceFrameMock(): MockObject&ISequenceFrame
+    {
+        return $this->createMock(ISequenceFrame::class);
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Contract\IFrame;
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
@@ -40,9 +40,9 @@ final readonly class TimerProcedure implements ITimerProcedure
     protected function createFrame(string $sequence): IFrame
     {
         if ($sequence === '') {
-            return new CharFrame('', 0);
+            return new CharSequenceFrame('', 0);
         }
-        return new CharFrame($sequence, $this->getWidth($sequence));
+        return new CharSequenceFrame($sequence, $this->getWidth($sequence));
     }
 
     protected function getWidth(string $value): int

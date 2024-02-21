@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use AlecRabbit\Spinner\Core\CharFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Rainbow;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
@@ -17,7 +17,7 @@ $widget =
     Facade::getWidgetFactory()
         ->usingSettings(
             new WidgetSettings(
-                trailingSpacer: new CharFrame('', 0),
+                trailingSpacer: new CharSequenceFrame('', 0),
             ),
         )
         ->create()
@@ -28,7 +28,7 @@ $widgetTwo =
     Facade::getWidgetFactory()
         ->usingSettings(
             new WidgetSettings(
-                trailingSpacer: new CharFrame(' 🎊', 3),
+                trailingSpacer: new CharSequenceFrame(' 🎊', 3),
                 stylePalette: new Rainbow(),
                 charPalette: new DotBinaryCount(
                     new PaletteOptions

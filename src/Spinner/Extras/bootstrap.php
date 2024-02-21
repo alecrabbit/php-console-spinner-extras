@@ -5,6 +5,7 @@ declare(strict_types=1);
 use AlecRabbit\Spinner\Container\Contract\IContainer;
 use AlecRabbit\Spinner\Container\DefinitionRegistry;
 use AlecRabbit\Spinner\Container\ServiceDefinition;
+use AlecRabbit\Spinner\Contract\IStyleFrameTransformer;
 use AlecRabbit\Spinner\Core\Factory\Contract\ICharFrameRevolverFactory;
 use AlecRabbit\Spinner\Core\Factory\Contract\IStyleFrameRevolverFactory;
 use AlecRabbit\Spinner\Core\Palette\Factory\Contract\IPaletteTemplateFactory;
@@ -32,7 +33,10 @@ use AlecRabbit\Spinner\Extras\Palette\Builder\InfinitePaletteTemplateBuilder;
 use AlecRabbit\Spinner\Extras\Palette\Contract\Builder\IInfinitePaletteTemplateBuilder;
 use AlecRabbit\Spinner\Extras\Palette\Factory\PaletteTemplateFactory;
 use AlecRabbit\Spinner\Extras\Pattern\Factory\PatternFactory;
+use AlecRabbit\Spinner\Extras\Render\Contract\IStyleFrameRenderer;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
+use AlecRabbit\Spinner\Extras\Render\StyleFrameRenderer;
+use AlecRabbit\Spinner\Extras\Render\StyleFrameTransformer;
 use AlecRabbit\Spinner\Extras\Revolver\Builder\CharFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\ICharFrameRevolverBuilder;
 use AlecRabbit\Spinner\Extras\Revolver\Builder\Contract\IStyleFrameRevolverBuilder;
@@ -120,6 +124,14 @@ DefinitionRegistry::getInstance()
         new ServiceDefinition(
             IPatternFactory::class,
             PatternFactory::class,
+        ),
+        new ServiceDefinition(
+            IStyleFrameTransformer::class,
+            StyleFrameTransformer::class,
+        ),
+        new ServiceDefinition(
+            IStyleFrameRenderer::class,
+            StyleFrameRenderer::class,
         ),
     )
 ;

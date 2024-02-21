@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Factory;
 
+use AlecRabbit\Spinner\Extras\Contract\IAnsiColorParser;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyleOptionsParser;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IAnsiColorParserFactory;
 use AlecRabbit\Spinner\Extras\Factory\Contract\IStyleToAnsiStringConverterFactory;
 use AlecRabbit\Spinner\Extras\Factory\StyleToAnsiStringConverterFactory;
 use AlecRabbit\Spinner\Extras\StyleToAnsiStringConverter;
-use AlecRabbit\Tests\TestCase\TestCaseWithPrebuiltMocksAndStubs;
+use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 
-final class StyleToAnsiStringConverterFactoryTest extends TestCaseWithPrebuiltMocksAndStubs
+final class StyleToAnsiStringConverterFactoryTest extends TestCase
 {
     #[Test]
     public function canBeInstantiated(): void
@@ -30,6 +32,14 @@ final class StyleToAnsiStringConverterFactoryTest extends TestCaseWithPrebuiltMo
             parserFactory: $parserFactory ?? $this->getAnsiColorParserFactoryMock(),
             optionsParser: $optionsParser ?? $this->getStyleOptionsParserMock(),
         );
+    }
+    protected function getAnsiColorParserFactoryMock(): MockObject&IAnsiColorParserFactory
+    {
+        return $this->createMock(IAnsiColorParserFactory::class);
+    }
+    protected function getStyleOptionsParserMock(): MockObject&IStyleOptionsParser
+    {
+        return $this->createMock(IStyleOptionsParser::class);
     }
 
     #[Test]
@@ -52,5 +62,10 @@ final class StyleToAnsiStringConverterFactoryTest extends TestCaseWithPrebuiltMo
         $converter = $converterFactory->create();
         self::assertInstanceOf(StyleToAnsiStringConverterFactory::class, $converterFactory);
         self::assertInstanceOf(StyleToAnsiStringConverter::class, $converter);
+    }
+
+    protected function getAnsiColorParserMock(): MockObject&IAnsiColorParser
+    {
+        return $this->createMock(IAnsiColorParser::class);
     }
 }
