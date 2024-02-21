@@ -55,59 +55,45 @@ $progressWidgetSettings =
         // nested multi settings
         new MultiWidgetSettings(
             new WidgetSettings(
-                charPalette: new ProcedureCharPalette(
-                    procedure: new ProgressElapsedProcedure(
+                charPalette:  new ProgressElapsedProcedure(
                         progressValue: $progressValue,
                         format: '🕐 [%6s]',
                     ),
-                ),
             ),
             new WidgetSettings(
                 charPalette: new Moon(options: new PaletteOptions(interval: 100)),
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProcedureCharPalette(
-                procedure: new ProgressStepsProcedure(
+            charPalette:  new ProgressStepsProcedure(
                     progressValue: $progressValue,
                     format: '%2s/%2s',
-                ),
             ),
         ),
         new WidgetSettings(
-            stylePalette: new ProcedureStylePalette(
-                procedure: new PercentGradientProcedure(
+            stylePalette:  new PercentGradientProcedure(
                     floatValue: $progressValue,
                     gradient: $gradient,
-                ),
             ),
-            charPalette: new ProcedureCharPalette(
-                procedure: new ProgressBarProcedure(
+            charPalette:  new ProgressBarProcedure(
                     progressValue: $progressValue,
                     units: $units,
                 ),
-            ),
         ),
         new WidgetSettings(
-            charPalette: new ProcedureCharPalette(
-                procedure: new PercentValueProcedure(
+            charPalette:  new PercentValueProcedure(
                     floatValue: $progressValue
                 ),
-            ),
         ),
         new WidgetSettings(
-            stylePalette: new ProcedureStylePalette(
-                procedure: new PercentGradientProcedure(
+            stylePalette:  new PercentGradientProcedure(
                     floatValue: $progressValue,
                     gradient: $gradient,
-                ),
             ),
-            charPalette: new ProcedureCharPalette(
-                procedure: new ProgressEstimateProcedure(
+            charPalette:  new ProgressEstimateProcedure(
                     progressValue: $progressValue,
                     format: '🏁 [%6s]',
                 ),
-            ),
         ),
     );
 
