@@ -48,11 +48,7 @@ final class ProcedureStylePalette extends AInfiniteStylePalette
         return $element;
     }
 
-    public function unwrap(?IPaletteMode $mode = null): IPaletteTemplate
-    {
-        // TODO: Implement unwrap() method.
-        throw new RuntimeException(__METHOD__ . ' Not implemented.');
-    }
+    
 
     protected function createFrame(string $element, ?int $width = null): IStyleSequenceFrame
     {

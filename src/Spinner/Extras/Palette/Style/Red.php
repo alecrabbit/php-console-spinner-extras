@@ -14,11 +14,7 @@ use Traversable;
 
 final class Red extends AStylePalette
 {
-    public function unwrap(?IPaletteMode $mode = null): IPaletteTemplate
-    {
-        // TODO: Implement unwrap() method.
-        throw new RuntimeException(__METHOD__ . ' Not implemented.');
-    }
+    
 
     protected function ansi4StyleFrames(): Traversable
     {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Palette\Char;
 
-use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Contract\ICharSequenceFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
-use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteTemplate;
-use RuntimeException;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Extras\Palette\PaletteOptions;
 use Traversable;
 
 /**
@@ -18,24 +18,25 @@ use Traversable;
  */
 final class Moon extends ACharPalette
 {
-    public function unwrap(?IPaletteMode $mode = null): IPaletteTemplate
-    {
-        // TODO: Implement unwrap() method.
-        throw new RuntimeException(__METHOD__ . ' Not implemented.');
-    }
-
-    protected function sequence(): Traversable
-    {
-        yield from ['🌘', '🌗', '🌖', '🌕', '🌔', '🌓', '🌒', '🌑'];
-    }
-
-    protected function createFrame(string $element, ?int $width = null): ICharSequenceFrame
-    {
-        return new CharSequenceFrame($element, $width ?? 2);
-    }
-
-    protected function modeInterval(?IPaletteMode $mode = null): ?int
-    {
-        return 300;
+    public function __construct(
+        IPaletteOptions $options = new PaletteOptions(interval: 300),
+        int $index = 0,
+    ) {
+        parent::__construct(
+            new \ArrayObject(
+                [
+                    new CharSequenceFrame('🌘', 2),
+                    new CharSequenceFrame('🌗', 2),
+                    new CharSequenceFrame('🌖', 2),
+                    new CharSequenceFrame('🌕', 2),
+                    new CharSequenceFrame('🌔', 2),
+                    new CharSequenceFrame('🌓', 2),
+                    new CharSequenceFrame('🌒', 2),
+                    new CharSequenceFrame('🌑', 2),
+                ]
+            ),
+            $options,
+            $index
+        );
     }
 }

@@ -18,11 +18,7 @@ use Traversable;
  */
 final class Square extends ACharPalette
 {
-    public function unwrap(?IPaletteMode $mode = null): IPaletteTemplate
-    {
-        // TODO: Implement unwrap() method.
-        throw new RuntimeException(__METHOD__ . ' Not implemented.');
-    }
+    
 
     protected function sequence(): Traversable
     {
