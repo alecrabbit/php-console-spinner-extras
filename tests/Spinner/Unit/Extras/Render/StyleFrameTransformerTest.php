@@ -10,7 +10,6 @@ use AlecRabbit\Spinner\Contract\IStyleSequenceFrame;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\IStyleFrame;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleFrameRenderer;
-use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 use AlecRabbit\Spinner\Extras\Render\StyleFrameTransformer;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -66,7 +65,8 @@ final class StyleFrameTransformerTest extends TestCase
             ->expects(self::once())
             ->method('render')
             ->with($input)
-            ->willReturn($frame);
+            ->willReturn($frame)
+        ;
 
         $transformer = $this->getTesteeInstance(
             styleFrameRenderer: $styleFrameRenderer,

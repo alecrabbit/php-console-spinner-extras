@@ -8,7 +8,7 @@ namespace AlecRabbit\Spinner\Extras\Color;
 use AlecRabbit\Spinner\Extras\Color\A\AAnsiCode;
 use AlecRabbit\Spinner\Extras\Contract\IAnsiCode;
 
-final readonly class AnsiCode  implements IAnsiCode
+final readonly class AnsiCode implements IAnsiCode
 {
     private array $codes;
     private bool $empty;

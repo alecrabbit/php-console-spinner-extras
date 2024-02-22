@@ -10,7 +10,7 @@ use AlecRabbit\Spinner\Extras\ClockDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\FineDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
-use AlecRabbit\Spinner\Extras\Palette\PaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
 use AlecRabbit\Spinner\Extras\Procedure\PercentageSymbolIndex;
 use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;

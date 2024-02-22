@@ -9,7 +9,6 @@ use AlecRabbit\Spinner\Core\Palette\Contract\IStylePalette;
 use AlecRabbit\Spinner\Extras\Color\Style\Style;
 use AlecRabbit\Spinner\Extras\Frame\StyleFrame;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProcedure;
-use Traversable;
 
 final class Red extends AProcedure implements IStylePalette
 {

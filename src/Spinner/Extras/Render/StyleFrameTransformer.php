@@ -7,11 +7,9 @@ namespace AlecRabbit\Spinner\Extras\Render;
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\IStyleFrameTransformer;
 use AlecRabbit\Spinner\Contract\IStyleSequenceFrame;
-use AlecRabbit\Spinner\Core\StyleSequenceFrame;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\IStyleFrame;
 use AlecRabbit\Spinner\Extras\Render\Contract\IStyleFrameRenderer;
-use AlecRabbit\Spinner\Extras\Render\Contract\IStyleRenderer;
 
 final readonly class StyleFrameTransformer implements IStyleFrameTransformer
 {
@@ -26,7 +24,7 @@ final readonly class StyleFrameTransformer implements IStyleFrameTransformer
             return $frame;
         }
 
-        if($frame instanceof IStyleFrame) {
+        if ($frame instanceof IStyleFrame) {
             return $this->styleFrameRenderer->render($frame);
         }
 

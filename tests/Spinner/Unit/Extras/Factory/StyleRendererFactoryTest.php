@@ -25,10 +25,6 @@ final class StyleRendererFactoryTest extends TestCase
         self::assertInstanceOf(StyleRendererFactory::class, $styleRendererFactory);
     }
 
-    protected function getStyleToAnsiStringConverterFactoryMock(): MockObject&IStyleToAnsiStringConverterFactory
-    {
-        return $this->createMock(IStyleToAnsiStringConverterFactory::class);
-    }
     public function getTesteeInstance(
         ?IStyleToAnsiStringConverterFactory $converterFactory = null,
     ): IStyleRendererFactory {
@@ -36,10 +32,12 @@ final class StyleRendererFactoryTest extends TestCase
             converterFactory: $converterFactory ?? $this->getStyleToAnsiStringConverterFactoryMock(),
         );
     }
-    protected function getStyleOptionsParserMock(): MockObject&IStyleOptionsParser
+
+    protected function getStyleToAnsiStringConverterFactoryMock(): MockObject&IStyleToAnsiStringConverterFactory
     {
-        return $this->createMock(IStyleOptionsParser::class);
+        return $this->createMock(IStyleToAnsiStringConverterFactory::class);
     }
+
     #[Test]
     public function canCreate(): void
     {
@@ -65,6 +63,11 @@ final class StyleRendererFactoryTest extends TestCase
     protected function getStyleToAnsiStringConverterMock(): MockObject&IStyleToAnsiStringConverter
     {
         return $this->createMock(IStyleToAnsiStringConverter::class);
+    }
+
+    protected function getStyleOptionsParserMock(): MockObject&IStyleOptionsParser
+    {
+        return $this->createMock(IStyleOptionsParser::class);
     }
 
     private function getOutputConfigMock(): MockObject&IOutputConfig
