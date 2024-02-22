@@ -66,12 +66,12 @@ $loadWidgetSettings =
             ),
         ),
         new WidgetSettings(
-            charPalette:  new TimerProcedure(
-                    target: new DateTimeImmutable('+86410 seconds'),
-                    intervalFormatter: new ClockDateIntervalFormatter(),
-                    format: '[%s]',
-                ),
+            charPalette: new TimerProcedure(
+                target: new DateTimeImmutable('+86410 seconds'),
+                intervalFormatter: new ClockDateIntervalFormatter(),
+                format: '[%s]',
             ),
+        ),
     );
 
 /** @var IWidgetComposite $widget */

@@ -8,6 +8,7 @@ use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
+use ArrayObject;
 
 /**
  * @codeCoverageIgnore
@@ -20,7 +21,7 @@ final class Aesthetic extends ACharPalette
         int $index = 0,
     ) {
         parent::__construct(
-            new \ArrayObject(
+            new ArrayObject(
                 [
                     new CharSequenceFrame('▰▱▱▱▱▱▱', 7),
                     new CharSequenceFrame('▰▰▱▱▱▱▱', 7),

@@ -27,6 +27,7 @@ final class PercentValueProcedure extends AFloatValueProcedure implements ICharP
     ) {
         parent::__construct($floatValue, $format, $options);
     }
+
     public function getFrame(?float $dt = null): IFrame
     {
         return $this->createSequenceFrame(

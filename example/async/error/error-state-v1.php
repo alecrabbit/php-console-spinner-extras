@@ -11,6 +11,8 @@ use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
 use Faker\Factory as FakerFactory;
 
+use function AlecRabbit\WCWidth\wcswidth;
+
 require_once __DIR__ . '/../bootstrap.async.php';
 
 $spinner = Facade::createSpinner();
@@ -31,14 +33,14 @@ $errorState =
 
         $stylePalette =
             new CustomStylePalette(
-                new \ArrayObject([
+                new ArrayObject([
                     new StyleSequenceFrame("\e[41;1;5m  %s  \e[0m", 4),
                 ]),
             );
 
         $charPalette =
             new CustomCharPalette(
-                new \ArrayObject([
+                new ArrayObject([
                     new CharSequenceFrame('Error', 5),
                 ]),
             );
@@ -63,8 +65,8 @@ $errorState =
                 ->usingSettings(
                     new WidgetSettings(
                         charPalette: new CustomCharPalette(
-                            new \ArrayObject([
-                                new CharSequenceFrame($message, \AlecRabbit\WCWidth\wcswidth($message)),
+                            new ArrayObject([
+                                new CharSequenceFrame($message, wcswidth($message)),
                             ]),
                         ),
                     ),
@@ -82,7 +84,7 @@ $loop = Facade::getLoop();
 $loop->repeat(
     1,
     static function () use ($errorState, $loop): void {
-        if (\random_int(0, 1000) > 950) {
+        if (random_int(0, 1000) > 950) {
             $message = FakerFactory::create()->sentence(); // random error message
             $errorState(
                 sprintf(

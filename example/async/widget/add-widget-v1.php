@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use AlecRabbit\Spinner\Core\Palette\NoStylePalette;
-use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Rainbow;
 use AlecRabbit\Spinner\Core\Settings\RootWidgetSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
@@ -27,7 +26,7 @@ $widget =
         ->usingSettings(
             new WidgetSettings(
                 stylePalette: new Rainbow(),
-                charPalette: new FeatheredArrow(                )
+                charPalette: new FeatheredArrow()
             )
         )
         ->create()

@@ -21,7 +21,7 @@ final class Red extends AProcedure implements IStylePalette
     ) {
         parent::__construct(options: $options);
 
-        $this->frame =  new StyleFrame(
+        $this->frame = new StyleFrame(
             style: new Style(fgColor: 'red'),
         );
     }

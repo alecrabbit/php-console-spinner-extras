@@ -94,13 +94,13 @@ $progressWidgetTwoSettings =
         ),
         new WidgetSettings(
             stylePalette: new PercentGradientProcedure(
-                    floatValue: $progressValue,
-                    gradient: $gradientTwo,
+                floatValue: $progressValue,
+                gradient: $gradientTwo,
             ),
             charPalette: new ProgressEstimateProcedure(
-                    progressValue: $progressValue,
-                    format: '🏁 [%6s]',
-                ),
+                progressValue: $progressValue,
+                format: '🏁 [%6s]',
+            ),
         ),
     );
 

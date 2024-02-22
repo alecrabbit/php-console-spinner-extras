@@ -37,6 +37,7 @@ final class ProgressBarProcedure extends AProgressValueProcedure implements ICha
         $this->cursorThreshold = $this->progressValue->getMax();
         $this->units = $this->withCursor ? $units - 1 : $units;
     }
+
     public function getFrame(?float $dt = null): IFrame
     {
         return $this->createSequenceFrame(

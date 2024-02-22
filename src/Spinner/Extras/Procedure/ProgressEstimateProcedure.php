@@ -51,6 +51,7 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure implements
     {
         return ($progressValue->getMax() - $progressValue->getMin()) / $progressValue->getSteps();
     }
+
     public function getFrame(?float $dt = null): IFrame
     {
         return $this->createSequenceFrame(

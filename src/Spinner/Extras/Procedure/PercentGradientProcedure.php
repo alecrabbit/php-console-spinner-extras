@@ -30,7 +30,7 @@ final class PercentGradientProcedure extends AFloatValueProcedure implements ISt
         private readonly IGradient $gradient,
         IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
-        parent::__construct($floatValue, options:  $options);
+        parent::__construct($floatValue, options: $options);
 
         $this->count = $floatValue instanceof IProgressValue
             ? $floatValue->getSteps()

@@ -13,12 +13,12 @@ use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\Moon;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
+use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
-use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
-use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Value\ProgressValue;
 
@@ -55,45 +55,45 @@ $progressWidgetSettings =
         // nested multi settings
         new MultiWidgetSettings(
             new WidgetSettings(
-                charPalette:  new ProgressElapsedProcedure(
-                        progressValue: $progressValue,
-                        format: '🕐 [%6s]',
-                    ),
+                charPalette: new ProgressElapsedProcedure(
+                    progressValue: $progressValue,
+                    format: '🕐 [%6s]',
+                ),
             ),
             new WidgetSettings(
                 charPalette: new Moon(options: new PaletteOptions(interval: 100)),
             ),
         ),
         new WidgetSettings(
-            charPalette:  new ProgressStepsProcedure(
-                    progressValue: $progressValue,
-                    format: '%2s/%2s',
+            charPalette: new ProgressStepsProcedure(
+                progressValue: $progressValue,
+                format: '%2s/%2s',
             ),
         ),
         new WidgetSettings(
-            stylePalette:  new PercentGradientProcedure(
-                    floatValue: $progressValue,
-                    gradient: $gradient,
+            stylePalette: new PercentGradientProcedure(
+                floatValue: $progressValue,
+                gradient: $gradient,
             ),
-            charPalette:  new ProgressBarProcedure(
-                    progressValue: $progressValue,
-                    units: $units,
-                ),
+            charPalette: new ProgressBarProcedure(
+                progressValue: $progressValue,
+                units: $units,
+            ),
         ),
         new WidgetSettings(
-            charPalette:  new PercentValueProcedure(
-                    floatValue: $progressValue
-                ),
+            charPalette: new PercentValueProcedure(
+                floatValue: $progressValue
+            ),
         ),
         new WidgetSettings(
-            stylePalette:  new PercentGradientProcedure(
-                    floatValue: $progressValue,
-                    gradient: $gradient,
+            stylePalette: new PercentGradientProcedure(
+                floatValue: $progressValue,
+                gradient: $gradient,
             ),
-            charPalette:  new ProgressEstimateProcedure(
-                    progressValue: $progressValue,
-                    format: '🏁 [%6s]',
-                ),
+            charPalette: new ProgressEstimateProcedure(
+                progressValue: $progressValue,
+                format: '🏁 [%6s]',
+            ),
         ),
     );
 

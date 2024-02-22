@@ -9,6 +9,7 @@ use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
+use ArrayObject;
 use Traversable;
 
 /**
@@ -28,14 +29,14 @@ final class DotBinaryCount extends ACharPalette
         );
     }
 
-    private function getFrames(): \ArrayObject
+    private function getFrames(): ArrayObject
     {
         $frames = [];
         /** @var string $item */
         foreach ($this->sequence() as $item) {
             $frames[] = $this->createFrame($item);
         }
-        return new \ArrayObject($frames);
+        return new ArrayObject($frames);
     }
 
     private function sequence(): Traversable

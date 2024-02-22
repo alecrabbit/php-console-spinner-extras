@@ -40,20 +40,6 @@ final class PercentSequenceProcedure extends AFloatValueProcedure implements IPe
             $this->addSymbolIndex($subject->get());
         }
     }
-    public function getFrame(?float $dt = null): IFrame
-    {
-        return $this->createSequenceFrame(
-            $this->createFrameSequence()
-        );
-    }
-
-    private function createSequenceFrame(string $sequence): ISequenceFrame
-    {
-        if ($sequence === '') {
-            return new CharSequenceFrame('', 0);
-        }
-        return new CharSequenceFrame($sequence, $this->getWidth($sequence));
-    }
 
     private function addSymbolIndex(int $index): void
     {
@@ -67,6 +53,21 @@ final class PercentSequenceProcedure extends AFloatValueProcedure implements IPe
         if (count($this->charSequence) > $this->size) {
             array_shift($this->charSequence);
         }
+    }
+
+    public function getFrame(?float $dt = null): IFrame
+    {
+        return $this->createSequenceFrame(
+            $this->createFrameSequence()
+        );
+    }
+
+    private function createSequenceFrame(string $sequence): ISequenceFrame
+    {
+        if ($sequence === '') {
+            return new CharSequenceFrame('', 0);
+        }
+        return new CharSequenceFrame($sequence, $this->getWidth($sequence));
     }
 
     private function createFrameSequence(): string
