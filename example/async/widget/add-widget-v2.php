@@ -31,11 +31,7 @@ $widgetTwo =
                 trailingSpacer: new CharSequenceFrame(' 🎊', 3),
                 stylePalette: new Rainbow(),
                 charPalette: new DotBinaryCount(
-                    new PaletteOptions
-                    (
-                        interval: 1000,
-                        reversed: false
-                    )
+                    options: new PaletteOptions(interval: 10),
                 ),
             )
         )

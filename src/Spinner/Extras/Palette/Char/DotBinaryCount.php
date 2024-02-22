@@ -7,8 +7,8 @@ namespace AlecRabbit\Spinner\Extras\Palette\Char;
 use AlecRabbit\Spinner\Contract\ICharSequenceFrame;
 use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
-use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
-
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use Traversable;
 
 /**
@@ -17,9 +17,28 @@ use Traversable;
  */
 final class DotBinaryCount extends ACharPalette
 {
+    public function __construct(
+        IPaletteOptions $options = new PaletteOptions(interval: 1000),
+        int $index = 0,
+    ) {
+        parent::__construct(
+            $this->getFrames(),
+            $options,
+            $index
+        );
+    }
 
+    private function getFrames(): \ArrayObject
+    {
+        $frames = [];
+        /** @var string $item */
+        foreach ($this->sequence() as $item) {
+            $frames[] = $this->createFrame($item);
+        }
+        return new \ArrayObject($frames);
+    }
 
-    protected function sequence(): Traversable
+    private function sequence(): Traversable
     {
         yield from [
             '⠀',
@@ -281,13 +300,8 @@ final class DotBinaryCount extends ACharPalette
         ];
     }
 
-    protected function createFrame(string $element, ?int $width = null): ICharSequenceFrame
+    private function createFrame(string $element): ICharSequenceFrame
     {
-        return new CharSequenceFrame($element, $width ?? 1);
-    }
-
-    protected function modeInterval(?IPaletteMode $mode = null): ?int
-    {
-        return 1000;
+        return new CharSequenceFrame($element, 1);
     }
 }

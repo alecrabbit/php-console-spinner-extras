@@ -27,13 +27,7 @@ $widget =
         ->usingSettings(
             new WidgetSettings(
                 stylePalette: new Rainbow(),
-                charPalette: new FeatheredArrow(
-                    new PaletteOptions
-                    (
-                        interval: 1000,
-                        reversed: false
-                    )
-                )
+                charPalette: new FeatheredArrow(                )
             )
         )
         ->create()
