@@ -33,10 +33,12 @@ final class StyleToAnsiStringConverterFactoryTest extends TestCase
             optionsParser: $optionsParser ?? $this->getStyleOptionsParserMock(),
         );
     }
+
     protected function getAnsiColorParserFactoryMock(): MockObject&IAnsiColorParserFactory
     {
         return $this->createMock(IAnsiColorParserFactory::class);
     }
+
     protected function getStyleOptionsParserMock(): MockObject&IStyleOptionsParser
     {
         return $this->createMock(IStyleOptionsParser::class);

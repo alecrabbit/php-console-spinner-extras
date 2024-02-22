@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Frame;
 
-use AlecRabbit\Spinner\Exception\LogicException;
 use AlecRabbit\Spinner\Extras\Contract\IStyleFrame;
 use AlecRabbit\Spinner\Extras\Contract\Style\IStyle;
 

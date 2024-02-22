@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
 
@@ -18,8 +20,9 @@ final class PercentValueProcedure extends AFloatValueProcedure implements ICharP
     public function __construct(
         IFloatValue $floatValue,
         string $format = self::FORMAT,
+        IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
-        parent::__construct($floatValue, $format);
+        parent::__construct($floatValue, $format, $options);
     }
 
     protected function createFrameSequence(): string

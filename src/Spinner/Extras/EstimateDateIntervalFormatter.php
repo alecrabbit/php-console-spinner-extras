@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras;
 
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\Contract\ILabels;
 use DateInterval;
 
 final readonly class EstimateDateIntervalFormatter implements IDateIntervalFormatter

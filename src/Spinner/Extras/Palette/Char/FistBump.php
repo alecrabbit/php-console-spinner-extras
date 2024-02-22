@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Palette\Char;
 
-use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Contract\ICharSequenceFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use Traversable;

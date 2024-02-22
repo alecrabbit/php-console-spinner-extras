@@ -32,9 +32,9 @@ final class StyleFrameRendererTest extends TestCase
         );
     }
 
-    protected function getStyleToAnsiStringConverterMock(): MockObject&IStyleToAnsiStringConverter
+    private function getStyleRendererMock(): MockObject&IStyleRenderer
     {
-        return $this->createMock(IStyleToAnsiStringConverter::class);
+        return $this->createMock(IStyleRenderer::class);
     }
 
 //    #[Test]
@@ -71,13 +71,13 @@ final class StyleFrameRendererTest extends TestCase
 ////        );
 //    }
 
+    protected function getStyleToAnsiStringConverterMock(): MockObject&IStyleToAnsiStringConverter
+    {
+        return $this->createMock(IStyleToAnsiStringConverter::class);
+    }
+
     protected function getStyleMock(): MockObject&IStyle
     {
         return $this->createMock(IStyle::class);
-    }
-
-    private function getStyleRendererMock(): MockObject&IStyleRenderer
-    {
-        return $this->createMock(IStyleRenderer::class);
     }
 }

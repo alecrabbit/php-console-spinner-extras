@@ -7,6 +7,8 @@ namespace AlecRabbit\Spinner\Extras\Procedure\A;
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Core\CharSequenceFrame;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 
 use function AlecRabbit\WCWidth\wcswidth;
@@ -18,7 +20,9 @@ abstract class AFloatValueProcedure extends AProcedure
     public function __construct(
         protected readonly IFloatValue $floatValue,
         protected readonly string $format = self::FORMAT,
+        IPaletteOptions $options = new PaletteOptions(),
     ) {
+        parent::__construct($options);
     }
 
     public function getFrame(?float $dt = null): IFrame
@@ -28,7 +32,7 @@ abstract class AFloatValueProcedure extends AProcedure
         );
     }
 
-    protected function createSequenceFrame(string $sequence): ISequenceFrame
+    private function createSequenceFrame(string $sequence): ISequenceFrame
     {
         if ($sequence === '') {
             return new CharSequenceFrame('', 0);
@@ -41,7 +45,7 @@ abstract class AFloatValueProcedure extends AProcedure
         return wcswidth($value);
     }
 
-    protected function createFrameSequence(): string
+    private function createFrameSequence(): string
     {
         return sprintf(
             $this->format,

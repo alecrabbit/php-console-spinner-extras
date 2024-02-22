@@ -8,7 +8,9 @@ use AlecRabbit\Color\Contract\Gradient\IGradient;
 use AlecRabbit\Color\Contract\IColor;
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\ISequenceFrame;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\Contract\IStylePalette;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Color\Style\Style;
 use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
@@ -26,8 +28,10 @@ final class PercentGradientProcedure extends AFloatValueProcedure implements ISt
     public function __construct(
         IFloatValue $floatValue,
         private readonly IGradient $gradient,
+        IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
-        parent::__construct($floatValue);
+        parent::__construct($floatValue, options:  $options);
+
         $this->count = $floatValue instanceof IProgressValue
             ? $floatValue->getSteps()
             : 100;

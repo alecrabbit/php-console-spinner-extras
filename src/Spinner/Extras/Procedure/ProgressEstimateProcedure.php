@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
+use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Contract\ISecondsToDateIntervalConverter;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
-use AlecRabbit\Spinner\Extras\FineDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\EstimateDateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\FineDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 use AlecRabbit\Spinner\Extras\SecondsToDateIntervalConverter;
 use DateTimeImmutable;
@@ -33,14 +38,11 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure implements
         private readonly IDateIntervalFormatter $estimateFormatter = new EstimateDateIntervalFormatter(),
         private readonly IDateIntervalFormatter $elapsedFormatter = new FineDateIntervalFormatter(),
         private readonly ISecondsToDateIntervalConverter $converter = new SecondsToDateIntervalConverter(),
+        IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
+        parent::__construct($progressValue, $format, $options);
+
         $this->createdAt = $this->currentTimeProvider->now();
-
-        parent::__construct(
-            progressValue: $progressValue,
-            format: $format
-        );
-
         $this->stepValue = $this->calculateStepValue($progressValue);
         $this->startValue = $progressValue->getValue();
     }
@@ -48,6 +50,20 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure implements
     private function calculateStepValue(IProgressValue $progressValue): float
     {
         return ($progressValue->getMax() - $progressValue->getMin()) / $progressValue->getSteps();
+    }
+    public function getFrame(?float $dt = null): IFrame
+    {
+        return $this->createSequenceFrame(
+            $this->createFrameSequence()
+        );
+    }
+
+    private function createSequenceFrame(string $sequence): ISequenceFrame
+    {
+        if ($sequence === '') {
+            return new CharSequenceFrame('', 0);
+        }
+        return new CharSequenceFrame($sequence, $this->getWidth($sequence));
     }
 
     protected function createFrameSequence(): string
