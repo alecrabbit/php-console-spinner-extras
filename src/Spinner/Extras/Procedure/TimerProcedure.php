@@ -6,10 +6,13 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Core\CharSequenceFrame;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\EstimateDateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\Procedure\A\AProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\ITimerProcedure;
 use DateTimeImmutable;
 
@@ -18,16 +21,18 @@ use function AlecRabbit\WCWidth\wcswidth;
 /**
  * @psalm-suppress UnusedClass
  */
-final readonly class TimerProcedure implements ITimerProcedure
+final  class TimerProcedure extends AProcedure implements ITimerProcedure
 {
     private const DEFAULT_FORMAT = '%s';
 
     public function __construct(
-        private DateTimeImmutable $target,
-        private ICurrentTimeProvider $currentTimeProvider = new CurrentTimeProvider(),
-        private IDateIntervalFormatter $intervalFormatter = new EstimateDateIntervalFormatter(),
-        private string $format = self::DEFAULT_FORMAT,
+        private readonly DateTimeImmutable $target,
+        private readonly ICurrentTimeProvider $currentTimeProvider = new CurrentTimeProvider(),
+        private readonly IDateIntervalFormatter $intervalFormatter = new EstimateDateIntervalFormatter(),
+        private readonly string $format = self::DEFAULT_FORMAT,
+        IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
+        parent::__construct(options: $options);
     }
 
     public function getFrame(?float $dt = null): IFrame

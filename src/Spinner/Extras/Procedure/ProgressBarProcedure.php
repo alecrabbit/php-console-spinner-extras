@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
+use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Factory\CharFrameFactory;
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
@@ -34,10 +37,19 @@ final class ProgressBarProcedure extends AProgressValueProcedure implements ICha
         $this->cursorThreshold = $this->progressValue->getMax();
         $this->units = $this->withCursor ? $units - 1 : $units;
     }
-
-    protected function createFrameSequence(): string
+    public function getFrame(?float $dt = null): IFrame
     {
-        return $this->createBar($this->progressValue->getValue());
+        return $this->createSequenceFrame(
+            $this->createBar($this->progressValue->getValue())
+        );
+    }
+
+    private function createSequenceFrame(string $sequence): ISequenceFrame
+    {
+        if ($sequence === '') {
+            return new CharSequenceFrame('', 0);
+        }
+        return new CharSequenceFrame($sequence, $this->getWidth($sequence));
     }
 
     private function createBar(float $progress): string

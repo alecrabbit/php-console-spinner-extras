@@ -32,7 +32,7 @@ abstract class AFloatValueProcedure extends AProcedure
         );
     }
 
-    protected function createSequenceFrame(string $sequence): ISequenceFrame
+    private function createSequenceFrame(string $sequence): ISequenceFrame
     {
         if ($sequence === '') {
             return new CharSequenceFrame('', 0);
@@ -45,7 +45,7 @@ abstract class AFloatValueProcedure extends AProcedure
         return wcswidth($value);
     }
 
-    protected function createFrameSequence(): string
+    private function createFrameSequence(): string
     {
         return sprintf(
             $this->format,
