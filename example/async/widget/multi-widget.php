@@ -18,11 +18,11 @@ require_once __DIR__ . '/../bootstrap.async.php';
 $multiWidgetSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
-            stylePalette: new Rainbow(),
+            stylePalette: new Red(),
             charPalette: new Dice()
         ),
         new WidgetSettings(
-            stylePalette: new Red(),
+            stylePalette: new Rainbow(),
             charPalette: new FeatheredArrow()
         ),
         new WidgetSettings(

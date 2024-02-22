@@ -6,6 +6,8 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Core\Factory\CharFrameFactory;
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IProgressBarSprite;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
@@ -25,8 +27,9 @@ final class ProgressBarProcedure extends AProgressValueProcedure implements ICha
         int $units = self::UNITS,
         private readonly IProgressBarSprite $sprite = new ProgressBarSprite(),
         private readonly bool $withCursor = true,
+        IPaletteOptions $options = new PaletteOptions(interval: 300),
     ) {
-        parent::__construct($progressValue);
+        parent::__construct($progressValue, options: $options);
 
         $this->cursorThreshold = $this->progressValue->getMax();
         $this->units = $this->withCursor ? $units - 1 : $units;

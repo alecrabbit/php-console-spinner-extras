@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Contract\ISubject;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\IIndexToCodepointConverter;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentageSymbolIndex;
@@ -20,8 +22,9 @@ final class PercentSequenceProcedure extends AFloatValueProcedure implements IPe
         private readonly int $size = self::DEFAULT_SIZE,
         private readonly IIndexToCodepointConverter $codepointConverter = new IndexToCodepointConverter(),
         array $charSequence = [],
+        IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
-        parent::__construct($this->percentageSymbolIndex->getValue());
+        parent::__construct($this->percentageSymbolIndex->getValue(), options: $options);
 
         $this->percentageSymbolIndex->attach($this);
         $this->charSequence = array_pad($charSequence, $this->size, ' ');

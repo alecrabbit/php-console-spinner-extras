@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 
@@ -19,11 +21,10 @@ final class ProgressStepsProcedure extends AProgressValueProcedure implements IC
     public function __construct(
         IProgressValue $progressValue,
         string $format = self::FORMAT,
+        IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
-        parent::__construct(
-            progressValue: $progressValue,
-            format: $format
-        );
+        parent::__construct($progressValue, $format, $options);
+
         $this->stepValue = ($progressValue->getMax() - $progressValue->getMin()) / $progressValue->getSteps();
     }
 

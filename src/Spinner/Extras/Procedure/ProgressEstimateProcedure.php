@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
@@ -33,14 +35,11 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure implements
         private readonly IDateIntervalFormatter $estimateFormatter = new EstimateDateIntervalFormatter(),
         private readonly IDateIntervalFormatter $elapsedFormatter = new FineDateIntervalFormatter(),
         private readonly ISecondsToDateIntervalConverter $converter = new SecondsToDateIntervalConverter(),
+        IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
+        parent::__construct($progressValue, $format, $options);
+
         $this->createdAt = $this->currentTimeProvider->now();
-
-        parent::__construct(
-            progressValue: $progressValue,
-            format: $format
-        );
-
         $this->stepValue = $this->calculateStepValue($progressValue);
         $this->startValue = $progressValue->getValue();
     }
