@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 use AlecRabbit\Color\Gradient\ColorRange;
 use AlecRabbit\Color\Gradient\RGBAGradient;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\ClockDateIntervalFormatter;
-use AlecRabbit\Spinner\Extras\FineDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
-use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
 use AlecRabbit\Spinner\Extras\Procedure\PercentageSymbolIndex;
 use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;
@@ -45,44 +44,34 @@ $gradientTwo = new RGBAGradient(
 $loadWidgetSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
-            stylePalette: new ProcedureStylePalette(
-                procedure: new PercentGradientProcedure(
-                    floatValue: $loadValue,
-                    gradient: $gradient,
-                ),
+            stylePalette: new PercentGradientProcedure(
+                floatValue: $loadValue,
+                gradient: $gradient,
                 options: $options,
             ),
-            charPalette: new ProcedureCharPalette(
-                procedure: new PercentValueProcedure(
-                    floatValue: $loadValue,
-                ),
+            charPalette: new PercentValueProcedure(
+                floatValue: $loadValue,
                 options: $options,
             ),
         ),
         new WidgetSettings(
-            stylePalette: new ProcedureStylePalette(
-                procedure: new PercentGradientProcedure(
-                    floatValue: $loadValue,
-                    gradient: $gradientTwo,
-                ),
+            stylePalette: new PercentGradientProcedure(
+                floatValue: $loadValue,
+                gradient: $gradientTwo,
             ),
-            charPalette: new ProcedureCharPalette(
-                procedure: new PercentSequenceProcedure(
-                    percentageSymbolIndex: $loadSymbolIndex,
-                    size: $size,
-                ),
+            charPalette: new PercentSequenceProcedure(
+                percentageSymbolIndex: $loadSymbolIndex,
+                size: $size,
                 options: $options,
             ),
         ),
         new WidgetSettings(
-            charPalette: new ProcedureCharPalette(
-                procedure: new TimerProcedure(
+            charPalette:  new TimerProcedure(
                     target: new DateTimeImmutable('+86410 seconds'),
                     intervalFormatter: new ClockDateIntervalFormatter(),
                     format: '[%s]',
                 ),
             ),
-        ),
     );
 
 /** @var IWidgetComposite $widget */

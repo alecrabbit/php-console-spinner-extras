@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Procedure;
 
+use AlecRabbit\Spinner\Contract\IFrame;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Contract\ISubject;
+use AlecRabbit\Spinner\Core\CharSequenceFrame;
+use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
@@ -12,7 +16,7 @@ use AlecRabbit\Spinner\Extras\Procedure\Contract\IIndexToCodepointConverter;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentageSymbolIndex;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentSequenceProcedure;
 
-final class PercentSequenceProcedure extends AFloatValueProcedure implements IPercentSequenceProcedure
+final class PercentSequenceProcedure extends AFloatValueProcedure implements IPercentSequenceProcedure, ICharPalette
 {
     private const DEFAULT_SIZE = 10;
     private array $charSequence;
@@ -36,6 +40,20 @@ final class PercentSequenceProcedure extends AFloatValueProcedure implements IPe
             $this->addSymbolIndex($subject->get());
         }
     }
+    public function getFrame(?float $dt = null): IFrame
+    {
+        return $this->createSequenceFrame(
+            $this->createFrameSequence()
+        );
+    }
+
+    private function createSequenceFrame(string $sequence): ISequenceFrame
+    {
+        if ($sequence === '') {
+            return new CharSequenceFrame('', 0);
+        }
+        return new CharSequenceFrame($sequence, $this->getWidth($sequence));
+    }
 
     private function addSymbolIndex(int $index): void
     {
@@ -51,7 +69,7 @@ final class PercentSequenceProcedure extends AFloatValueProcedure implements IPe
         }
     }
 
-    protected function createFrameSequence(): string
+    private function createFrameSequence(): string
     {
         return implode('', $this->charSequence);
     }

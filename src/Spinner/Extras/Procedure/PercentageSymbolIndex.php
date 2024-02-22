@@ -15,7 +15,6 @@ final class PercentageSymbolIndex extends ASubject implements IPercentageSymbolI
 {
     private int $inter;
 
-
     public function __construct(
         private readonly IPercentValue $loadValue,
         private int $current = 0,

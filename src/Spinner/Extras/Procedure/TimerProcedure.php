@@ -6,6 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Procedure;
 
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Core\CharSequenceFrame;
+use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
@@ -21,7 +22,7 @@ use function AlecRabbit\WCWidth\wcswidth;
 /**
  * @psalm-suppress UnusedClass
  */
-final  class TimerProcedure extends AProcedure implements ITimerProcedure
+final  class TimerProcedure extends AProcedure implements ITimerProcedure, ICharPalette
 {
     private const DEFAULT_FORMAT = '%s';
 
