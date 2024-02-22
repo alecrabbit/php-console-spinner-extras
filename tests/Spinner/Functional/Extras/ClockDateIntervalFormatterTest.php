@@ -6,7 +6,7 @@ namespace AlecRabbit\Tests\Spinner\Functional\Extras;
 
 use AlecRabbit\Spinner\Extras\ClockDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
-use AlecRabbit\Spinner\Extras\ILabels;
+use AlecRabbit\Spinner\Extras\Contract\ILabels;
 use AlecRabbit\Spinner\Extras\Labels;
 use AlecRabbit\Tests\TestCase\TestCase;
 use DateInterval;

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras;
 
+use AlecRabbit\Spinner\Extras\Contract\ILabels;
+
 final readonly class Labels implements ILabels
 {
     public function __construct(
