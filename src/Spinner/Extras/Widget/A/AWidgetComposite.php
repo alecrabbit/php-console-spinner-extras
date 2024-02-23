@@ -8,6 +8,7 @@ use AlecRabbit\Spinner\Contract\ICharSequenceFrame;
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Contract\IObserver;
+use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Core\Contract\IIntervalComparator;
 use AlecRabbit\Spinner\Core\Widget\A\AWidget;
@@ -26,8 +27,8 @@ abstract class AWidgetComposite extends AWidget implements IWidgetComposite
 
     public function __construct(
         IWidgetRevolver $revolver,
-        IFrame $leadingSpacer,
-        IFrame $trailingSpacer,
+        ISequenceFrame $leadingSpacer,
+        ISequenceFrame $trailingSpacer,
         protected readonly IIntervalComparator $intervalComparator,
         protected readonly IWidgetCompositeChildrenContainer $children = new WidgetCompositeChildrenContainer(),
         ?IObserver $observer = null,
