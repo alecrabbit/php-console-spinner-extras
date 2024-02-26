@@ -7,6 +7,8 @@ namespace AlecRabbit\Tests\Spinner\Unit\Extras;
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISequenceFrame;
+use AlecRabbit\Spinner\Core\Builder\Contract\ISequenceStateBuilder;
+use AlecRabbit\Spinner\Core\Contract\ISequenceState;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Exception\ObserverCanNotBeOverwritten;
@@ -30,13 +32,78 @@ final class ExtrasSpinnerTest extends TestCase
     }
 
     protected function getTesteeInstance(
-        ?IWidget $rootWidget = null,
+        ?IWidget $widget = null,
+        ?ISequenceStateBuilder $stateBuilder = null,
+        ?ISequenceState $state = null,
         ?IObserver $observer = null,
     ): IExtrasSpinner {
         return new ExtrasSpinner(
-            widget: $rootWidget ?? $this->getWidgetMock(),
+            widget: $widget ?? $this->getWidgetMock(),
+            stateBuilder: $stateBuilder ?? $this->getStateBuilderMock(),
+            state: $state ?? $this->getStateMock(),
             observer: $observer,
         );
+    }
+
+    #[Test]
+    public function canGetState(): void
+    {
+        $dt = 10;
+        $sequence = 'sequence';
+        $width = 8;
+        $frame = $this->getSequenceFrameMock();
+        $frame
+            ->expects($this->once())
+            ->method('getSequence')
+            ->willReturn($sequence)
+        ;
+        $frame
+            ->expects($this->once())
+            ->method('getWidth')
+            ->willReturn($width)
+        ;
+
+
+        $widget = $this->getWidgetMock();
+        $widget
+            ->expects($this->once())
+            ->method('getFrame')
+            ->with($dt)
+            ->willReturn($frame)
+        ;
+
+        $state = $this->getStateMock();
+        $stateBuilder = $this->getStateBuilderMock();
+        $stateBuilder
+            ->expects($this->once())
+            ->method('withSequence')
+            ->with($sequence)
+            ->willReturnSelf()
+        ;
+        $stateBuilder
+            ->expects($this->once())
+            ->method('withWidth')
+            ->with($width)
+            ->willReturnSelf()
+        ;
+        $stateBuilder
+            ->expects($this->once())
+            ->method('withPreviousWidth')
+            ->with(0)
+            ->willReturnSelf()
+        ;
+        $stateBuilder
+            ->expects($this->once())
+            ->method('build')
+            ->willReturn($state)
+        ;
+
+        $spinner = $this->getTesteeInstance(
+            widget: $widget,
+            stateBuilder: $stateBuilder,
+        );
+
+        self::assertSame($state, $spinner->getState($dt));
     }
 
     protected function getWidgetMock(): MockObject&IWidget
@@ -44,30 +111,71 @@ final class ExtrasSpinnerTest extends TestCase
         return $this->createMock(IWidget::class);
     }
 
-    #[Test]
-    public function canGetFrame(): void
+    private function getStateBuilderMock(): MockObject&ISequenceStateBuilder
     {
-        $frame = $this->getFrameMock();
-        $rootWidget = $this->getWidgetCompositeMock();
-        $rootWidget
-            ->expects(self::once())
-            ->method('getFrame')
-            ->willReturn($frame)
-        ;
-        $spinner = $this->getTesteeInstance(rootWidget: $rootWidget);
-
-        self::assertInstanceOf(ExtrasSpinner::class, $spinner);
-        self::assertSame($frame, $spinner->getFrame());
+        return $this->createMock(ISequenceStateBuilder::class);
     }
 
-    protected function getFrameMock(): MockObject&ISequenceFrame
+    private function getStateMock(): MockObject&ISequenceState
+    {
+        return $this->createMock(ISequenceState::class);
+    }
+
+    #[Test]
+    public function canGetCurrentState(): void
+    {
+        $dt = null;
+        $frame = $this->getSequenceFrameMock();
+        $frame
+            ->expects($this->never())
+            ->method('getSequence')
+        ;
+        $frame
+            ->expects($this->never())
+            ->method('getWidth')
+        ;
+
+
+        $widget = $this->getWidgetMock();
+        $widget
+            ->expects($this->never())
+            ->method('getFrame')
+        ;
+
+        $initialState = $this->getStateMock();
+        $stateBuilder = $this->getStateBuilderMock();
+        $stateBuilder
+            ->expects($this->never())
+            ->method('withSequence')
+            ->willReturnSelf()
+        ;
+        $stateBuilder
+            ->expects($this->never())
+            ->method('withWidth')
+            ->willReturnSelf()
+        ;
+        $stateBuilder
+            ->expects($this->never())
+            ->method('withPreviousWidth')
+            ->willReturnSelf()
+        ;
+        $stateBuilder
+            ->expects($this->never())
+            ->method('build')
+        ;
+
+        $spinner = $this->getTesteeInstance(
+            widget: $widget,
+            stateBuilder: $stateBuilder,
+            state: $initialState,
+        );
+
+        self::assertSame($initialState, $spinner->getState($dt));
+    }
+
+    private function getSequenceFrameMock(): MockObject&ISequenceFrame
     {
         return $this->createMock(ISequenceFrame::class);
-    }
-
-    protected function getWidgetCompositeMock(): MockObject&IWidgetComposite
-    {
-        return $this->createMock(IWidgetComposite::class);
     }
 
     #[Test]
@@ -80,13 +188,18 @@ final class ExtrasSpinnerTest extends TestCase
             ->method('update')
         ;
         $spinner = $this->getTesteeInstance(
-            rootWidget: $rootWidget,
+            widget: $rootWidget,
             observer: $observer
         );
 
         self::assertInstanceOf(ExtrasSpinner::class, $spinner);
 
         $spinner->update($rootWidget);
+    }
+
+    protected function getWidgetCompositeMock(): MockObject&IWidgetComposite
+    {
+        return $this->createMock(IWidgetComposite::class);
     }
 
     protected function getObserverMock(): MockObject&IObserver
@@ -105,7 +218,7 @@ final class ExtrasSpinnerTest extends TestCase
             ->method('update')
         ;
         $spinner = $this->getTesteeInstance(
-            rootWidget: $rootWidget,
+            widget: $rootWidget,
             observer: $observer
         );
 
@@ -124,7 +237,7 @@ final class ExtrasSpinnerTest extends TestCase
         ;
 
         $spinner = $this->getTesteeInstance(
-            rootWidget: $rootWidget,
+            widget: $rootWidget,
         );
 
         self::assertInstanceOf(ExtrasSpinner::class, $spinner);
@@ -140,7 +253,7 @@ final class ExtrasSpinnerTest extends TestCase
             ->method('getInterval')
             ->willReturn($interval)
         ;
-        $spinner = $this->getTesteeInstance(rootWidget: $rootWidget);
+        $spinner = $this->getTesteeInstance(widget: $rootWidget);
 
         self::assertInstanceOf(ExtrasSpinner::class, $spinner);
         self::assertSame($interval, $spinner->getInterval());
@@ -193,7 +306,7 @@ final class ExtrasSpinnerTest extends TestCase
             ->willReturn($context)
         ;
 
-        $spinner = $this->getTesteeInstance(rootWidget: $rootWidget);
+        $spinner = $this->getTesteeInstance(widget: $rootWidget);
 
         self::assertInstanceOf(ExtrasSpinner::class, $spinner);
         self::assertSame($context, $spinner->add($context));
@@ -214,7 +327,7 @@ final class ExtrasSpinnerTest extends TestCase
             ->method('remove')
         ;
 
-        $spinner = $this->getTesteeInstance(rootWidget: $rootWidget);
+        $spinner = $this->getTesteeInstance(widget: $rootWidget);
 
         self::assertInstanceOf(ExtrasSpinner::class, $spinner);
         $spinner->remove($context);
@@ -270,7 +383,7 @@ final class ExtrasSpinnerTest extends TestCase
 
             $rootWidget = $this->getWidgetMock();
 
-            $spinner = $this->getTesteeInstance(rootWidget: $rootWidget);
+            $spinner = $this->getTesteeInstance(widget: $rootWidget);
 
             self::assertSame($context, $spinner->add($context));
         };
@@ -280,5 +393,10 @@ final class ExtrasSpinnerTest extends TestCase
             exception: $exceptionClass,
             message: $exceptionMessage,
         );
+    }
+
+    protected function getFrameMock(): MockObject&ISequenceFrame
+    {
+        return $this->createMock(ISequenceFrame::class);
     }
 }

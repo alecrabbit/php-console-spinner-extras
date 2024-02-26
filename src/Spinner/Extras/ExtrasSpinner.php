@@ -9,6 +9,8 @@ use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Core\A\ASubject;
+use AlecRabbit\Spinner\Core\Builder\Contract\ISequenceStateBuilder;
+use AlecRabbit\Spinner\Core\Contract\ISequenceState;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
 use AlecRabbit\Spinner\Extras\Contract\IExtrasSpinner;
 use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
@@ -20,6 +22,8 @@ final class ExtrasSpinner extends ASubject implements IExtrasSpinner
 
     public function __construct(
         private readonly IWidget $widget,
+        private readonly ISequenceStateBuilder $stateBuilder,
+        private ISequenceState $state,
         ?IObserver $observer = null,
     ) {
         parent::__construct($observer);
@@ -41,11 +45,6 @@ final class ExtrasSpinner extends ASubject implements IExtrasSpinner
         }
     }
 
-    public function getFrame(?float $dt = null): ISequenceFrame
-    {
-        return $this->widget->getFrame($dt);
-    }
-
     public function getInterval(): IInterval
     {
         return $this->widget->getInterval();
@@ -56,5 +55,21 @@ final class ExtrasSpinner extends ASubject implements IExtrasSpinner
         if ($subject === $this->widget) {
             $this->notify();
         }
+    }
+
+    public function getState(?float $dt = null): ISequenceState
+    {
+        if ($dt !== null) {
+            $frame = $this->widget->getFrame($dt);
+
+            $this->state = $this->stateBuilder
+                ->withSequence($frame->getSequence())
+                ->withWidth($frame->getWidth())
+                ->withPreviousWidth($this->state->getWidth())
+                ->build()
+            ;
+        }
+
+        return $this->state;
     }
 }
