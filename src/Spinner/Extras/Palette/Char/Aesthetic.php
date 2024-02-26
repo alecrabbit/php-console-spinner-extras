@@ -11,7 +11,6 @@ use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use ArrayObject;
 
 /**
- * @codeCoverageIgnore
  * @psalm-suppress UnusedClass
  */
 final class Aesthetic extends ACharPalette
@@ -21,7 +20,7 @@ final class Aesthetic extends ACharPalette
         int $index = 0,
     ) {
         parent::__construct(
-            new ArrayObject(
+            new \ArrayObject(
                 [
                     new CharSequenceFrame('▰▱▱▱▱▱▱', 7),
                     new CharSequenceFrame('▰▰▱▱▱▱▱', 7),

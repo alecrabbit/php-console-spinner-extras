@@ -8,33 +8,30 @@ use AlecRabbit\Spinner\Contract\ICharSequenceFrame;
 use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use Traversable;
 
 /**
- * @codeCoverageIgnore
  * @psalm-suppress UnusedClass
  */
 final class SquareToggle extends ACharPalette
 {
-
-
-    protected function sequence(): Traversable
-    {
-        yield from [
-            '■',
-            '□',
-            '▪',
-            '▫',
-        ];
-    }
-
-    protected function createFrame(string $element, ?int $width = null): ICharSequenceFrame
-    {
-        return new CharSequenceFrame($element, $width ?? 1);
-    }
-
-    protected function modeInterval(?IPaletteMode $mode = null): ?int
-    {
-        return 500;
+    public function __construct(
+        IPaletteOptions $options = new PaletteOptions(interval: 500),
+        int $index = 0,
+    ) {
+        parent::__construct(
+            new \ArrayObject(
+                [
+                    new CharSequenceFrame('■', 7),
+                    new CharSequenceFrame('□', 7),
+                    new CharSequenceFrame('▪', 7),
+                    new CharSequenceFrame('▫', 7),
+                ],
+            ),
+            $options,
+            $index
+        );
     }
 }

@@ -4,26 +4,40 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Palette\Char;
 
-use AlecRabbit\Spinner\Contract\ICharSequenceFrame;
 use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
-use Traversable;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
+use ArrayObject;
 
 /**
- * @codeCoverageIgnore
  * @psalm-suppress UnusedClass
  */
 final class PulseOrangeBlue extends ACharPalette
 {
-
-
-    protected function sequence(): Traversable
-    {
-        yield from ['🔸', '🔶', '🟠', '🟠', '🔶', '🔸', '🔹', '🔷', '🔵', '🔵', '🔷', '🔹'];
-    }
-
-    protected function createFrame(string $element, ?int $width = null): ICharSequenceFrame
-    {
-        return new CharSequenceFrame($element, $width ?? 2);
+    public function __construct(
+        IPaletteOptions $options = new PaletteOptions(interval: 100),
+        int $index = 0,
+    ) {
+        parent::__construct(
+            new ArrayObject(
+                [
+                    new CharSequenceFrame('🔸', 2),
+                    new CharSequenceFrame('🔶', 2),
+                    new CharSequenceFrame('🟠', 2),
+                    new CharSequenceFrame('🟠', 2),
+                    new CharSequenceFrame('🔶', 2),
+                    new CharSequenceFrame('🔸', 2),
+                    new CharSequenceFrame('🔹', 2),
+                    new CharSequenceFrame('🔷', 2),
+                    new CharSequenceFrame('🔵', 2),
+                    new CharSequenceFrame('🔵', 2),
+                    new CharSequenceFrame('🔷', 2),
+                    new CharSequenceFrame('🔹', 2),
+                ],
+            ),
+            $options,
+            $index
+        );
     }
 }

@@ -10,7 +10,6 @@ use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use Traversable;
 
 /**
- * @codeCoverageIgnore
  * @psalm-suppress UnusedClass
  */
 final class PulseBlue extends ACharPalette

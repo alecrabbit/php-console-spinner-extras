@@ -13,7 +13,6 @@ use ArrayObject;
 use Traversable;
 
 /**
- * @codeCoverageIgnore
  * @psalm-suppress UnusedClass
  */
 final class DotBinaryCount extends ACharPalette

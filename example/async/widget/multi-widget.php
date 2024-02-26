@@ -6,7 +6,10 @@ use AlecRabbit\Spinner\Core\Palette\Rainbow;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
+use AlecRabbit\Spinner\Extras\Palette\Char\Clock;
+use AlecRabbit\Spinner\Extras\Palette\Char\Diamond;
 use AlecRabbit\Spinner\Extras\Palette\Char\Dice;
+use AlecRabbit\Spinner\Extras\Palette\Char\Dot;
 use AlecRabbit\Spinner\Extras\Palette\Char\FeatheredArrow;
 use AlecRabbit\Spinner\Extras\Palette\Char\Runner;
 use AlecRabbit\Spinner\Extras\Palette\Char\ShortSnake;
@@ -30,6 +33,13 @@ $multiWidgetSettings =
         ),
         new WidgetSettings(
             charPalette: new ShortSnake()
+        ),
+        new WidgetSettings(
+            charPalette: new Clock()
+        ),
+        new WidgetSettings(
+            stylePalette: new Rainbow(),
+            charPalette: new Dot(),
         ),
     );
 

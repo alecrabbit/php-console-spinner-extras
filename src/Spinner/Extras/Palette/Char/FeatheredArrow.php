@@ -11,7 +11,6 @@ use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use ArrayObject;
 
 /**
- * @codeCoverageIgnore
  * @psalm-suppress UnusedClass
  */
 final class FeatheredArrow extends ACharPalette

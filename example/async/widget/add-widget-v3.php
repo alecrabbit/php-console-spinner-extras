@@ -11,7 +11,7 @@ use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\PulseOrangeBlue;
 use AlecRabbit\Spinner\Extras\Palette\Char\ShortSnake;
-use AlecRabbit\Spinner\Extras\Palette\Style\Red;
+use AlecRabbit\Spinner\Extras\Procedure\Red;
 
 require_once __DIR__ . '/../bootstrap.async.php';
 

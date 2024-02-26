@@ -11,7 +11,6 @@ use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
 use Traversable;
 
 /**
- * @codeCoverageIgnore
  * @psalm-suppress UnusedClass
  */
 final class MindBlown extends ACharPalette
