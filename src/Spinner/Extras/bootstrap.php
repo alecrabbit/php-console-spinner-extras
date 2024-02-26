@@ -6,7 +6,10 @@ use AlecRabbit\Spinner\Container\Contract\IContainer;
 use AlecRabbit\Spinner\Container\DefinitionRegistry;
 use AlecRabbit\Spinner\Container\ServiceDefinition;
 use AlecRabbit\Spinner\Contract\IStyleFrameTransformer;
+use AlecRabbit\Spinner\Core\Builder\Contract\ISpinnerBuilder;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
+use AlecRabbit\Spinner\Extras\Builder\Contract\IExtrasSpinnerBuilder;
+use AlecRabbit\Spinner\Extras\Builder\ExtrasSpinnerBuilder;
 use AlecRabbit\Spinner\Extras\Color\Builder\ColorToAnsiCodeConverterBuilder;
 use AlecRabbit\Spinner\Extras\Color\Builder\Contract\IColorToAnsiCodeConverterBuilder;
 use AlecRabbit\Spinner\Extras\Color\Contract\IHexColorNormalizer;
@@ -90,6 +93,10 @@ DefinitionRegistry::getInstance()
         new ServiceDefinition(
             IStyleFrameRenderer::class,
             StyleFrameRenderer::class,
+        ),
+        new ServiceDefinition(
+            ISpinnerBuilder::class,
+            ExtrasSpinnerBuilder::class,
         ),
     )
 ;
