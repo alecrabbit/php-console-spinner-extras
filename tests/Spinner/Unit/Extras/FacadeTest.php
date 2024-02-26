@@ -16,6 +16,7 @@ use AlecRabbit\Spinner\Core\Settings\Contract\ISettingsProvider;
 use AlecRabbit\Spinner\Core\Settings\Contract\ISpinnerSettings;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
 use AlecRabbit\Spinner\Exception\DomainException;
+use AlecRabbit\Spinner\Extras\Contract\IExtrasSpinner;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Factory\IWidgetCompositeFactory;
 use AlecRabbit\Tests\TestCase\FacadeAwareTestCase;
@@ -141,7 +142,7 @@ final class FacadeTest extends FacadeAwareTestCase
         $container = $this->getContainerMock();
         self::setContainer($container);
 
-        $spinner = $this->getSpinnerMock();
+        $spinner = $this->getExtrasSpinnerMock();
 
         $driver = $this->getDriverMock();
         $driver
@@ -181,9 +182,9 @@ final class FacadeTest extends FacadeAwareTestCase
         self::assertSame($spinner, Facade::createSpinner($spinnerSettings));
     }
 
-    private function getSpinnerMock(): MockObject&ISpinner
+    private function getExtrasSpinnerMock(): MockObject&IExtrasSpinner
     {
-        return $this->createMock(ISpinner::class);
+        return $this->createMock(IExtrasSpinner::class);
     }
 
     private function getDriverMock(): MockObject&IDriver
