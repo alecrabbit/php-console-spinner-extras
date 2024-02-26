@@ -18,7 +18,6 @@ use AlecRabbit\Spinner\Extras\Widget\Contract\IPlaceholder;
 use WeakMap;
 
 final class NeoWidgetComposite extends ASubject implements INeoWidgetComposite
-
 {
     private int $count;
     private IInterval $interval;
@@ -61,7 +60,7 @@ final class NeoWidgetComposite extends ASubject implements INeoWidgetComposite
     public function add(IWidget $widget, ?IPlaceholder $placeholder = null): IPlaceholder
     {
         if ($placeholder === null) {
-            $placeholder = new \AlecRabbit\Spinner\Extras\Widget\Placeholder();
+            $placeholder = $this->createPlaceholder();
         }
 
         $this->widgets->offsetSet($placeholder, $widget);
@@ -130,5 +129,10 @@ final class NeoWidgetComposite extends ASubject implements INeoWidgetComposite
             }
         }
         return false;
+    }
+
+    protected function createPlaceholder(): Placeholder
+    {
+        return new Placeholder();
     }
 }
