@@ -7,6 +7,7 @@ namespace AlecRabbit\Spinner\Extras\Contract;
 use AlecRabbit\Spinner\Contract\IHasNullableInterval;
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
+use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
 
 interface IWidgetContext extends IObserver,
                                  ISubject,

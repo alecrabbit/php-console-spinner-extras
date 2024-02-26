@@ -7,7 +7,7 @@ use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Settings\OutputSettings;
 use AlecRabbit\Spinner\Core\Settings\SpinnerSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
-use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
+use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\PulseOrangeBlue;
 use AlecRabbit\Spinner\Extras\Palette\Char\ShortSnake;

@@ -9,7 +9,7 @@ use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Core\A\ASubject;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
-use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetContext;
+use AlecRabbit\Spinner\Extras\Contract\IWidgetContext;
 
 final class WidgetContext extends ASubject implements IWidgetContext
 {

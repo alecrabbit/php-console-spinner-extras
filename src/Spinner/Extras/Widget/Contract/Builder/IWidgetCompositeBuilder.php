@@ -7,7 +7,7 @@ namespace AlecRabbit\Spinner\Extras\Widget\Contract\Builder;
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Core\Contract\IIntervalComparator;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetBuilder;
-use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
+use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetRevolver;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Exception\LogicException;

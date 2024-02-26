@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
-use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
+use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
 use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;

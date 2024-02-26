@@ -6,7 +6,7 @@ namespace AlecRabbit\Spinner\Extras\Widget\Contract\Factory;
 
 use AlecRabbit\Spinner\Core\Config\Contract\IWidgetConfig;
 use AlecRabbit\Spinner\Core\Settings\Contract\IWidgetSettings;
-use AlecRabbit\Spinner\Core\Widget\Contract\IWidgetComposite;
+use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
 
 interface IWidgetCompositeFactory extends IWidgetFactory
