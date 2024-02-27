@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Palette\Char;
 
 use AlecRabbit\Tests\TestCase\TestCase;
+use AlecRabbit\Spinner\Extras\Palette\Char;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -13,36 +14,36 @@ final class PaletteInstantiatingTest extends TestCase
     public static function paletteClassesProvider(): iterable
     {
         yield from [
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Aesthetic::class,],  // #00
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Ascii::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\ChristmasTree::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Clock::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\ClockHourly::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Diamond::class,],  // #05
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Dice::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Dot::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\DotBinaryCount::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Earth::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\FeatheredArrow::class,], // #10
-            [\AlecRabbit\Spinner\Extras\Palette\Char\FingerDance::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\FistBump::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\HalfCircle::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\MindBlown::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Monkey::class,],// #15
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Moon::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\PulseBlue::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\PulseOrange::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\PulseOrangeBlue::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\RainyWeather::class,], // #20
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Runner::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Sector::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\ShortSnake::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Speaker::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Square::class,], // #25
-            [\AlecRabbit\Spinner\Extras\Palette\Char\SquareToggle::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\StormyWeather::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\SwirlingDots::class,],
-            [\AlecRabbit\Spinner\Extras\Palette\Char\Toggle::class,], // #29
+            [Char\Aesthetic::class,],  // #00
+            [Char\Ascii::class,],
+            [Char\ChristmasTree::class,],
+            [Char\Clock::class,],
+            [Char\ClockHourly::class,],
+            [Char\Diamond::class,],  // #05
+            [Char\Dice::class,],
+            [Char\Dot::class,],
+            [Char\DotBinaryCount::class,],
+            [Char\Earth::class,],
+            [Char\FeatheredArrow::class,], // #10
+            [Char\FingerDance::class,],
+            [Char\FistBump::class,],
+            [Char\HalfCircle::class,],
+            [Char\MindBlown::class,],
+            [Char\Monkey::class,],// #15
+            [Char\Moon::class,],
+            [Char\PulseBlue::class,],
+            [Char\PulseOrange::class,],
+            [Char\PulseOrangeBlue::class,],
+            [Char\RainyWeather::class,], // #20
+            [Char\Runner::class,],
+            [Char\Sector::class,],
+            [Char\ShortSnake::class,],
+            [Char\Speaker::class,],
+            [Char\Square::class,], // #25
+            [Char\SquareToggle::class,],
+            [Char\StormyWeather::class,],
+            [Char\SwirlingDots::class,],
+            [Char\Toggle::class,], // #29
         ];
     }
 
