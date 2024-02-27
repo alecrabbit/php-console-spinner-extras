@@ -68,6 +68,36 @@ final class StyleRendererTest extends TestCase
             '%s ',
             $styleFrameRenderer->render($style),
         );
+    }    #[Test]
+    public function canRenderEmptyStyle(): void
+    {
+        $style = $this->getStyleMock();
+        $style
+            ->expects(self::once())
+            ->method('isEmpty')
+            ->willReturn(true)
+        ;
+        $style
+            ->expects(self::never())
+            ->method('getFormat')
+        ;
+        $style
+            ->expects(self::never())
+            ->method('getWidth')
+        ;
+        $converter = $this->getStyleToAnsiStringConverterMock();
+        $converter
+            ->expects(self::never())
+            ->method('convert')
+        ;
+        $styleFrameRenderer = $this->getTesteeInstance(
+            converter: $converter,
+        );
+        self::assertInstanceOf(StyleRenderer::class, $styleFrameRenderer);
+        self::assertEquals(
+            '%s',
+            $styleFrameRenderer->render($style),
+        );
     }
 
     protected function getStyleMock(): MockObject&IStyle

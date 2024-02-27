@@ -19,9 +19,11 @@ final readonly class StyleFrameRenderer implements IStyleFrameRenderer
 
     public function render(IStyleFrame $frame): IStyleSequenceFrame
     {
+        $style = $frame->getStyle();
+
         return new StyleSequenceFrame(
-            sequence: $this->renderer->render($frame->getStyle()),
-            width: 0,
+            sequence: $this->renderer->render($style),
+            width: $style->getWidth(),
         );
     }
 }

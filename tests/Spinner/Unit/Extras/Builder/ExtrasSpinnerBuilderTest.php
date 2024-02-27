@@ -76,4 +76,22 @@ final class ExtrasSpinnerBuilderTest extends TestCase
             ->build()
         ;
     }
+
+    #[Test]
+    public function throwsIfStateBuilderIsNotSet(): void
+    {
+        $builder = $this->getTesteeInstance();
+
+        $widget = $this->getWidgetMock();
+        $observer = $this->getObserverMock();
+
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('StateBuilder is not set.');
+
+        $builder
+            ->withWidget($widget)
+            ->withObserver($observer)
+            ->build()
+        ;
+    }
 }
