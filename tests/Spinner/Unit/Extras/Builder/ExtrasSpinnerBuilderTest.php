@@ -6,6 +6,7 @@ namespace AlecRabbit\Tests\Spinner\Unit\Extras\Builder;
 
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Core\Builder\Contract\ISequenceStateBuilder;
+use AlecRabbit\Spinner\Core\Factory\Contract\ISequenceStateFactory;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
 use AlecRabbit\Spinner\Exception\LogicException;
 use AlecRabbit\Spinner\Extras\Builder\Contract\IExtrasSpinnerBuilder;
@@ -37,12 +38,12 @@ final class ExtrasSpinnerBuilderTest extends TestCase
 
         $widget = $this->getWidgetMock();
         $observer = $this->getObserverMock();
-        $stateBuilder = $this->getStateBuilderMock();
+        $stateFactory = $this->getStateFactoryMock();
 
         $spinner = $builder
             ->withWidget($widget)
             ->withObserver($observer)
-            ->withStateBuilder($stateBuilder)
+            ->withStateFactory($stateFactory)
             ->build()
         ;
 
@@ -78,7 +79,7 @@ final class ExtrasSpinnerBuilderTest extends TestCase
     }
 
     #[Test]
-    public function throwsIfStateBuilderIsNotSet(): void
+    public function throwsIfStateFactoryIsNotSet(): void
     {
         $builder = $this->getTesteeInstance();
 
@@ -86,12 +87,17 @@ final class ExtrasSpinnerBuilderTest extends TestCase
         $observer = $this->getObserverMock();
 
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('StateBuilder is not set.');
+        $this->expectExceptionMessage('StateFactory is not set.');
 
         $builder
             ->withWidget($widget)
             ->withObserver($observer)
             ->build()
         ;
+    }
+
+    private function getStateFactoryMock(): MockObject&ISequenceStateFactory
+    {
+        return $this->createMock(ISequenceStateFactory::class);
     }
 }

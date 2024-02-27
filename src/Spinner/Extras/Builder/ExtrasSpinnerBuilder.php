@@ -6,7 +6,9 @@ namespace AlecRabbit\Spinner\Extras\Builder;
 
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Core\Builder\Contract\ISequenceStateBuilder;
+use AlecRabbit\Spinner\Core\Builder\Contract\ISpinnerBuilder;
 use AlecRabbit\Spinner\Core\Contract\ISequenceState;
+use AlecRabbit\Spinner\Core\Factory\Contract\ISequenceStateFactory;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
 use AlecRabbit\Spinner\Exception\LogicException;
 use AlecRabbit\Spinner\Extras\Builder\Contract\IExtrasSpinnerBuilder;
@@ -18,6 +20,7 @@ final class ExtrasSpinnerBuilder implements IExtrasSpinnerBuilder
     private ?IWidget $widget = null;
     private ?IObserver $observer = null;
     private ?ISequenceStateBuilder $stateBuilder = null;
+    private ?ISequenceStateFactory $stateFactory = null;
     private ?ISequenceState $state = null;
 
     public function build(): IExtrasSpinner
@@ -26,30 +29,20 @@ final class ExtrasSpinnerBuilder implements IExtrasSpinnerBuilder
             throw new LogicException('Widget is not set.');
         }
 
-        if ($this->stateBuilder === null) {
-            throw new LogicException('StateBuilder is not set.');
+        if ($this->stateFactory === null) {
+            throw new LogicException('StateFactory is not set.');
         }
 
         if ($this->state === null) {
-            $this->state = $this->createInitialState();
+            $this->state = $this->stateFactory->create();
         }
 
         return new ExtrasSpinner(
             widget: $this->widget,
-            stateBuilder: $this->stateBuilder,
+            stateFactory: $this->stateFactory,
             state: $this->state,
             observer: $this->observer,
         );
-    }
-
-    private function createInitialState(): ISequenceState
-    {
-        return $this->stateBuilder
-            ->withSequence('')
-            ->withWidth(0)
-            ->withPreviousWidth(0)
-            ->build()
-        ;
     }
 
     public function withWidget(IWidget $widget): IExtrasSpinnerBuilder
@@ -70,6 +63,20 @@ final class ExtrasSpinnerBuilder implements IExtrasSpinnerBuilder
     {
         $clone = clone $this;
         $clone->stateBuilder = $stateBuilder;
+        return $clone;
+    }
+
+    public function withStateFactory(ISequenceStateFactory $stateFactory): IExtrasSpinnerBuilder
+    {
+        $clone = clone $this;
+        $clone->stateFactory = $stateFactory;
+        return $clone;
+    }
+
+    public function withInitialState(ISequenceState $state): ISpinnerBuilder
+    {
+        $clone = clone $this;
+        $clone->state = $state;
         return $clone;
     }
 }

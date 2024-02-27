@@ -10,6 +10,7 @@ use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Core\A\ASubject;
 use AlecRabbit\Spinner\Core\Builder\Contract\ISequenceStateBuilder;
 use AlecRabbit\Spinner\Core\Contract\ISequenceState;
+use AlecRabbit\Spinner\Core\Factory\Contract\ISequenceStateFactory;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
 use AlecRabbit\Spinner\Extras\Contract\IExtrasSpinner;
 use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
@@ -18,10 +19,9 @@ use AlecRabbit\Spinner\Extras\Exception\WidgetIsNotAComposite;
 
 final class ExtrasSpinner extends ASubject implements IExtrasSpinner
 {
-
     public function __construct(
         private readonly IWidget $widget,
-        private readonly ISequenceStateBuilder $stateBuilder,
+        private readonly ISequenceStateFactory $stateFactory,
         private ISequenceState $state,
         ?IObserver $observer = null,
     ) {
@@ -61,12 +61,7 @@ final class ExtrasSpinner extends ASubject implements IExtrasSpinner
         if ($dt !== null) {
             $frame = $this->widget->getFrame($dt);
 
-            $this->state = $this->stateBuilder
-                ->withSequence($frame->getSequence())
-                ->withWidth($frame->getWidth())
-                ->withPreviousWidth($this->state->getWidth())
-                ->build()
-            ;
+            $this->state = $this->stateFactory->create($frame, $this->state);
         }
 
         return $this->state;
