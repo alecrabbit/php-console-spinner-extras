@@ -8,6 +8,8 @@ use AlecRabbit\Spinner\Contract\ICharSequenceFrame;
 use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use Traversable;
 
 /**
@@ -17,38 +19,36 @@ final class MindBlown extends ACharPalette
 {
     private const SPACE = "\u{3000} ";
 
-    protected function sequence(): Traversable
-    {
-        yield from [
-            '😊 ',
-            '🙂 ',
-            '😐 ',
-            '😐 ',
-            '😮 ',
-            '😮 ',
-            '😦 ',
-            '😦 ',
-            '😧 ',
-            '😧 ',
-            '🤯 ',
-            '🤯 ',
-            '💥 ',
-            '✨ ',
-            self::SPACE,
-            self::SPACE,
-            self::SPACE,
-            self::SPACE,
-            self::SPACE,
-        ];
-    }
-
-    protected function createFrame(string $element, ?int $width = null): ICharSequenceFrame
-    {
-        return new CharSequenceFrame($element, $width ?? 3);
-    }
-
-    protected function modeInterval(?IPaletteMode $mode = null): ?int
-    {
-        return 200;
+    public function __construct(
+        IPaletteOptions $options = new PaletteOptions(interval: 200),
+        int $index = 0,
+    ) {
+        parent::__construct(
+            new \ArrayObject(
+                [
+                    new CharSequenceFrame('😊 ', 3),
+                    new CharSequenceFrame('🙂 ', 3),
+                    new CharSequenceFrame('😐 ', 3),
+                    new CharSequenceFrame('😐 ', 3),
+                    new CharSequenceFrame('😮 ', 3),
+                    new CharSequenceFrame('😮 ', 3),
+                    new CharSequenceFrame('😦 ', 3),
+                    new CharSequenceFrame('😦 ', 3),
+                    new CharSequenceFrame('😧 ', 3),
+                    new CharSequenceFrame('😧 ', 3),
+                    new CharSequenceFrame('🤯 ', 3),
+                    new CharSequenceFrame('🤯 ', 3),
+                    new CharSequenceFrame('💥 ', 3),
+                    new CharSequenceFrame('✨ ', 3),
+                    new CharSequenceFrame(self::SPACE, 3),
+                    new CharSequenceFrame(self::SPACE, 3),
+                    new CharSequenceFrame(self::SPACE, 3),
+                    new CharSequenceFrame(self::SPACE, 3),
+                    new CharSequenceFrame(self::SPACE, 3),
+                ],
+            ),
+            $options,
+            $index
+        );
     }
 }

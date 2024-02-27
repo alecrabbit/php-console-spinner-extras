@@ -8,6 +8,8 @@ use AlecRabbit\Spinner\Contract\ICharSequenceFrame;
 use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteMode;
+use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
+use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use Traversable;
 
 /**
@@ -16,28 +18,25 @@ use Traversable;
 final class Square extends ACharPalette
 {
 
-
-    protected function sequence(): Traversable
-    {
-        yield from [
-            '◼    ',
-            ' ◼   ',
-            '  ◼  ',
-            '   ◼ ',
-            '    ◼',
-            '   ◼ ',
-            '  ◼  ',
-            ' ◼   ',
-        ];
-    }
-
-    protected function createFrame(string $element, ?int $width = null): ICharSequenceFrame
-    {
-        return new CharSequenceFrame($element, $width ?? 5);
-    }
-
-    protected function modeInterval(?IPaletteMode $mode = null): ?int
-    {
-        return 120;
+    public function __construct(
+        IPaletteOptions $options = new PaletteOptions(interval: 120),
+        int $index = 0,
+    ) {
+        parent::__construct(
+            new \ArrayObject(
+                [
+                    new CharSequenceFrame('◼    ', 5),
+                    new CharSequenceFrame(' ◼   ', 5),
+                    new CharSequenceFrame('  ◼  ', 5),
+                    new CharSequenceFrame('   ◼ ', 5),
+                    new CharSequenceFrame('    ◼', 5),
+                    new CharSequenceFrame('   ◼ ', 5),
+                    new CharSequenceFrame('  ◼  ', 5),
+                    new CharSequenceFrame(' ◼   ', 5),
+                ],
+            ),
+            $options,
+            $index
+        );
     }
 }
