@@ -87,8 +87,4 @@ final readonly class ProgressBarSprite implements IProgressBarSprite
     {
         return $this->close;
     }
-
-    private function initBySample(?string $sample): void
-    {
-    }
 }

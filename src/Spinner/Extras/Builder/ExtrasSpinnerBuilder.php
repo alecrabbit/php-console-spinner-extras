@@ -25,7 +25,7 @@ final class ExtrasSpinnerBuilder implements IExtrasSpinnerBuilder
         if ($this->widget === null) {
             throw new LogicException('Widget is not set.');
         }
-        
+
         if ($this->stateBuilder === null) {
             throw new LogicException('StateBuilder is not set.');
         }
