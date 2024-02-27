@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Root\A;
 
+use AlecRabbit\Spinner\Core\Builder\Contract\ISpinnerBuilder;
 use AlecRabbit\Spinner\Core\Settings\Contract\ISpinnerSettings;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
 use AlecRabbit\Spinner\Exception\DomainException;
@@ -25,11 +26,13 @@ abstract class AFacade extends ACoreFacade
             return $spinner;
         }
 
+        // @codeCoverageIgnoreStart
         throw new DomainException(
             sprintf(
                 'Spinner is not an instance of %s',
                 IExtrasSpinner::class
             ),
         );
+        // @codeCoverageIgnoreEnd
     }
 }

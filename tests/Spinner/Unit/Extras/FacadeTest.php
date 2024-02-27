@@ -18,11 +18,12 @@ use AlecRabbit\Spinner\Exception\DomainException;
 use AlecRabbit\Spinner\Extras\Contract\IExtrasSpinner;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Widget\Contract\Factory\IWidgetCompositeFactory;
+use AlecRabbit\Tests\TestCase\ContainerModifyingTestCase;
 use AlecRabbit\Tests\TestCase\FacadeAwareTestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 
-final class FacadeTest extends FacadeAwareTestCase
+final class FacadeTest extends ContainerModifyingTestCase
 {
 //    #[Test]
 //    public function canNotBeInstantiated(): void
@@ -177,8 +178,9 @@ final class FacadeTest extends FacadeAwareTestCase
             ->willReturnOnConsecutiveCalls($spinnerFactory, $driverProvider)
         ;
 
+        $actual = Facade::createSpinner($spinnerSettings);
 
-        self::assertSame($spinner, Facade::createSpinner($spinnerSettings));
+        self::assertSame($spinner, $actual);
     }
 
     private function getExtrasSpinnerMock(): MockObject&IExtrasSpinner

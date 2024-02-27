@@ -59,13 +59,6 @@ final class ExtrasSpinnerBuilder implements IExtrasSpinnerBuilder
         return $clone;
     }
 
-    public function withStateBuilder(ISequenceStateBuilder $stateBuilder): IExtrasSpinnerBuilder
-    {
-        $clone = clone $this;
-        $clone->stateBuilder = $stateBuilder;
-        return $clone;
-    }
-
     public function withStateFactory(ISequenceStateFactory $stateFactory): IExtrasSpinnerBuilder
     {
         $clone = clone $this;
