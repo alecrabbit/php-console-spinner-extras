@@ -13,6 +13,7 @@ use AlecRabbit\Spinner\Extras\Palette\Char\Dot;
 use AlecRabbit\Spinner\Extras\Palette\Char\FeatheredArrow;
 use AlecRabbit\Spinner\Extras\Palette\Char\Runner;
 use AlecRabbit\Spinner\Extras\Palette\Char\ShortSnake;
+use AlecRabbit\Spinner\Extras\Palette\Char\StormyWeather;
 use AlecRabbit\Spinner\Extras\Procedure\Red;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 
@@ -38,8 +39,7 @@ $multiWidgetSettings =
             charPalette: new Clock()
         ),
         new WidgetSettings(
-            stylePalette: new Rainbow(),
-            charPalette: new Dot(),
+            charPalette: new StormyWeather(),
         ),
     );
 
