@@ -8,7 +8,6 @@ use AlecRabbit\Spinner\Container\ServiceDefinition;
 use AlecRabbit\Spinner\Contract\IStyleFrameTransformer;
 use AlecRabbit\Spinner\Core\Builder\Contract\ISpinnerBuilder;
 use AlecRabbit\Spinner\Core\Widget\Factory\Contract\IWidgetFactory;
-use AlecRabbit\Spinner\Extras\Builder\Contract\IExtrasSpinnerBuilder;
 use AlecRabbit\Spinner\Extras\Builder\ExtrasSpinnerBuilder;
 use AlecRabbit\Spinner\Extras\Color\Builder\ColorToAnsiCodeConverterBuilder;
 use AlecRabbit\Spinner\Extras\Color\Builder\Contract\IColorToAnsiCodeConverterBuilder;

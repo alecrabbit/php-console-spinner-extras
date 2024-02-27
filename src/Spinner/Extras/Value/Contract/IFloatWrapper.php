@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Extras\Contract;
+namespace AlecRabbit\Spinner\Extras\Value\Contract;
 
 use AlecRabbit\Spinner\Contract\ISubject;
 
-interface IFloatValue extends IValue, ISubject
+interface IFloatWrapper extends IValueWrapper, ISubject
 {
-    public function getValue(): float;
+    public function unwrap(): float;
 
     public function getMin(): float;
 

@@ -7,10 +7,12 @@ namespace AlecRabbit\Tests\Spinner\Functional\Extras\Procedure;
 use AlecRabbit\Spinner\Contract\IProcedure;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
-use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
+use AlecRabbit\Spinner\Extras\Contract\IProgressWrapper;
 use AlecRabbit\Spinner\Extras\EstimateDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
-use AlecRabbit\Spinner\Extras\Value\ProgressValue;
+use AlecRabbit\Spinner\Extras\Value\Contract\IValueReference;
+use AlecRabbit\Spinner\Extras\Value\ProgressWrapper;
+use AlecRabbit\Spinner\Extras\Value\ValueReference;
 use AlecRabbit\Tests\TestCase\TestCase;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\Test;
@@ -21,19 +23,45 @@ final class ProgressEstimateProcedureTest extends TestCase
     #[Test]
     public function canBeInstantiated(): void
     {
-        $procedure = $this->getTesteeInstance();
+        $progressValue = $this->getProgressValueMock();
+
+        $progressValue
+            ->expects(self::once())
+            ->method('getSteps')
+            ->willReturn(1)
+        ;
+
+        $reference = $this->getValueReferenceMock();
+        $reference
+            ->method('getWrapper')
+            ->willReturn($progressValue)
+        ;
+
+        $procedure = $this->getTesteeInstance(
+            reference: $reference
+        );
 
         self::assertInstanceOf(ProgressEstimateProcedure::class, $procedure);
     }
 
+    private function getProgressValueMock(): MockObject&IProgressWrapper
+    {
+        return $this->createMock(IProgressWrapper::class);
+    }
+
+    private function getValueReferenceMock(): MockObject&IValueReference
+    {
+        return $this->createMock(IValueReference::class);
+    }
+
     private function getTesteeInstance(
-        ?IProgressValue $progressValue = null,
+        ?IValueReference $reference = null,
         ?string $format = null,
         ICurrentTimeProvider $currentTimeProvider = null,
         IDateIntervalFormatter $intervalFormatter = new EstimateDateIntervalFormatter()
     ): IProcedure {
         return new ProgressEstimateProcedure(
-            progressValue: $progressValue ?? new ProgressValue(),
+            reference: $reference ?? $this->getValueReferenceMock(),
             format: $format ?? '-%s-',
             currentTimeProvider: $currentTimeProvider ?? $this->getCurrentTimeProviderMock(),
             estimateFormatter: $intervalFormatter,
@@ -48,7 +76,9 @@ final class ProgressEstimateProcedureTest extends TestCase
     #[Test]
     public function canGetFrame(): void
     {
-        $progressValue = new ProgressValue();
+        $progressValue = new ProgressWrapper();
+
+        $reference = new ValueReference($progressValue);
 
         $createdAt = new DateTimeImmutable('-900 seconds');
 
@@ -67,7 +97,7 @@ final class ProgressEstimateProcedureTest extends TestCase
         ;
 
         $procedure = $this->getTesteeInstance(
-            progressValue: $progressValue,
+            reference: $reference,
             currentTimeProvider: $currentTimeProvider,
         );
 

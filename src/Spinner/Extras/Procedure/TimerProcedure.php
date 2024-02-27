@@ -9,12 +9,15 @@ use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\EstimateDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\ITimerProcedure;
+use AlecRabbit\Spinner\Extras\Value\Contract\ITimerValue;
+use AlecRabbit\Spinner\Extras\Value\Contract\IValueReference;
 use DateTimeImmutable;
 
 use function AlecRabbit\WCWidth\wcswidth;
@@ -25,15 +28,21 @@ use function AlecRabbit\WCWidth\wcswidth;
 final  class TimerProcedure extends AProcedure implements ITimerProcedure, ICharPalette
 {
     private const DEFAULT_FORMAT = '%s';
+    private readonly DateTimeImmutable $target;
 
     public function __construct(
-        private readonly DateTimeImmutable $target,
-        private readonly ICurrentTimeProvider $currentTimeProvider = new CurrentTimeProvider(),
+        IValueReference $reference,
         private readonly IDateIntervalFormatter $intervalFormatter = new EstimateDateIntervalFormatter(),
+        private readonly ICurrentTimeProvider $currentTimeProvider = new CurrentTimeProvider(),
         private readonly string $format = self::DEFAULT_FORMAT,
         IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
-        parent::__construct(options: $options);
+        parent::__construct(
+            reference: $reference,
+            options: $options,
+        );
+
+        $this->target = $this->reference->getWrapper()->unwrap();
     }
 
     public function getFrame(?float $dt = null): IFrame
@@ -43,7 +52,7 @@ final  class TimerProcedure extends AProcedure implements ITimerProcedure, IChar
         );
     }
 
-    protected function createFrame(string $sequence): IFrame
+    private function createFrame(string $sequence): IFrame
     {
         if ($sequence === '') {
             return new CharSequenceFrame('', 0);
@@ -51,9 +60,9 @@ final  class TimerProcedure extends AProcedure implements ITimerProcedure, IChar
         return new CharSequenceFrame($sequence, $this->getWidth($sequence));
     }
 
-    protected function getWidth(string $value): int
+    private function getWidth(string $value): int
     {
-        return wcswidth($value);
+        return wcswidth($value); // TODO (2024-02-27 13:25) [Alec Rabbit]: [431c50df-f9be-4a7e-b79c-569fd74470a5]
     }
 
     private function createFrameSequence(): string
@@ -70,5 +79,17 @@ final  class TimerProcedure extends AProcedure implements ITimerProcedure, IChar
             $this->format,
             $this->intervalFormatter->format($interval),
         );
+    }
+
+    protected function assertReference(): void
+    {
+        if (!$this->reference->getWrapper() instanceof ITimerValue) {
+            throw new InvalidArgument(
+                sprintf(
+                    'Reference value is expected to contain an instance of %s.',
+                    ITimerValue::class
+                )
+            );
+        }
     }
 }

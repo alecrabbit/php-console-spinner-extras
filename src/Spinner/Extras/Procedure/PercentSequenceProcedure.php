@@ -11,6 +11,7 @@ use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\IIndexToCodepointConverter;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentageSymbolIndex;
@@ -22,21 +23,21 @@ final class PercentSequenceProcedure extends AFloatValueProcedure implements IPe
     private array $charSequence;
 
     public function __construct(
-        private readonly IPercentageSymbolIndex $percentageSymbolIndex,
+        IPercentageSymbolIndex $reference,
         private readonly int $size = self::DEFAULT_SIZE,
         private readonly IIndexToCodepointConverter $codepointConverter = new IndexToCodepointConverter(),
         array $charSequence = [],
         IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
-        parent::__construct($this->percentageSymbolIndex->getValue(), options: $options);
+        parent::__construct($reference, options: $options);
 
-        $this->percentageSymbolIndex->attach($this);
+        $this->reference->attach($this);
         $this->charSequence = array_pad($charSequence, $this->size, ' ');
     }
 
     public function update(ISubject $subject): void
     {
-        if ($subject === $this->percentageSymbolIndex) {
+        if ($subject === $this->reference) {
             $this->addSymbolIndex($subject->get());
         }
     }
@@ -73,5 +74,17 @@ final class PercentSequenceProcedure extends AFloatValueProcedure implements IPe
     private function createFrameSequence(): string
     {
         return implode('', $this->charSequence);
+    }
+
+    protected function assertReference(): void
+    {
+        if (!$this->reference instanceof IPercentageSymbolIndex) {
+            throw new InvalidArgument(
+                sprintf(
+                    'Reference value is expected to be of type %s.',
+                    IPercentageSymbolIndex::class
+                )
+            );
+        }
     }
 }

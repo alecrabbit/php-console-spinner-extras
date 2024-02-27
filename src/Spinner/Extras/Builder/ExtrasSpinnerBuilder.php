@@ -50,6 +50,7 @@ final class ExtrasSpinnerBuilder implements IExtrasSpinnerBuilder
             ->build()
         ;
     }
+
     public function withWidget(IWidget $widget): IExtrasSpinnerBuilder
     {
         $clone = clone $this;

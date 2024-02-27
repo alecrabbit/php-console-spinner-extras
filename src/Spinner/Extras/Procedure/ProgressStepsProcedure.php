@@ -10,8 +10,8 @@ use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
-use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
+use AlecRabbit\Spinner\Extras\Value\Contract\IValueReference;
 
 /**
  * @psalm-suppress UnusedClass
@@ -22,13 +22,14 @@ final class ProgressStepsProcedure extends AProgressValueProcedure implements IC
     private float $stepValue;
 
     public function __construct(
-        IProgressValue $progressValue,
+        IValueReference $reference,
         string $format = self::FORMAT,
         IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
-        parent::__construct($progressValue, $format, $options);
+        parent::__construct($reference, $format, $options);
 
-        $this->stepValue = ($progressValue->getMax() - $progressValue->getMin()) / $progressValue->getSteps();
+        $this->stepValue = ($this->wrapper->getMax() - $this->wrapper->getMin())
+            / $this->wrapper->getSteps();
     }
 
     public function getFrame(?float $dt = null): IFrame
@@ -50,8 +51,8 @@ final class ProgressStepsProcedure extends AProgressValueProcedure implements IC
     {
         return sprintf(
             $this->format,
-            (int)($this->progressValue->getValue() / $this->stepValue),
-            $this->progressValue->getSteps()
+            (int)($this->wrapper->unwrap() / $this->stepValue),
+            $this->wrapper->getSteps()
         );
     }
 }

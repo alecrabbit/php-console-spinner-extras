@@ -70,6 +70,11 @@ final class NeoWidgetComposite extends ASubject implements INeoWidgetComposite
         return $placeholder;
     }
 
+    protected function createPlaceholder(): Placeholder
+    {
+        return new Placeholder();
+    }
+
     private function internalUpdate(): void
     {
         $this->count = $this->countWidgets();
@@ -129,10 +134,5 @@ final class NeoWidgetComposite extends ASubject implements INeoWidgetComposite
             }
         }
         return false;
-    }
-
-    protected function createPlaceholder(): Placeholder
-    {
-        return new Placeholder();
     }
 }

@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\A;
 
 use AlecRabbit\Spinner\Exception\InvalidArgument;
-use AlecRabbit\Spinner\Extras\A\AProgressValue;
-use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
+use AlecRabbit\Spinner\Extras\Contract\IProgressWrapper;
+use AlecRabbit\Spinner\Extras\Value\A\AProgressWrapper;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
-final class AProgressValueTest extends TestCase
+final class AProgressWrapperTest extends TestCase
 {
     public static function createDataProvider(): iterable
     {
@@ -236,7 +236,7 @@ final class AProgressValueTest extends TestCase
 
         self::assertEqualsWithDelta(
             $expected[self::VALUE],
-            $fractionValue->getValue(),
+            $fractionValue->unwrap(),
             self::FLOAT_EQUALITY_DELTA
         );
 
@@ -246,7 +246,7 @@ final class AProgressValueTest extends TestCase
         self::assertSame($expected[self::STEPS], $fractionValue->getSteps());
     }
 
-    public static function getTesteeInstance(array $args = []): IProgressValue
+    public static function getTesteeInstance(array $args = []): IProgressWrapper
     {
         return new class(
             startValue: $args[self::START] ?? 0.0,
@@ -255,7 +255,7 @@ final class AProgressValueTest extends TestCase
             max: $args[self::MAX] ?? 1.0,
             autoFinish: $args[self::AUTO_FINISH] ?? false,
         ) extends
-            AProgressValue {
+            AProgressWrapper {
         };
     }
 
@@ -277,7 +277,7 @@ final class AProgressValueTest extends TestCase
 
         self::assertEqualsWithDelta(
             $expected[self::VALUE],
-            $progressValue->getValue(),
+            $progressValue->unwrap(),
             self::FLOAT_EQUALITY_DELTA
         );
 

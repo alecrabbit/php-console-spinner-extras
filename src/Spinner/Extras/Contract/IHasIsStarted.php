@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Contract;
 
-interface IValue
+interface IHasIsStarted
 {
-    public function getValue(): mixed;
+    public function isStarted(): bool;
 }

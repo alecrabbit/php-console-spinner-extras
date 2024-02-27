@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\A;
 
 use AlecRabbit\Spinner\Exception\InvalidArgument;
-use AlecRabbit\Spinner\Extras\A\AFloatValue;
-use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
+use AlecRabbit\Spinner\Extras\Value\A\AFloatWrapper;
+use AlecRabbit\Spinner\Extras\Value\Contract\IFloatWrapper;
 use AlecRabbit\Tests\TestCase\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -102,14 +102,14 @@ final class AFloatValueTest extends TestCase
 
         $floatValue = self::getTesteeInstance($incoming[self::ARGUMENTS] ?? []);
 
-        self::assertSame($expected[self::VALUE], $floatValue->getValue());
+        self::assertSame($expected[self::VALUE], $floatValue->unwrap());
         self::assertSame($expected[self::MIN], $floatValue->getMin());
         self::assertSame($expected[self::MAX], $floatValue->getMax());
     }
 
-    public static function getTesteeInstance(array $args = []): IFloatValue
+    public static function getTesteeInstance(array $args = []): IFloatWrapper
     {
-        return new class(...$args) extends AFloatValue {
+        return new class(...$args) extends AFloatWrapper {
         };
     }
 }

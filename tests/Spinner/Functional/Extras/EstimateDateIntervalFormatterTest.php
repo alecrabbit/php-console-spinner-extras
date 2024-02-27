@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
 
-final class EstimatedDateIntervalFormatterTest extends TestCase
+final class EstimateDateIntervalFormatterTest extends TestCase
 {
     public static function canFormatDataProvider(): iterable
     {

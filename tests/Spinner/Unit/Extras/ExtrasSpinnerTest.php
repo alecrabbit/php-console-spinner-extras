@@ -45,6 +45,21 @@ final class ExtrasSpinnerTest extends TestCase
         );
     }
 
+    protected function getWidgetMock(): MockObject&IWidget
+    {
+        return $this->createMock(IWidget::class);
+    }
+
+    private function getStateBuilderMock(): MockObject&ISequenceStateBuilder
+    {
+        return $this->createMock(ISequenceStateBuilder::class);
+    }
+
+    private function getStateMock(): MockObject&ISequenceState
+    {
+        return $this->createMock(ISequenceState::class);
+    }
+
     #[Test]
     public function canGetState(): void
     {
@@ -106,19 +121,9 @@ final class ExtrasSpinnerTest extends TestCase
         self::assertSame($state, $spinner->getState($dt));
     }
 
-    protected function getWidgetMock(): MockObject&IWidget
+    private function getSequenceFrameMock(): MockObject&ISequenceFrame
     {
-        return $this->createMock(IWidget::class);
-    }
-
-    private function getStateBuilderMock(): MockObject&ISequenceStateBuilder
-    {
-        return $this->createMock(ISequenceStateBuilder::class);
-    }
-
-    private function getStateMock(): MockObject&ISequenceState
-    {
-        return $this->createMock(ISequenceState::class);
+        return $this->createMock(ISequenceFrame::class);
     }
 
     #[Test]
@@ -171,11 +176,6 @@ final class ExtrasSpinnerTest extends TestCase
         );
 
         self::assertSame($initialState, $spinner->getState($dt));
-    }
-
-    private function getSequenceFrameMock(): MockObject&ISequenceFrame
-    {
-        return $this->createMock(ISequenceFrame::class);
     }
 
     #[Test]

@@ -9,14 +9,14 @@ use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Core\A\ASubject;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\IFloatToIndex;
 use AlecRabbit\Spinner\Extras\Procedure\Contract\IPercentageSymbolIndex;
-use AlecRabbit\Spinner\Extras\Value\IPercentValue;
+use AlecRabbit\Spinner\Extras\Value\Contract\IPercentWrapper;
 
 final class PercentageSymbolIndex extends ASubject implements IPercentageSymbolIndex
 {
     private int $inter;
 
     public function __construct(
-        private readonly IPercentValue $loadValue,
+        private readonly IPercentWrapper $percentValue,
         private int $current = 0,
         private bool $even = true,
         private readonly IFloatToIndex $floatToIndex = new FloatToIndex(),
@@ -25,14 +25,14 @@ final class PercentageSymbolIndex extends ASubject implements IPercentageSymbolI
         parent::__construct($observer);
 
         $this->inter = $this->current;
-        $this->loadValue->attach($this);
+        $this->percentValue->attach($this);
     }
 
     public function update(ISubject $subject): void
     {
-        if ($subject === $this->loadValue) {
-            /** @var IPercentValue $subject */
-            $this->add($subject->getValue());
+        if ($subject === $this->percentValue) {
+            /** @var IPercentWrapper $subject */
+            $this->add($subject->unwrap());
         }
     }
 
@@ -58,8 +58,8 @@ final class PercentageSymbolIndex extends ASubject implements IPercentageSymbolI
         return $this->current;
     }
 
-    public function getValue(): IPercentValue
+    public function getWrapper(): IPercentWrapper
     {
-        return $this->loadValue;
+        return $this->percentValue;
     }
 }

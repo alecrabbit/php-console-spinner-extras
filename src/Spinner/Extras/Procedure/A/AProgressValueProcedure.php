@@ -7,21 +7,12 @@ namespace AlecRabbit\Spinner\Extras\Procedure\A;
 use AlecRabbit\Spinner\Contract\IFrame;
 use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Core\CharSequenceFrame;
-use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
-use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
-use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
+use AlecRabbit\Spinner\Exception\InvalidArgument;
+use AlecRabbit\Spinner\Extras\Contract\IProgressWrapper;
 
 abstract class AProgressValueProcedure extends AFloatValueProcedure
 {
     private const FORMAT = "%' 3.0f%%"; // "%' 5.1f%%";
-
-    public function __construct(
-        protected readonly IProgressValue $progressValue,
-        string $format = self::FORMAT,
-        IPaletteOptions $options = new PaletteOptions(),
-    ) {
-        parent::__construct($progressValue, $format, $options);
-    }
 
     public function getFrame(?float $dt = null): IFrame
     {
@@ -42,7 +33,19 @@ abstract class AProgressValueProcedure extends AFloatValueProcedure
     {
         return sprintf(
             $this->format,
-            $this->progressValue->getValue() * 100
+            $this->wrapper->unwrap() * 100
         );
+    }
+
+    protected function assertReference(): void
+    {
+        if (!$this->reference->getWrapper() instanceof IProgressWrapper) {
+            throw new InvalidArgument(
+                sprintf(
+                    'Reference value is expected to contain an instance of %s.',
+                    IProgressWrapper::class
+                )
+            );
+        }
     }
 }

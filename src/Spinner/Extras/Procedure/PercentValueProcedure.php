@@ -10,8 +10,8 @@ use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
-use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AFloatValueProcedure;
+use AlecRabbit\Spinner\Extras\Value\Contract\IValueReference;
 
 /**
  * @psalm-suppress UnusedClass
@@ -21,11 +21,11 @@ final class PercentValueProcedure extends AFloatValueProcedure implements ICharP
     private const FORMAT = "%' 3.0f%%"; // "%' 5.1f%%";
 
     public function __construct(
-        IFloatValue $floatValue,
+        IValueReference $reference,
         string $format = self::FORMAT,
         IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
-        parent::__construct($floatValue, $format, $options);
+        parent::__construct($reference, $format, $options);
     }
 
     public function getFrame(?float $dt = null): IFrame
@@ -47,7 +47,7 @@ final class PercentValueProcedure extends AFloatValueProcedure implements ICharP
     {
         return sprintf(
             $this->format,
-            $this->floatValue->getValue() * 100
+            $this->wrapper->unwrap() * 100
         );
     }
 }

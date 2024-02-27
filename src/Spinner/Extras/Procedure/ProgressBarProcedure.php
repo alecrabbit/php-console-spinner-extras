@@ -12,9 +12,9 @@ use AlecRabbit\Spinner\Core\Palette\Contract\ICharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\IProgressBarSprite;
-use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 use AlecRabbit\Spinner\Extras\ProgressBarSprite;
+use AlecRabbit\Spinner\Extras\Value\Contract\IValueReference;
 
 /**
  * @psalm-suppress UnusedClass
@@ -26,22 +26,22 @@ final class ProgressBarProcedure extends AProgressValueProcedure implements ICha
     private readonly int $units;
 
     public function __construct(
-        IProgressValue $progressValue,
+        IValueReference $reference,
         int $units = self::UNITS,
         private readonly IProgressBarSprite $sprite = new ProgressBarSprite(),
         private readonly bool $withCursor = true,
         IPaletteOptions $options = new PaletteOptions(interval: 300),
     ) {
-        parent::__construct($progressValue, options: $options);
+        parent::__construct($reference, options: $options);
 
-        $this->cursorThreshold = $this->progressValue->getMax();
+        $this->cursorThreshold = $this->wrapper->getMax();
         $this->units = $this->withCursor ? $units - 1 : $units;
     }
 
     public function getFrame(?float $dt = null): IFrame
     {
         return $this->createSequenceFrame(
-            $this->createBar($this->progressValue->getValue())
+            $this->createBar($this->wrapper->unwrap())
         );
     }
 

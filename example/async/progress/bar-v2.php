@@ -20,7 +20,8 @@ use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
-use AlecRabbit\Spinner\Extras\Value\ProgressValue;
+use AlecRabbit\Spinner\Extras\Value\ProgressWrapper;
+use AlecRabbit\Spinner\Extras\Value\ValueReference;
 
 require_once __DIR__ . '/../bootstrap.async.php';
 
@@ -36,9 +37,11 @@ $units = 100;
 $steps = 100;
 
 $progressValue =
-    new ProgressValue(
+    new ProgressWrapper(
         steps: $steps,
     );
+
+$progressReference = new ValueReference($progressValue);
 
 $gradient = new AlecRabbit\Color\Gradient\HSLAGradient(
     range: new ColorRange(
@@ -56,7 +59,7 @@ $progressWidgetSettings =
         new MultiWidgetSettings(
             new WidgetSettings(
                 charPalette: new ProgressElapsedProcedure(
-                    progressValue: $progressValue,
+                    reference: $progressReference,
                     format: '🕐 [%6s]',
                 ),
             ),
@@ -66,32 +69,32 @@ $progressWidgetSettings =
         ),
         new WidgetSettings(
             charPalette: new ProgressStepsProcedure(
-                progressValue: $progressValue,
+                reference: $progressReference,
                 format: '%2s/%2s',
             ),
         ),
         new WidgetSettings(
             stylePalette: new PercentGradientProcedure(
-                floatValue: $progressValue,
+                reference: $progressReference,
                 gradient: $gradient,
             ),
             charPalette: new ProgressBarProcedure(
-                progressValue: $progressValue,
+                reference: $progressReference,
                 units: $units,
             ),
         ),
         new WidgetSettings(
             charPalette: new PercentValueProcedure(
-                floatValue: $progressValue
+                reference: $progressReference,
             ),
         ),
         new WidgetSettings(
             stylePalette: new PercentGradientProcedure(
-                floatValue: $progressValue,
+                reference: $progressReference,
                 gradient: $gradient,
             ),
             charPalette: new ProgressEstimateProcedure(
-                progressValue: $progressValue,
+                reference: $progressReference,
                 format: '🏁 [%6s]',
             ),
         ),

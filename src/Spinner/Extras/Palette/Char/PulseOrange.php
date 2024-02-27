@@ -9,6 +9,7 @@ use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\A\ACharPalette;
 use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
+use ArrayObject;
 use Traversable;
 
 /**
@@ -21,7 +22,7 @@ final class PulseOrange extends ACharPalette
         int $index = 0,
     ) {
         parent::__construct(
-            new \ArrayObject(
+            new ArrayObject(
                 [
                     new CharSequenceFrame('🔸', 2),
                     new CharSequenceFrame('🔶', 2),
@@ -33,15 +34,5 @@ final class PulseOrange extends ACharPalette
             $options,
             $index
         );
-    }
-
-    protected function sequence(): Traversable
-    {
-        yield from ['🔸', '🔶', '🟠', '🟠', '🔶'];
-    }
-
-    protected function createFrame(string $element, ?int $width = null): ICharSequenceFrame
-    {
-        return new CharSequenceFrame($element, $width ?? 2);
     }
 }

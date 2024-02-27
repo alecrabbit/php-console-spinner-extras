@@ -6,7 +6,6 @@ namespace AlecRabbit\Spinner\Extras;
 
 use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Contract\IObserver;
-use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Contract\ISubject;
 use AlecRabbit\Spinner\Core\A\ASubject;
 use AlecRabbit\Spinner\Core\Builder\Contract\ISequenceStateBuilder;

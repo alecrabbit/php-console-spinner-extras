@@ -48,10 +48,7 @@ final class ExtrasSpinnerBuilderTest extends TestCase
 
         self::assertInstanceOf(ExtrasSpinner::class, $spinner);
     }
-    private function getStateBuilderMock(): MockObject&ISequenceStateBuilder
-    {
-        return $this->createMock(ISequenceStateBuilder::class);
-    }
+
     private function getWidgetMock(): MockObject&IWidget
     {
         return $this->createMock(IWidget::class);
@@ -60,6 +57,11 @@ final class ExtrasSpinnerBuilderTest extends TestCase
     private function getObserverMock(): MockObject&IObserver
     {
         return $this->createMock(IObserver::class);
+    }
+
+    private function getStateBuilderMock(): MockObject&ISequenceStateBuilder
+    {
+        return $this->createMock(ISequenceStateBuilder::class);
     }
 
     #[Test]

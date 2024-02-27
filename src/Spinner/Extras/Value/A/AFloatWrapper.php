@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Spinner\Extras\A;
+namespace AlecRabbit\Spinner\Extras\Value\A;
 
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Core\A\ASubject;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
-use AlecRabbit\Spinner\Extras\Contract\IFloatValue;
+use AlecRabbit\Spinner\Extras\Value\Contract\IFloatWrapper;
 
-abstract class AFloatValue extends ASubject implements IFloatValue
+abstract class AFloatWrapper extends ASubject implements IFloatWrapper
 {
     protected float $value;
 
@@ -70,7 +70,7 @@ abstract class AFloatValue extends ASubject implements IFloatValue
         return $this->max;
     }
 
-    public function getValue(): float
+    public function unwrap(): float
     {
         return $this->value;
     }

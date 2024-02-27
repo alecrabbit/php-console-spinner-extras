@@ -20,7 +20,7 @@ final class Aesthetic extends ACharPalette
         int $index = 0,
     ) {
         parent::__construct(
-            new \ArrayObject(
+            new ArrayObject(
                 [
                     new CharSequenceFrame('▰▱▱▱▱▱▱', 7),
                     new CharSequenceFrame('▰▰▱▱▱▱▱', 7),

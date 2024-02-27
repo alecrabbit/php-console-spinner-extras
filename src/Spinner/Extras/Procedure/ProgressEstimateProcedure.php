@@ -12,13 +12,14 @@ use AlecRabbit\Spinner\Core\Palette\Contract\IPaletteOptions;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Extras\Contract\ICurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\Contract\IDateIntervalFormatter;
-use AlecRabbit\Spinner\Extras\Contract\IProgressValue;
+use AlecRabbit\Spinner\Extras\Contract\IProgressWrapper;
 use AlecRabbit\Spinner\Extras\Contract\ISecondsToDateIntervalConverter;
 use AlecRabbit\Spinner\Extras\CurrentTimeProvider;
 use AlecRabbit\Spinner\Extras\EstimateDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\FineDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Procedure\A\AProgressValueProcedure;
 use AlecRabbit\Spinner\Extras\SecondsToDateIntervalConverter;
+use AlecRabbit\Spinner\Extras\Value\Contract\IValueReference;
 use DateTimeImmutable;
 
 /**
@@ -32,7 +33,7 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure implements
     private DateTimeImmutable $createdAt;
 
     public function __construct(
-        IProgressValue $progressValue,
+        IValueReference $reference,
         string $format = self::FORMAT,
         private readonly ICurrentTimeProvider $currentTimeProvider = new CurrentTimeProvider(),
         private readonly IDateIntervalFormatter $estimateFormatter = new EstimateDateIntervalFormatter(),
@@ -40,14 +41,15 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure implements
         private readonly ISecondsToDateIntervalConverter $converter = new SecondsToDateIntervalConverter(),
         IPaletteOptions $options = new PaletteOptions(interval: 1000),
     ) {
-        parent::__construct($progressValue, $format, $options);
+        parent::__construct($reference, $format, $options);
 
         $this->createdAt = $this->currentTimeProvider->now();
-        $this->stepValue = $this->calculateStepValue($progressValue);
-        $this->startValue = $progressValue->getValue();
+
+        $this->stepValue = $this->calculateStepValue($this->wrapper);
+        $this->startValue = $this->wrapper->unwrap();
     }
 
-    private function calculateStepValue(IProgressValue $progressValue): float
+    private function calculateStepValue(IProgressWrapper $progressValue): float
     {
         return ($progressValue->getMax() - $progressValue->getMin()) / $progressValue->getSteps();
     }
@@ -74,7 +76,7 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure implements
         if ($stepsDone > 0) {
             $estimate = $this->getEstimate($stepsDone);
 
-            if ($this->progressValue->isFinished()) {
+            if ($this->wrapper->isFinished()) {
                 $estimate = 0;
             }
 
@@ -91,7 +93,7 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure implements
 
     private function getStepsDone(): int
     {
-        return (int)(($this->progressValue->getValue() - $this->startValue) / $this->stepValue);
+        return (int)(($this->wrapper->unwrap() - $this->startValue) / $this->stepValue);
     }
 
     private function getEstimate(int $stepsDone): int|float
@@ -100,7 +102,7 @@ final class ProgressEstimateProcedure extends AProgressValueProcedure implements
 
         $timePerStep = $elapsed / $stepsDone;
 
-        $timeNeededForAllSteps = $timePerStep * $this->progressValue->getSteps();
+        $timeNeededForAllSteps = $timePerStep * $this->wrapper->getSteps();
 
         return $timeNeededForAllSteps - $elapsed;
     }

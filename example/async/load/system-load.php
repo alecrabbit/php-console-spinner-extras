@@ -8,7 +8,9 @@ use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\ClockDateIntervalFormatter;
+use AlecRabbit\Spinner\Extras\EstimateDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Facade;
+use AlecRabbit\Spinner\Extras\FineDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
 use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
 use AlecRabbit\Spinner\Extras\Procedure\PercentageSymbolIndex;
@@ -17,14 +19,16 @@ use AlecRabbit\Spinner\Extras\Procedure\PercentSequenceProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\TimerProcedure;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
-use AlecRabbit\Spinner\Extras\Value\PercentValue;
+use AlecRabbit\Spinner\Extras\Value\PercentWrapper;
+use AlecRabbit\Spinner\Extras\Value\TimerValue;
+use AlecRabbit\Spinner\Extras\Value\ValueReference;
 
 require_once __DIR__ . '/../bootstrap.async.php';
 
 $updateInterval = 500; // milliseconds
 
-$loadValue = new PercentValue();
-$loadSymbolIndex = new PercentageSymbolIndex(loadValue: $loadValue);
+$loadValue = new PercentWrapper();
+$loadSymbolIndex = new PercentageSymbolIndex(percentValue: $loadValue);
 $size = 4;
 
 $options = new PaletteOptions(interval: $updateInterval);
@@ -41,34 +45,56 @@ $gradientTwo = new RGBAGradient(
         end: '#bbb',
     ),
 );
+
+$target = new DateTimeImmutable( '+110 seconds');
+
+$timerValue = new TimerValue($target);
+
+$timerReference = new ValueReference($timerValue);
+$loadReference = new ValueReference($loadValue);
+
 $loadWidgetSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
             stylePalette: new PercentGradientProcedure(
-                floatValue: $loadValue,
+                reference: $loadReference,
                 gradient: $gradient,
                 options: $options,
             ),
             charPalette: new PercentValueProcedure(
-                floatValue: $loadValue,
+                reference: $loadReference,
                 options: $options,
             ),
         ),
         new WidgetSettings(
             stylePalette: new PercentGradientProcedure(
-                floatValue: $loadValue,
+                reference: $loadReference,
                 gradient: $gradientTwo,
             ),
             charPalette: new PercentSequenceProcedure(
-                percentageSymbolIndex: $loadSymbolIndex,
+                reference: $loadSymbolIndex,
                 size: $size,
                 options: $options,
             ),
         ),
         new WidgetSettings(
             charPalette: new TimerProcedure(
-                target: new DateTimeImmutable('+86410 seconds'),
+                reference: $timerReference,
                 intervalFormatter: new ClockDateIntervalFormatter(),
+                format: '[%s]',
+            ),
+        ),
+        new WidgetSettings(
+            charPalette: new TimerProcedure(
+                reference: $timerReference,
+                intervalFormatter: new EstimateDateIntervalFormatter(),
+                format: '[%s]',
+            ),
+        ),
+        new WidgetSettings(
+            charPalette: new TimerProcedure(
+                reference: $timerReference,
+                intervalFormatter: new FineDateIntervalFormatter(),
                 format: '[%s]',
             ),
         ),

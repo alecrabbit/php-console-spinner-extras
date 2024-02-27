@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AlecRabbit\Spinner\Extras\Widget\Contract;
 
 use AlecRabbit\Spinner\Contract\IInterval;
-use AlecRabbit\Spinner\Extras\Contract\IWidgetContext;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
+use AlecRabbit\Spinner\Extras\Contract\IWidgetContext;
 use ArrayAccess;
 use Countable;
 use IteratorAggregate;
