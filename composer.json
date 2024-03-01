@@ -22,7 +22,9 @@
         "react/event-loop": "*",
         "revolt/event-loop": "*",
         "symfony/console": "*",
-        "symfony/var-dumper": "*"
+        "symfony/var-dumper": "*",
+        "symfony/dependency-injection": "^7.0",
+        "php-di/php-di": "^7.0"
     },
     "suggest": {
         "ext-mbstring": "For multibyte Unicode string functionality."
