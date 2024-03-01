@@ -8,7 +8,7 @@ use AlecRabbit\Spinner\Contract\IInterval;
 use AlecRabbit\Spinner\Contract\IObserver;
 use AlecRabbit\Spinner\Contract\ISequenceFrame;
 use AlecRabbit\Spinner\Core\Factory\Contract\ISequenceStateFactory;
-use AlecRabbit\Spinner\Core\Contract\ISequenceState;
+use AlecRabbit\Spinner\Contract\ISequenceState;
 use AlecRabbit\Spinner\Core\Widget\Contract\IWidget;
 use AlecRabbit\Spinner\Exception\InvalidArgument;
 use AlecRabbit\Spinner\Exception\ObserverCanNotBeOverwritten;

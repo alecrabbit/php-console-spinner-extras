@@ -114,12 +114,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
-                "reference": "882ef2c3ea926e787cd868e6c983bb33dd622504"
+                "reference": "36dc6ac1229c9e41694edfb98fcea5737d7f07f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/882ef2c3ea926e787cd868e6c983bb33dd622504",
-                "reference": "882ef2c3ea926e787cd868e6c983bb33dd622504",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/36dc6ac1229c9e41694edfb98fcea5737d7f07f8",
+                "reference": "36dc6ac1229c9e41694edfb98fcea5737d7f07f8",
                 "shasum": ""
             },
             "require": {
@@ -129,12 +129,14 @@
             "require-dev": {
                 "fakerphp/faker": "*",
                 "nunomaduro/collision": "*",
+                "php-di/php-di": "^7.0",
                 "phpunit/php-code-coverage": "*",
                 "phpunit/phpunit": "^10.0",
                 "react/event-loop": "*",
                 "react/http": "*",
                 "revolt/event-loop": "*",
                 "symfony/console": "*",
+                "symfony/dependency-injection": "^7.0",
                 "symfony/var-dumper": "*"
             },
             "suggest": {
@@ -184,7 +186,7 @@
                 "issues": "https://github.com/alecrabbit/php-console-spinner/issues",
                 "source": "https://github.com/alecrabbit/php-console-spinner/tree/1.x"
             },
-            "time": "2024-02-27T15:10:18+00:00"
+            "time": "2024-03-01T15:52:32+00:00"
         },
         {
             "name": "alecrabbit/php-wcwidth",

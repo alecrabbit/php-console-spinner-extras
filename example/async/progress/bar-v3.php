@@ -11,8 +11,6 @@ use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
 use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\Moon;
-use AlecRabbit\Spinner\Extras\Palette\Char\ProcedureCharPalette;
-use AlecRabbit\Spinner\Extras\Palette\Style\ProcedureStylePalette;
 use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
@@ -29,9 +27,13 @@ Facade::getSettings()
     ->set(
         new OutputSettings(
             stylingMethodOption: StylingMethodOption::ANSI24,
-        )
+        ),
+//        new AlecRabbit\Spinner\Core\Settings\NormalizerSettings(
+//            normalizerOption: AlecRabbit\Spinner\Contract\Option\NormalizerOption::SMOOTH,
+//        ),
     )
 ;
+
 
 $units = 10;
 $steps = 100;
@@ -61,7 +63,7 @@ $gradientTwo = new AlecRabbit\Color\Gradient\RGBAGradient(
 $progressWidgetOneSettings =
     new MultiWidgetSettings(
         new WidgetSettings(
-            charPalette: new Moon(options: new PaletteOptions(interval: 100)),
+            charPalette: new Moon(options: new PaletteOptions(interval: 10)),
         ),
         new WidgetSettings(
             charPalette: new ProgressStepsProcedure(
