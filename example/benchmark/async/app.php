@@ -3,19 +3,20 @@
 declare(strict_types=1);
 
 use AlecRabbit\Benchmark\Factory\ReportFactory;
+use AlecRabbit\Color\Gradient\ColorRange;
+use AlecRabbit\Color\Model\DTO\DRGB;
 use AlecRabbit\Lib\Helper\MemoryUsage;
 use AlecRabbit\Lib\Spinner\BenchmarkFacade;
 use AlecRabbit\Lib\Spinner\Contract\IBenchmarkingDriver;
 use AlecRabbit\Spinner\Asynchronous\React\ReactLoopProbe;
-use AlecRabbit\Spinner\Extras\Facade;
-use AlecRabbit\Spinner\Probes;
-use AlecRabbit\Color\Gradient\ColorRange;
-use AlecRabbit\Color\Model\DTO\DRGB;
 use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\OutputSettings;
+use AlecRabbit\Spinner\Core\Settings\SpinnerSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
+use AlecRabbit\Spinner\Extras\ClockDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
+use AlecRabbit\Spinner\Extras\Facade;
 use AlecRabbit\Spinner\Extras\Palette\Char\Moon;
 use AlecRabbit\Spinner\Extras\Procedure\PercentGradientProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\PercentValueProcedure;
@@ -23,9 +24,12 @@ use AlecRabbit\Spinner\Extras\Procedure\ProgressBarProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressElapsedProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressEstimateProcedure;
 use AlecRabbit\Spinner\Extras\Procedure\ProgressStepsProcedure;
+use AlecRabbit\Spinner\Extras\Procedure\TimerProcedure;
 use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Value\ProgressWrapper;
+use AlecRabbit\Spinner\Extras\Value\TimerValue;
 use AlecRabbit\Spinner\Extras\Value\ValueReference;
+use AlecRabbit\Spinner\Probes;
 
 // in seconds
 const RUNTIME = 600;
@@ -42,9 +46,9 @@ Facade::getSettings()
         new OutputSettings(
             stylingMethodOption: StylingMethodOption::ANSI24,
         ),
-//        new AlecRabbit\Spinner\Core\Settings\NormalizerSettings(
-//            normalizerOption: AlecRabbit\Spinner\Contract\Option\NormalizerOption::SMOOTH,
-//        ),
+        new AlecRabbit\Spinner\Core\Settings\NormalizerSettings(
+            normalizerOption: AlecRabbit\Spinner\Contract\Option\NormalizerOption::SMOOTH,
+        ),
     )
 ;
 
@@ -202,6 +206,7 @@ $progressWidgetTwoSettings =
         ),
     );
 
+
 /** @var IWidgetComposite $widgetOne */
 $widgetOne =
     Facade::getWidgetFactory()
@@ -216,8 +221,32 @@ $widgetTwo =
         ->create()
 ;
 
+$target = new DateTimeImmutable('+' . RUNTIME . ' seconds');
+
+$timerReference = new ValueReference(new TimerValue($target));
+
+/** @var IWidgetComposite $timer */
+$timer =
+    Facade::getWidgetFactory()
+        ->usingSettings(
+            new WidgetSettings(
+                stylePalette: new PercentGradientProcedure(
+                    reference: $progressReference,
+                    gradient: $gradientTwo,
+                ),
+                charPalette: new TimerProcedure(
+                    reference: $timerReference,
+                    intervalFormatter: new ClockDateIntervalFormatter(),
+                    format: '[%s]',
+                ),
+            )
+        )
+        ->create()
+;
+
 $spinner = Facade::createSpinner();
 
+$spinner->add($timer->getContext());
 $spinner->add($widgetOne->getContext());
 $spinner->add($widgetTwo->getContext());
 
