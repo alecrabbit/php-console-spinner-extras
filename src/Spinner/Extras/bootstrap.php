@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use AlecRabbit\Spinner\Container\Contract\IContainer;
 use AlecRabbit\Spinner\Container\DefinitionRegistry;
+use AlecRabbit\Spinner\Container\Reference;
 use AlecRabbit\Spinner\Container\ServiceDefinition;
 use AlecRabbit\Spinner\Contract\IStyleFrameTransformer;
 use AlecRabbit\Spinner\Core\Builder\Contract\ISpinnerBuilder;
@@ -53,9 +54,7 @@ DefinitionRegistry::getInstance()
         ),
         new ServiceDefinition(
             IStyleRenderer::class,
-            static function (IContainer $container): IStyleRenderer {
-                return $container->get(IStyleRendererFactory::class)->create();
-            },
+            new Reference(IStyleRendererFactory::class),
         ),
         new ServiceDefinition(
             IStyleRendererFactory::class,
