@@ -18,7 +18,6 @@ final class FacadeCreateSpinnerTest extends ContainerModifyingTestCase
     {
         self::setContainer(
             self::modifyContainer(
-                self::getCurrentContainer(),
                 [
                     ISpinnerBuilder::class => SpinnerBuilder::class,
                 ]
