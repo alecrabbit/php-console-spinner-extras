@@ -57,7 +57,7 @@ final class StyleRendererFactoryTest extends TestCase
         $renderer = $styleRendererFactory->create();
         self::assertInstanceOf(StyleRendererFactory::class, $styleRendererFactory);
         self::assertInstanceOf(StyleRenderer::class, $renderer);
-        self::assertSame($converter, self::getPropertyValue('converter', $renderer));
+        self::assertSame($converter, self::getPropertyValue($renderer, 'converter'));
     }
 
     protected function getStyleToAnsiStringConverterMock(): MockObject&IStyleToAnsiStringConverter
