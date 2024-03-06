@@ -1,2 +1,8 @@
 deptrac:
-  skip_violations: {  }
+  skip_violations:
+    AlecRabbit\Spinner\DI\Symfony\ContainerFactory:
+      - AlecRabbit\Spinner\Container\Adapter\ContainerAdapter
+      - AlecRabbit\Spinner\Container\Contract\IContainer
+      - AlecRabbit\Spinner\Container\Contract\IContainerFactory
+      - AlecRabbit\Spinner\Container\Contract\IDefinitionRegistry
+      - AlecRabbit\Spinner\Container\Contract\IReference

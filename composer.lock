@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b77a40b51bd3118bdaedd12c652f8f8",
+    "content-hash": "b69877d6a08c06fb45afa2aaae1c480e",
     "packages": [
         {
             "name": "alecrabbit/php-color",
@@ -114,12 +114,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-console-spinner.git",
-                "reference": "48d75df314799f7e1194a9a850fcabc50936f03a"
+                "reference": "5d445dda58824e5e8df195c4b0703b1a696f7f8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/48d75df314799f7e1194a9a850fcabc50936f03a",
-                "reference": "48d75df314799f7e1194a9a850fcabc50936f03a",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-spinner/zipball/5d445dda58824e5e8df195c4b0703b1a696f7f8e",
+                "reference": "5d445dda58824e5e8df195c4b0703b1a696f7f8e",
                 "shasum": ""
             },
             "require": {
@@ -187,7 +187,7 @@
                 "issues": "https://github.com/alecrabbit/php-console-spinner/issues",
                 "source": "https://github.com/alecrabbit/php-console-spinner/tree/1.x"
             },
-            "time": "2024-03-06T12:20:37+00:00"
+            "time": "2024-03-06T12:24:46+00:00"
         },
         {
             "name": "alecrabbit/php-wcwidth",
@@ -309,16 +309,16 @@
     "packages-dev": [
         {
             "name": "alecrabbit/php-sneaky-peek",
-            "version": "0.0.1",
+            "version": "0.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-sneaky-peek.git",
-                "reference": "baa926abb0c23ce7a9b470ea4d066c37a12b92df"
+                "reference": "f6e1611a6aae30f89c4375abf7a58427fc248f12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-sneaky-peek/zipball/baa926abb0c23ce7a9b470ea4d066c37a12b92df",
-                "reference": "baa926abb0c23ce7a9b470ea4d066c37a12b92df",
+                "url": "https://api.github.com/repos/alecrabbit/php-sneaky-peek/zipball/f6e1611a6aae30f89c4375abf7a58427fc248f12",
+                "reference": "f6e1611a6aae30f89c4375abf7a58427fc248f12",
                 "shasum": ""
             },
             "require": {
@@ -355,9 +355,9 @@
             ],
             "support": {
                 "issues": "https://github.com/alecrabbit/php-sneaky-peek/issues",
-                "source": "https://github.com/alecrabbit/php-sneaky-peek/tree/0.0.1"
+                "source": "https://github.com/alecrabbit/php-sneaky-peek/tree/0.0.4"
             },
-            "time": "2024-03-05T14:27:27+00:00"
+            "time": "2024-03-06T08:30:38+00:00"
         },
         {
             "name": "fakerphp/faker",

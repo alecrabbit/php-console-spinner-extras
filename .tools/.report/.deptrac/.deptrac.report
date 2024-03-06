@@ -1,12 +1,51 @@
+ ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Reason      VendorSymfony                                                                                                                                    
+ ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Contract\IReference (VendorSpinnerCore)           
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/DI/Symfony/ContainerFactory.php:33                                                        
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Adapter\ContainerAdapter (VendorSpinnerCore)      
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/DI/Symfony/ContainerFactory.php:51                                                        
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Contract\IDefinitionRegistry (VendorSpinnerCore)  
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/DI/Symfony/ContainerFactory.php:20                                                        
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Contract\IContainer (VendorSpinnerCore)           
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/DI/Symfony/ContainerFactory.php:20                                                        
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Contract\IContainerFactory (VendorSpinnerCore)    
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/DI/Symfony/ContainerFactory.php:18                                                        
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Adapter\ContainerAdapter (VendorSpinnerCore)      
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/DI/Symfony/ContainerFactory.php:7                                                         
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Contract\IContainer (VendorSpinnerCore)           
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/DI/Symfony/ContainerFactory.php:8                                                         
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Contract\IContainerFactory (VendorSpinnerCore)    
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/DI/Symfony/ContainerFactory.php:9                                                         
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Contract\IDefinitionRegistry (VendorSpinnerCore)  
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/DI/Symfony/ContainerFactory.php:10                                                        
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Contract\IReference (VendorSpinnerCore)           
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/DI/Symfony/ContainerFactory.php:11                                                        
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Contract\IDefinitionRegistry (VendorSpinnerCore)  
+              AlecRabbit\Spinner\Container\Contract\IContainerFactory::18 ->                                                                                   
+              AlecRabbit\Spinner\Container\Contract\IDefinitionRegistry::9                                                                                     
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/Container/Contract/IContainerFactory.php:9                                                
+  Violation   AlecRabbit\Spinner\DI\Symfony\ContainerFactory must not depend on AlecRabbit\Spinner\Container\Contract\IContainer (VendorSpinnerCore)           
+              AlecRabbit\Spinner\Container\Contract\IContainerFactory::18 ->                                                                                   
+              AlecRabbit\Spinner\Container\Contract\IContainer::9                                                                                              
+              /app/vendor/alecrabbit/php-console-spinner/src/Spinner/Container/Contract/IContainerFactory.php:9                                                
+ ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Warnings                                                                                                                                                                        
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  AlecRabbit\Spinner\DI\Symfony\ContainerFactory is in more than one layer ["VendorSpinnerCore", "VendorSymfony"]. It is recommended that one token should only be in one layer.  
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
 
  -------------------- ------ 
   Report                     
  -------------------- ------ 
-  Violations           0     
+  Violations           12    
   Skipped violations   0     
-  Uncovered            177   
-  Allowed              3740  
-  Warnings             0     
+  Uncovered            240   
+  Allowed              3862  
+  Warnings             1     
   Errors               0     
  -------------------- ------ 
 
