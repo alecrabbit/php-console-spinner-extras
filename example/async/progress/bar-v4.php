@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use AlecRabbit\Color\Gradient\ColorRange;
 use AlecRabbit\Color\Model\DTO\DRGB;
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Contract\Option\StylingOption;
 use AlecRabbit\Spinner\Core\CharSequenceFrame;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
 use AlecRabbit\Spinner\Core\Settings\OutputSettings;
@@ -29,7 +29,7 @@ require_once __DIR__ . '/../bootstrap.async.php';
 Facade::getSettings()
     ->set(
         new OutputSettings(
-            stylingMethodOption: StylingMethodOption::ANSI24,
+            stylingOption: StylingOption::ANSI24,
         )
     )
 ;

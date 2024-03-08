@@ -9,10 +9,10 @@ use AlecRabbit\Lib\Helper\MemoryUsage;
 use AlecRabbit\Lib\Spinner\BenchmarkFacade;
 use AlecRabbit\Lib\Spinner\Contract\IBenchmarkingDriver;
 use AlecRabbit\Spinner\Asynchronous\React\ReactLoopProbe;
-use AlecRabbit\Spinner\Contract\Option\StylingMethodOption;
+use AlecRabbit\Spinner\Contract\Option\StylingOption;
 use AlecRabbit\Spinner\Core\Palette\PaletteOptions;
+use AlecRabbit\Spinner\Core\Probes;
 use AlecRabbit\Spinner\Core\Settings\OutputSettings;
-use AlecRabbit\Spinner\Core\Settings\SpinnerSettings;
 use AlecRabbit\Spinner\Core\Settings\WidgetSettings;
 use AlecRabbit\Spinner\Extras\ClockDateIntervalFormatter;
 use AlecRabbit\Spinner\Extras\Contract\IWidgetComposite;
@@ -29,7 +29,6 @@ use AlecRabbit\Spinner\Extras\Settings\MultiWidgetSettings;
 use AlecRabbit\Spinner\Extras\Value\ProgressWrapper;
 use AlecRabbit\Spinner\Extras\Value\TimerValue;
 use AlecRabbit\Spinner\Extras\Value\ValueReference;
-use AlecRabbit\Spinner\Probes;
 
 // in seconds
 const RUNTIME = 600;
@@ -44,7 +43,7 @@ Probes::unregister(ReactLoopProbe::class);
 Facade::getSettings()
     ->set(
         new OutputSettings(
-            stylingMethodOption: StylingMethodOption::ANSI24,
+            stylingOption: StylingOption::ANSI24,
         ),
         new AlecRabbit\Spinner\Core\Settings\NormalizerSettings(
             normalizerOption: AlecRabbit\Spinner\Contract\Option\NormalizerOption::SMOOTH,
@@ -133,7 +132,7 @@ $loop
 /** ******************************************************** */
 /** ******************************************************** */
 $units = 100;
-$steps = 2000;
+$steps = 25000;
 
 // Note: We'll use the same progress value for both widgets
 $progressValue =
@@ -166,6 +165,7 @@ $progressWidgetOneSettings =
             charPalette: new ProgressStepsProcedure(
                 reference: $progressReference,
                 format: '%2s/%2s',
+                options: new PaletteOptions(interval: 10),
             ),
         ),
         new WidgetSettings(
@@ -257,7 +257,7 @@ $loop
     ->repeat(
         0.01,
         static function () use ($progressValue): void {
-            if (random_int(0, 100) < 5) {
+            if (random_int(0, 100) < 80) {
                 $progressValue->advance();
             }
         }
