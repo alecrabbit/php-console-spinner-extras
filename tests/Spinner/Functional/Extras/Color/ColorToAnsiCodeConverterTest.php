@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Spinner\Functional\Extras\Color;
 
-use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
+use AlecRabbit\Spinner\Contract\Mode\StylingMode;
 use AlecRabbit\Spinner\Extras\Color\Ansi24ColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\Ansi4ColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\Ansi4ColorDegrader;
@@ -48,9 +48,9 @@ final class ColorToAnsiCodeConverterTest extends TestCase
 
     protected static function simpleCanConvertDataFeeder(): iterable
     {
-        $ansi4 = StylingMethodMode::ANSI4;
-        $ansi8 = StylingMethodMode::ANSI8;
-        $ansi24 = StylingMethodMode::ANSI24;
+        $ansi4 = StylingMode::ANSI4;
+        $ansi8 = StylingMode::ANSI8;
+        $ansi24 = StylingMode::ANSI24;
 
         yield from [
             // result, color, styleMode
@@ -90,11 +90,11 @@ final class ColorToAnsiCodeConverterTest extends TestCase
         );
     }
 
-    private function getColorCodesGetter(StylingMethodMode $styleMode = null): IColorCodesGetter
+    private function getColorCodesGetter(StylingMode $styleMode = null): IColorCodesGetter
     {
         return match ($styleMode) {
-            StylingMethodMode::ANSI24 => new Ansi24ColorCodesGetter(),
-            StylingMethodMode::ANSI8 => new Ansi8ColorCodesGetter(new Ansi8ColorDegrader()),
+            StylingMode::ANSI24 => new Ansi24ColorCodesGetter(),
+            StylingMode::ANSI8 => new Ansi8ColorCodesGetter(new Ansi8ColorDegrader()),
             default => new Ansi4ColorCodesGetter(new Ansi4ColorDegrader()),
         };
     }

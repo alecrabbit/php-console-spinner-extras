@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Spinner\Extras\Factory;
 
-use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
+use AlecRabbit\Spinner\Contract\Mode\StylingMode;
 use AlecRabbit\Spinner\Core\Config\Contract\IOutputConfig;
 use AlecRabbit\Spinner\Extras\Color\Ansi24ColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\Ansi4ColorCodesGetter;
@@ -24,12 +24,12 @@ final readonly class ColorCodesGetterFactory implements IColorCodesGetterFactory
 
     public function create(): IColorCodesGetter
     {
-        $mode = $this->outputConfig->getStylingMethodMode();
+        $mode = $this->outputConfig->getStylingMode();
 
         return match ($mode) {
-            StylingMethodMode::ANSI4 => new Ansi4ColorCodesGetter(new Ansi4ColorDegrader()),
-            StylingMethodMode::ANSI8 => new Ansi8ColorCodesGetter(new Ansi8ColorDegrader()),
-            StylingMethodMode::ANSI24 => new Ansi24ColorCodesGetter(),
+            StylingMode::ANSI4 => new Ansi4ColorCodesGetter(new Ansi4ColorDegrader()),
+            StylingMode::ANSI8 => new Ansi8ColorCodesGetter(new Ansi8ColorDegrader()),
+            StylingMode::ANSI24 => new Ansi24ColorCodesGetter(),
             default => throw new LogicException(
                 'Unknown mode.' .
                 sprintf(

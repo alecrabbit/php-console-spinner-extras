@@ -41,10 +41,10 @@ final class WidgetCompositeFactoryTest extends FacadeAwareTestCase
     ): IWidgetCompositeFactory {
         return
             new WidgetCompositeFactory(
-                widgetConfigFactory: $widgetConfigFactory ?? self::getService(IWidgetConfigFactory::class),
-                widgetBuilder: $widgetBuilder ?? self::getService(IWidgetCompositeBuilder::class),
-                widgetRevolverFactory: $widgetRevolverFactory ?? self::getService(IWidgetRevolverFactory::class),
-                intervalComparator: $intervalComparator ?? self::getService(IIntervalComparator::class),
+                widgetConfigFactory: $widgetConfigFactory ?? $this->getWidgetConfigFactoryMock(),
+                widgetBuilder: $widgetBuilder ?? $this->getWidgetCompositeBuilderMock(),
+                widgetRevolverFactory: $widgetRevolverFactory ?? $this->getWidgetRevolverFactoryMock(),
+                intervalComparator: $intervalComparator ?? $this->getIntervalComparatorMock(),
             );
     }
 
@@ -182,29 +182,5 @@ final class WidgetCompositeFactoryTest extends FacadeAwareTestCase
     private function getWidgetCompositeBuilderMock(): MockObject&IWidgetCompositeBuilder
     {
         return $this->createMock(IWidgetCompositeBuilder::class);
-    }
-
-    #[Test]
-    public function canCreateWidgetWithNestedMultiWidgetSettings(): void
-    {
-        $multiWidgetSettings =
-            new MultiWidgetSettings(
-                new WidgetSettings(),
-                new WidgetSettings(),
-                new MultiWidgetSettings(
-                    new WidgetSettings(),
-                    new WidgetSettings(),
-                ),
-                new WidgetSettings(),
-            );
-
-        $widgetFactory = $this->getTesteeInstance();
-
-        self::assertInstanceOf(WidgetCompositeFactory::class, $widgetFactory);
-
-        $widgetComposite = $widgetFactory->usingSettings($multiWidgetSettings)->create();
-
-        self::assertInstanceOf(WidgetComposite::class, $widgetComposite);
-        // TODO (2023-12-19 13:08) [Alec Rabbit]: enhance test, add checks for nested widgets
     }
 }

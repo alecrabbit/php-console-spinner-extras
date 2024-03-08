@@ -12,6 +12,9 @@
          testdox="true"
 >
     <testsuites>
+        <testsuite name="Spinner/Integration">
+            <directory>tests/Spinner/Integration</directory>
+        </testsuite>
         <testsuite name="Spinner/Functional">
             <directory>tests/Spinner/Functional</directory>
         </testsuite>

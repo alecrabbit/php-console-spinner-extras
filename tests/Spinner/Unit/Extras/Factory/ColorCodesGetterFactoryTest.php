@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Spinner\Unit\Extras\Factory;
 
 
-use AlecRabbit\Spinner\Contract\Mode\StylingMethodMode;
+use AlecRabbit\Spinner\Contract\Mode\StylingMode;
 use AlecRabbit\Spinner\Core\Config\Contract\IOutputConfig;
 use AlecRabbit\Spinner\Extras\Color\Ansi24ColorCodesGetter;
 use AlecRabbit\Spinner\Extras\Color\Ansi4ColorCodesGetter;
@@ -23,9 +23,9 @@ final class ColorCodesGetterFactoryTest extends TestCase
     public static function canCreateDataProvider(): iterable
     {
         yield from [
-            [Ansi4ColorCodesGetter::class, StylingMethodMode::ANSI4],
-            [Ansi8ColorCodesGetter::class, StylingMethodMode::ANSI8],
-            [Ansi24ColorCodesGetter::class, StylingMethodMode::ANSI24],
+            [Ansi4ColorCodesGetter::class, StylingMode::ANSI4],
+            [Ansi8ColorCodesGetter::class, StylingMode::ANSI8],
+            [Ansi24ColorCodesGetter::class, StylingMode::ANSI24],
         ];
     }
 
@@ -52,12 +52,12 @@ final class ColorCodesGetterFactoryTest extends TestCase
 
     #[Test]
     #[DataProvider('canCreateDataProvider')]
-    public function canCreate(string $expectedClass, StylingMethodMode $stylingMode): void
+    public function canCreate(string $expectedClass, StylingMode $stylingMode): void
     {
         $outputConfig = $this->getOutputConfigMock();
         $outputConfig
             ->expects(self::once())
-            ->method('getStylingMethodMode')
+            ->method('getStylingMode')
             ->willReturn($stylingMode)
         ;
 
@@ -76,8 +76,8 @@ final class ColorCodesGetterFactoryTest extends TestCase
         $outputConfig = $this->getOutputConfigMock();
         $outputConfig
             ->expects(self::once())
-            ->method('getStylingMethodMode')
-            ->willReturn(StylingMethodMode::NONE)
+            ->method('getStylingMode')
+            ->willReturn(StylingMode::NONE)
         ;
 
         $factory = $this->getTesteeInstance(outputConfig: $outputConfig);

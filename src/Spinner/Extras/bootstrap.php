@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use AlecRabbit\Spinner\Container\Contract\IContainer;
+use AlecRabbit\Spinner\Container\Contract\IServiceDefinition;
 use AlecRabbit\Spinner\Container\DefinitionRegistry;
 use AlecRabbit\Spinner\Container\Reference;
 use AlecRabbit\Spinner\Container\ServiceDefinition;
@@ -43,6 +44,7 @@ DefinitionRegistry::getInstance()
         new ServiceDefinition(
             IWidgetFactory::class,
             WidgetCompositeFactory::class,
+            IServiceDefinition::PUBLIC,
         ),
         new ServiceDefinition(
             IWidgetCompositeBuilder::class,
