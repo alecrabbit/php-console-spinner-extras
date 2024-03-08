@@ -52,6 +52,7 @@ final class PaletteInstantiatingTest extends TestCase
             [Char\StormyWeather::class, 61, 80],
             [Char\SwirlingDots::class, 56, 80],
             [Char\Toggle::class, 2, 500],
+            [Char\Quadrant::class, 4, 300],
             // #30
         ];
     }
