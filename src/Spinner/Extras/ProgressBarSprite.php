@@ -19,6 +19,9 @@ final readonly class ProgressBarSprite implements IProgressBarSprite
     private string $open;
     private string $close;
 
+    // empty(gray)/done(dark orange) '━' // see doc/image/.sample/Screenshot from 2024-03-15 14-15-04.png
+    // cursor(dark orange) '╸'
+
     public function __construct(
         string $empty = '░',
         string $done = '█',
